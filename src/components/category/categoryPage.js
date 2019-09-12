@@ -32,7 +32,7 @@ class CategoryPage extends React.Component {
         return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
 
             <div className="category-info">
-                <h1>{item.category_name}</h1>
+                <h1>{item.category_name} {item.category_number}</h1>
                 <p>{item.category_description}</p>
             </div>
 
@@ -40,13 +40,13 @@ class CategoryPage extends React.Component {
                 <Row>
                     <Col lg={8}>
                         <h4>Overview & History</h4>
-                        <p>{item.overviewText}</p>
+                        <p>{item.category_overview}</p>
                         <h4>Sources & Getting Started</h4>
                         <p>{item.sourcesText}</p>
                     </Col>
                     <Col lg={4}>
                         <h4>Collections</h4>
-                        { item.kinds ? item.kinds.map(i => <Link key={i.id} to={`/collection/${i.id}`}>{i.name}</Link>) : ""}
+                        { item.kinds ? item.kinds.map(i => <Link key={i.kind_id} to={`/collection/${i.kind_id}`}>{i.kind_name}</Link>) : ""}
                     </Col>
                 </Row>
 

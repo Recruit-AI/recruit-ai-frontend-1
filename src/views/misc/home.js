@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
@@ -61,7 +60,7 @@ function Home(props) {
           <div className="reverse-divider"></div>
 
             <div className="tpBlackBg">
-              <PopularPantheonList pantheons={props.pantheons} />
+              <PopularPantheonList />
             </div>
 
 
@@ -69,10 +68,4 @@ function Home(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    pantheons: state.pantheons
-  }
-}
-
-export default connect(mapStateToProps)(Home);
+export default Home;

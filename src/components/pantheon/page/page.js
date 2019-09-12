@@ -40,8 +40,15 @@ class PantheonPage extends React.Component {
                   <ImageGallery item={item} />
                 </BasicInfo>
 
-
                 <Collections item={item} />
+
+
+                  <div>
+                      <h4>History & Background</h4>
+                      <p>{item.pantheon_history}</p>
+                      <h4>Culture & Advancements</h4>
+                      <p>{item.pantheon_culture}</p>
+                  </div>
 
                 <Row className="forms">
                     <Col className=""><FormInsert item={item} key={item.id} formClass={"pantheons"} /></Col>

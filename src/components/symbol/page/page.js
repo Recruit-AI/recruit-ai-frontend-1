@@ -40,6 +40,15 @@ class SymbolPage extends React.Component {
               <ImageGallery item={item} />
               <Connections item={item} />
 
+
+                      <div>
+                          <h4>Background:</h4>
+                          {item.symbol_overview}
+                          <h4>Meaning:</h4>
+                          {item.symbol_overview}
+                      </div>
+
+
                <Row className="forms">
                    <Col><FormInsert item={item} key={item.symbol_name} formClass={"symbols"} /></Col>
                    <Col><FormInsert item={item} key={item.symbol_name} formClass={"symbols"} /></Col>

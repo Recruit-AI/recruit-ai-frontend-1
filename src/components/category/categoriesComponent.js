@@ -27,15 +27,7 @@ class CategoriesComponent extends React.Component {
                     <br />
                     <h5><Link to={`/category/${category.category_id}`}>{category.category_name}</Link></h5>
                     {category.category_description}<br />
-                    {
-                      category.kinds ? category.kinds
-                        .filter(item => category.kindIds.indexOf(item.id) >= 0)
-                        .map(kind =>
-                            <div key={kind.id}>
-                              -<Link  to={`/collection/${kind.id}`}>{kind.name}</Link><br />
-                            </div>
-                        ) : ""
-                    }
+                    
                         <br />
                 </Col>)
             }

@@ -22,8 +22,6 @@ import categories from './db/categoriesDb';
 
 const store = createStore(reducer);
 
-console.log(localStorage.getItem('kinds'))
-
 ReactDOM.render(
 
 <Provider store={store}>

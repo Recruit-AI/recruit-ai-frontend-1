@@ -23,12 +23,7 @@ class BasicInfo extends React.Component {
           </Col>
       </Row>
 
-      <div>
-          <h4>History & Background</h4>
-          <p>{item.pantheon_history}</p>
-          <h4>Culture & Advancements</h4>
-          <p>{item.pantheon_culture}</p>
-      </div>
+      
     </div>
   }
 }

@@ -18,25 +18,23 @@ class BasicInfo extends React.Component {
       <Row>
           <Col lg={8}>
               <h4>Basic Information</h4>
-              <i>Also Spelled: { item.otherSpellings } </i>
+            <p>Short Description: {item.symbol_description}</p>
+              <i>{ item.other_spellings ? `Also Spelled: ${ item.other_spellings }` : "" } </i>
               <p>Collection: <Link to={ `/collection/${item.kind.kind_id}` }> {item.kind.kind_name} </Link></p>
-              <p>Used by: { item.pantheons.map(i => <Link key={i.id} to={`/pantheon/${i.pantheon_id}`}> {i.pantheon_name} </Link>) }</p>
-              <p>Short Description: {item.symbol_description}</p>
+              { item.pantheons.length > 0 ?
+                <p>Used by: { item.pantheons.map(i => <Link key={i.id} to={`/pantheon/${i.pantheon_id}`}> {i.pantheon_name} </Link>) }</p>
+                : "" }
           </Col>
           <Col lg={4}>
               <h4>Key Information</h4>
-              {  item.extra_info ? Object.entries(item.kind.extraInfoDefault).map(infoEntry => <div key={infoEntry[0]} >
-                {infoEntry[0]}: {item.info[infoEntry[0]] }
-              </div>) : ""  }
+              {  item.extra_info ?
+                Object.entries(item.kind.default_extra_info).map(infoEntry =>
+                  <div key={infoEntry[0]} >
+                    {infoEntry[0]}: {item.extra_info[infoEntry[0]] }
+                  </div> ) : ""  }
           </Col>
       </Row>
 
-      <div>
-          <h4>Background:</h4>
-          {item.backgroundText}
-          <h4>Meaning:</h4>
-          {item.meaningText}
-      </div>
 
     </div>
   }
