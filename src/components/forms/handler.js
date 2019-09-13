@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import {Form} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {addItem, updateItem, deleteItem} from '../../redux/actions'
@@ -14,10 +15,17 @@ class FormHandler extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      item: props.item,
-      formClass: props.formClass,
-      existing: props.item.id ? true : false
+      item: {},
+      formClass: "",
+      existing: props.match.params.id ? true : false
     }
+  }
+
+  componentDidMount = () => { this.updateInfo(); }
+  componentWillReceiveProps = (newProps) => {this.updateInfo(newProps);}
+
+  updateInfo = (props = this.props) => {
+    this.setState({item: props.item, formClass: props.formClass})
   }
 
   handleChange = (e) => {
@@ -25,6 +33,15 @@ class FormHandler extends React.Component {
           item: {
               ...this.state.item,
               [e.target.name]: e.target.value
+          }
+      })
+  }
+
+  handleCheck = (e) => {
+      this.setState({
+          item: {
+              ...this.state.item,
+              [e.target.name]: e.target.checked
           }
       })
   }
@@ -63,16 +80,34 @@ class FormHandler extends React.Component {
     this.setState({
         item: {
             ...this.state.item,
-            extraInfoDefault: fieldsObject
+            default_extra_info: fieldsObject
         }
     })
   }
 
   submitForm = (e) => {
-    //e.preventDefault();
-      this.state.existing ?
-          this.props.updateItem(this.state.item, this.state.formClass) :
-          this.props.addItem(this.state.item, this.state.formClass)
+    e.preventDefault();
+    let item = this.state.item
+    if (item.default_extra_info) {
+      item = {...item, default_extra_info: JSON.stringify(item.default_extra_info)}
+    }
+    if(this.state.existing) {
+      axios
+          .put(`http://localhost:4001/api/${this.state.formClass}/${this.props.match.params.id}`, item )
+          .then(res =>
+            this.setState({item: res.data})
+          )
+          .catch(err => console.log(err) )
+    } else {
+      axios
+          .post(`http://localhost:4001/api/${this.state.formClass}`, item)
+          .then(res =>
+            this.setState({item: res.data})
+          )
+          .catch(err => console.log(err) )
+    }
+
+
   }
 
   deleteItem = (e) => {
@@ -91,7 +126,7 @@ class FormHandler extends React.Component {
 
 
                 {
-                  typeof itemField[1] === 'string' &&  itemField[0].indexOf("Id") <= 0 && itemField[0] !== 'id' && itemField[0].indexOf('Text') === -1  ?
+                  typeof itemField[1] === 'string' &&  itemField[0].indexOf("_id") <= 0 && itemField[0] !== 'id' && itemField[0].indexOf('_text') === -1  ?
                           <Form.Group>
                     <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                     <Form.Control onChange={this.handleChange} type="text"
@@ -102,7 +137,7 @@ class FormHandler extends React.Component {
                 }
 
                 {
-                  itemField[0].indexOf('Text') >= 0 ?
+                  itemField[0].indexOf('_text') >= 0 ?
                   <Form.Group>
                     <Form.Label>{ itemField[0].replace('Text', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                     <Form.Control as="textarea" rows={5} onChange={this.handleChange} type="text"
@@ -113,25 +148,48 @@ class FormHandler extends React.Component {
                 }
 
                 {
-                  !Array.isArray(itemField[1]) && itemField[0].indexOf("Id") > 0 ?
+                  !Array.isArray(itemField[1]) && itemField[0].indexOf("_id") > 0 ?
                   <IdSelectField item={this.state.item} field={itemField[0]} value={itemField[1]} handleChange={this.handleChangeCb}/>
                   : ""
                 }
 
                 {
-                  Array.isArray(itemField[1]) && itemField[0].indexOf("Id") > 0 ?
+                  Array.isArray(itemField[1]) && itemField[0].indexOf("_id") > 0 ?
                   <IdListField item={this.state.item} field={itemField[0]} array={itemField[1]} handleArrayChange={this.handleArrayChange}/>
                   : ""
                 }
 
                 {
-                  Array.isArray(itemField[1]) && itemField[0].indexOf("Id") <= 0 ?
+                  Array.isArray(itemField[1]) && itemField[0].indexOf("_id") <= 0 ?
                   <ArrayField item={this.state.item} field={itemField[0]} array={itemField[1]} handleArrayChange={this.handleArrayChange}/>
+                  : ""
+                 }
+
+                {
+                  Number.isInteger(itemField[1]) && itemField[0].indexOf("_id") <= 0 ?
+                  <Form.Group>
+                  <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                  <Form.Control onChange={this.handleChange} type="number"
+                  name={ itemField[0] } placeholder={ itemField[0] }
+                  value={this.state.item[ itemField[0] ]} />
+                  </Form.Group>
+                  : ""
+                }
+                {
+
+                  typeof itemField[1] === 'boolean' && itemField[0].indexOf("_id") <= 0 ?
+                  <Form.Group>
+                  <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+
+                  <Form.Control onChange={this.handleCheck} type="checkbox"
+                  name={ itemField[0] } placeholder={ itemField[0] }
+                  checked={this.state.item[ itemField[0] ]} />
+                  </Form.Group>
                   : ""
                 }
 
                 {
-                  itemField[0] === 'info' ?
+                  itemField[0] === 'extra_info' ?
                     this.state.item.info ?
                      <div>
                       <h5>Collection Related Information</h5>
@@ -146,7 +204,7 @@ class FormHandler extends React.Component {
                 }
 
                 {
-                  itemField[0] === 'extraInfoDefault' ?
+                  itemField[0] === 'default_extra_info' ?
                     <span>
                       {JSON.stringify(itemField[1])}
                       <ExtraInfoDefaultField item={this.state.item} fieldsObject={itemField[1]} handleExtraInfoChange={this.handleExtraInfoChange} />

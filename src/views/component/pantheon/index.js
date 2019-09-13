@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Pantheons from '../../../components/pantheon/index/index'
-import FormInsert from '../../../components/forms/insert'
+import FormInsert from '../../../components/forms/handler'
 import {defaultPantheon} from '../../../db/defaultObjects'
 
 class Pantheon extends React.Component {

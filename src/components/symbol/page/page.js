@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'
 import { Row, Col } from 'react-bootstrap'
 
-import FormInsert from '../../forms/insert'
+import FormInsert from '../../forms/handler'
 
 import BasicInfo from './basicInfo'
 import ImageGallery from '../../imageGallery/gallery'
@@ -43,16 +43,11 @@ class SymbolPage extends React.Component {
 
                       <div>
                           <h4>Background:</h4>
-                          {item.symbol_overview}
+                          {item.symbol_overview_text}
                           <h4>Meaning:</h4>
-                          {item.symbol_overview}
+                          {item.symbol_background_text}
                       </div>
 
-
-               <Row className="forms">
-                   <Col><FormInsert item={item} key={item.symbol_name} formClass={"symbols"} /></Col>
-                   <Col><FormInsert item={item} key={item.symbol_name} formClass={"symbols"} /></Col>
-              </Row>
 
 
             </div>

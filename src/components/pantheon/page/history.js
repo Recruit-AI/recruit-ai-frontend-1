@@ -27,12 +27,12 @@ class BasicInfo extends React.Component {
             <p> { this.yearRange(item) } </p>
             History:
             { item.history.length > 0 ? item.history.map(i => <span key={i.pantheon_name}>
-                <Link to={`/pantheon/${i.pantheon_id}`}>{i.pantheon_name}</Link>
+                <Link to={`/pantheons/${i.pantheon_id}`}>{i.pantheon_name}</Link>
             </span>) : "N/a" }<br />
 
             Offshoots:
             { item.influenced.length > 0 ? item.influenced.map(i => <span key={i.pantheon_name}>
-                <Link to={`/pantheon/${i.pantheon_id}`}>{i.pantheon_name}</Link>
+                <Link to={`/pantheons/${i.pantheon_id}`}>{i.pantheon_name}</Link>
             </span>) : "N/a"}<br />
     </div>
   }

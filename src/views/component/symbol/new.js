@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Kind from '../../../components/kind/page/page'
+import Symbol from '../../../components/symbol/page/page'
 
-class KindPage extends React.Component {
+class SymbolPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,9 +11,9 @@ class KindPage extends React.Component {
 
   render() {
     return <div  className="tpBlackBg">
-        <Kind match={this.props.match}  />
+        <Symbol match={this.props.match}  />
       </div>
   }
 }
 
-export default KindPage;
+export default SymbolPage;

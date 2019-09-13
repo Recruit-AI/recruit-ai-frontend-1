@@ -9,7 +9,7 @@ function SmallPantheonCard(props) {
     }
     return <div style={style}>
             <h2>{ item.thumbnail ? <img src={item.thumbnail.image_url} height="50px" alt={item.pantheon_name} /> : item.pantheon_name[0]}</h2>
-            <Link to={`/pantheon/${item.pantheon_id}`}>{ item.pantheon_name }</Link><br />
+            <Link to={`/pantheons/${item.pantheon_id}`}>{ item.pantheon_name }</Link><br />
     </div>
 }
 

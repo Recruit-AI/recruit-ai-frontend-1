@@ -16,17 +16,17 @@ class Collections extends React.Component {
                             <h5>Collections Created by {this.props.item.pantheon_name}</h5>
                             {
                               created_kinds.length > 0 ?
-                              created_kinds.map(item => <Link key={item.kind_name} to={`/collection/${item.kind_id}`}>
+                              created_kinds.map(item => <Link key={item.kind_name} to={`/collections/${item.kind_id}`}>
                                   {item.kind_name}
                                 </Link>
-                              ) : "N/a" 
+                              ) : "N/a"
                             }
                           </Col>
                           <Col>
                             <h5>Collections Used by {this.props.item.pantheon_name}</h5>
                             {
                               uses_kinds.length > 0 ?
-                              uses_kinds.map(item => <Link  key={item.kind_name} to={`/collection/${item.kind_id}`}>{item.kind_name}</Link> ) : "N/a"
+                              uses_kinds.map(item => <Link  key={item.kind_name} to={`/collections/${item.kind_id}`}>{item.kind_name}</Link> ) : "N/a"
                             }
                           </Col>
                       </Row>

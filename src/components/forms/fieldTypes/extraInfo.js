@@ -11,13 +11,13 @@ class ArrayField extends React.Component {
 
   deleteField = (e) => {
     console.log(e.target.id)
-    var oldObject = this.props.item.extraInfoDefault
+    var oldObject = this.props.item.default_extra_info
     delete oldObject[e.target.id]
     this.props.handleExtraInfoChange(oldObject)
   }
 
   addField = (e) => {
-    var oldObject = this.props.item.extraInfoDefault
+    var oldObject = this.props.item.default_extra_info
     oldObject[this.state.currentWord] = ""
     this.props.handleExtraInfoChange(oldObject)
   }

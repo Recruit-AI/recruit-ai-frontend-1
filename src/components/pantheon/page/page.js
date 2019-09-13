@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 
 import { Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
-import FormInsert from '../../forms/insert'
+import FormInsert from '../../forms/handler'
 import {defaultKind} from '../../../db/defaultObjects'
 
 import BasicInfo from './basicInfo'
@@ -35,7 +36,11 @@ class PantheonPage extends React.Component {
     render() {
         const item = this.state.pantheon
         return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
+
+          <Link to="/pantheons">Back to Pantheons</Link> | <Link to="/pantheons/new">Create Pantheon</Link>
                 <BasicInfo item={item}>
+                  <Link to={`/pantheons/${item.pantheon_id}/edit`}>Edit This Pantheon</Link>
+                  <Link to={`/collections/new?pantheon_id=${item.pantheon_id}`}>Add a New Collection</Link>
                   <History item={item} />
                   <ImageGallery item={item} />
                 </BasicInfo>
@@ -45,15 +50,11 @@ class PantheonPage extends React.Component {
 
                   <div>
                       <h4>History & Background</h4>
-                      <p>{item.pantheon_history}</p>
+                      <p>{item.pantheon_history_text}</p>
                       <h4>Culture & Advancements</h4>
-                      <p>{item.pantheon_culture}</p>
+                      <p>{item.pantheon_culture_text}</p>
                   </div>
 
-                <Row className="forms">
-                    <Col className=""><FormInsert item={item} key={item.id} formClass={"pantheons"} /></Col>
-                    <Col className=""><FormInsert item={defaultKind} formClass={"kinds"} /></Col>
-                </Row>
             </div> : "Loading... Or object not found."
 
     }

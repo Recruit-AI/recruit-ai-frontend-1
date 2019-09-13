@@ -17,12 +17,12 @@ class BasicInfo extends React.Component {
     <Row>
         <Col lg={4}>
             <p>{item.kind_description}</p>
-            <p>Created By: <Link to={`/pantheon/${item.pantheon_id}`}>{item.pantheon_name}</Link></p>
+            <p>Created By: <Link to={`/pantheons/${item.pantheon_id}`}>{item.pantheon_name}</Link></p>
 
             { item.pantheons ?
               <p>Used By:
                 {item.pantheons.map(i =>
-                  <Link key={i.pantheon_id} to={`/pantheon/${i.pantheon_id}`}>{i.pantheon_name}</Link>
+                  <Link key={i.pantheon_id} to={`/pantheons/${i.pantheon_id}`}>{i.pantheon_name}</Link>
                 )}</p>
               :""}
         </Col>

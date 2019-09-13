@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap'
 
-import FormInsert from '../../forms/insert'
+import FormInsert from '../../forms/handler'
 import {defaultSymbol} from '../../../db/defaultObjects'
 import BasicInfo from './basicInfo'
 import SymbolList from './symbolList'
@@ -48,10 +48,6 @@ class KindPage extends React.Component {
             <ImageGallery item={item} />
             <SymbolList item={item} relatedSymbols={this.state.relatedSymbols} />
 
-            <Row className="forms">
-                <Col className=""><FormInsert item={item} key={item.name} formClass={"kinds"} /></Col>
-                <Col className=""><FormInsert item={this.defaultSymbolWithInfo()} formClass={"symbols"} /></Col>
-            </Row>
         </div> : "Loading or not found"
 
     }

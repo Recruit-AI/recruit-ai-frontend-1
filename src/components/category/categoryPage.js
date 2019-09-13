@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap'
 
-import FormInsert from '../forms/insert'
+import FormInsert from '../forms/handler'
 import {defaultKind} from '../../db/defaultObjects'
 
 class CategoryPage extends React.Component {
@@ -52,10 +52,6 @@ class CategoryPage extends React.Component {
 
             </div>
 
-                        <Row className="forms">
-                            <Col className=""><FormInsert item={item} key={item.name} formClass={"categories"} /></Col>
-                            <Col className=""><FormInsert item={defaultKind} formClass={"kinds"} /></Col>
-                        </Row>
 
 
         </div> : "Loading or not found"

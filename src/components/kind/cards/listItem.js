@@ -8,8 +8,8 @@ function SmallKindCard(props) {
         width: ''
     }
     return <div style={style}>
-            <Link to={`/collection/${item.kind_id}`}>{ item.kind_name }</Link>
-            {item.description}
+            <Link to={`/collections/${item.kind_id}`}>{ item.kind_name }</Link>
+            {item.kind_description}
                     <img src={item.thumbnail} height="50px"/>
     </div>
 }

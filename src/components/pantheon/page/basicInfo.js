@@ -1,5 +1,6 @@
 import React from 'react'
 import {Row, Col} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 class BasicInfo extends React.Component {
   constructor(props) {
@@ -19,11 +20,11 @@ class BasicInfo extends React.Component {
           </Col>
           <Col>
               <h4>Overview</h4>
-              <p>{item.pantheon_overview}</p>
+              <p>{item.pantheon_overview_text}</p>
           </Col>
       </Row>
 
-      
+
     </div>
   }
 }

@@ -24,33 +24,47 @@ export const defaultConnection = {
 }
 
 export const defaultKind = {
-    id: "",
-    name: "",
-    originalPantheonId: "",
-    featuredPantheonIds: [],
-    theoryText: "",
-    historyText: "",
-    description: "",
-    totalNumber: "",
-    specificOrder: "false",
-    thumbnail: "",
-    images: [],
-    extraInfoDefault: {}
+  'kind_name': "",
+  'kind_description': "",
+  'kind_application_theory_text': "",
+  'kind_background_history_text': "",
+  'creator_pantheon_id': 1,
+  'total_number': 0,
+  'specific_order': false,
+  'default_extra_info': {}
 }
 
+export const defaultKindKeys = [
+  'kind_id',
+  'kind_name',
+  'kind_description',
+  'kind_application_theory_text',
+  'kind_background_history_text',
+  'creator_pantheon_id',
+  'total_number',
+  'specific_order',
+  'default_extra_info'
+]
+
 export const defaultPantheon = {
-    id: "",
-    name: "",
-    overviewText: "",
-    historyText: "",
-    cultureText: "",
-    description: "",
-    startYear: "0",
-    endYear: "0",
-    historyIds: [],
-    thumbnail: "",
-    images: []
+    pantheon_name: "",
+    pantheon_description: "",
+    pantheon_overview: "",
+    pantheon_history: "",
+    pantheon_culture: "",
+    start_year: 0,
+    end_year: 0
   }
+
+  export const defaultPantheonKeys = [
+    'pantheon_name',
+    'pantheon_description',
+    'pantheon_overview',
+    'pantheon_history',
+    'pantheon_culture',
+    'start_year',
+    'end_year'
+  ]
 
 export const defaultCategory = {
     id: "",

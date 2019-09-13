@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {Row, Col} from 'react-bootstrap'
-import FormInsert from '../../forms/insert'
+import FormInsert from '../../forms/handler'
 
 
 function Display(props) {
@@ -9,7 +9,7 @@ function Display(props) {
   const number = props.number
   const title = props.title
 
-  const conn = item.connections.filter(item => item.relationship === number)
+  const conn = item.connections.filter(item => item.connection_relationship == number)
 
   if(conn.length > 0) {
       return <div>
