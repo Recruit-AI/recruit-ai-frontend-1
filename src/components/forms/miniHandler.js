@@ -15,7 +15,7 @@ class FormHandler extends React.Component {
     this.state = {
       item: {},
       formClass: "",
-      existing: props.match.params.id ? true : false
+      existing: props.existing
     }
   }
 
@@ -86,6 +86,8 @@ class FormHandler extends React.Component {
   submitForm = (e) => {
     e.preventDefault();
     let item = this.state.item
+    const id = this.state.item.id
+    delete this.state.item.id
     if (item.default_extra_info) {
       item = {...item, default_extra_info: JSON.stringify(item.default_extra_info)}
     }
@@ -94,14 +96,14 @@ class FormHandler extends React.Component {
     }
     if(this.state.existing) {
       axios
-          .put(`http://localhost:4001/api/${this.state.formClass}/${this.props.match.params.id}`, item )
-          .then(res =>
+          .put(`http://localhost:4001/api/${this.props.info.url}/${id}`, item )
+          .then(res => {
             this.props.update()
-          )
+          })
           .catch(err => console.log(err) )
     } else {
       axios
-          .post(`http://localhost:4001/api/${this.state.formClass}`, item)
+          .post(`http://localhost:4001/api/${this.props.info.url}`, item)
           .then(res =>
             this.props.update()
           )
@@ -114,14 +116,18 @@ class FormHandler extends React.Component {
   deleteItem = (e) => {
     e.preventDefault()
     if(window.confirm("Are you sure you wish to completely delete the item?")){
-      this.props.deleteItem(this.state.item, this.state.formClass)
-      this.props.history.push(`/${this.state.formClass}`)
+      axios
+          .delete(`http://localhost:4001/api/${this.props.info.url}/${this.state.item.id}`)
+          .then(res =>
+            this.setState({item: {}})
+          )
+          .catch(err => console.log(err) )
     }
   }
 
   render() {
-    return <Form onSubmit={this.submitForm} style={{width:'800px',margin:'auto'}}>
-      <h2>{ this.state.existing ? `Edit` : "Add"}</h2>
+    return Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px'}}><Form onSubmit={this.submitForm}>
+      <h5>{ this.state.existing ? `` : "Add New"}</h5>
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 
 
@@ -129,7 +135,7 @@ class FormHandler extends React.Component {
                 {
                   typeof itemField[1] === 'string' &&  itemField[0].indexOf("_id") <= 0 && itemField[0] !== 'id' && itemField[0].indexOf('_text') === -1  ?
                           <Form.Group>
-                    <Form.Label>{ itemField[0].replace('pantheon_', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                    <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                     <Form.Control onChange={this.handleChange} type="text"
                     name={ itemField[0] } placeholder={ itemField[0] }
                     value={this.state.item[ itemField[0] ]} />
@@ -140,7 +146,7 @@ class FormHandler extends React.Component {
                 {
                   itemField[0].indexOf('_text') >= 0 ?
                   <Form.Group>
-                    <Form.Label>{ itemField[0].replace('pantheon_', '').replace('_text', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                    <Form.Label>{ itemField[0].replace('Text', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                     <Form.Control as="textarea" rows={5} onChange={this.handleChange} type="text"
                       name={ itemField[0] } placeholder={ itemField[0] }
                       value={this.state.item[ itemField[0] ]} />
@@ -167,7 +173,7 @@ class FormHandler extends React.Component {
                  }
 
                 {
-                  Number.isInteger(itemField[1]) && itemField[0].indexOf("_id") <= 0 ?
+                  Number.isInteger(itemField[1]) && itemField[0].indexOf("_id") <= 0 && itemField[0] !== "id" ?
                   <Form.Group>
                   <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                   <Form.Control onChange={this.handleChange} type="number"
@@ -218,11 +224,11 @@ class FormHandler extends React.Component {
       </div>) }
 
 
-    <button type='submit'>Okie</button>
+    <button type='submit'>{ this.state.existing ? `Edit` : "Add"}</button>
     <button onClick={this.deleteItem}>Delete</button>
 
-    </Form>
-  }
+    </Form></div> : ""
+}
 
 
 }

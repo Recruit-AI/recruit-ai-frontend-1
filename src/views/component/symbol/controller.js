@@ -9,10 +9,10 @@ import New from './new'
 function Controller() {
   return <div class="controller">
     <Switch>
-        <Route path="/" exact component={Index} />
-        <Route path="/:id" exact component={Page} />
-        <Route path="/:id/edit" exact component={Edit} />
-        <Route path="/new" exact component={New} />
+        <Route path="/symbols/" exact component={Index} />
+        <Route path="/symbols/new" exact component={New} />
+        <Route path="/symbols/:id" exact component={Page} />
+        <Route path="/symbols/:id/edit" exact component={Edit} />
     </Switch>
   </div>
 }

@@ -1,6 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 
 import Symbol from '../../../components/symbol/page/page'
+import HandleForm from '../../../components/forms/handler'
+
+import {defaultSymbol} from '../../../db/defaultObjects'
 
 class SymbolPage extends React.Component {
   constructor(props) {
@@ -11,7 +15,7 @@ class SymbolPage extends React.Component {
 
   render() {
     return <div  className="tpBlackBg">
-        <Symbol match={this.props.match}  />
+        <HandleForm item={defaultSymbol} formClass={"symbols"} />
       </div>
   }
 }

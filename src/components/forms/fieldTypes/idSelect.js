@@ -12,18 +12,42 @@ class IdList extends React.Component {
   }
 
   componentDidMount = () => {
-         axios
-            .get('http://localhost:4001/api/pantheons')
-            .then(res => {
-              this.setState({
-                allItems: res.data.map(
-                  item => ({
-                    ...item,
-                    name: item.pantheon_name,
-                    id: item.pantheon_id })),
-                });
-            })
-            .catch(err => console.log(err) );
+
+    switch(this.props.field) {
+      case "influenced_id":
+      case "influencer_id":
+      case "creator_pantheon_id":
+      case "kp_pantheon_id":
+        axios
+           .get('http://localhost:4001/api/pantheons')
+           .then(res => {
+             this.setState({
+               allItems: res.data.map(
+                 item => ({
+                   ...item,
+                   name: item.pantheon_name,
+                   id: item.pantheon_id })),
+               });
+           })
+           .catch(err => console.log(err) );
+           break;
+      case "symbol_kind_id":
+      case "kp_kind_id":
+        axios
+           .get('http://localhost:4001/api/kinds')
+           .then(res => {
+             this.setState({
+               allItems: res.data.map(
+                 item => ({
+                   ...item,
+                   name: item.kind_name,
+                   id: item.kind_id })),
+               });
+           })
+           .catch(err => console.log(err) );
+           break;
+    }
+
   }
 
   handleTextChange = (e) => {
@@ -49,12 +73,12 @@ class IdList extends React.Component {
     const {allItems} = this.state
     const selected = allItems.filter(obj => obj.id === value)[0]
 
-    console.log(field, value, item, selected)
-
 
     return <div>
     <Form.Group>
-        <Form.Label>{ field.replace("Ids", "").replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+        <Form.Label>
+          { field.replace("_id", "").replace("kp_", "").replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }:
+        </Form.Label>
 
 
            <div>

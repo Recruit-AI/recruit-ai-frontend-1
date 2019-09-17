@@ -1,6 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 
-import Category from '../../../components/category/categoryPage.js'
+import Category from '../../../components/category/page/page'
+import HandleForm from '../../../components/forms/handler'
+
+import {defaultCategory} from '../../../db/defaultObjects'
 
 class CategoryPage extends React.Component {
   constructor(props) {
@@ -10,8 +14,8 @@ class CategoryPage extends React.Component {
   }
 
   render() {
-    return <div className="tpBlackBg">
-        <Category match={this.props.match} />
+    return <div  className="tpBlackBg">
+        <HandleForm item={defaultCategory} formClass={"categories"} />
       </div>
   }
 }

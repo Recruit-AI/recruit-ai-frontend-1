@@ -45,7 +45,7 @@ class SymbolPage extends React.Component {
                           <h4>Background:</h4>
                           {item.symbol_overview_text}
                           <h4>Meaning:</h4>
-                          {item.symbol_background_text}
+                          {item.symbol_meaning_text}
                       </div>
 
 

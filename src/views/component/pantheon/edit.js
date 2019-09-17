@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Pantheon from '../../../components/pantheon/page/page'
 import HandleForm from '../../../components/forms/handler'
+import RelationshipForm from '../../../components/forms/relationship'
 
 import {defaultPantheonKeys, defaultPantheon} from  '../../../db/defaultObjects'
 
@@ -17,7 +18,8 @@ class PantheonPage extends React.Component {
   componentDidMount = () => { this.updateInfo(); }
   componentWillReceiveProps = (newProps) => {this.updateInfo(newProps);}
 
-    updateInfo = (props = this.props) => {
+
+  updateInfo = (props = this.props) => {
       const id = props.match.params.id
       console.log(id)
       axios
@@ -38,7 +40,10 @@ class PantheonPage extends React.Component {
 
 
     return <div  className="tpBlackBg">
-        <HandleForm item={formFields} formClass={"pantheons"} />
+        <HandleForm item={formFields} formClass={"pantheons"} update={this.updateInfo} />
+        <RelationshipForm item={item} formClass={"pantheons_history"} update={this.updateInfo} />
+        <RelationshipForm item={item} formClass={"pantheons_influenced"} update={this.updateInfo} />
+        <RelationshipForm item={item} formClass={"pantheons_use_kinds"} update={this.updateInfo} />
       </div>
   }
 }

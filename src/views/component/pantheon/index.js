@@ -38,8 +38,6 @@ class Pantheon extends React.Component {
       </div>
       <div className="reverse-divider"></div>
 
-      <FormInsert item={defaultPantheon} formClass={"pantheons"} />
-
     </div>
   );
 

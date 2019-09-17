@@ -25,9 +25,9 @@ class CategoriesComponent extends React.Component {
             {
                 this.state.categories.map(category => <Col key={category.category_name} lg={3}>
                     <br />
-                    <h5><Link to={`/category/${category.category_id}`}>{category.category_name}</Link></h5>
+                    <h5><Link to={`/categories/${category.category_id}`}>{category.category_name}</Link></h5>
                     {category.category_description}<br />
-                    
+
                         <br />
                 </Col>)
             }

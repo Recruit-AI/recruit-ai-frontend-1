@@ -3,7 +3,7 @@ import React from 'react';
 import {Row, Col, Accordion, Button, Card} from 'react-bootstrap'
 
 import Kinds from '../../../components/kind/index/index'
-import Collections from '../../../components/category/categoriesComponent'
+import Collections from '../../../components/category/index/index'
 import FormInsert from '../../../components/forms/handler'
 import {defaultKind} from '../../../db/defaultObjects'
 

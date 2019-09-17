@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Category from '../../../components/category/categoryPage.js'
+import Category from '../../../components/category/page/page'
 
 class CategoryPage extends React.Component {
   constructor(props) {
@@ -10,8 +10,8 @@ class CategoryPage extends React.Component {
   }
 
   render() {
-    return <div className="tpBlackBg">
-        <Category match={this.props.match} />
+    return <div  className="tpBlackBg">
+        <Category match={this.props.match}  />
       </div>
   }
 }

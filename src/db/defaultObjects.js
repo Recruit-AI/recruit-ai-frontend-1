@@ -1,17 +1,24 @@
 export const defaultSymbol = {
-    id: "",
-    name: "",
-    pantheonIds: [],
-    kindId: "",
-    otherSpellings: [],
-    description: "",
-    thumbnail: "",
-    images: [],
-    backgroundText: "",
-    meaningText:"",
-    number: "",
-    info: {}
+    symbol_name: "",
+    symbol_kind_id: "",
+    other_spellings: [],
+    symbol_description: "",
+    symbol_overview_text: "",
+    symbol_meaning_text:"",
+    order_number: "",
+    extra_info: {}
 }
+
+export const defaultSymbolKeys = [
+    'symbol_name',
+    'symbol_kind_id',
+    'other_spellings',
+    'symbol_description',
+    'symbol_overview_text',
+    'symbol_meaning_text',
+    'order_number',
+    'extra_info'
+]
 
 export const defaultConnection = {
       id: "",
@@ -49,9 +56,9 @@ export const defaultKindKeys = [
 export const defaultPantheon = {
     pantheon_name: "",
     pantheon_description: "",
-    pantheon_overview: "",
-    pantheon_history: "",
-    pantheon_culture: "",
+    pantheon_overview_text: "",
+    pantheon_history_text: "",
+    pantheon_culture_text: "",
     start_year: 0,
     end_year: 0
   }
@@ -59,23 +66,25 @@ export const defaultPantheon = {
   export const defaultPantheonKeys = [
     'pantheon_name',
     'pantheon_description',
-    'pantheon_overview',
-    'pantheon_history',
-    'pantheon_culture',
+    'pantheon_overview_text',
+    'pantheon_history_text',
+    'pantheon_culture_text',
     'start_year',
     'end_year'
   ]
 
 export const defaultCategory = {
-    id: "",
-    name: "",
-    description: "",
-    kindIds: [],
-    prerequisiteIds: [],
-    overviewText: "",
-    sourcesText: "",
+    category_name: "",
+    category_description: "",
+    category_overview_text: "",
+    category_sources_text: "",
+    category_number: 0
 }
 
-export const defaultUser = {
-
-}
+export const defaultCategoryKeys = [
+      'category_name',
+      'category_description',
+      'category_overview_text',
+      'category_sources_text',
+      'category_number'
+]
