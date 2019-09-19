@@ -1,4 +1,5 @@
 import React from 'react'
+import ImageModal from './imageModal'
 
 class Gallery extends React.Component {
   constructor(props) {
@@ -11,19 +12,19 @@ class Gallery extends React.Component {
   render() {
     const item = this.props.item
 
+    const images = item.images
+    const thumbnail = item.thumbnail
+    const galleryImages = [thumbnail, ...images]
     return <div className="image-gallery">
         <hr />
-        <h4>Images:</h4>
+        <h4>Image Gallery:</h4>
+        <p>Click for larger & more info</p>
         <div style={{display:'flex'}} >
-          { item.images ?
-            item.images.map(
+          { Array.isArray(galleryImages) ? galleryImages.map(
               image => <span key={image.image_title}>
-                {image.image_title}<br />
-                <img key={image} src={`http://localhost:4001/uploads/${image.image_url}`} height="200px" alt={item.name} /><br />
-                {image.image_description}<br />
+                <ImageModal key={image.image_id} item={image} />
               </span>
-            ) : ""
-          }
+            )  : "" }
         </div>
         <hr />
     </div>
