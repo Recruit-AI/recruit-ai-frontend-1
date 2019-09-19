@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Kind from '../../../components/kind/page/page'
 import HandleForm from '../../../components/forms/handler'
+import RelationshipForm from '../../../components/forms/relationship'
 
 import {defaultKindKeys, defaultKind} from  '../../../db/defaultObjects'
 
@@ -37,7 +38,12 @@ class KindPage extends React.Component {
     }});
 
     return <div  className="tpBlackBg">
-        <HandleForm item={formFields} formClass={"kinds"} />
+        <HandleForm item={formFields} formClass={"kinds"} update={this.updateInfo} />
+
+        <RelationshipForm item={item} formClass={"thumbnail"} update={this.updateInfo} info={ {id: item.kind_id, class: "Kind"}  } />
+        <RelationshipForm item={item} formClass={"images"} update={this.updateInfo} info={ {id: item.kind_id, class: "Kind"}  } />
+
+        <RelationshipForm item={item} formClass={"kinds_used_by_pantheons"} update={this.updateInfo} />
       </div>
   }
 }

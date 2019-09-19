@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {Form} from 'react-bootstrap'
+import {Input} from 'reactstrap'
 import { withRouter } from "react-router-dom";
 
 
@@ -83,6 +84,16 @@ class FormHandler extends React.Component {
     })
   }
 
+  handleFileChange = (e) => {
+    this.setState({
+        item: {
+            ...this.state.item,
+            image_raw: e.target.files[0],
+            image_preview_url: URL.createObjectURL(e.target.files[0])
+        }
+    })
+  }
+
   submitForm = (e) => {
     e.preventDefault();
     let item = this.state.item
@@ -94,22 +105,44 @@ class FormHandler extends React.Component {
     if(item.extra_info) {
       item = {...item, extra_info: JSON.stringify(item.extra_info)}
     }
-    if(this.state.existing) {
-      axios
-          .put(`http://localhost:4001/api/${this.props.info.url}/${id}`, item )
-          .then(res => {
-            this.props.update()
-          })
-          .catch(err => console.log(err) )
-    } else {
-      axios
-          .post(`http://localhost:4001/api/${this.props.info.url}`, item)
-          .then(res =>
-            this.props.update()
-          )
-          .catch(err => console.log(err) )
-    }
+    if(this.state.formClass === "images" || this.state.formClass === "thumbnail"){
+      const formId = `${this.state.formClass}-${id}`
+      let myForm = document.getElementById(formId);
+      console.log(myForm)
+      let formData = new FormData(myForm);
 
+      if(this.state.existing) {
+        axios
+            .put(`http://localhost:4001/api/${this.props.info.url}/${id}`, formData )
+            .then(res => {
+              this.props.update()
+            })
+            .catch(err => console.log(err) )
+      } else {
+        axios
+            .post(`http://localhost:4001/api/${this.props.info.url}`, formData)
+            .then(res =>
+              this.props.update()
+            )
+            .catch(err => console.log(err) )
+      }
+    } else{
+      if(this.state.existing) {
+        axios
+            .put(`http://localhost:4001/api/${this.props.info.url}/${id}`, item )
+            .then(res => {
+              this.props.update()
+            })
+            .catch(err => console.log(err) )
+      } else {
+        axios
+            .post(`http://localhost:4001/api/${this.props.info.url}`, item)
+            .then(res =>
+              this.props.update()
+            )
+            .catch(err => console.log(err) )
+      }
+    }
 
   }
 
@@ -126,20 +159,28 @@ class FormHandler extends React.Component {
   }
 
   render() {
-    return Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px'}}><Form onSubmit={this.submitForm}>
+    return Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px'}}><Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
+
       <h5>{ this.state.existing ? `` : "Add New"}</h5>
+      { console.log("Checking in minihandler", this.state.item)}
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 
 
 
                 {
-                  typeof itemField[1] === 'string' &&  itemField[0].indexOf("_id") <= 0 && itemField[0] !== 'id' && itemField[0].indexOf('_text') === -1  ?
-                          <Form.Group>
+                  //IF the value is a string, and the name of the field signifies it is not an id, a long text field, or a url
+                  typeof itemField[1] === 'string' &&
+                  itemField[0].indexOf("_id") < 0 &&
+                  itemField[0] !== 'id' &&
+                  itemField[0].indexOf('_text') === -1 &&
+                  itemField[0].indexOf('_url') === -1 &&
+                  itemField[0] !== "foreign_class" ?
+                  <Form.Group>
                     <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                     <Form.Control onChange={this.handleChange} type="text"
                     name={ itemField[0] } placeholder={ itemField[0] }
                     value={this.state.item[ itemField[0] ]} />
-                    </Form.Group>
+                  </Form.Group>
                   : ""
                 }
 
@@ -155,14 +196,9 @@ class FormHandler extends React.Component {
                 }
 
                 {
-                  !Array.isArray(itemField[1]) && itemField[0].indexOf("_id") > 0 ?
+                  !Array.isArray(itemField[1]) && itemField[0].indexOf("_id") > 0 &&
+                  itemField[0].indexOf("foreign") === -1 ?
                   <IdSelectField item={this.state.item} field={itemField[0]} value={itemField[1]} handleChange={this.handleChangeCb}/>
-                  : ""
-                }
-
-                {
-                  Array.isArray(itemField[1]) && itemField[0].indexOf("_id") > 0 ?
-                  <IdListField item={this.state.item} field={itemField[0]} array={itemField[1]} handleArrayChange={this.handleArrayChange}/>
                   : ""
                 }
 
@@ -217,6 +253,30 @@ class FormHandler extends React.Component {
                       <ExtraInfoDefaultField item={this.state.item} fieldsObject={itemField[1]} handleExtraInfoChange={this.handleExtraInfoChange} />
                     </span>
                 : ""
+                }
+
+                {
+                  itemField[0] === 'image_url' ?
+
+                    <Form.Group>
+                        {console.log(this.state.item.id)}
+                          <img src={this.state.item.image_preview_url ? this.state.item.image_preview_url : `http://localhost:4001/uploads/${itemField[1]}`} height="50px" alt={this.state.item.image_title} /><br />
+                          <Form.Label>Image</Form.Label>
+                          <Input type="file" name={'image_raw'} onChange={this.handleFileChange} />
+                    </Form.Group>
+                  : ""
+                }
+
+                { itemField[0] === 'foreign_id' ?
+
+                <Input type="hidden" name="foreign_id" value={this.state.item.foreign_id} />
+                  :""
+
+                }{ itemField[0] === 'foreign_class' ?
+
+                <Input type="hidden" name="foreign_class" value={this.state.item.foreign_class} />
+                  :""
+
                 }
 
 

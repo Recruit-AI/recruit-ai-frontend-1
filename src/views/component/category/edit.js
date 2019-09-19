@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Category from '../../../components/category/page/page'
 import HandleForm from '../../../components/forms/handler'
+import RelationshipForm from '../../../components/forms/relationship'
 
 import {defaultCategoryKeys, defaultCategory} from  '../../../db/defaultObjects'
 
@@ -37,7 +38,15 @@ class CategoryPage extends React.Component {
     }});
 
     return <div  className="tpBlackBg">
-        <HandleForm item={formFields} formClass={"categories"} />
+
+        <HandleForm item={formFields} formClass={"categories"} update={this.updateInfo}  />
+
+        <RelationshipForm item={item} formClass={"thumbnail"} update={this.updateInfo} info={ {id: item.category_id, class: "Category"}  } />
+        <RelationshipForm item={item} formClass={"images"} update={this.updateInfo} info={ {id: item.category_id, class: "Category"}  } />
+
+        <RelationshipForm item={item} formClass={"kinds_in_categories"} update={this.updateInfo} />
+        <RelationshipForm item={item} formClass={"category_prereqs"} update={this.updateInfo} />
+
       </div>
   }
 }

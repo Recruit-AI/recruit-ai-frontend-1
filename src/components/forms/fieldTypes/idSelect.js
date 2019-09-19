@@ -18,6 +18,7 @@ class IdList extends React.Component {
       case "influencer_id":
       case "creator_pantheon_id":
       case "kp_pantheon_id":
+      case "sp_pantheon_id":
         axios
            .get('http://localhost:4001/api/pantheons')
            .then(res => {
@@ -33,6 +34,7 @@ class IdList extends React.Component {
            break;
       case "symbol_kind_id":
       case "kp_kind_id":
+      case "ck_kind_id":
         axios
            .get('http://localhost:4001/api/kinds')
            .then(res => {
@@ -46,6 +48,68 @@ class IdList extends React.Component {
            })
            .catch(err => console.log(err) );
            break;
+
+
+        case "ck_category_id":
+        case "cp_prereq_id":
+        case "cp_category_id":
+             axios
+                .get('http://localhost:4001/api/categories')
+                .then(res => {
+                  this.setState({
+                    allItems: res.data.map(
+                      item => ({
+                        ...item,
+                        name: item.category_name,
+                        id: item.category_id })),
+                    });
+                })
+                .catch(err => console.log(err) );
+                break;
+
+                case "connected_symbol_id":
+                case "main_symbol_id":
+                case "sp_symbol_id":
+                     axios
+                        .get('http://localhost:4001/api/symbols')
+                        .then(res => {
+                          this.setState({
+                            allItems: res.data.map(
+                              item => ({
+                                ...item,
+                                name: item.symbol_name,
+                                id: item.symbol_id })),
+                            });
+                        })
+                        .catch(err => console.log(err) );
+                        break;
+
+                  case "foreign_id":
+                    let string = this.props.item.foreign_class.toLowerCase()
+                    let plural_string = ""
+                    if(string === 'category'){
+                      plural_string='categories'
+                    } else {
+                      plural_string = string + 's'
+                    }
+
+                    console.log("FOREIGNID", string)
+                    axios
+                       .get(`http://localhost:4001/api/${plural_string}`)
+                       .then(res => {
+                         this.setState({
+                           allItems: res.data.map(
+                             item => ({
+                               ...item,
+                               name: item[`${string}_name`],
+                               id: item[`${string}_id`] })),
+                           });
+                       })
+                       .catch(err => console.log(err) );
+                       break;
+
+
+
     }
 
   }
@@ -77,7 +141,10 @@ class IdList extends React.Component {
     return <div>
     <Form.Group>
         <Form.Label>
-          { field.replace("_id", "").replace("kp_", "").replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }:
+          { field.replace("_id", "")
+            .replace("kp_", "")
+            .replace("ck_", "")
+            .replace("cp_", "").replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }:
         </Form.Label>
 
 

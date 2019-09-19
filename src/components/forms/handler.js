@@ -114,8 +114,12 @@ class FormHandler extends React.Component {
   deleteItem = (e) => {
     e.preventDefault()
     if(window.confirm("Are you sure you wish to completely delete the item?")){
-      this.props.deleteItem(this.state.item, this.state.formClass)
-      this.props.history.push(`/${this.state.formClass}`)
+      axios
+          .delete(`http://localhost:4001/api/${this.state.formClass}/${this.props.match.params.id}`)
+          .then(res =>
+            this.props.history.push(`/${this.state.formClass}`)
+          )
+          .catch(err => console.log(err) )
     }
   }
 
@@ -124,12 +128,16 @@ class FormHandler extends React.Component {
       <h2>{ this.state.existing ? `Edit` : "Add"}</h2>
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 
-
-
                 {
                   typeof itemField[1] === 'string' &&  itemField[0].indexOf("_id") <= 0 && itemField[0] !== 'id' && itemField[0].indexOf('_text') === -1  ?
                           <Form.Group>
-                    <Form.Label>{ itemField[0].replace('pantheon_', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                    <Form.Label>{
+                        itemField[0]
+                        .replace('pantheon_', '')
+                        .replace('kind_', '')
+                        .replace('category_', '')
+                        .replace('symbol_', '')
+                        .replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                     <Form.Control onChange={this.handleChange} type="text"
                     name={ itemField[0] } placeholder={ itemField[0] }
                     value={this.state.item[ itemField[0] ]} />
@@ -140,7 +148,11 @@ class FormHandler extends React.Component {
                 {
                   itemField[0].indexOf('_text') >= 0 ?
                   <Form.Group>
-                    <Form.Label>{ itemField[0].replace('pantheon_', '').replace('_text', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                    <Form.Label>{ itemField[0]
+                        .replace('pantheon_', '')
+                        .replace('kind_', '')
+                        .replace('category_', '')
+                        .replace('symbol_', '').replace('_text', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                     <Form.Control as="textarea" rows={5} onChange={this.handleChange} type="text"
                       name={ itemField[0] } placeholder={ itemField[0] }
                       value={this.state.item[ itemField[0] ]} />
