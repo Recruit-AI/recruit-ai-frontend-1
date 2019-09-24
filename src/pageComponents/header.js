@@ -11,9 +11,22 @@ function Menu() {
                 </Col>
 
                 <Col xs={12} lg={10} className="menu-right">
+                    {/*Content drop down*/}
                     <NavLink to="/pantheons">Pantheons & Religions</NavLink>
-                    <NavLink to="/categories">Collections & Categories</NavLink>
+                    <NavLink to="/categories">Categories & Classes</NavLink>
+                    <NavLink to="/collections">Lists & Collections</NavLink>
                     <NavLink to="/symbols">Search</NavLink>
+
+                    <NavLink to="/categories">Our Mission</NavLink>
+                    {
+                      true ? <span>
+                        <NavLink to="/users/login">Login</NavLink>
+                        <NavLink to="/users/register">Register</NavLink>
+                      </span>
+                      :
+                        <NavLink to="/users/profile">Welcome, Jordan</NavLink>
+
+                    }
                 </Col>
             </Row>
         </Container>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 
 import LogIn from '../../components/user/logIn'
 import UserProfile from '../../components/user/userProfile'
@@ -13,8 +13,10 @@ class User extends React.Component {
 
     render() {
         return <div>
-            <Route path="/users" exact component={LogIn} />
+          <Switch>
+            <Route path="/users/login" exact component={LogIn} />
             <Route path="/users/:id" exact component={UserProfile} />
+          </Switch>
         </div>
     }
 }

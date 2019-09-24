@@ -16,7 +16,7 @@ class PopularPantheonList extends React.Component {
       axios
           .get('http://localhost:4001/api/pantheons')
           .then(res =>
-            this.setState({pantheons: res.data})
+            this.setState({pantheons: res.data.pageOfItems})
           )
           .catch(err => console.log(err) );
     }
@@ -31,7 +31,7 @@ class PopularPantheonList extends React.Component {
       return <div>
         <h3>Popular</h3>
         <div style={style}>
-          { this.state.pantheons.splice(1, 12).map(item =>
+          { this.state.pantheons.map(item =>
             <SmallPantheonCard key={item.pantheon_name} pantheon={item} />
           )}
         </div>
