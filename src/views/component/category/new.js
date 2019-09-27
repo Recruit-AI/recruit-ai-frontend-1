@@ -11,7 +11,7 @@ class CategoryPage extends React.Component {
     super(props);
     this.state = {
     }
-  }
+  } 
 
   render() {
     return <div  className="tpBlackBg">

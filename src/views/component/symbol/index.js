@@ -22,13 +22,10 @@ class Symbol extends React.Component {
     <div className="">
       <div className="pageCTA">
         <div className="container">
-          <h4>List of all relgions, groups, and philosophies</h4>
+          <h4>Search through our database of topics & objects</h4>
           <h1>Symbols</h1>
-          <h5>All human thought is related to another. The Greeks came from the Macedonians, the Jewish people
-            from the Ancient Babylonians, The Christians from both of those, and all three inspired many other forms of thought.</h5>
-          <h3>All forms of thought & philosophy around the state & nature of humanity, the universe, and anything beyond can be better
-            understood by looking at the forms of thought that inspired those civiliations</h3>
-          <h6>We attempt to include all forms of schools and tribes but that will take time and effort. You can help us.</h6>
+          <h5>In one way or another, everything is a symbol, everything has meaning</h5>
+          <h3>Our "Symbols" include the items that make up all of our Collections list.</h3>
 
         </div>
       </div>

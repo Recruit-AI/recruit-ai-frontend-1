@@ -1,8 +1,15 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col, NavItem, Dropdown} from 'react-bootstrap'
+import {withRouter} from 'react-router-dom'
 
-function Menu() {
+function Menu(props) {
+    const logout = (e) => {
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      props.history.push('/')
+    }
+    const user = localStorage.user ? JSON.parse(localStorage.user) : null
     return <div className="header">
         <Container>
             <Row>
@@ -12,20 +19,23 @@ function Menu() {
 
                 <Col xs={12} lg={10} className="menu-right">
                     {/*Content drop down*/}
-                    <NavLink to="/pantheons">Pantheons & Religions</NavLink>
-                    <NavLink to="/categories">Categories & Classes</NavLink>
-                    <NavLink to="/collections">Lists & Collections</NavLink>
-                    <NavLink to="/symbols">Search</NavLink>
+                    <Dropdown as={NavItem}>
+                      <Dropdown.Toggle as={NavLink}>Browse</Dropdown.Toggle>
+                      <Dropdown.Menu>
+                        <Dropdown.Item><NavLink to="/pantheons">By Pantheons & Religions</NavLink></Dropdown.Item>
+                        <Dropdown.Item><NavLink to="/categories">By Categories & Classes</NavLink></Dropdown.Item>
+                        <Dropdown.Item><NavLink to="/collections">By Lists & Collections</NavLink></Dropdown.Item>
+                        <Dropdown.Item><NavLink to="/symbols">Search All</NavLink></Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
 
-                    <NavLink to="/categories">Our Mission</NavLink>
+
+                    <NavLink to="/pages/mission">Our Mission</NavLink>
+                    <NavLink to="/pages/questions">FAQ</NavLink>
+                    <NavLink to="/pages/help">Help Us Out</NavLink>
                     {
-                      true ? <span>
-                        <NavLink to="/users/login">Login</NavLink>
-                        <NavLink to="/users/register">Register</NavLink>
-                      </span>
-                      :
-                        <NavLink to="/users/profile">Welcome, Jordan</NavLink>
-
+                       user ? <span>Welcome, Jordan <button onClick={logout}>Logout</button></span>
+                      : <NavLink to="/users/login">Admin</NavLink>
                     }
                 </Col>
             </Row>
@@ -33,4 +43,4 @@ function Menu() {
     </div>
 }
 
-export default Menu;
+export default withRouter(Menu);

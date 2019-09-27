@@ -10,6 +10,9 @@ import IdListField from './fieldTypes/idList'
 import IdSelectField from './fieldTypes/idSelect'
 import ExtraInfoDefaultField from './fieldTypes/extraInfo'
 
+
+const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
+
 class FormHandler extends React.Component {
   constructor(props) {
     super(props)
@@ -159,7 +162,7 @@ class FormHandler extends React.Component {
   }
 
   render() {
-    return Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px'}}><Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
+    return curr_user && Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px'}}><Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
 
       <h5>{ this.state.existing ? `` : "Add New"}</h5>
       { console.log("Checking in minihandler", this.state.item)}

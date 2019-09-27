@@ -2,6 +2,9 @@ import React from 'react';
 import FullPantheonsList from '../lists/full';
 import axios from 'axios';
 
+
+
+const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 //This component is used to build a 'complete' list, used for calling searches and passing props to the actual list component.
 
 class Pantheons extends React.Component {

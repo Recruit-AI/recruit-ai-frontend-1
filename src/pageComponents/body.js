@@ -10,6 +10,8 @@ import PantheonController from '../views/component/pantheon/controller';
 import KindController from '../views/component/kind/controller';
 import CategoryController from '../views/component/category/controller';
 
+import PagesController from '../views/pages/pages'
+
 function Body() {
     return <div className="body">
         <Switch>
@@ -19,6 +21,7 @@ function Body() {
             <Route path="/pantheons" component={PantheonController} />
             <Route path="/collections" component={KindController} />
             <Route path="/categories" component={CategoryController} />
+            <Route path="/pages" component={PagesController} />
 
             <Route path="/users" component={UserComponent} />
             <Route path="/logs" component={LogsComponent} />

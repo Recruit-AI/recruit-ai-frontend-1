@@ -9,6 +9,8 @@ import BasicInfo from './basicInfo'
 import SymbolList from './symbolList'
 import ImageGallery from '../../imageGallery/gallery'
 
+const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
+
 class KindPage extends React.Component {
     constructor(props) {
         super(props);
@@ -43,6 +45,8 @@ class KindPage extends React.Component {
     render() {
         const item = this.state.kind
         return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
+            { curr_user ?  <Link to="/collections/new">Create Collection</Link> : "" }
+            { curr_user ?  <Link to={`/collections/${this.props.match.params.id}/edit`}>Edit This Collection</Link> : "" }
 
             <BasicInfo item={item} createdBy={this.state.createdBy} usedBy={this.state.usedBy} />
             <ImageGallery item={item} />

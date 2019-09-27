@@ -6,6 +6,9 @@ import { Row, Col } from 'react-bootstrap'
 import FormInsert from '../../forms/handler'
 import {defaultKind} from '../../../db/defaultObjects'
 
+
+const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
+
 class CategoryPage extends React.Component {
     constructor(props) {
         super(props);
@@ -30,6 +33,10 @@ class CategoryPage extends React.Component {
     render() {
         const item = this.state.category
         return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
+
+
+            { curr_user ?  <Link to="/categories/new">Create Category</Link> : "" }
+            { curr_user ?  <Link to={`/categories/${this.props.match.params.id}/edit`}>Edit This Category</Link> : "" }
 
             <div className="category-info">
                 <h1>{item.category_name} {item.category_number}</h1>

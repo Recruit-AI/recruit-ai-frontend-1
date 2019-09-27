@@ -12,7 +12,7 @@ class CategoryPage extends React.Component {
     super(props);
     this.state = {
         category: {}
-    }
+    } 
   }
 
   componentDidMount = () => { this.updateInfo(); }

@@ -12,6 +12,9 @@ import History from './history'
 import Collections from './collections'
 import ImageGallery from '../../imageGallery/gallery'
 
+const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
+
+
 class PantheonPage extends React.Component {
     constructor(props) {
         super(props);
@@ -37,10 +40,12 @@ class PantheonPage extends React.Component {
         const item = this.state.pantheon
         return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
 
-          <Link to="/pantheons">Back to Pantheons</Link> | <Link to="/pantheons/new">Create Pantheon</Link>
+          <Link to="/pantheons">Back to Pantheons</Link> { curr_user ?  <Link to="/pantheons/new">Create Pantheon</Link> : "" }
                 <BasicInfo item={item}>
-                  <Link to={`/pantheons/${item.pantheon_id}/edit`}>Edit This Pantheon</Link>
-                  <Link to={`/collections/new?pantheon_id=${item.pantheon_id}`}>Add a New Collection</Link>
+                  { curr_user ? <span>
+                    <Link to={`/pantheons/${item.pantheon_id}/edit`}>Edit This Pantheon</Link>
+                    <Link to={`/collections/new?pantheon_id=${item.pantheon_id}`}>Add a New Collection</Link>
+                  </span> : "" }
                   <History item={item} />
                   <ImageGallery item={item} />
                 </BasicInfo>

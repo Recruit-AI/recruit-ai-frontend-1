@@ -9,6 +9,9 @@ import IdListField from './fieldTypes/idList'
 import IdSelectField from './fieldTypes/idSelect'
 import ExtraInfoDefaultField from './fieldTypes/extraInfo'
 
+
+const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
+
 class FormHandler extends React.Component {
   constructor(props) {
     super(props)
@@ -86,6 +89,7 @@ class FormHandler extends React.Component {
   submitForm = (e) => {
     e.preventDefault();
     let item = this.state.item
+    const headers = { headers: {'authorization': localStorage.token} }
     if (item.default_extra_info) {
       item = {...item, default_extra_info: JSON.stringify(item.default_extra_info)}
     }
@@ -94,14 +98,14 @@ class FormHandler extends React.Component {
     }
     if(this.state.existing) {
       axios
-          .put(`http://localhost:4001/api/${this.state.formClass}/${this.props.match.params.id}`, item )
+          .put(`http://localhost:4001/api/${this.state.formClass}/${this.props.match.params.id}`, item, headers)
           .then(res =>
             this.props.update()
           )
           .catch(err => console.log(err) )
     } else {
       axios
-          .post(`http://localhost:4001/api/${this.state.formClass}`, item)
+          .post(`http://localhost:4001/api/${this.state.formClass}`, item, headers )
           .then(res =>
             this.props.update()
           )
@@ -124,7 +128,7 @@ class FormHandler extends React.Component {
   }
 
   render() {
-    return <Form onSubmit={this.submitForm} style={{width:'800px',margin:'auto'}}>
+    return curr_user ? <Form onSubmit={this.submitForm} style={{width:'800px',margin:'auto'}}>
       <h2>{ this.state.existing ? `Edit` : "Add"}</h2>
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 
@@ -233,7 +237,7 @@ class FormHandler extends React.Component {
     <button type='submit'>Okie</button>
     <button onClick={this.deleteItem}>Delete</button>
 
-    </Form>
+    </Form> : ""
   }
 
 

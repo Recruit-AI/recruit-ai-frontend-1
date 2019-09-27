@@ -26,15 +26,18 @@ class LogIn extends React.Component {
       e.preventDefault();
       axios
           .post(`http://localhost:4001/api/users/login`, this.state.user)
-          .then(res =>
-            console.log(res, "Loggegd in")
+          .then(res => {
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('user', JSON.stringify(res.data.user))
+            this.props.history.push('/')
+          }
           )
           .catch(err => console.log(err) );
     }
 
     render() {
-        return <div>
-            <Form onSubmit={this.handleLogin}>
+        return <div style={{height:"100vh"}}>
+            <Form onSubmit={this.handleLogin} style={{width:"800px", margin:"auto"}}>
                 <Form.Group>
                     <Form.Label>Username or Email</Form.Label>
                     <Form.Control
