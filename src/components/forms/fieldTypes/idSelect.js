@@ -20,7 +20,7 @@ class IdList extends React.Component {
       case "kp_pantheon_id":
       case "sp_pantheon_id":
         axios
-           .get('https://grimwire.herokuapp.com/api/pantheons')
+           .get('https://grimwire.herokuapp.com/api/pantheons/nameList')
            .then(res => {
              this.setState({
                allItems: res.data.map(
@@ -36,7 +36,7 @@ class IdList extends React.Component {
       case "kp_kind_id":
       case "ck_kind_id":
         axios
-           .get('https://grimwire.herokuapp.com/api/kinds')
+           .get('https://grimwire.herokuapp.com/api/kinds/nameList')
            .then(res => {
              this.setState({
                allItems: res.data.map(
@@ -54,7 +54,7 @@ class IdList extends React.Component {
         case "cp_prereq_id":
         case "cp_category_id":
              axios
-                .get('https://grimwire.herokuapp.com/api/categories')
+                .get('https://grimwire.herokuapp.com/api/categories/nameList')
                 .then(res => {
                   this.setState({
                     allItems: res.data.map(
@@ -71,7 +71,7 @@ class IdList extends React.Component {
                 case "main_symbol_id":
                 case "sp_symbol_id":
                      axios
-                        .get('https://grimwire.herokuapp.com/api/symbols')
+                        .get('https://grimwire.herokuapp.com/api/symbols/nameList')
                         .then(res => {
                           this.setState({
                             allItems: res.data.map(
@@ -95,7 +95,7 @@ class IdList extends React.Component {
 
                     console.log("FOREIGNID", string)
                     axios
-                       .get(`https://grimwire.herokuapp.com/api/${plural_string}`)
+                       .get(`https://grimwire.herokuapp.com/api/${plural_string}/nameList`)
                        .then(res => {
                          this.setState({
                            allItems: res.data.map(
