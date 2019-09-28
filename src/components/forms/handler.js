@@ -18,7 +18,8 @@ class FormHandler extends React.Component {
     this.state = {
       item: {},
       formClass: "",
-      existing: props.match.params.id ? true : false
+      existing: props.match.params.id ? true : false,
+      default_extra_info: {}
     }
   }
 
@@ -27,6 +28,17 @@ class FormHandler extends React.Component {
 
   updateInfo = (props = this.props) => {
     this.setState({item: props.item, formClass: props.formClass})
+    if(props.item.extra_info) {
+      console.log(props.item)
+      axios
+          .get(`https://grimwire.herokuapp.com/api/kinds/${props.item.symbol_kind_id}`)
+          .then(res => {
+            if(res.data.kind_id){
+              this.setState({default_extra_info: res.data.default_extra_info})
+            }
+          })
+          .catch(err => console.log(err) )
+    }
   }
 
   handleChange = (e) => {
@@ -210,12 +222,12 @@ class FormHandler extends React.Component {
                     this.state.item.extra_info ?
                      <div>
                       <h5>Collection Related Information</h5>
-                      { Object.entries(this.state.item.extra_info).map(i => <Form.Group key={i[0]}>
+                      { Object.entries(this.state.default_extra_info).map(i => <Form.Group key={i[0]}>
                           <Form.Label>{i[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); })}</Form.Label>
                           <Form.Control
                               onChange={this.handleInfoChange}
                               name={i[0]} type="text" placeholder={i[0]}
-                              value={i[1]} />
+                              value={this.state.item.extra_info[ i[0] ]} />
                       </Form.Group>) } </div>
                   : "" : ""
                 }
