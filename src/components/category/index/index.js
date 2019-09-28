@@ -31,7 +31,7 @@ class Categories extends React.Component {
     loadPage = () => {
       const {pageNumber, sort, sortdir, searchTerm} = this.state
       axios
-          .get(`http://localhost:4001/api/categories?page=${pageNumber}&sort=${sort}&sortdir=${sortdir}&search=${searchTerm}`)
+          .get(`https://grimwire.herokuapp.com/api/categories?page=${pageNumber}&sort=${sort}&sortdir=${sortdir}&search=${searchTerm}`)
           .then(res =>
             this.setState({
               categories: res.data.pageOfItems,

@@ -29,7 +29,7 @@ class PantheonPage extends React.Component {
       updateInfo = (props = this.props) => {
         const id = props.match.params.id
         axios
-            .get(`http://localhost:4001/api/pantheons/${id}`)
+            .get(`https://grimwire.herokuapp.com/api/pantheons/${id}`)
             .then(res =>
               this.setState({pantheon: res.data})
             )

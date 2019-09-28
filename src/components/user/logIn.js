@@ -25,7 +25,7 @@ class LogIn extends React.Component {
     handleLogin = (e) => {
       e.preventDefault();
       axios
-          .post(`http://localhost:4001/api/users/login`, this.state.user)
+          .post(`https://grimwire.herokuapp.com/api/users/login`, this.state.user)
           .then(res => {
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('user', JSON.stringify(res.data.user))

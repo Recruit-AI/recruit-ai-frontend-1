@@ -29,7 +29,7 @@ class Kinds extends React.Component {
     loadPage = () => {
       const {pageNumber, sort, sortdir, searchTerm} = this.state
       axios
-          .get(`http://localhost:4001/api/kinds?page=${pageNumber}&sort=${sort}&sortdir=${sortdir}&search=${searchTerm}`)
+          .get(`https://grimwire.herokuapp.com/api/kinds?page=${pageNumber}&sort=${sort}&sortdir=${sortdir}&search=${searchTerm}`)
           .then(res =>
             this.setState({
               kinds: res.data.pageOfItems,

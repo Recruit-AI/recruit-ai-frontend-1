@@ -20,11 +20,11 @@ class ModalExample extends React.Component {
   render() {
     return (
       <div>
-        <div color="danger" onClick={this.toggle}>  <img src={`http://localhost:4001/uploads/${this.props.item.image_url}`} height="100px" alt={this.props.item.image_description} /> </div>
+        <div color="danger" onClick={this.toggle}>  <img src={`https://grimwire.herokuapp.com/uploads/${this.props.item.image_url}`} height="100px" alt={this.props.item.image_description} /> </div>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className="modal-xl">
           <ModalHeader toggle={this.toggle}>{this.props.item.image_title}</ModalHeader>
           <ModalBody>
-            <img style={{maxWidth:"100%", maxHeight:"100%"}} src={`http://localhost:4001/uploads/${this.props.item.image_url}`} alt={this.props.item.image_description} /><br />
+            <img style={{maxWidth:"100%", maxHeight:"100%"}} src={`https://grimwire.herokuapp.com/uploads/${this.props.item.image_url}`} alt={this.props.item.image_description} /><br />
             { this.props.item.image_description }
           </ModalBody>
           <ModalFooter>

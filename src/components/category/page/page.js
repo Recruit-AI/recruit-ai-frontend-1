@@ -23,7 +23,7 @@ class CategoryPage extends React.Component {
     updatePage = (props = this.props) => {
         const id = props.match.params.id
         axios
-            .get(`http://localhost:4001/api/categories/${id}`)
+            .get(`https://grimwire.herokuapp.com/api/categories/${id}`)
             .then(res =>
               this.setState({category: res.data})
             )
@@ -52,7 +52,7 @@ class CategoryPage extends React.Component {
                         <p>{item.category_sources_text}</p>
                     </Col>
                     <Col lg={4}>
-                        <img src={item.thumbnail ? `http://localhost:4001/uploads/${item.thumbnail.image_url}` : ""}  alt={item.pantheon_name} width="250px"/>
+                        <img src={item.thumbnail ? `https://grimwire.herokuapp.com/uploads/${item.thumbnail.image_url}` : ""}  alt={item.pantheon_name} width="250px"/>
                         <h4>Collections</h4>
                         { item.kinds ? item.kinds.map(i => <div><Link key={i.kind_id} to={`/collections/${i.kind_id}`}>{i.kind_name}</Link></div>) : ""}
                     </Col>

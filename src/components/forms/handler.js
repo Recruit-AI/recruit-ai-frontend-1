@@ -98,14 +98,14 @@ class FormHandler extends React.Component {
     }
     if(this.state.existing) {
       axios
-          .put(`http://localhost:4001/api/${this.state.formClass}/${this.props.match.params.id}`, item, headers)
+          .put(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.props.match.params.id}`, item, headers)
           .then(res =>
             this.props.update()
           )
           .catch(err => console.log(err) )
     } else {
       axios
-          .post(`http://localhost:4001/api/${this.state.formClass}`, item, headers )
+          .post(`https://grimwire.herokuapp.com/api/${this.state.formClass}`, item, headers )
           .then(res =>
             this.props.update()
           )
@@ -119,7 +119,7 @@ class FormHandler extends React.Component {
     e.preventDefault()
     if(window.confirm("Are you sure you wish to completely delete the item?")){
       axios
-          .delete(`http://localhost:4001/api/${this.state.formClass}/${this.props.match.params.id}`)
+          .delete(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.props.match.params.id}`)
           .then(res =>
             this.props.history.push(`/${this.state.formClass}`)
           )

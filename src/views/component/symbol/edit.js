@@ -22,7 +22,7 @@ class SymbolPage extends React.Component {
       const id = props.match.params.id
       console.log(id)
       axios
-          .get(`http://localhost:4001/api/symbols/${id}`)
+          .get(`https://grimwire.herokuapp.com/api/symbols/${id}`)
           .then(res =>
             this.setState({symbol: res.data})
           )

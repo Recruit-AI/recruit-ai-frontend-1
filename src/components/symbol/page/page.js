@@ -26,7 +26,7 @@ class SymbolPage extends React.Component {
 
     updateSymbolAndConnections = (props = this.props) => {
       axios
-          .get(`http://localhost:4001/api/symbols/${props.match.params.id}`)
+          .get(`https://grimwire.herokuapp.com/api/symbols/${props.match.params.id}`)
           .then(res =>
             this.setState({symbol: res.data})
           )

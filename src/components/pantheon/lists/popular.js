@@ -14,7 +14,7 @@ class PopularPantheonList extends React.Component {
 
     componentDidMount = () => {
       axios
-          .get('http://localhost:4001/api/pantheons')
+          .get('https://grimwire.herokuapp.com/api/pantheons')
           .then(res =>
             this.setState({pantheons: res.data.pageOfItems})
           )

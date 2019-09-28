@@ -116,14 +116,14 @@ class FormHandler extends React.Component {
 
       if(this.state.existing) {
         axios
-            .put(`http://localhost:4001/api/${this.props.info.url}/${id}`, formData )
+            .put(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${id}`, formData )
             .then(res => {
               this.props.update()
             })
             .catch(err => console.log(err) )
       } else {
         axios
-            .post(`http://localhost:4001/api/${this.props.info.url}`, formData)
+            .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, formData)
             .then(res =>
               this.props.update()
             )
@@ -132,14 +132,14 @@ class FormHandler extends React.Component {
     } else{
       if(this.state.existing) {
         axios
-            .put(`http://localhost:4001/api/${this.props.info.url}/${id}`, item )
+            .put(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${id}`, item )
             .then(res => {
               this.props.update()
             })
             .catch(err => console.log(err) )
       } else {
         axios
-            .post(`http://localhost:4001/api/${this.props.info.url}`, item)
+            .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, item)
             .then(res =>
               this.props.update()
             )
@@ -153,7 +153,7 @@ class FormHandler extends React.Component {
     e.preventDefault()
     if(window.confirm("Are you sure you wish to completely delete the item?")){
       axios
-          .delete(`http://localhost:4001/api/${this.props.info.url}/${this.state.item.id}`)
+          .delete(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${this.state.item.id}`)
           .then(res =>
             this.setState({item: {}})
           )
@@ -263,7 +263,7 @@ class FormHandler extends React.Component {
 
                     <Form.Group>
                         {console.log(this.state.item.id)}
-                          <img src={this.state.item.image_preview_url ? this.state.item.image_preview_url : `http://localhost:4001/uploads/${itemField[1]}`} height="50px" alt={this.state.item.image_title} /><br />
+                          <img src={this.state.item.image_preview_url ? this.state.item.image_preview_url : `https://grimwire.herokuapp.com/uploads/${itemField[1]}`} height="50px" alt={this.state.item.image_title} /><br />
                           <Form.Label>Image</Form.Label>
                           <Input type="file" name={'image_raw'} onChange={this.handleFileChange} />
                     </Form.Group>

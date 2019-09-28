@@ -25,7 +25,7 @@ class KindPage extends React.Component {
     updatePage = (props = this.props) => {
         const id = props.match.params.id
         axios
-            .get(`http://localhost:4001/api/kinds/${id}`)
+            .get(`https://grimwire.herokuapp.com/api/kinds/${id}`)
             .then(res =>
               this.setState({kind: res.data})
             )
