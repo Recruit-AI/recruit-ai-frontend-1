@@ -101,6 +101,7 @@ class FormHandler extends React.Component {
     e.preventDefault();
     let item = this.state.item
     const id = this.state.item.id
+    const headers = { headers: {'authorization': localStorage.token} }
     delete this.state.item.id
     if (item.default_extra_info) {
       item = {...item, default_extra_info: JSON.stringify(item.default_extra_info)}
@@ -116,14 +117,14 @@ class FormHandler extends React.Component {
 
       if(this.state.existing) {
         axios
-            .put(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${id}`, formData )
+            .put(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${id}`, formData, headers )
             .then(res => {
               this.props.update()
             })
             .catch(err => console.log(err) )
       } else {
         axios
-            .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, formData)
+            .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, formData, headers)
             .then(res =>
               this.props.update()
             )
@@ -132,14 +133,14 @@ class FormHandler extends React.Component {
     } else{
       if(this.state.existing) {
         axios
-            .put(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${id}`, item )
+            .put(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${id}`, item, headers )
             .then(res => {
               this.props.update()
             })
             .catch(err => console.log(err) )
       } else {
         axios
-            .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, item)
+            .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, item, headers)
             .then(res =>
               this.props.update()
             )
