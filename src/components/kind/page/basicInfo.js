@@ -12,7 +12,7 @@ class BasicInfo extends React.Component {
     const item = this.props.item
 
     return <div>
-    <img src={item.thumbnail.image_url} alt={item.kind_name}  height="100px" />
+    {item.thumbnail ? <img src={`https://grimwire.herokuapp.com/uploads/${item.thumbnail.image_url}`} alt={item.kind_name}  height="100px" /> : "" }
     <h1>{item.kind_name}</h1>
     <Row>
         <Col lg={4}>
