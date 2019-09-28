@@ -21,9 +21,9 @@ class Gallery extends React.Component {
         <p>Click for larger & more info</p>
         <div style={{display:'flex'}} >
           { Array.isArray(galleryImages) ? galleryImages.map(
-              image => <span key={image.image_title}>
+              image => image ? <span key={image.image_title}>
                 <ImageModal key={image.image_id} item={image} />
-              </span>
+              </span> : ""
             )  : "" }
         </div>
         <hr />
