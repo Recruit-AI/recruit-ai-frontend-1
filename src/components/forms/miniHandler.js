@@ -264,7 +264,7 @@ class FormHandler extends React.Component {
 
                     <Form.Group>
                         {console.log(this.state.item.id)}
-                          <img src={this.state.item.image_preview_url ? this.state.item.image_preview_url : `https://grimwire.herokuapp.com/uploads/${itemField[1]}`} height="50px" alt={this.state.item.image_title} /><br />
+                          <img src={this.state.item.image_preview_url ? this.state.item.image_preview_url : itemField[1] } height="50px" alt={this.state.item.image_title} /><br />
                           <Form.Label>Image</Form.Label>
                           <Input type="file" name={'image_raw'} onChange={this.handleFileChange} />
                     </Form.Group>
