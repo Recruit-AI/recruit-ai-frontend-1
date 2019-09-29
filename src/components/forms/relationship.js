@@ -273,7 +273,6 @@ class FormHandler extends React.Component {
 
       { this.props.formClass === 'thumbnail' && this.records().records ? ""
         : <div style={{display:'flex', justifyContent:'center'}}>
-          {console.log("Default Item in relationship.js", this.records().default_item)}
           {this.records().default_item ?
           <HandleForm item={ this.records().default_item } formClass={this.props.formClass} existing={false} info={info} update={this.props.update} />
           :""}

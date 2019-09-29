@@ -88,6 +88,7 @@ class FormHandler extends React.Component {
   }
 
   handleFileChange = (e) => {
+    if(e.target.files[0]){
     this.setState({
         item: {
             ...this.state.item,
@@ -95,6 +96,7 @@ class FormHandler extends React.Component {
             image_preview_url: URL.createObjectURL(e.target.files[0])
         }
     })
+    }
   }
 
   submitForm = (e) => {
@@ -166,7 +168,6 @@ class FormHandler extends React.Component {
     return curr_user && Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px'}}><Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
 
       <h5>{ this.state.existing ? `` : "Add New"}</h5>
-      { console.log("Checking in minihandler", this.state.item)}
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 
 
@@ -263,7 +264,6 @@ class FormHandler extends React.Component {
                   itemField[0] === 'image_url' ?
 
                     <Form.Group>
-                        {console.log(this.state.item.id)}
                           <img src={this.state.item.image_preview_url ? this.state.item.image_preview_url : itemField[1] } height="50px" alt={this.state.item.image_title} /><br />
                           <Form.Label>Image</Form.Label>
                           <Input type="file" name={'image_raw'} onChange={this.handleFileChange} />
