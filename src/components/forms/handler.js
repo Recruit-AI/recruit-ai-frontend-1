@@ -105,12 +105,12 @@ class FormHandler extends React.Component {
 
     let item = this.state.item
     const headers = { headers: {'authorization': localStorage.token} }
-    if (item.default_extra_info) {
-      item = {...item, default_extra_info: JSON.stringify(item.default_extra_info)}
-    }
-    if(item.extra_info) {
-      item = {...item, extra_info: JSON.stringify(item.extra_info)}
-    }
+    // if (item.default_extra_info) {
+    //   item = {...item, default_extra_info: JSON.stringify(item.default_extra_info)}
+    // }
+    // if(item.extra_info) {
+    //   item = {...item, extra_info: JSON.stringify(item.extra_info)}
+    // }
     if(this.state.existing) {
       axios
           .put(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.props.match.params.id}`, item, headers)
