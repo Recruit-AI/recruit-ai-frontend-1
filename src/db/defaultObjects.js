@@ -1,7 +1,7 @@
 export const defaultSymbol = {
     symbol_name: "",
     symbol_kind_id: "",
-    other_spellings: [],
+    other_spellings: "",
     symbol_description: "",
     symbol_overview_text: "",
     symbol_meaning_text:"",
