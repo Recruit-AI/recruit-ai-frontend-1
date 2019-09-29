@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 import Category from '../../../components/category/page/page'
 import HandleForm from '../../../components/forms/handler'
@@ -12,7 +13,7 @@ class CategoryPage extends React.Component {
     super(props);
     this.state = {
         category: {}
-    } 
+    }
   }
 
   componentDidMount = () => { this.updateInfo(); }
@@ -38,6 +39,8 @@ class CategoryPage extends React.Component {
     }});
 
     return <div  className="tpBlackBg">
+
+        <Link to={`/categories/${item.category_id}`}>Back to Page</Link>
 
         <HandleForm item={formFields} formClass={"categories"} update={this.updateInfo}  />
 

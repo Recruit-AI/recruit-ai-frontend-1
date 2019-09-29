@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 import Pantheon from '../../../components/pantheon/page/page'
 import HandleForm from '../../../components/forms/handler'
@@ -40,8 +41,11 @@ class PantheonPage extends React.Component {
 
 
     return <div  className="tpBlackBg">
+
+        <Link to={`/pantheons/${item.pantheon_id}`}>Back to Page</Link>
+
         <HandleForm item={formFields} formClass={"pantheons"} update={this.updateInfo} />
-        
+
         <RelationshipForm item={item} formClass={"thumbnail"} update={this.updateInfo} info={ {id: item.pantheon_id, class: "Pantheon"}  } />
         <RelationshipForm item={item} formClass={"images"} update={this.updateInfo} info={ {id: item.pantheon_id, class: "Pantheon"}  } />
 

@@ -19,7 +19,8 @@ class FormHandler extends React.Component {
       item: {},
       formClass: "",
       existing: props.match.params.id ? true : false,
-      default_extra_info: {}
+      default_extra_info: {},
+      formColor: 'transparent'
     }
   }
 
@@ -99,7 +100,9 @@ class FormHandler extends React.Component {
   }
 
   submitForm = (e) => {
+    this.setState({formColor:'white'})
     e.preventDefault();
+
     let item = this.state.item
     const headers = { headers: {'authorization': localStorage.token} }
     if (item.default_extra_info) {
@@ -111,16 +114,20 @@ class FormHandler extends React.Component {
     if(this.state.existing) {
       axios
           .put(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.props.match.params.id}`, item, headers)
-          .then(res =>
+          .then(res =>{
+            this.setState({formColor:'green'})
             this.props.update()
-          )
+            setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
+          })
           .catch(err => console.log(err) )
     } else {
       axios
           .post(`https://grimwire.herokuapp.com/api/${this.state.formClass}`, item, headers )
-          .then(res =>
+          .then(res => {
+            this.setState({formColor:'green'})
             this.props.update()
-          )
+            setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
+          })
           .catch(err => console.log(err) )
     }
 
@@ -140,7 +147,7 @@ class FormHandler extends React.Component {
   }
 
   render() {
-    return curr_user ? <Form onSubmit={this.submitForm} style={{width:'800px',margin:'auto'}}>
+    return curr_user ? <Form onSubmit={this.submitForm} style={{width:'800px',margin:'auto',backgroundColor:this.state.formColor}}>
       <h2>{ this.state.existing ? `Edit` : "Add"}</h2>
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 

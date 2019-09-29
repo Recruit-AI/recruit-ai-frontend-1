@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 import Kind from '../../../components/kind/page/page'
 import HandleForm from '../../../components/forms/handler'
@@ -38,6 +39,9 @@ class KindPage extends React.Component {
     }});
 
     return <div  className="tpBlackBg">
+
+              <Link to={`/collections/${item.kind_id}`}>Back to Page</Link>
+
         <HandleForm item={formFields} formClass={"kinds"} update={this.updateInfo} />
 
         <RelationshipForm item={item} formClass={"thumbnail"} update={this.updateInfo} info={ {id: item.kind_id, class: "Kind"}  } />

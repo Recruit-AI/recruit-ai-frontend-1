@@ -19,7 +19,8 @@ class FormHandler extends React.Component {
     this.state = {
       item: {},
       formClass: "",
-      existing: props.existing
+      existing: props.existing,
+      formColor: 'transparent'
     }
   }
 
@@ -100,6 +101,9 @@ class FormHandler extends React.Component {
   }
 
   submitForm = (e) => {
+
+    this.setState({formColor:'white'})
+
     e.preventDefault();
     let item = this.state.item
     const id = this.state.item.id
@@ -121,14 +125,19 @@ class FormHandler extends React.Component {
         axios
             .put(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${id}`, formData, headers )
             .then(res => {
+              this.setState({formColor:'green'})
               this.props.update()
+              setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
             })
             .catch(err => console.log(err) )
       } else {
         axios
             .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, formData, headers)
-            .then(res =>
+            .then(res =>{
+              this.setState({formColor:'green'})
               this.props.update()
+              setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
+            }
             )
             .catch(err => console.log(err) )
       }
@@ -137,14 +146,19 @@ class FormHandler extends React.Component {
         axios
             .put(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${id}`, item, headers )
             .then(res => {
+              this.setState({formColor:'green'})
               this.props.update()
+              setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
             })
             .catch(err => console.log(err) )
       } else {
         axios
             .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, item, headers)
-            .then(res =>
+            .then(res => {
+              this.setState({formColor:'green'})
               this.props.update()
+              setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
+            }
             )
             .catch(err => console.log(err) )
       }
@@ -165,7 +179,7 @@ class FormHandler extends React.Component {
   }
 
   render() {
-    return curr_user && Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px'}}><Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
+    return curr_user && Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px', backgroundColor:this.state.formColor}}><Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
 
       <h5>{ this.state.existing ? `` : "Add New"}</h5>
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
