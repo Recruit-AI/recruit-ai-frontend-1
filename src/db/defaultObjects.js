@@ -1,11 +1,11 @@
 export const defaultSymbol = {
     symbol_name: "",
-    symbol_kind_id: "",
+    symbol_kind_id: 1,
     other_spellings: "",
     symbol_description: "",
     symbol_overview_text: "",
     symbol_meaning_text:"",
-    order_number: "",
+    order_number: 0,
     extra_info: {}
 }
 
@@ -24,8 +24,8 @@ export const defaultConnection = {
       id: "",
       mainId: "",
       connectedId: "",
-      relationship: "",
-      strength: "",
+      relationship: 0,
+      strength: 0,
       description: "",
       aboutText: ""
 }

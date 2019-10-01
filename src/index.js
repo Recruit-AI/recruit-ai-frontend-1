@@ -11,14 +11,6 @@ import { Provider } from 'react-redux';
 
 import ScrollToTop from './pageComponents/scrollToTop'
 
-import symbols from './db/symbolsDb';
-import kinds from './db/kindsDb';
-import connections from './db/connectionsDb';
-import pantheons from './db/pantheonsDb';
-import {users} from './db/miscDb'
-import categories from './db/categoriesDb';
-
-
 
 const store = createStore(reducer);
 

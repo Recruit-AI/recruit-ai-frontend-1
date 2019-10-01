@@ -105,12 +105,6 @@ class FormHandler extends React.Component {
 
     let item = this.state.item
     const headers = { headers: {'authorization': localStorage.token} }
-    // if (item.default_extra_info) {
-    //   item = {...item, default_extra_info: JSON.stringify(item.default_extra_info)}
-    // }
-    // if(item.extra_info) {
-    //   item = {...item, extra_info: JSON.stringify(item.extra_info)}
-    // }
     if(this.state.existing) {
       axios
           .put(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.props.match.params.id}`, item, headers)
@@ -149,6 +143,7 @@ class FormHandler extends React.Component {
   render() {
     return curr_user ? <Form onSubmit={this.submitForm} style={{width:'800px',margin:'auto',backgroundColor:this.state.formColor}}>
       <h2>{ this.state.existing ? `Edit` : "Add"}</h2>
+      {console.log(this.state.item.order_number)}
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 
                 {
@@ -207,10 +202,11 @@ class FormHandler extends React.Component {
                   <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
                   <Form.Control onChange={this.handleChange} type="number"
                   name={ itemField[0] } placeholder={ itemField[0] }
-                  value={this.state.item[ itemField[0] ]} />
+                  value={ this.state.item[ itemField[0] ] } />
                   </Form.Group>
                   : ""
                 }
+
                 {
 
                   typeof itemField[1] === 'boolean' && itemField[0].indexOf("_id") <= 0 ?

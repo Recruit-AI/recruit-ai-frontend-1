@@ -139,13 +139,19 @@ class FormHandler extends React.Component {
               return {
                 default_item: {
                   main_symbol_id: this.props.item.symbol_id,
-                  connected_symbol_id: 0
+                  connected_symbol_id: 0,
+                  connection_description: "",
+                  connection_strength: 0,
+                  connection_relationship: 0
                 },
                 records: records.map(item => ({
                   update_id: item.symbol_connection_id,
                   record: {
                     id: item.symbol_connection_id,
-                    connected_symbol_id: item.connected_symbol_id
+                    connected_symbol_id: item.connected_symbol_id,
+                    connection_description: item.connection_description || "",
+                    connection_strength: item.connection_strength || 0,
+                    connection_relationship: item.connection_strength || 0
                   }
                 }))
               }
