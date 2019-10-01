@@ -3,6 +3,7 @@ import React from 'react';
 import Pantheons from '../../../components/pantheon/index/index'
 import FormInsert from '../../../components/forms/handler'
 import {defaultPantheon} from '../../../db/defaultObjects'
+import {Link} from 'react-router-dom'
 
 class Pantheon extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Pantheon extends React.Component {
   }
 
   render() {
+    const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
   return (
     <div className="">
       <div className="pageCTA">
@@ -30,6 +32,7 @@ class Pantheon extends React.Component {
             understood by looking at the forms of thought that inspired those civiliations</h3>
           <h6>We attempt to include all forms of schools and tribes but that will take time and effort. You can help us.</h6>
 
+                        { curr_user ?  <Link to="/pantheons/new">+ Create New Pantheon</Link> : "" }
         </div>
       </div>
       <div className="divider"></div>

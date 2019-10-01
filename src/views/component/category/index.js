@@ -3,6 +3,7 @@ import React from 'react';
 import Categories from '../../../components/category/index/index'
 import FormInsert from '../../../components/forms/handler'
 import {defaultCategory} from '../../../db/defaultObjects'
+import {Link} from 'react-router-dom'
 
 class Category extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Category extends React.Component {
 
 
   render() {
+    const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
   return (
     <div className="">
       <div className="pageCTA">
@@ -23,6 +25,7 @@ class Category extends React.Component {
           <h3>We have categories for Philosophy 101, Introduction to Wicca, Mythology 101, and Divination, among others.</h3>
           <h6>Find your starting point below!</h6>
 
+                        { curr_user ?  <Link to="/categories/new">+ Create New Category</Link> : "" }
         </div>
       </div>
       <div className="divider"></div>

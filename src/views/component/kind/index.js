@@ -3,6 +3,7 @@ import React from 'react';
 import Kinds from '../../../components/kind/index/index'
 import FormInsert from '../../../components/forms/handler'
 import {defaultKind} from '../../../db/defaultObjects'
+import {Link} from 'react-router-dom'
 
 class Kind extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Kind extends React.Component {
 
 
   render() {
+    const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
   return (
     <div className="">
       <div className="pageCTA">
@@ -23,6 +25,7 @@ class Kind extends React.Component {
           <h3>It seems like everyone has their own way of categorizing & understanding nature & the universe, certains lists and things they pay attention to.</h3>
           <h6>These are those lists.</h6>
 
+                        { curr_user ?  <Link to="/collections/new">+ Create New Collection</Link> : "" }
         </div>
       </div>
       <div className="divider"></div>
