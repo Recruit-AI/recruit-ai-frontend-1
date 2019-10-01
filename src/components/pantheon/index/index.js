@@ -17,8 +17,8 @@ class Pantheons extends React.Component {
           pageNumber: params.get('page') || 1,
           sort: params.get('sort') || "pantheon_name",
           sortdir: params.get('sortdir') || "ASC",
-          searchTerm: ""
-
+          searchTerm: "",
+          update:true
         }
     }
 
@@ -26,44 +26,44 @@ class Pantheons extends React.Component {
       this.loadPage();
     }
     componentDidUpdate = () => {
-      this.loadPage();
+      if(this.state.update){
+        this.loadPage();
+      }
     }
 
     loadPage = () => {
       const {pageNumber, sort, sortdir, searchTerm} = this.state
+
       axios
           .get(`https://grimwire.herokuapp.com/api/pantheons?page=${pageNumber}&sort=${sort}&sortdir=${sortdir}&search=${searchTerm}`)
           .then(res =>
             this.setState({
               pantheons: res.data.pageOfItems,
-              pager: res.data.pager
+              pager: res.data.pager,
+              update: false
             })
           )
           .catch(err => console.log(err) );
     }
 
     goToPage = (e) => {
-      this.setState({pageNumber: e.target.attributes.page.value})
-      this.loadPage()
+      this.setState({pageNumber: e.target.attributes.page.value, update:true})
     }
 
     toggleSortDir = (e) => {
-      this.setState({sortdir: this.state.sortdir === "ASC" ? "DESC" : "ASC"})
-      this.loadPage()
+      this.setState({sortdir: this.state.sortdir === "ASC" ? "DESC" : "ASC", update:true})
     }
 
     changeSort = (e) => {
-      this.setState({ sort: e.target.attributes.sortTerm.value })
-      this.loadPage()
+      this.setState({ sort: e.target.attributes.sortTerm.value, update:true })
     }
 
     handleChange = (e) => {
-      this.setState({searchTerm: e.target.value})
+      this.setState({searchTerm: e.target.value, update:true})
     }
 
     sendSearch = (e) => {
       e.preventDefault()
-      this.loadPage()
     }
 
 
