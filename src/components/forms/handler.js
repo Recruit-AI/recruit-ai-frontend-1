@@ -119,8 +119,9 @@ class FormHandler extends React.Component {
           .post(`https://grimwire.herokuapp.com/api/${this.state.formClass}`, item, headers )
           .then(res => {
             this.setState({formColor:'green'})
-            this.props.update()
             setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
+            const redirectId = res.data.symbol_id || res.data.pantheon_id || res.data.kind_id || res.data.category_id
+            this.props.history.push(`/${this.state.formClass}/${redirectId}/edit`)
           })
           .catch(err => console.log(err) )
     }
@@ -140,8 +141,17 @@ class FormHandler extends React.Component {
     }
   }
 
+  printifyName = (name) => {
+    return name
+    .replace('pantheon_', '')
+    .replace('kind_', '')
+    .replace('category_', '')
+    .replace('symbol_', '')
+    .replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
+  }
+
   render() {
-    return curr_user ? <Form onSubmit={this.submitForm} style={{width:'800px',margin:'auto',backgroundColor:this.state.formColor}}>
+    return curr_user ? <Form onSubmit={this.submitForm} style={{margin:'auto',backgroundColor:this.state.formColor}}>
       <h2>{ this.state.existing ? `Edit` : "Add"}</h2>
       {console.log(this.state.item.order_number)}
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
@@ -150,12 +160,8 @@ class FormHandler extends React.Component {
                   typeof itemField[1] === 'string' &&  itemField[0].indexOf("_id") <= 0 && itemField[0] !== 'id' && itemField[0].indexOf('_text') === -1  ?
                           <Form.Group>
                     <Form.Label>{
-                        itemField[0]
-                        .replace('pantheon_', '')
-                        .replace('kind_', '')
-                        .replace('category_', '')
-                        .replace('symbol_', '')
-                        .replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                        this.printifyName(itemField[0])
+                        }</Form.Label>
                     <Form.Control onChange={this.handleChange} type="text"
                     name={ itemField[0] } placeholder={ itemField[0] }
                     value={this.state.item[ itemField[0] ]} />
@@ -166,11 +172,7 @@ class FormHandler extends React.Component {
                 {
                   itemField[0].indexOf('_text') >= 0 ?
                   <Form.Group>
-                    <Form.Label>{ itemField[0]
-                        .replace('pantheon_', '')
-                        .replace('kind_', '')
-                        .replace('category_', '')
-                        .replace('symbol_', '').replace('_text', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                    <Form.Label>{  this.printifyName(itemField[0]) }</Form.Label>
                     <Form.Control as="textarea" rows={5} onChange={this.handleChange} type="text"
                       name={ itemField[0] } placeholder={ itemField[0] }
                       value={this.state.item[ itemField[0] ]} />
@@ -199,10 +201,13 @@ class FormHandler extends React.Component {
                 {
                   Number.isInteger(itemField[1]) && itemField[0].indexOf("_id") <= 0 ?
                   <Form.Group>
-                  <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                  <Form.Label>{ this.printifyName(itemField[0]) }</Form.Label>
                   <Form.Control onChange={this.handleChange} type="number"
                   name={ itemField[0] } placeholder={ itemField[0] }
                   value={ this.state.item[ itemField[0] ] } />
+                {itemField[0] === 'start_year' ? "Values greater than 0 are treated as AD, and negative values are treated as BCE." : ""}
+                {itemField[0] === 'end_year' ? "Values greater than 0 are treated as AD, and negative values are treated as BCE. Enter '2100' exactly if the pantheon is still living." : ""}
+
                   </Form.Group>
                   : ""
                 }
@@ -211,7 +216,7 @@ class FormHandler extends React.Component {
 
                   typeof itemField[1] === 'boolean' && itemField[0].indexOf("_id") <= 0 ?
                   <Form.Group>
-                  <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                  <Form.Label>{ this.printifyName(itemField[0]) }</Form.Label>
 
                   <Form.Control onChange={this.handleCheck} type="checkbox"
                   name={ itemField[0] } placeholder={ itemField[0] }
@@ -226,7 +231,7 @@ class FormHandler extends React.Component {
                      <div>
                       <h5>Collection Related Information</h5>
                       { Object.entries(this.state.default_extra_info).map(i => <Form.Group key={i[0]}>
-                          <Form.Label>{i[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); })}</Form.Label>
+                          <Form.Label>{this.printifyName(i[0]) }</Form.Label>
                           <Form.Control
                               onChange={this.handleInfoChange}
                               name={i[0]} type="text" placeholder={i[0]}
@@ -238,7 +243,6 @@ class FormHandler extends React.Component {
                 {
                   itemField[0] === 'default_extra_info' ?
                     <span>
-                      {JSON.stringify(itemField[1])}
                       <ExtraInfoDefaultField item={this.state.item} fieldsObject={itemField[1]} handleExtraInfoChange={this.handleExtraInfoChange} />
                     </span>
                 : ""

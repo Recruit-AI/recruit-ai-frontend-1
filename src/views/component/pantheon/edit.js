@@ -12,7 +12,8 @@ class PantheonPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        pantheon: {}
+        pantheon: {},
+        page: 0
     }
   }
 
@@ -31,6 +32,10 @@ class PantheonPage extends React.Component {
           .catch(err => console.log(err) );
   }
 
+  changePage = (e) => {
+    this.setState({page: Number.parseInt(e.target.getAttribute('data-page'))})
+  }
+
   render() {
     const item = this.state.pantheon
     const formFields = {}
@@ -39,19 +44,53 @@ class PantheonPage extends React.Component {
       formFields[key] = item[key] ? item[key] : defaultPantheon[key]
     }});
 
-
+    const page = this.state.page
+    const pages = ["Main", "Thumbnail Image", "Image Gallery", "History", "Inspired", "Collections"]
     return <div  className="tpBlackBg">
 
         <Link to={`/pantheons/${item.pantheon_id}`}>Back to Page</Link>
 
-        <HandleForm item={formFields} formClass={"pantheons"} update={this.updateInfo} />
+        <div>
+                  {
+                    pages.map(option =>
+                      <span className={`page-button ${pages.indexOf(option) == page ? "page-button-active" : ""}`} onClick={this.changePage} data-page={pages.indexOf(option)}>
+                        {option}
+                      </span>)
 
-        <RelationshipForm item={item} formClass={"thumbnail"} update={this.updateInfo} info={ {id: item.pantheon_id, class: "Pantheon"}  } />
-        <RelationshipForm item={item} formClass={"images"} update={this.updateInfo} info={ {id: item.pantheon_id, class: "Pantheon"}  } />
+                  }
+        </div>
 
-        <RelationshipForm item={item} formClass={"pantheons_history"} update={this.updateInfo} />
-        <RelationshipForm item={item} formClass={"pantheons_influenced"} update={this.updateInfo} />
-        <RelationshipForm item={item} formClass={"pantheons_use_kinds"} update={this.updateInfo} />
+        {
+          page === 0 ?
+            <HandleForm item={formFields} formClass={"pantheons"} update={this.updateInfo} />
+            : ""
+        }
+        {
+          page === 1 ?
+            <RelationshipForm item={item} formClass={"thumbnail"} update={this.updateInfo} info={ {id: item.pantheon_id, class: "Pantheon"}  } />
+            : ""
+        }
+        {
+          page === 2 ?
+            <RelationshipForm item={item} formClass={"images"} update={this.updateInfo} info={ {id: item.pantheon_id, class: "Pantheon"}  } />
+            : ""
+        }
+        {
+          page === 3 ?
+            <RelationshipForm item={item} formClass={"pantheons_history"} update={this.updateInfo} />
+            : ""
+        }
+        {
+          page === 4 ?
+            <RelationshipForm item={item} formClass={"pantheons_influenced"} update={this.updateInfo} />
+            : ""
+        }
+        {
+          page === 5 ?
+            <RelationshipForm item={item} formClass={"pantheons_use_kinds"} update={this.updateInfo} />
+            : ""
+        }
+
 
       </div>
   }

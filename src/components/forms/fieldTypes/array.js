@@ -25,12 +25,15 @@ class ArrayField extends React.Component {
     }
     this.props.handleArrayChange(field, array)
   }
+  printifyName = (name) => {
+    return name.replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
+  }
 
   render() {
     const {field, array, item} = this.props
     return <div>
     <Form.Group>
-        <Form.Label>{ field.replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+        <Form.Label>{ this.printifyName(field) }</Form.Label>
 
         { item[field].length > 0 ?
             item[ field ].map( (item, index) => <span key={index}>

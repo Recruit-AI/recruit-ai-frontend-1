@@ -54,7 +54,9 @@ class Kinds extends React.Component {
     }
 
     changeSort = (e) => {
-      this.setState({ sort: e.target.attributes.sortTerm.value, update:true })
+      const sort = e.target.attributes.sortTerm.value
+      if(sort === this.state.sort) { this.toggleSortDir() }
+      this.setState({ sort: sort, update:true })
     }
 
     handleChange = (e) => {
@@ -65,16 +67,20 @@ class Kinds extends React.Component {
 
     render() {
         return <div className="container">
-            Sort by:
-            <button onClick={this.changeSort} sortTerm={"kind_name"} >Alpha</button>
-            <button onClick={this.toggleSortDir}>{this.state.sortdir === "ASC" ? "Asc" : "Desc"}</button>
-            <input type='text' onChange={this.handleChange} type="text"
-              name="search" placeholder="Search"
-              value={this.state.searchTerm} />
+            <div className="componentSearchBar">
+              <button className={`page-button ${this.state.sort === 'kind_name' ? 'page-button-active' : "" }`} onClick={this.changeSort} sortTerm={"kind_name"} >
+                Sort Alphabetically { this.state.sort === 'kind_name' ? this.state.sortdir === "ASC" ? "(A-Z)" : "(Z-A)" : "" }
+              </button>
+
+              <input className="page-field" type='text' onChange={this.handleChange} type="text"
+                name="search" placeholder="Search by name"
+                value={this.state.searchTerm} />
+            </div>
 
             <FullKindList kinds={this.state.kinds} />
 
-            { this.state.pager.currentPage && this.state.pager.currentPage > 1 ?
+            <div class="paginationLinks">
+            { this.state.pager.currentPage && this.state.pager.currentPage > 2 ?
               <span onClick={this.goToPage} page={1} >First</span>
             : "" }
 
@@ -83,16 +89,17 @@ class Kinds extends React.Component {
               : "" }
 
             { this.state.pager.pages ? this.state.pager.pages.map(page => <span>
-              <span onClick={this.goToPage} page={page} >{page}</span>
+              <span onClick={this.goToPage} page={page} style={{textDecoration: this.state.pager.currentPage==page ? 'underline' : 'none'}} >{page}</span>
             </span>) : "" }
 
             { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
               <span onClick={this.goToPage} page={this.state.pager.currentPage + 1} >Next</span>
             : "" }
 
-            { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
+            { this.state.pager.currentPage && this.state.pager.currentPage+1 < this.state.pager.totalPages ?
               <span onClick={this.goToPage} page={this.state.pager.totalPages} >Last</span>
             : "" }
+            </div>
 
         </div>
     }

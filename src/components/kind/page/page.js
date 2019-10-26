@@ -46,7 +46,7 @@ class KindPage extends React.Component {
         const item = this.state.kind
         return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
             { curr_user ?  <Link to="/collections/new">Create Collection</Link> : "" }
-            { curr_user ?  <Link to={`/collections/${this.props.match.params.id}/edit`}>Edit This Collection</Link> : "" }
+            <Link to="/collections">Back to Collections</Link>
 
             <BasicInfo item={item} createdBy={this.state.createdBy} usedBy={this.state.usedBy} />
             <ImageGallery item={item} />

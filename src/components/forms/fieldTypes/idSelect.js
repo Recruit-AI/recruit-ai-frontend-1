@@ -8,6 +8,8 @@ class IdList extends React.Component {
       this.state = {
         possibleOptions: [],
         allItems: [],
+        selectionName: "",
+        backgroundColor:'white'
       }
   }
 
@@ -124,27 +126,37 @@ class IdList extends React.Component {
   }
 
   handleSelectionChange = (e) => {
+    this.setState({backgroundColor: 'rgba(155,255,155, .6)'})
     const pair = e.target.value.split('-')
     const field = pair[0]
     const id = pair[1]
+    const name = pair[2]
     const item = this.props.item
     const array = item[field]
+    this.setState({selectionName: pair[2]})
     this.props.handleChange(field, id)
+    setTimeout( () => {this.setState({backgroundColor: 'white'})} , 250);
+  }
+
+  printifyName = (name) => {
+    return name.replace("_id", "")
+      .replace("kp_", "")
+      .replace("ck_", "")
+      .replace("cp_", "")
+      .replace("sp_", "")
+      .replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
   }
 
   render() {
     const {field, value, item} = this.props
-    const {allItems} = this.state
+    const {allItems, selectionName} = this.state
     const selected = allItems.filter(obj => obj.id === value)[0]
 
 
     return <div>
     <Form.Group>
         <Form.Label>
-          { field.replace("_id", "")
-            .replace("kp_", "")
-            .replace("ck_", "")
-            .replace("cp_", "").replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }:
+          { this.printifyName(field) }:
         </Form.Label>
 
 
@@ -152,19 +164,19 @@ class IdList extends React.Component {
 
 
 
-              { selected ? selected.name : "Select" }
+                { selectionName ? selectionName : selected ? selected.name : "Select" }
 
 
                 <Form.Control
                   onChange={this.handleTextChange}
-                  type='text'
+                  type='text' style={{backgroundColor:this.state.backgroundColor}}
                   />
 
-                <Form.Control as="select" onChange={this.handleSelectionChange}>
+                <Form.Control style={{backgroundColor:this.state.backgroundColor}} as="select" onChange={this.handleSelectionChange}>
                   <option value="-1">-please select-</option>
                   {
                     this.state.possibleOptions.map(option =>
-                      <option key={option.id} value={ `${field}-${option.id}` } >
+                      <option key={option.id} value={ `${field}-${option.id}-${option.name}` } >
                         {option.name}
                       </option>)
                   }

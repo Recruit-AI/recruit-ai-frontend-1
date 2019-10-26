@@ -12,7 +12,8 @@ class KindPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        kind: {}
+        kind: {},
+        page: 0
     }
   }
 
@@ -30,6 +31,11 @@ class KindPage extends React.Component {
           .catch(err => console.log(err) );
   }
 
+  changePage = (e) => {
+    this.setState({page: Number.parseInt(e.target.getAttribute('data-page'))})
+  }
+
+
   render() {
     const item = this.state.kind
     const formFields = {}
@@ -38,16 +44,48 @@ class KindPage extends React.Component {
       formFields[key] = item[key] ? item[key] : defaultKind[key]
     }});
 
+        const page = this.state.page
+        const pages = ["Main", "Thumbnail Image", "Image Gallery", "Used By Pantheons"]
     return <div  className="tpBlackBg">
 
               <Link to={`/collections/${item.kind_id}`}>Back to Page</Link>
 
+                <div>
+                          {
+                            pages.map(option =>
+                              <span className={`page-button ${pages.indexOf(option) == page ? "page-button-active" : ""}`} onClick={this.changePage} data-page={pages.indexOf(option)}>
+                                {option}
+                              </span>)
+
+                          }
+                </div>
+
+                {
+                page === 0 ?
+
         <HandleForm item={formFields} formClass={"kinds"} update={this.updateInfo} />
 
+          : ""
+          }
+          {
+          page === 1 ?
+
         <RelationshipForm item={item} formClass={"thumbnail"} update={this.updateInfo} info={ {id: item.kind_id, class: "Kind"}  } />
+        : ""
+    }
+    {
+      page === 2 ?
+
         <RelationshipForm item={item} formClass={"images"} update={this.updateInfo} info={ {id: item.kind_id, class: "Kind"}  } />
+        : ""
+    }
+    {
+      page === 3 ?
+
 
         <RelationshipForm item={item} formClass={"kinds_used_by_pantheons"} update={this.updateInfo} />
+        : ""
+    }
       </div>
   }
 }

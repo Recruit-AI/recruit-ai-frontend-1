@@ -30,7 +30,7 @@ class BasicInfo extends React.Component {
               {  item.extra_info ?
                 Object.entries(item.kind.default_extra_info).map(infoEntry =>
                   <div key={infoEntry[0]} >
-                    {infoEntry[0]}: {item.extra_info[infoEntry[0]] }
+                    {infoEntry[0].replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})}: {item.extra_info[infoEntry[0]] }
                   </div> ) : ""  }
           </Col>
       </Row>

@@ -15,7 +15,7 @@ function Home(props) {
 
       <div className="pageCTA">
         <div>
-        <img height="200px"  alt="logo" src="https://www.freelogodesign.org/file/app/client/thumb/d61a2eaf-ba59-4c5c-b40b-5d866a55672e_200x200.png?1563814596359" />
+        <img height="200px"  alt="logo" src={require('../../img/logo.png')} />
         <h1>&nbsp;GRIMWIRE</h1>
         <h2>The Cultural, Spritual, and Historical Encyclopedia,</h2>
         <h2>From Tarot Cards to Greek Myths to Buddhist Philosophy to Astrology</h2>
@@ -30,38 +30,52 @@ function Home(props) {
 
       <div className="divider"></div>
 
-      <div className="indexBar">
+      <div className="indexBar pageDarkSection">
+        <h2>Welcome to GrimWire</h2>
+        <hr />
       <Container>
       <Row>
         <Col>
-          <img height="100px" src="https://image.flaticon.com/sprites/new_packs/112045-religion-symbols.png" />
-          <h3><Link to='/pantheons'>All Pantheons</Link></h3>
-          <p>Religions, groups, organizations, and teachings throughout history. Complete histories & informations.</p>
+
+          <Link to="/pantheons" className='homeImageLink-bg' style={{background:`url(${require('../../img/main-pantheon.jpg')})`,backgroundPosition:'center',backgroundSize:'cover'}} >
+            <div className='homeImageLink'>
+              <h3>All Pantheons</h3>
+              <p>Religions, groups, organizations, and teachings throughout history. Complete histories & informations.</p>
+            </div>
+          </Link>
+
         </Col>
         <Col>
-          <img height="100px" src="https://image.flaticon.com/sprites/new_packs/112045-religion-symbols.png" />
-          <h3><Link to="/collections">All Collections</Link></h3>
-          <p>Tarot Cards, Crystals, Astrological Signs, Angels, Demons, and the lists & collections that make up GrimWire.</p>
+          <Link to="/collections" className='homeImageLink-bg' style={{background:`url(${require('../../img/main-collection.jpg')})`,backgroundPosition:'center',backgroundSize:'cover'}} >
+            <div className='homeImageLink'>
+              <h3>All Collections</h3>
+              <p>Tarot Cards, Crystals, Astrological Signs, Angels, Demons, and the lists & collections that make up GrimWire.</p>
+            </div>
+          </Link>
         </Col>
         <Col>
-          <img height="100px" src="https://image.flaticon.com/sprites/new_packs/112045-religion-symbols.png" />
-          <h3><Link to="/categories">All Categories</Link></h3>
-          <p>Only looking for Wicca 101? Or the spellworking sections? Categories groups together collections for easier absorption.</p>
+          <Link to="/categories" className='homeImageLink-bg' style={{background:`url(${require('../../img/main-category.jpg')})`,backgroundPosition:'center',backgroundSize:'cover'}} >
+            <div className='homeImageLink'>
+              <h3>All Categories</h3>
+              <p>Only looking for Wicca 101? Or the spellworking sections? Categories groups together collections for easier absorption.</p>
+            </div>
+          </Link>
         </Col>
         <Col>
-          <img height="100px" src="https://image.flaticon.com/sprites/new_packs/112045-religion-symbols.png" /><h3><Link to="/symbols">All Symbols</Link></h3>
-          <p>The whole list of symbols & objects, all the magickal things we have</p>
+          <Link to="/symbols" className='homeImageLink-bg' style={{background:`url(${require('../../img/main-symbol.jpg')})`,backgroundPosition:'center',backgroundSize:'cover'}} >
+            <div className='homeImageLink'>
+              <h3>Search Symbols</h3>
+              <p>The whole list of symbols & objects, all the magickal things we have</p>
+            </div>
+          </Link>
         </Col>
       </Row>
       </Container>
+      <hr />
     </div>
 
 
           <div className="reverse-divider"></div>
-
-            <div className="tpBlackBg">
-              <PopularPantheonList />
-            </div>
 
 
     </div>

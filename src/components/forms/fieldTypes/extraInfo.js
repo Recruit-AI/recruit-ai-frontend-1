@@ -25,16 +25,22 @@ class ArrayField extends React.Component {
   handleChange = (e) => {
     this.setState({currentWord: e.target.value})
   }
+  printifyName = (name) => {
+    return name.replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
+  }
 
   render() {
     const {item, fieldsObject} = this.props
     return <div>
     <Form.Group>
-        <Form.Label>Extra Information Fields</Form.Label>
+        <Form.Label>Extra Information Fields For Symbols</Form.Label>
+        <Form.Control type="text" onChange={this.handleChange} value={this.state.currentWord}/> <span onClick={this.addField}>Add (+)</span><br />
+        <p>Warning: You cannot change the name of a field once it is set and data is filled in. You can only delete the existing field and data and create a new one. Please choose careully.</p>
+        <Form.Label>Edit:</Form.Label>
         {
-          Object.entries(fieldsObject).map(name => <div><span id={name[0]} onClick={this.deleteField}> {name} (-)</span></div>)
+          Object.entries(fieldsObject).map(name => <div>{ this.printifyName(name[0]) } <span id={name[0]} onClick={this.deleteField}> (-delete)</span></div>)
         }
-        <Form.Control type="text" onChange={this.handleChange} value={this.state.currentWord}/> <span onClick={this.addField}>Add Field (+)</span>
+        <br />
     </Form.Group>
     </div>
   }

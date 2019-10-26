@@ -100,6 +100,16 @@ class FormHandler extends React.Component {
     }
   }
 
+  handleSelectIntChange = (e) => {
+        this.setState({
+            item: {
+                ...this.state.item,
+                [e.target.name]: Number.parseInt(e.target.value)
+            }
+        })
+  }
+
+
   submitForm = (e) => {
 
     this.setState({formColor:'white'})
@@ -178,6 +188,10 @@ class FormHandler extends React.Component {
     }
   }
 
+  printifyName = (name) => {
+    return name.replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
+  }
+
   render() {
     return curr_user && Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px', backgroundColor:this.state.formColor}}><Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
 
@@ -195,7 +209,7 @@ class FormHandler extends React.Component {
                   itemField[0].indexOf('_url') === -1 &&
                   itemField[0] !== "foreign_class" ?
                   <Form.Group>
-                    <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                    <Form.Label>{ this.printifyName(itemField[0]) }</Form.Label>
                     <Form.Control onChange={this.handleChange} type="text"
                     name={ itemField[0] } placeholder={ itemField[0] }
                     value={this.state.item[ itemField[0] ]} />
@@ -206,7 +220,7 @@ class FormHandler extends React.Component {
                 {
                   itemField[0].indexOf('_text') >= 0 ?
                   <Form.Group>
-                    <Form.Label>{ itemField[0].replace('Text', '').replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                    <Form.Label>{ this.printifyName( itemField[0] ).replace('Text', '') }</Form.Label>
                     <Form.Control as="textarea" rows={5} onChange={this.handleChange} type="text"
                       name={ itemField[0] } placeholder={ itemField[0] }
                       value={this.state.item[ itemField[0] ]} />
@@ -215,8 +229,9 @@ class FormHandler extends React.Component {
                 }
 
                 {
-                  !Array.isArray(itemField[1]) && itemField[0].indexOf("_id") > 0 &&
-                  itemField[0].indexOf("foreign") === -1 ?
+                  !Array.isArray(itemField[1])
+                  && itemField[0].indexOf("_id") > 0
+                  && itemField[0].indexOf("foreign") === -1 ?
                   <IdSelectField item={this.state.item} field={itemField[0]} value={itemField[1]} handleChange={this.handleChangeCb}/>
                   : ""
                 }
@@ -228,9 +243,9 @@ class FormHandler extends React.Component {
                  }
 
                 {
-                  Number.isInteger(itemField[1]) && itemField[0].indexOf("_id") <= 0 && itemField[0] !== "id" ?
+                  Number.isInteger(itemField[1]) && itemField[0].indexOf("_id")<= 0 && itemField[0] !== 'connection_relationship'  && itemField[0] !== "id" ?
                   <Form.Group>
-                  <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                  <Form.Label>{ this.printifyName(itemField[0]) }</Form.Label>
                   <Form.Control onChange={this.handleChange} type="number"
                   name={ itemField[0] } placeholder={ itemField[0] }
                   value={this.state.item[ itemField[0] ]} />
@@ -239,9 +254,9 @@ class FormHandler extends React.Component {
                 }
                 {
 
-                  typeof itemField[1] === 'boolean' && itemField[0].indexOf("_id") <= 0 ?
+                  typeof itemField[1] === 'boolean' && itemField[0] != 'thumbnail'  ?
                   <Form.Group>
-                  <Form.Label>{ itemField[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) }</Form.Label>
+                  <Form.Label>{this.printifyName(itemField[0])}</Form.Label>
 
                   <Form.Control onChange={this.handleCheck} type="checkbox"
                   name={ itemField[0] } placeholder={ itemField[0] }
@@ -256,7 +271,7 @@ class FormHandler extends React.Component {
                      <div>
                       <h5>Collection Related Information</h5>
                       { Object.entries(this.state.item.extra_info).map(i => <Form.Group key={i[0]}>
-                          <Form.Label>{i[0].replace(/([A-Z])/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); })}</Form.Label>
+                          <Form.Label>{this.printifyName(i[0])}</Form.Label>
                           <Form.Control
                               onChange={this.handleInfoChange}
                               name={i[0]} type="text" placeholder={i[0]}
@@ -270,6 +285,23 @@ class FormHandler extends React.Component {
                     <span>
                       {JSON.stringify(itemField[1])}
                       <ExtraInfoDefaultField item={this.state.item} fieldsObject={itemField[1]} handleExtraInfoChange={this.handleExtraInfoChange} />
+                    </span>
+                : ""
+                }
+
+                {
+                  itemField[0] === 'connection_relationship' ?
+                    <span>
+                      <Form.Label>Type of Connection</Form.Label>
+                      <Form.Control as="select" value={itemField[1]} name={itemField[0]} onChange={this.handleSelectIntChange}>
+                        <option value="-1">-please select-</option>
+                        {
+                          ['Source', 'Mention', 'Related', 'Association', 'Property', 'Alternate Form'].map((option, i) =>
+                            <option key={option} value={ i } >
+                              {option}
+                            </option>)
+                        }
+                      </Form.Control>
                     </span>
                 : ""
                 }

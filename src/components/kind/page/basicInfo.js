@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {Row, Col} from 'react-bootstrap'
+const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
+
 
 class BasicInfo extends React.Component {
   constructor(props) {
@@ -12,8 +14,12 @@ class BasicInfo extends React.Component {
     const item = this.props.item
 
     return <div>
-    {item.thumbnail ? <img src={item.thumbnail.image_url} alt={item.kind_name}  height="100px" /> : "" }
+    {item.thumbnail ? <img src={item.thumbnail.image_url} alt={item.kind_name} height="100px" /> : "" }
     <h1>{item.kind_name}</h1>
+
+      { curr_user ?  <Link to={`/collections/${item.kind_id}/edit`}>Edit This Collection</Link> : "" }
+
+      { curr_user ?  <Link to={`/symbols/new`}>New Symbol</Link> : "" }
     <Row>
         <Col lg={4}>
             <p>{item.kind_description}</p>

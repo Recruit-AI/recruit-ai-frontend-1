@@ -54,7 +54,9 @@ class Categories extends React.Component {
     }
 
     changeSort = (e) => {
-      this.setState({ sort: e.target.attributes.sortTerm.value, update:true })
+      const sort = e.target.attributes.sortTerm.value
+      if(sort === this.state.sort) { this.toggleSortDir() }
+      this.setState({ sort: sort, update:true })
     }
 
     handleChange = (e) => {
@@ -68,13 +70,19 @@ class Categories extends React.Component {
 
     render() {
         return <div className="container">
-            Sort by:
-            <button onClick={this.changeSort} sortTerm={"category_name"} >Alpha</button>
-            <button onClick={this.changeSort} sortTerm={"category_number"} >Number</button>
-            <button onClick={this.toggleSortDir}>{this.state.sortdir === "ASC" ? "Asc" : "Desc"}</button>
-            <input type='text' onChange={this.handleChange} type="text"
-              name="search" placeholder="Search"
-              value={this.state.searchTerm} />
+
+            <div className="componentSearchBar">
+              <button className={`page-button ${this.state.sort === 'category_name' ? 'page-button-active' : "" }`} onClick={this.changeSort} sortTerm={"category_name"} >
+                Sort Alphabetically { this.state.sort === 'category_name' ? this.state.sortdir === "ASC" ? "(A-Z)" : "(Z-A)" : "" }
+              </button>
+              <button className={`page-button ${this.state.sort === 'category_number' ? 'page-button-active' : "" }`} onClick={this.changeSort} sortTerm={"category_number"} >
+                Sort by Number { this.state.sort === 'category_number' ? this.state.sortdir === "ASC" ? "(Beginner)" : "(Advanced)" : "" }
+              </button>
+
+              <input className="page-field" type='text' onChange={this.handleChange} type="text"
+                name="search" placeholder="Search by name"
+                value={this.state.searchTerm} />
+            </div>
 
               <Row>
                   {
@@ -90,7 +98,8 @@ class Categories extends React.Component {
 
 
 
-            { this.state.pager.currentPage && this.state.pager.currentPage > 1 ?
+            <div class="paginationLinks">
+            { this.state.pager.currentPage && this.state.pager.currentPage > 2 ?
               <span onClick={this.goToPage} page={1} >First</span>
             : "" }
 
@@ -99,16 +108,17 @@ class Categories extends React.Component {
               : "" }
 
             { this.state.pager.pages ? this.state.pager.pages.map(page => <span>
-              <span onClick={this.goToPage} page={page} >{page}</span>
+              <span onClick={this.goToPage} page={page}  style={{textDecoration: this.state.pager.currentPage==page ? 'underline' : 'none'}}>{page}</span>
             </span>) : "" }
 
             { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
               <span onClick={this.goToPage} page={this.state.pager.currentPage + 1} >Next</span>
             : "" }
 
-            { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
+            { this.state.pager.currentPage && this.state.pager.currentPage+1 < this.state.pager.totalPages ?
               <span onClick={this.goToPage} page={this.state.pager.totalPages} >Last</span>
             : "" }
+            </div>
 
         </div>
     }

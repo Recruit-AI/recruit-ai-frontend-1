@@ -29,7 +29,7 @@ class PopularPantheonList extends React.Component {
       }
 
       return <div>
-        <h3>Popular</h3>
+        <h3>Popular Pantheons</h3>
         <div style={style}>
           { this.state.pantheons.map(item =>
             <SmallPantheonCard key={item.pantheon_name} pantheon={item} />

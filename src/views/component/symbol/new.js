@@ -13,7 +13,7 @@ class SymbolPage extends React.Component {
     this.state = {
     }
   }
-
+ 
   render() {
   const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
     return <div  className="tpBlackBg">

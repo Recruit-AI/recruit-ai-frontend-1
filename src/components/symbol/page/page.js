@@ -39,6 +39,7 @@ class SymbolPage extends React.Component {
         return <div>
           { typeof item !== 'undefined' && Object.keys(item).length > 0 ?
             <div>
+              <Link to="/symbols">Search All Symbol</Link>
               { curr_user ?  <Link to="/symbols/new">Create Symbol</Link> : "" }
               { curr_user ?  <Link to={`/symbols/${this.props.match.params.id}/edit`}>Edit This Symbol</Link> : "" }
 

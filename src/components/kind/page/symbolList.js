@@ -47,28 +47,32 @@ class BasicInfo extends React.Component {
 
   render() {
     const item = this.props.item
-    return <div>
-    <h3>List of Items</h3>
+    return <div className="extra-info-slider">
 
-    <Row>
-        {item.specific_order ? <Col onClick={this.sortNumber} >#</Col> : ""}
-        <Col onClick={this.sortName} >Name</Col>
+    <h3>List of Items ></h3>
+
+    <div className="extra-info-row">
+        {item.specific_order ? <div className="extra-info-column" onClick={this.sortNumber} >#</div> : ""}
+        <div className="extra-info-column" onClick={this.sortName} >Name</div>
         { item.default_extra_info ? Object.entries( item.default_extra_info ).map( (entry) =>
-          <Col key={entry[0]} onClick={this.sortOther} sortTerm={entry[0]}> {entry[0]} </Col> ) : "" }
-        <Col>Thumbnail</Col>
-    </Row>
+          <div className="extra-info-column" key={entry[0]} onClick={this.sortOther} sortTerm={entry[0]}>
+            {/*Replaces underscores with spaces and capitalizes each word*/}
+            {entry[0].replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})}
+          </div> ) : "" }
+        <div className="extra-info-column">Thumbnail</div>
+    </div>
 
 
-    {item.symbols.map(i => <Row key={i.symbol_name}>
-        {item.specific_order ? <Col>{i.order_number}. </Col> : ""}
-        <Col><Link to={`/symbols/${i.symbol_id}`}>{i.symbol_name}</Link></Col>
+    {item.symbols.map(i => <div className="extra-info-row" key={i.symbol_name}>
+        {item.specific_order ? <div className="extra-info-column">{i.order_number}. </div> : ""}
+        <div className="extra-info-column"><Link to={`/symbols/${i.symbol_id}`}>{i.symbol_name}</Link></div>
         { i.extra_info ?
           Object.entries( item.default_extra_info ).map(
             (entry) =>
-              <Col key={entry[0]}> {  i.extra_info[entry[0]] } </Col>
+              <div className="extra-info-column" key={entry[0]}> {  i.extra_info[entry[0]] } </div>
           ) : ""}
-        <Col><img alt={i.name} src={i.thumbnail ? i.thumbnail.image_url : ""} height="64px" /></Col>
-    </Row>)}
+        <div className="extra-info-column"><img alt={i.name} src={i.thumbnail ? i.thumbnail.image_url : ""} height="64px" /></div>
+    </div>)}
     </div>
   }
 }

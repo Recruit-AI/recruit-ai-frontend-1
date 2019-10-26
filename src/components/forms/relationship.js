@@ -151,7 +151,7 @@ class FormHandler extends React.Component {
                     connected_symbol_id: item.connected_symbol_id,
                     connection_description: item.connection_description || "",
                     connection_strength: item.connection_strength || 0,
-                    connection_relationship: item.connection_strength || 0
+                    connection_relationship: item.connection_relationship || 0
                   }
                 }))
               }

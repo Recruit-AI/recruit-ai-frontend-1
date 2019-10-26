@@ -53,7 +53,9 @@ class Symbols extends React.Component {
     }
 
     changeSort = (e) => {
-      this.setState({ sort: e.target.attributes.sortTerm.value, update:true })
+      const sort = e.target.attributes.sortTerm.value
+      if(sort === this.state.sort) { this.toggleSortDir() }
+      this.setState({ sort: sort, update:true })
     }
 
     handleChange = (e) => {
@@ -67,16 +69,22 @@ class Symbols extends React.Component {
 
     render() {
         return <div className="container">
-            Sort by:
-            <button onClick={this.changeSort} sortTerm={"symbol_name"} >Alpha</button>
-            <button onClick={this.toggleSortDir}>{this.state.sortdir === "ASC" ? "Asc" : "Desc"}</button>
-            <input type='text' onChange={this.handleChange} type="text"
-              name="search" placeholder="Search"
+
+            <div className="componentSearchBar">
+            <button className={`page-button ${this.state.sort === 'symbol_name' ? 'page-button-active' : "" }`} onClick={this.changeSort} sortTerm={"symbol_name"} >
+              Sort Alphabetically { this.state.sort === 'symnbol_name' ? this.state.sortdir === "ASC" ? "(A-Z)" : "(Z-A)" : "" }
+            </button>
+
+            <input className="page-field" type='text' onChange={this.handleChange} type="text"
+              name="search" placeholder="Search by name"
               value={this.state.searchTerm} />
+            </div>
+
 
             <SimpleSymbolList symbols={this.state.symbols} />
 
-            { this.state.pager.currentPage && this.state.pager.currentPage > 1 ?
+            <div class="paginationLinks">
+            { this.state.pager.currentPage && this.state.pager.currentPage > 2 ?
               <span onClick={this.goToPage} page={1} >First</span>
             : "" }
 
@@ -84,17 +92,18 @@ class Symbols extends React.Component {
                 <span onClick={this.goToPage} page={this.state.pager.currentPage - 1} >Previous</span>
               : "" }
 
-            { this.state.pager.pages ? this.state.pager.pages.map(page => <span>
-              <span onClick={this.goToPage} page={page} >{page}</span>
-            </span>) : "" }
+            { this.state.pager.pages ? this.state.pager.pages.map(page =>
+              <span onClick={this.goToPage} page={page} style={{textDecoration: this.state.pager.currentPage==page ? 'underline' : 'none'}} >{page}</span>
+            ) : "" }
 
             { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
               <span onClick={this.goToPage} page={this.state.pager.currentPage + 1} >Next</span>
             : "" }
 
-            { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
+            { this.state.pager.currentPage && this.state.pager.currentPage+1 < this.state.pager.totalPages ?
               <span onClick={this.goToPage} page={this.state.pager.totalPages} >Last</span>
             : "" }
+          </div>
 
         </div>
     }

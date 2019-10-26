@@ -12,7 +12,8 @@ class SymbolPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        symbol: {}
+        symbol: {},
+        page: 0
     }
   }
 
@@ -30,6 +31,11 @@ class SymbolPage extends React.Component {
           .catch(err => console.log(err) );
   }
 
+  changePage = (e) => {
+    this.setState({page: Number.parseInt(e.target.getAttribute('data-page'))})
+  }
+
+
   render() {
     const item = this.state.symbol
     const formFields = {}
@@ -39,17 +45,55 @@ class SymbolPage extends React.Component {
     }});
 
 
+        const page = this.state.page
+        const pages = ["Main", "Thumbnail Image", "Image Gallery", "Connections", "Pantheons"]
+
     return <div  className="tpBlackBg">
 
         <Link to={`/symbols/${item.symbol_id}`}>Back to Page</Link>
 
+          <div>
+                    {
+                      pages.map(option =>
+                        <span className={`page-button ${pages.indexOf(option) == page ? "page-button-active" : ""}`} onClick={this.changePage} data-page={pages.indexOf(option)}>
+                          {option}
+                        </span>)
+
+                    }
+          </div>
+
+          {
+          page === 0 ?
+
         <HandleForm item={formFields} formClass={"symbols"} update={this.updateInfo} />
+        : ""
+    }
+    {
+      page === 1 ?
+
 
         <RelationshipForm item={item} formClass={"thumbnail"} update={this.updateInfo} info={ {id: item.symbol_id, class: "Symbol"}  } />
+        : ""
+    }
+    {
+      page === 2 ?
+
         <RelationshipForm item={item} formClass={"images"} update={this.updateInfo} info={ {id: item.symbol_id, class: "Symbol"}  } />
+        : ""
+    }
+    {
+      page === 3 ?
+
 
         <RelationshipForm item={item} formClass={"symbol_connections"} update={this.updateInfo} />
+        : ""
+    }
+    {
+      page === 4 ?
+
         <RelationshipForm item={item} formClass={"symbol_pantheons"} update={this.updateInfo} />
+        : ""
+    }
       </div>
   }
 }

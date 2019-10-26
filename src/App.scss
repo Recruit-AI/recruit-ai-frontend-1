@@ -1,14 +1,36 @@
+$ll-primary-color: #6e72d1;
+$l-primary-color: #4248c3;
+$primary-color: #31369b;
+$d-primary-color: #23276f;
+$dd-primary-color: #151844;
+$ll-secondary-color: #98a7ac;
+$l-secondary-color: #788c93;
+$secondary-color: #5d6e74;
+$d-secondary-color: #435054;
+$dd-secondary-color: #2a3234;
+$ll-highlight-color: #cc6467;
+$l-highlight-color: #b93d41;
+$highlight-color: #8e2f32;
+$d-highlight-color: #632123;
+$dd-highlight-color: #381214;
+$ll-light-color: #ebecf9;
+$l-light-color: #c0c1eb;
+$light-color: #9497dd;
+$d-light-color: #686dcf;
+$dd-light-color: #3d43c1;
+$ll-grey-color: #9f9f9f;
+$l-grey-color: #838383;
+$grey-color: #666666;
+$d-grey-color: #494949;
+$dd-grey-color: #2d2d2d;
+$ll-dark-color: #003a75;
+$l-dark-color: #001e3b;
+$dark-color: #000102;
+$d-dark-color: #000000;
+$dd-dark-color: #000000;
 
-$primaryColor: rgb(131, 131, 224);
-$secondaryColor: rgb(8, 42, 53);
-$highlightColor: rgb(143, 63, 63);
-$lightColor: rgb(200,200,200);
 
-$blackColor: desaturate(darken($secondaryColor, 4%), 50%);
-$whiteColor: rgb(218, 218, 218);
-$greyColor: #ccc;
-
-$tGreyColor: rgba(58, 47, 47, 0.9);
+$tGreyColor: rgba($secondary-color, .7);
 
 
 $textFont: 'Martel', serif;
@@ -17,7 +39,7 @@ $headerFont: 'Patua One', sans-serif;
 
 .App {
   text-align: center;
-  background-color: $blackColor;
+  background-color: $dark-color;
 
   $nightWoods: "https://images.pexels.com/photos/289367/pexels-photo-289367.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
   $nightButterflies: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
@@ -30,9 +52,9 @@ $headerFont: 'Patua One', sans-serif;
 }
 
 a {
-  color: $primaryColor !important;
+  color: $l-secondary-color !important;
 }
-button { color: $blackColor }
+button { color: $dark-color }
 
 a {
   padding:5px;
@@ -42,21 +64,64 @@ a {
   text-decoration:none;
 }
 
+
+
 .main-page {
-  background-color: $tGreyColor;
+  background-color: rgba($secondary-color, .7);
 }
 
+.page-button{
+  margin:5px;
+  background-color:$secondary-color;
+  font-family: $textFont;
+  padding:5px;
+  border-radius: 5px;
+  color:$ll-light-color;
+  border: 2px solid $l-secondary-color;
+  display:inline-block;
+  cursor: pointer;
+  &:hover {
+    background-color:$l-secondary-color;
+    border: 2px solid $d-secondary-color;
+  }
+}
 
+.page-button-active {
+  background-color:$d-secondary-color;
+
+}
+
+.page-field {
+  margin:5px;
+  padding:5px;
+  border-radius: 5px;
+  max-width:500px;
+  width:100%;
+  color:$dark-color;
+}
 
 .pageCTA {
-  background: rgba(0,0,0,.6);
+  background: linear-gradient(
+    rgba($dark-color,.9) 10%,
+    rgba($dark-color,.75) 20%,
+    rgba($dark-color,.55) 40%,
+    rgba($dark-color,.45) 70%,
+    rgba($dark-color,.9) 100%,
+  );
   min-height:100vh;
+  padding:20px;
   margin:0;
-  h1 { font-size: 84px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 42px; font-weight:bold;}
-  .CTAList h3, h5 { color: $lightColor; text-decoration: none;}
+  .CTAList h3, h5 { color: $light-color; text-decoration: none;}
   display:flex;
   align-items: center;
   justify-content:center;
+}
+
+@media only screen and (max-width: 911px) {
+.pageCTA h1 { font-size: 32px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 8px; font-weight:bold;}
+}
+@media only screen and (min-width: 912px) {
+.pageCTA h1 { font-size: 84px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 21px; font-weight:bold;}
 }
 
 .tpBlackBg {
@@ -65,45 +130,72 @@ a {
 
 }
 
+$dividerColor: $secondary-color;
+$d-dividerColor: $dd-secondary-color;
+$l-dividerColor: $ll-secondary-color;
+
 .divider {
   box-sizing: border-box;
-  height:6px;
-  background-color:$secondaryColor;
-  border-top:2px solid lighten($secondaryColor, 5%);
-  border-bottom:2px solid darken($secondaryColor, 5%);
+  height:12px;
+  background-color:$dividerColor;
+  border-top:3px solid $l-dividerColor;
+  border-bottom:3px solid $d-dividerColor;
 }
 
 .reverse-divider {
   box-sizing: border-box;
-  height:6px;
-  background-color:$secondaryColor;
-  border-bottom:2px solid lighten($secondaryColor, 5%);
-  border-top:2px solid darken($secondaryColor, 5%);
+  height:12px;
+  background-color: $dividerColor;
+  border-bottom:3px solid $l-dividerColor;
+  border-top:3px solid $d-dividerColor;
 }
 
 .indexBar {
   padding: 20px;
-  background:linear-gradient( darken($secondaryColor, 4%) 0%, lighten($secondaryColor, 2%) 20%, darken($secondaryColor, 0%) 30%, darken($secondaryColor, 2%) 60%, darken($secondaryColor, 6%) 90%);
+  background-color:$primary-color;
   h3 { margin: 0; padding: 20px 0 10px;}
   margin:0;
 }
 
+.homeAltBg {
+  background: linear-gradient(rgba($dd-secondary-color, .1), rgba($dd-secondary-color, .9)),
+    repeating-linear-gradient( 100deg,
+      rgba($secondary-color, .1),
+      rgba($secondary-color, .2) 25px,
+      rgba(transparent, .2) 35px,
+      rgba($d-secondary-color, .4) 75px,
+      rgba($dd-secondary-color, .4) 100px,
+      rgba($secondary-color, .1) 150px
+    ),
+    $dd-secondary-color;
+  padding:40px 20px;
+}
+
 .pageDarkSection {
   text-align:center;
-  background-color: $blackColor;
+  background: repeating-linear-gradient(35deg, rgba($primary-color, .1), rgba($primary-color, .2) 120px),
+  repeating-linear-gradient(rgba($d-primary-color, .1), rgba($d-primary-color, .3) 50px),
+  repeating-linear-gradient(120deg, rgba($d-primary-color, .1), rgba($d-primary-color, .2) 50px),
+  $dark-color;
   padding:20px;
 }
+
+
 
 .header {
   box-sizing: border-box;
   display:flex;
   justify-content: space-between;
   align-items: center;
-  background:linear-gradient( darken($secondaryColor, 4%) 0%, lighten($secondaryColor, 2%) 20%, darken($secondaryColor, 0%) 30%, darken($secondaryColor, 2%) 60%, darken($secondaryColor, 6%) 90%);
-  position:sticky;
+  background-color:transparent;
+  position:fixed;
+  width:100%;
   z-index:10;
   top:0;
-  border-bottom:2px solid rgba(darken($secondaryColor, 15%), .7);
+  &:hover {
+    background-color:$dark-color;
+    transition: background-color 100ms linear;
+  }
 
 
   .menu-right {
@@ -117,35 +209,59 @@ a {
     font-family: $topFont;
 
   }
-  a{ color: $highlightColor !important;
+  a{ color: $ll-primary-color !important;
     font-family: $headerFont;}
 
 }
 
 .footer {
-  background-color:darken($secondaryColor, 7%);
+  background-color:$d-dark-color;
   padding:40px;
 }
 
 h1, .header h3 {
   margin:0;
   font-family: $topFont;
-  color:$highlightColor;
+  color:$highlight-color;
+
+  $shadowColor: lighten($ll-highlight-color, 10%);
+  $shadowSize: 3px;
+  $shadowSizeN: -3px;
+  $shadowSizeX: 3px;
+  $shadowSizeXN: -3px;
+  $shadowBlur: 10px;
+  text-shadow:
+		$shadowSizeXN $shadowSizeN $shadowBlur $shadowColor,
+		$shadowSizeX $shadowSizeN $shadowBlur $shadowColor,
+		$shadowSizeXN $shadowSize $shadowBlur $shadowColor,
+		$shadowSizeX $shadowSize $shadowBlur $shadowColor;
 }
 
 p, a, * {
   font-family: $textFont;
-  color: $whiteColor;
+  color: $light-color;
 }
 
 h2, h3, h4, h5, h3 a {
   font-family: $headerFont;
-  color:$primaryColor;
+  color:$l-primary-color;
+}
+
+h2 {
+  color: $ll-primary-color;
+  $shadowColor: $l-dark-color;
+  $shadowSize: 4px;
+  $shadowSizeN: -4px;
+  text-shadow:
+		$shadowSizeN $shadowSizeN $shadowSize $shadowColor,
+		$shadowSize $shadowSizeN $shadowSize $shadowColor,
+		$shadowSizeN $shadowSize $shadowSize $shadowColor,
+		$shadowSize $shadowSize $shadowSize $shadowColor;
 }
 
 
 .side-bar-section {
-  border: 2px solid $blackColor;
+  border: 2px solid $dark-color;
   padding:10px;
   margin:10px;
   background-color: $tGreyColor;
@@ -166,4 +282,58 @@ h5{
 
 hr {
   background-color: grey;
+}
+
+
+.homeImageLink {
+  background:rgba($dark-color, .8);
+  width:100%;
+  height:100%;
+  padding:10px;
+
+}
+
+.homeImageLink-bg {
+  height:400px;
+  background-size: cover;
+  background-position: left;
+  padding:0;
+}
+
+.paginationLinks {
+    text-align:center;
+    font-size: 18px;
+  & > span {
+    padding:5px;
+    font-family: $topFont;
+    &:hover {
+      cursor:pointer;
+      font-weight: bolder;
+    }
+  }
+}
+
+.extra-info-slider {
+  background-color:rgba(white, .2);
+  padding:10px;
+}
+
+.extra-info-row {
+  width:max-content;
+}
+
+.extra-info-column {
+  display:inline-block;
+  min-width: 140px;
+
+}
+
+@media only screen and (max-width: 911px) {
+
+  .extra-info-slider, .image-slider {
+    overflow-y: scroll;
+  }
+}
+@media only screen and (min-width: 912px) {
+.pageCTA h1 { font-size: 84px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 21px; font-weight:bold;}
 }

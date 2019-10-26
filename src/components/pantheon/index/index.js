@@ -55,7 +55,9 @@ class Pantheons extends React.Component {
     }
 
     changeSort = (e) => {
-      this.setState({ sort: e.target.attributes.sortTerm.value, update:true })
+      const sort = e.target.attributes.sortTerm.value
+      if(sort === this.state.sort) { this.toggleSortDir() }
+      this.setState({ sort: sort, update:true })
     }
 
     handleChange = (e) => {
@@ -68,18 +70,27 @@ class Pantheons extends React.Component {
 
 
     render() {
+
         return <div className="container">
-            Sort by:
-            <button onClick={this.changeSort} sortTerm={"pantheon_name"} >Alpha</button>
-            <button onClick={this.changeSort} sortTerm={"start_year"} >Year</button>
-            <button onClick={this.toggleSortDir}>{this.state.sortdir === "ASC" ? "Asc" : "Desc"}</button>
-            <input type='text' onChange={this.handleChange} type="text"
-              name="search" placeholder="Search"
-              value={this.state.searchTerm} />
+
+            <div className="componentSearchBar">
+              <button className={`page-button ${this.state.sort === 'pantheon_name' ? 'page-button-active' : "" }`}  onClick={this.changeSort} sortTerm={"pantheon_name"}>
+                 Sort Alphabetically { this.state.sort === 'pantheon_name' ? this.state.sortdir === "ASC" ? "(A-Z)" : "(Z-A)" : "" }
+              </button>
+              <button className={`page-button ${this.state.sort === 'start_year' ? 'page-button-active' : "" }`}  onClick={this.changeSort} sortTerm={"start_year"} >
+                Sort by Year { this.state.sort === 'start_year' ? this.state.sortdir === "ASC" ? "(Oldest)" : "(Recent)" : "" }
+              </button>
+
+              <input className='page-field'  type='text' onChange={this.handleChange} type="text"
+                name="search" placeholder="Search by name"
+                value={this.state.searchTerm} />
+            </div>
+
 
             <FullPantheonsList pantheons={this.state.pantheons} />
 
-            { this.state.pager.currentPage && this.state.pager.currentPage > 1 ?
+            <div class="paginationLinks">
+            { this.state.pager.currentPage && this.state.pager.currentPage > 2 ?
               <span onClick={this.goToPage} page={1} >First</span>
             : "" }
 
@@ -87,17 +98,18 @@ class Pantheons extends React.Component {
                 <span onClick={this.goToPage} page={this.state.pager.currentPage - 1} >Previous</span>
               : "" }
 
-            { this.state.pager.pages ? this.state.pager.pages.map(page => <span>
-              <span onClick={this.goToPage} page={page} >{page}</span>
-            </span>) : "" }
+            { this.state.pager.pages ? this.state.pager.pages.map(page =>
+              <span onClick={this.goToPage} page={page} style={{textDecoration: this.state.pager.currentPage==page ? 'underline' : 'none'}}>{page}</span>
+            ) : "" }
 
             { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
               <span onClick={this.goToPage} page={this.state.pager.currentPage + 1} >Next</span>
             : "" }
 
-            { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
+            { this.state.pager.currentPage && this.state.pager.currentPage+1 < this.state.pager.totalPages ?
               <span onClick={this.goToPage} page={this.state.pager.totalPages} >Last</span>
             : "" }
+            </div>
 
         </div>
     }

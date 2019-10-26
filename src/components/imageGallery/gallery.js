@@ -19,7 +19,7 @@ class Gallery extends React.Component {
         <hr />
         <h4>Image Gallery:</h4>
         <p>Click for larger & more info</p>
-        <div style={{display:'flex'}} >
+        <div className="image-slider" style={{display:'flex'}} >
           { Array.isArray(galleryImages) ? galleryImages.map(
               image => image ? <span key={image.image_title}>
                 <ImageModal key={image.image_id} item={image} />
