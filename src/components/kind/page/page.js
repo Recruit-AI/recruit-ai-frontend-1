@@ -50,7 +50,7 @@ class KindPage extends React.Component {
 
             <BasicInfo item={item} createdBy={this.state.createdBy} usedBy={this.state.usedBy} />
             <ImageGallery item={item} />
-            <SymbolList item={item} relatedSymbols={this.state.relatedSymbols} />
+            <SymbolList item={item} relatedSymbols={this.state.relatedSymbols} updatePage={this.updatePage} />
 
         </div> : "Loading or not found"
 

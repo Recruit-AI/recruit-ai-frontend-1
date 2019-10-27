@@ -20,7 +20,8 @@ class FormHandler extends React.Component {
       item: {},
       formClass: "",
       existing: props.existing,
-      formColor: 'transparent'
+      formColor: 'transparent',
+      duplicateConnection: true,
     }
   }
 
@@ -109,6 +110,10 @@ class FormHandler extends React.Component {
         })
   }
 
+  toggleDuplicate = (e) => {
+    this.setState({duplicateConnection: !this.state.duplicateConnection})
+  }
+
 
   submitForm = (e) => {
 
@@ -128,7 +133,6 @@ class FormHandler extends React.Component {
     if(this.state.formClass === "images" || this.state.formClass === "thumbnail"){
       const formId = `${this.state.formClass}-${id}`
       let myForm = document.getElementById(formId);
-      console.log(myForm)
       let formData = new FormData(myForm);
 
       if(this.state.existing) {
@@ -162,6 +166,7 @@ class FormHandler extends React.Component {
             })
             .catch(err => console.log(err) )
       } else {
+        if(this.state.formClass === 'symbol_connections') { item.duplicateConnection = this.state.duplicateConnection }
         axios
             .post(`https://grimwire.herokuapp.com/api/${this.props.info.url}`, item, headers)
             .then(res => {
@@ -193,7 +198,8 @@ class FormHandler extends React.Component {
   }
 
   render() {
-    return curr_user && Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px', backgroundColor:this.state.formColor}}><Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
+    return curr_user && Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px', backgroundColor:this.state.formColor}}>
+    <Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
 
       <h5>{ this.state.existing ? `` : "Add New"}</h5>
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
@@ -254,7 +260,7 @@ class FormHandler extends React.Component {
                 }
                 {
 
-                  typeof itemField[1] === 'boolean' && itemField[0] != 'thumbnail'  ?
+                  typeof itemField[1] === 'boolean' ?
                   <Form.Group>
                   <Form.Label>{this.printifyName(itemField[0])}</Form.Label>
 
@@ -331,8 +337,18 @@ class FormHandler extends React.Component {
 
 
 
+
+
       </div>) }
 
+      {
+        this.state.formClass==='symbol_connections' ? <Form.Group>
+        <Form.Label>Dual Connection?</Form.Label>
+        <Form.Control onChange={this.toggleDuplicate} type="checkbox" checked={this.state.duplicateConnection} />
+        </Form.Group>
+        : ""
+
+      }
 
     <button type='submit'>{ this.state.existing ? `Edit` : "Add"}</button>
     <button onClick={this.deleteItem}>Delete</button>

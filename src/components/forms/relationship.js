@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import HandleForm from './miniHandler'
+import MainHandler from './handler'
 import { withRouter } from "react-router-dom";
 
 
@@ -196,6 +197,7 @@ class FormHandler extends React.Component {
                   update_id: item.image_id,
                   record: {
                     id: item.image_id,
+                    thumbnail: item.thumbnail,
                     image_url: item.image_url,
                     image_title: item.image_title,
                     image_description: item.image_description
@@ -272,18 +274,27 @@ class FormHandler extends React.Component {
       <div style={{display:'flex', justifyContent:'center'}}>
         {
           this.records().records ?
-            this.records().records.map(item => <HandleForm item={item.record} formClass={this.props.formClass} existing={true} info={info} update={this.props.update} />)
+            this.records().records.map(item => <div>
+                <HandleForm item={item.record} formClass={this.props.formClass} existing={true} info={info} update={this.props.update} />
+              </div>
+            )
             : ""
         }
       </div>
 
-      { this.props.formClass === 'thumbnail' && this.records().records ? ""
+      {
+        this.props.formClass === 'thumbnail' && this.records().records ? ""
         : <div style={{display:'flex', justifyContent:'center'}}>
-          {this.records().default_item ?
-          <HandleForm item={ this.records().default_item } formClass={this.props.formClass} existing={false} info={info} update={this.props.update} />
+          {this.records().default_item ? <div>
+
+            {this.props.formClass === 'symbol_connections' ? <div>
+              <MainHandler item={{symbol_name: "", symbol_kind_id: 0}} formClass={"symbols"} existing={false} bulkAdd={true} />
+            </div> : ""}
+
+            <HandleForm item={ this.records().default_item } formClass={this.props.formClass} existing={false} info={info} update={this.props.update} />
+          </div>
           :""}
         </div>
-
       }
 
     </div>

@@ -52,6 +52,8 @@ class SymbolPage extends React.Component {
 
         <Link to={`/symbols/${item.symbol_id}`}>Back to Page</Link>
 
+        <h3>{item.symbol_name}</h3>
+
           <div>
                     {
                       pages.map(option =>

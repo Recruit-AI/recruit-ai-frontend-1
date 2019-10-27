@@ -15,12 +15,15 @@ const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 class FormHandler extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       item: {},
       formClass: "",
-      existing: props.match.params.id ? true : false,
+      existing: (props.existing === true || props.existing === false) ? props.existing : (props.match.params.id ? true : false),
       default_extra_info: {},
-      formColor: 'transparent'
+      formColor: 'transparent',
+      bulkAdd: this.props.bulkAdd || false,
+      editId: props.editId || props.match.params.id
     }
   }
 
@@ -30,7 +33,6 @@ class FormHandler extends React.Component {
   updateInfo = (props = this.props) => {
     this.setState({item: props.item, formClass: props.formClass})
     if(props.item.extra_info) {
-      console.log(props.item)
       axios
           .get(`https://grimwire.herokuapp.com/api/kinds/${props.item.symbol_kind_id}`)
           .then(res => {
@@ -107,7 +109,7 @@ class FormHandler extends React.Component {
     const headers = { headers: {'authorization': localStorage.token} }
     if(this.state.existing) {
       axios
-          .put(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.props.match.params.id}`, item, headers)
+          .put(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.state.editId}`, item, headers)
           .then(res =>{
             this.setState({formColor:'green'})
             this.props.update()
@@ -120,8 +122,25 @@ class FormHandler extends React.Component {
           .then(res => {
             this.setState({formColor:'green'})
             setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
-            const redirectId = res.data.symbol_id || res.data.pantheon_id || res.data.kind_id || res.data.category_id
-            this.props.history.push(`/${this.state.formClass}/${redirectId}/edit`)
+            if(!this.state.bulkAdd) {
+              let redirectId = 0;
+              switch(this.state.formClass){
+                case('kinds'):
+                  redirectId = res.data.kind_id
+                  break;
+                case('pantheons'):
+                  redirectId = res.data.pantheon_id
+                  break;
+                case('symbols'):
+                  redirectId = res.data.symbol_id
+                  break;
+                case('categories'):
+                  redirectId = res.data.category_id
+                  break;
+                }
+                const redirectPath = this.state.formClass === 'kinds' ? "collections" : this.state.formClass
+                this.props.history.push(`/${redirectPath}/${redirectId}/edit`)
+              }
           })
           .catch(err => console.log(err) )
     }
@@ -150,10 +169,17 @@ class FormHandler extends React.Component {
     .replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
   }
 
+  toggleBulkAdd = (e) => {
+    this.setState({bulkAdd: !this.state.bulkAdd})
+  }
+
   render() {
-    return curr_user ? <Form onSubmit={this.submitForm} style={{margin:'auto',backgroundColor:this.state.formColor}}>
+    return curr_user ? <div>
+
+    { this.state.existing ? "" : <div>BULK ADD <input onChange={this.toggleBulkAdd} type="checkbox" checked={this.state.bulkAdd} /></div> }
+
+    <Form onSubmit={this.submitForm} style={{maxWidth:'800px',margin:'auto',backgroundColor:this.state.formColor}}>
       <h2>{ this.state.existing ? `Edit` : "Add"}</h2>
-      {console.log(this.state.item.order_number)}
       { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 
                 {
@@ -256,7 +282,7 @@ class FormHandler extends React.Component {
     <button type='submit'>Okie</button>
     <button onClick={this.deleteItem}>Delete</button>
 
-    </Form> : ""
+    </Form> </div>: ""
   }
 
 

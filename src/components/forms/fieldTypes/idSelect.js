@@ -14,7 +14,10 @@ class IdList extends React.Component {
   }
 
   componentDidMount = () => {
+    this.updateItems()
+  }
 
+  updateItems = () => {
     switch(this.props.field) {
       case "influenced_id":
       case "influencer_id":
@@ -119,6 +122,7 @@ class IdList extends React.Component {
   handleTextChange = (e) => {
     const searchTerm = e.target.value
     if(searchTerm === "") {
+        this.updateItems()
         this.setState({possibleOptions: [] })
     } else{
       this.setState({possibleOptions: this.state.allItems.filter(item => item.name.indexOf(searchTerm) >= 0) })

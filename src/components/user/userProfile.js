@@ -1,34 +1,27 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 
-class LogIn extends React.Component {
+class Profile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: {}
         }
     }
 
-    componentDidMount = () => {
-        const userId = this.props.match.params.id
-        console.log(this.props)
-        this.setState({user: this.props.users[userId]})
-    }
-
     render() {
-        return <div>
-            {this.state.user.name}<br />
-            {this.state.user.email}<br />
-            {this.state.user.role}<br />
+        return <div className='tpBlackBg'>
+            <h2>{curr_user.username}</h2>
+            <p>{curr_user.user_email}</p>
+            <p>{['', 'User', 'Mod', 'Admin'][curr_user.user_role]}</p>
+
+            <h4>Links</h4>
+            Edit Profile<br />
+            Logs (if >mod)<br />
+            Users (for banning if >mod, promoting if >admin)<br />
         </div>
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        users: state.users
-    }
-}
-
-export default connect(mapStateToProps)(LogIn)
+export default Profile

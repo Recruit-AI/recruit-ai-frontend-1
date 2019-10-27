@@ -29,6 +29,8 @@ $dark-color: #000102;
 $d-dark-color: #000000;
 $dd-dark-color: #000000;
 
+.body, .controller {min-height:100vh;}
+
 
 $tGreyColor: rgba($secondary-color, .7);
 
@@ -338,15 +340,27 @@ hr {
   width:100%;
   height:100%;
   padding:10px;
-
 }
 
-.homeImageLink-bg {
-  height:400px;
-  background-size: cover;
-  background-position: left;
-  padding:0;
+@media only screen and (max-width: 911px) {
+  .homeImageLink-bg {
+    height:200px;
+    background-size: cover;
+    background-position: left;
+    padding:0;
+  }
 }
+@media only screen and (min-width: 912px) {
+  .homeImageLink-bg {
+    height:400px;
+    background-size: cover;
+    background-position: left;
+    padding:0;
+  }
+}
+
+
+
 
 .paginationLinks {
     text-align:center;
@@ -373,7 +387,12 @@ hr {
 .extra-info-column {
   display:inline-block;
   min-width: 140px;
+  cursor:pointer;
+}
 
+.eic-active {
+  text-decoration: underline;
+  color:$ll-light-color;
 }
 
 @media only screen and (max-width: 911px) {

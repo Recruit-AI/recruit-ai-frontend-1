@@ -21,9 +21,9 @@ function Home(props) {
         <h2>From Tarot Cards to Greek Myths to Buddhist Philosophy to Astrology</h2>
         <hr />
         <Row className="CTAList">
-          <Col><h2>Including</h2><h3>Philosophies</h3><h3>Religions</h3><h3>Histories</h3><h3>Cultures & Beliefs</h3></Col>
-          <Col><h2>For</h2><h3>Practitioners</h3><h3>Students</h3><h3>Teachers</h3><h3>Hobbyists</h3></Col>
-          <Col><h2>Featuring</h2><h3>Teachings & Concepts</h3><h3>Stories & Myths</h3><h3>Symbols & Dieties</h3><h3>Divination & Magic</h3></Col>
+          <Col lg={4} md={4} xs={6}><h2>Including</h2><h3>Philosophies</h3><h3>Religions</h3><h3>Histories</h3><h3>Cultures & Beliefs</h3></Col>
+          <Col lg={4} md={3} xs={6}><h2>For</h2><h3>Practitioners</h3><h3>Students</h3><h3>Teachers</h3><h3>Hobbyists</h3></Col>
+          <Col lg={4} md={5} xs={12}><h2>Featuring</h2><h3>Teachings & Concepts</h3><h3>Stories & Myths</h3><h3>Symbols & Dieties</h3><h3>Divination & Magic</h3></Col>
         </Row>
         </div>
       </div>
@@ -35,7 +35,7 @@ function Home(props) {
         <hr />
       <Container>
       <Row>
-        <Col>
+        <Col lg={3} md={6} xs={12}>
 
           <Link to="/pantheons" className='homeImageLink-bg' style={{background:`url(${require('../../img/main-pantheon.jpg')})`,backgroundPosition:'center',backgroundSize:'cover'}} >
             <div className='homeImageLink'>
@@ -45,7 +45,7 @@ function Home(props) {
           </Link>
 
         </Col>
-        <Col>
+        <Col lg={3} md={6} xs={12}>
           <Link to="/collections" className='homeImageLink-bg' style={{background:`url(${require('../../img/main-collection.jpg')})`,backgroundPosition:'center',backgroundSize:'cover'}} >
             <div className='homeImageLink'>
               <h3>All Collections</h3>
@@ -53,7 +53,7 @@ function Home(props) {
             </div>
           </Link>
         </Col>
-        <Col>
+        <Col lg={3} md={6} xs={12}>
           <Link to="/categories" className='homeImageLink-bg' style={{background:`url(${require('../../img/main-category.jpg')})`,backgroundPosition:'center',backgroundSize:'cover'}} >
             <div className='homeImageLink'>
               <h3>All Categories</h3>
@@ -61,7 +61,7 @@ function Home(props) {
             </div>
           </Link>
         </Col>
-        <Col>
+        <Col lg={3} md={6} xs={12}>
           <Link to="/symbols" className='homeImageLink-bg' style={{background:`url(${require('../../img/main-symbol.jpg')})`,backgroundPosition:'center',backgroundSize:'cover'}} >
             <div className='homeImageLink'>
               <h3>Search Symbols</h3>
