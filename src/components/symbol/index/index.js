@@ -34,12 +34,14 @@ class Symbols extends React.Component {
       const {pageNumber, sort, sortdir, searchTerm} = this.state
       axios
           .get(`https://grimwire.herokuapp.com/api/symbols?page=${pageNumber}&sort=${sort}&sortdir=${sortdir}&search=${searchTerm}`)
-          .then(res =>
-            this.setState({
-              symbols: res.data.pageOfItems,
-              pager: res.data.pager,
-              update: false
-            })
+          .then(res => {
+              this.setState({
+                symbols: res.data.pageOfItems,
+                pager: res.data.pager,
+                update: false
+              });
+              console.log(res.data)
+            }
           )
           .catch(err => console.log(err) );
     }

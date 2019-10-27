@@ -32,6 +32,7 @@ $dd-dark-color: #000000;
 
 $tGreyColor: rgba($secondary-color, .7);
 
+* {box-sizing:border-box;}
 
 $textFont: 'Martel', serif;
 $topFont: 'Lexend Giga', cursive;
@@ -64,7 +65,54 @@ a {
   text-decoration:none;
 }
 
+@media only screen and (max-width: 911px) {
+  .header{
+    background:$dark-color;
+  }
+  .hmenu-dropdown-options{
 
+  }
+  .hmenu-item {
+    width:100%;
+  }
+  .mobile-menu-hide {
+    display:none;
+  }
+  .mobile-menu-show {
+    padding:20px;
+    width:100%;
+  }
+}
+@media only screen and (min-width: 912px) {
+  .hmenu-item {
+    display:inline-block;
+    width:100px;
+  }
+
+  .hmenu-dropdown {
+    position:relative;
+  }
+}
+
+
+.hmenu-dropdown-toggle {
+  display:inline-block;
+  cursor:pointer;
+}
+.hmenu-dropdown-options {
+  position:absolute;
+  left:0;
+  width:100vw;
+  max-width:500px;
+  background-color:$dark-color;
+  a {
+    display:block;
+  }
+}
+
+.page-container {
+  padding: 80px 20px 20px;
+}
 
 .main-page {
   background-color: rgba($secondary-color, .7);
@@ -109,7 +157,7 @@ a {
     rgba($dark-color,.9) 100%,
   );
   min-height:100vh;
-  padding:20px;
+  padding:80px 20px 20px;
   margin:0;
   .CTAList h3, h5 { color: $light-color; text-decoration: none;}
   display:flex;
@@ -126,7 +174,7 @@ a {
 
 .tpBlackBg {
   background: rgba(0,0,0,.6);
-  padding:20px;
+  padding:80px 20px 20px;
 
 }
 
@@ -187,7 +235,6 @@ $l-dividerColor: $ll-secondary-color;
   display:flex;
   justify-content: space-between;
   align-items: center;
-  background-color:transparent;
   position:fixed;
   width:100%;
   z-index:10;
@@ -202,6 +249,7 @@ $l-dividerColor: $ll-secondary-color;
     display:flex;
     justify-content: flex-end;
     align-items: center;
+    flex-wrap:wrap;
   }
 
   h3 {

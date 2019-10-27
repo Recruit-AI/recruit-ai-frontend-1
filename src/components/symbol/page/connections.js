@@ -16,7 +16,7 @@ function Display(props) {
         <h5>{title}</h5>
         {
           conn.map(i => <div>
-            <Link to={`/symbols/${i.symbol_id}`}>{i.symbol_name} {console.log(i)}</Link>
+            <Link to={`/symbols/${i.symbol_id}`}>{i.symbol_name} ({i.kind_name})</Link>
           </div>)
         }
       </div>

@@ -14,7 +14,7 @@ class Pages extends React.Component {
     }
 
     render() {
-        return <div>
+        return <div className="page-container">
           <Switch>
             <Route path="/pages/mission" exact component={OurMission} />
             <Route path="/pages/questions" exact component={GeneralQuestions} />

@@ -11,8 +11,8 @@ function SmallPantheonCard(props) {
     return <div style={style}>
 
             <Link to={`/symbols/${item.symbol_id}`}>{ item.symbol_name }</Link><br />
+            {item.kind_name}<br />
             { item.thumbnail ? <img src={`${item.thumbnail.image_url}`} height="50px" alt={item.pantheon_name} /> : "" } <br/>
-          {console.log(item)}
             {item.symbol_description}
     </div>
 }
