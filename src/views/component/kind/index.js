@@ -4,6 +4,7 @@ import Kinds from '../../../components/kind/index/index'
 import FormInsert from '../../../components/forms/handler'
 import {defaultKind} from '../../../db/defaultObjects'
 import {Link} from 'react-router-dom'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 class Kind extends React.Component {
   constructor(props) {
@@ -15,9 +16,9 @@ class Kind extends React.Component {
 
   render() {
     const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
-  return (
-    <div className="">
-      <div className="pageCTA">
+  return (<SwitchTransition><CSSTransition key={`kinds`}
+    in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit><div className="">
+    <div key='kinds' className="pageCTA">
         <div className="container">
           <h4>Tarot Cards, Astrology Signs, Planetary Energies, Crystals</h4>
           <h1>Collections</h1>
@@ -34,7 +35,7 @@ class Kind extends React.Component {
       </div>
       <div className="reverse-divider"></div>
 
-    </div>
+    </div></CSSTransition></SwitchTransition>
   );
 
   }

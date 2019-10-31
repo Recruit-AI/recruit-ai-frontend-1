@@ -198,11 +198,13 @@ class FormHandler extends React.Component {
   }
 
   render() {
-    return curr_user && Object.entries(this.state.item).length > 0 ? <div style={{margin:'10px', width:'200px', backgroundColor:this.state.formColor}}>
-    <Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
+    return curr_user && Object.entries(this.state.item).length > 0 ?
+    <div style={{margin:'10px', width:'200px', backgroundColor:this.state.formColor}}>
 
-      <h5>{ this.state.existing ? `` : "Add New"}</h5>
-      { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
+      <Form onSubmit={this.submitForm} id={`${this.state.formClass}-${this.state.item.id}`} >
+
+        <h5>{ this.state.existing ? `` : "Add New"}</h5>
+        { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
 
 
 
@@ -342,7 +344,7 @@ class FormHandler extends React.Component {
       </div>) }
 
       {
-        this.state.formClass==='symbol_connections' ? <Form.Group>
+        this.state.formClass==='symbol_connections' && !this.state.existing ? <Form.Group>
         <Form.Label>Dual Connection?</Form.Label>
         <Form.Control onChange={this.toggleDuplicate} type="checkbox" checked={this.state.duplicateConnection} />
         </Form.Group>

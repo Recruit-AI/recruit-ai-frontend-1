@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Symbol from '../../../components/symbol/page/page'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 class SymbolPage extends React.Component {
   constructor(props) {
@@ -10,9 +11,10 @@ class SymbolPage extends React.Component {
   }
 
   render() {
-    return <div  className="tpBlackBg">
+    return <SwitchTransition><CSSTransition key={`symbols-show`}
+      in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit><div  key={`symbols-show`} className="tpBlackBg">
         <Symbol match={this.props.match}  />
-      </div>
+      </div></CSSTransition></SwitchTransition>
   }
 }
 

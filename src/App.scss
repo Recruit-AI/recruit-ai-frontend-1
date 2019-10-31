@@ -36,6 +36,8 @@ $tGreyColor: rgba($secondary-color, .7);
 
 * {box-sizing:border-box;}
 
+
+
 $textFont: 'Martel', serif;
 $topFont: 'Lexend Giga', cursive;
 $headerFont: 'Patua One', sans-serif;
@@ -97,6 +99,7 @@ a {
 }
 
 
+
 .hmenu-dropdown-toggle {
   display:inline-block;
   cursor:pointer;
@@ -110,6 +113,14 @@ a {
   a {
     display:block;
   }
+}
+
+.hmenu-dropdown-toggle {
+    color: $ll-primary-color !important;
+    font-family: $headerFont;
+    &:hover {
+      text-decoration: underline;
+    }
 }
 
 .page-container {
@@ -168,16 +179,23 @@ a {
 }
 
 @media only screen and (max-width: 911px) {
-.pageCTA h1 { font-size: 32px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 8px; font-weight:bold;}
+.pageCTA h1, .fancyText { font-size: 28px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 4px; font-weight:bold;}
 }
+@media only screen and (max-width: 480px) {
+  h1 {font-size:8vw; }
+}
+
 @media only screen and (min-width: 912px) {
-.pageCTA h1 { font-size: 84px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 21px; font-weight:bold;}
+.pageCTA h1, .fancyText { font-size: 84px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 21px; font-weight:bold;}
 }
 
 .tpBlackBg {
   background: rgba(0,0,0,.6);
   padding:80px 20px 20px;
+}
 
+.controller > .tpBlackBg {
+  min-height:100vh;
 }
 
 $dividerColor: $secondary-color;
@@ -230,6 +248,14 @@ $l-dividerColor: $ll-secondary-color;
   padding:20px;
 }
 
+.blockLink {
+  display:block;
+  padding:10px;
+  &:hover {
+    text-decoration:none;
+    background-color:rgba($light-color, .2);
+  }
+}
 
 
 .header {
@@ -241,10 +267,14 @@ $l-dividerColor: $ll-secondary-color;
   width:100%;
   z-index:10;
   top:0;
+    background-color:transparent;
+    transition: background-color 100ms linear;
   &:hover {
     background-color:$dark-color;
     transition: background-color 100ms linear;
   }
+
+
 
 
   .menu-right {
@@ -309,6 +339,13 @@ h2 {
 		$shadowSize $shadowSize $shadowSize $shadowColor;
 }
 
+.modal-title {
+  color:$light-color;
+}
+.modal-body {
+  color:$l-light-color;
+}
+
 
 .side-bar-section {
   border: 2px solid $dark-color;
@@ -336,10 +373,31 @@ hr {
 
 
 .homeImageLink {
-  background:rgba($dark-color, .8);
+  h3{
+    color: $highlight-color;
+    $shadowColor: $dd-highlight-color;
+    $shadowSize: 2px;
+    $shadowSizeN: -2px;
+    text-shadow:
+  		$shadowSizeN $shadowSizeN $shadowSize $shadowColor,
+  		$shadowSize $shadowSizeN $shadowSize $shadowColor,
+  		$shadowSizeN $shadowSize $shadowSize $shadowColor,
+  		$shadowSize $shadowSize $shadowSize $shadowColor;
+  }
+
+  p{
+    color: $light-color;
+  }
+
+
+  background-color:rgba($dark-color, .8);
   width:100%;
   height:100%;
   padding:10px;
+  &:hover{
+    background-color:rgba($dd-highlight-color, .95);
+    transition: background-color 300ms linear;
+  }
 }
 
 @media only screen and (max-width: 911px) {
@@ -356,10 +414,16 @@ hr {
     background-size: cover;
     background-position: left;
     padding:0;
+
   }
 }
+.homeImageLink-bg, .homeImageLink {
+  border-radius:14px;
+}
 
-
+.homeImageLink-bg:hover {
+  text-decoration:none;
+}
 
 
 .paginationLinks {
@@ -401,6 +465,147 @@ hr {
     overflow-y: scroll;
   }
 }
-@media only screen and (min-width: 912px) {
-.pageCTA h1 { font-size: 84px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 21px; font-weight:bold;}
+
+.handlerForm {
+  max-width:800px;
+}
+
+.headerFill {
+  background-color:$dark-color;
+}
+
+.inlineForm {
+
+  .formField {
+    display:inline-block;
+    padding:5px;
+
+    input {
+      width:150px;
+    }
+  }
+
+  .formHeader {
+    display:none;
+  }
+
+  .handlerForm {
+    max-width:90vw;
+  }
+}
+
+.loader {
+  display:block;
+  text-align: center;
+  position:relative;
+}
+
+.loaderImg {
+  background-color:$light-color;
+  border-radius: 50%;
+  position:absolute;
+  margin-left:-30px;
+  opacity:.8;
+  transition:opacity 500ms;
+}
+
+
+.effect-name-appear {
+  opacity: 0;
+}
+.effect-name-appear-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+.effect-name-enter {
+  opacity: 0;
+}
+.effect-name-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+.effect-name-exit {
+  opacity: 1;
+}
+.effect-name-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+
+.menu-fade-appear {
+  opacity: 0;
+}
+.menu-fade-appear-active {
+  opacity: 1;
+  transition: opacity 100ms;
+}
+.menu-fade-enter {
+  opacity: 0;
+  transform:translateY(-100px);
+}
+.menu-fade-enter-active {
+  opacity: 1;
+  transform:translateY(0);
+  transition: opacity 100ms, transform 100ms;
+}
+.menu-fade-exit {
+  opacity: 1;
+  transform:translateY(0);
+}
+.menu-fade-exit-active {
+  opacity: 0;
+  transform:translateY(-100px);
+  transition: opacity 100ms, transform 100ms;
+}
+
+
+
+.search-page-appear {
+  opacity: 0;
+}
+.search-page-appear-active {
+  opacity: 1;
+  transition: opacity 150ms ease-in;
+}
+.search-page-enter {
+  opacity: 0;
+}
+.search-page-enter-active {
+  opacity: 1;
+  transition: opacity 150ms ease-in;
+}
+.search-page-exit {
+  opacity: 1;
+}
+.search-page-exit-active {
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.whole-page-appear {
+  opacity: 0;
+  height:auto;
+}
+.whole-page-appear-active {
+  opacity: 1;
+  transition: opacity 150ms ease-in;
+}
+.whole-page-enter {
+  opacity: 0;
+  height:auto;
+}
+.whole-page-enter-active {
+  opacity: 1;
+  transition: opacity 150ms ease-in;
+}
+.whole-page-exit {
+  opacity: 1;
+  height:auto;
+}
+.whole-page-exit-active {
+  opacity: 0;
+  height:0;
+  transition: opacity  150ms ease-out;
+  transition: height  150ms ease-out;
 }

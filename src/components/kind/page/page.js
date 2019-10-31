@@ -8,6 +8,7 @@ import {defaultSymbol} from '../../../db/defaultObjects'
 import BasicInfo from './basicInfo'
 import SymbolList from './symbolList'
 import ImageGallery from '../../imageGallery/gallery'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 
@@ -15,7 +16,8 @@ class KindPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            kind: {}
+            kind: {},
+            loading: true
         }
     }
 
@@ -23,13 +25,17 @@ class KindPage extends React.Component {
     componentWillReceiveProps = (newProps) => { this.updatePage(newProps) }
 
     updatePage = (props = this.props) => {
+      this.setState({loading:true})
         const id = props.match.params.id
         axios
             .get(`https://grimwire.herokuapp.com/api/kinds/${id}`)
             .then(res =>
-              this.setState({kind: res.data})
+              this.setState({kind: res.data, loading: false})
             )
-            .catch(err => console.log(err) );
+            .catch(err => {
+              console.log(err);
+              this.setState({kind: {}, loading: false})
+            } );
     }
 
 
@@ -44,17 +50,25 @@ class KindPage extends React.Component {
 
     render() {
         const item = this.state.kind
-        return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
+        return <SwitchTransition><CSSTransition key={`pantheons-${this.props.match.params.id}`}
+          in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit>
+            {typeof item !== 'undefined' && Object.keys(item).length > 0 && !this.state.loading ?
+            <div>
+
             { curr_user ?  <Link to="/collections/new">Create Collection</Link> : "" }
             <Link to="/collections">Back to Collections</Link>
 
             <BasicInfo item={item} createdBy={this.state.createdBy} usedBy={this.state.usedBy} />
-            <ImageGallery item={item} />
+            <ImageGallery item={item} key={item.kind_ids}/>
             <SymbolList item={item} relatedSymbols={this.state.relatedSymbols} updatePage={this.updatePage} />
 
-        </div> : "Loading or not found"
+      </div> : ( this.state.loading ?
+        <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+        : <div className="failedSearch">Sorry, there was an error. This page does not exist.</div>
+    )
 
-    }
+}</CSSTransition></SwitchTransition>}
+
 }
 
 export default KindPage;

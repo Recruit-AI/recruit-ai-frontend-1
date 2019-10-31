@@ -4,6 +4,7 @@ import {Container, Row, Col, NavItem, Dropdown} from 'react-bootstrap'
 import {withRouter} from 'react-router-dom'
 
 
+import {CSSTransition} from 'react-transition-group'
 
 class Menu extends React.Component {
     constructor(props) {
@@ -13,7 +14,9 @@ class Menu extends React.Component {
         showMenu: false
       }
       document.addEventListener('click', (e) => {
-        if(e.target.className.indexOf('hmenu-dropdown-toggle') < 0 && e.target.className.indexOf('hmenu-mobile-toggle') < 0){
+        const mobileToggleClick = e.target.className.indexOf('hmenu-mobile-toggle') >= 0
+        const dropdownToggleClick = e.target.className.indexOf('hmenu-dropdown-toggle') >= 0
+        if(!dropdownToggleClick && !mobileToggleClick) {
           this.setState({showDropdown: false, showMenu: false})
         }
 
@@ -39,17 +42,17 @@ class Menu extends React.Component {
 
     const user = localStorage.user ? JSON.parse(localStorage.user) : null
 
-
-    return <div className="header">
+    const show = this.state.showDropdown
+    return <div className={`${this.state.showDropdown ? 'headerFill' : ""} header `}>
 
       <Container>
         <Row>
-            <Col xs={12} lg={2} style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+            <Col xs={12} lg={3} style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
                 <NavLink to="/"><img alt="logo" height="50px" src={require('../img/logo.png')} /> GrimWire</NavLink>
-                <span className='hmenu-mobile-toggle d-inline d-lg-none' onClick={this.toggleMenu}>{ this.state.showMenu ? 'Menu x' : 'Menu o' }</span>
+                <span className='fas fa-bars hmenu-mobile-toggle d-inline d-lg-none' onClick={this.toggleMenu}></span>
             </Col>
 
-            <Col xs={12} lg={10} className='menu-right' >
+            <Col xs={12} lg={9} className='menu-right' >
               <div className={`${ this.state.showMenu ? "mobile-menu-show" : "mobile-menu-hide" }`}>
                 <span className="hmenu-item hmenu-dropdown">
                   {/*Content drop down*/}
@@ -57,12 +60,14 @@ class Menu extends React.Component {
                     Browse
                   </span>
                   <br />
-                  <span className="hmenu-dropdown-options" style={{display: this.state.showDropdown ? 'block' : 'none'}}>
+                  <CSSTransition in={show} timeout={100} classNames="menu-fade">
+                  <span className="hmenu-dropdown-options" style={{display: show ? 'block' : 'none'}}>
                     <NavLink to="/pantheons">By Pantheons & Religions</NavLink>
                     <NavLink to="/categories">By Categories & Classes</NavLink>
                     <NavLink to="/collections">By Lists & Collections</NavLink>
                     <NavLink to="/symbols">Search All</NavLink>
                   </span>
+                  </CSSTransition>
                 </span>
 
 
@@ -70,7 +75,7 @@ class Menu extends React.Component {
                 <NavLink className="hmenu-item" to="/pages/questions">FAQ</NavLink>
                 <NavLink className="hmenu-item" to="/pages/help">Help Us Out</NavLink>
                 {
-                   user ? <span className="hmenu-item"><button onClick={this.logout}>Logout</button></span>
+                   user ? <span className="hmenu-item" style={{cursor:'pointer'}}><i class="fas fa-sign-out-alt"></i></span>
                   : <NavLink className="hmenu-item" to="/users/login">Admin</NavLink>
                 }
                 </div>

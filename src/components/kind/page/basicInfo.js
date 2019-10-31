@@ -22,7 +22,7 @@ class BasicInfo extends React.Component {
       { curr_user ?  <Link to={`/symbols/new`}>New Symbol</Link> : "" }
     <Row>
         <Col lg={4}>
-            <p>{item.kind_description}</p>
+            <p>{item.kind_description || "Please fill in."}</p>
             <p>Created By: <Link to={`/pantheons/${item.pantheon_id}`}>{item.pantheon_name}</Link></p>
 
             { item.pantheons ?
@@ -34,9 +34,9 @@ class BasicInfo extends React.Component {
         </Col>
         <Col lg={8}>
             <h4>Theory & Application</h4>
-            <p>{item.theoryText}</p>
+            <p>{item.theoryText || "Please fill in."}</p>
             <h4>History & Background</h4>
-            <p>{item.historyText}</p>
+            <p>{item.historyText || "Please fill in."}</p>
         </Col>
     </Row>
     </div>

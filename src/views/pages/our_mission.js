@@ -1,6 +1,7 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 import OurMission from './our_mission'
 
 class Pages extends React.Component {
@@ -12,7 +13,8 @@ class Pages extends React.Component {
 
     render() {
 
-        return <div style={{minHeight:"100vh"}}>
+        return <SwitchTransition><CSSTransition key={`mission`}
+          in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit><div key="mission" style={{minHeight:"100vh"}}>
           <h1>Our Mission</h1>
           <div style={{display:"flex"}}>
             <div style={{textAlign:'left',height:'200px', padding: "20px", width:"33%"}}>
@@ -36,10 +38,8 @@ class Pages extends React.Component {
                 Herb Shelf & Store<br />
               </div>
             </div>
-        </div>
+        </div></div></CSSTransition></SwitchTransition>
 
-
-        </div>
 
     }
 }

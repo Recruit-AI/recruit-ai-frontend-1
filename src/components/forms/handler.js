@@ -178,9 +178,9 @@ class FormHandler extends React.Component {
 
     { this.state.existing ? "" : <div>BULK ADD <input onChange={this.toggleBulkAdd} type="checkbox" checked={this.state.bulkAdd} /></div> }
 
-    <Form onSubmit={this.submitForm} style={{maxWidth:'800px',margin:'auto',backgroundColor:this.state.formColor}}>
-      <h2>{ this.state.existing ? `Edit` : "Add"}</h2>
-      { Object.entries(this.state.item).map(itemField => <div key={itemField[0]}>
+    <Form onSubmit={this.submitForm} className="handlerForm" style={{margin:'auto',backgroundColor:this.state.formColor}}>
+      <h2 className="formHeader">{ this.state.existing ? `Edit` : "Add"}</h2>
+      { Object.entries(this.state.item).map(itemField => <div key={itemField[0]} className="formField">
 
                 {
                   typeof itemField[1] === 'string' &&  itemField[0].indexOf("_id") <= 0 && itemField[0] !== 'id' && itemField[0].indexOf('_text') === -1  ?
@@ -255,8 +255,7 @@ class FormHandler extends React.Component {
                   itemField[0] === 'extra_info' ?
                     this.state.item.extra_info ?
                      <div>
-                      <h5>Collection Related Information</h5>
-                      { Object.entries(this.state.default_extra_info).map(i => <Form.Group key={i[0]}>
+                      { Object.entries(this.state.default_extra_info).map(i => <Form.Group key={i[0]} className="formField">
                           <Form.Label>{this.printifyName(i[0]) }</Form.Label>
                           <Form.Control
                               onChange={this.handleInfoChange}

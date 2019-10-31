@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap'
 
 import FormInsert from '../../forms/handler'
 import {defaultKind} from '../../../db/defaultObjects'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
@@ -13,7 +14,8 @@ class CategoryPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: {}
+            category: {},
+            loading: false
         }
     }
 
@@ -21,26 +23,33 @@ class CategoryPage extends React.Component {
     componentWillReceiveProps = (newProps) => { this.updatePage(newProps) }
 
     updatePage = (props = this.props) => {
+        this.setState({loading: true})
         const id = props.match.params.id
         axios
             .get(`https://grimwire.herokuapp.com/api/categories/${id}`)
             .then(res =>
-              this.setState({category: res.data})
+              this.setState({category: res.data, loading: false})
             )
-            .catch(err => console.log(err) );
+            .catch(err => {
+              console.log(err);
+              this.setState({category: {}, loading: false})
+            } );
     }
 
     render() {
         const item = this.state.category
-        return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
+        return typeof item !== 'undefined' && Object.keys(item).length > 0 && !this.state.loading ? <SwitchTransition><CSSTransition key={`categories-${this.props.match.params.id}`}
+          in={true} timeout={350} classNames="whole-page" unmountOnExit><div>
 
-
-            { curr_user ?  <Link to="/categories/new">Create Category</Link> : "" }
-            { curr_user ?  <Link to={`/categories/${this.props.match.params.id}/edit`}>Edit This Category</Link> : "" }
+            <Link to="/categories/">Back to All Categories</Link>
+            { curr_user ?  <Link to="/categories/new">Create Category/Class</Link> : "" }
 
             <div className="category-info">
                 <h1>{item.category_name} {item.category_number}</h1>
-                <p>{item.category_description}</p>
+                  { curr_user ?  <Link to="/collections/new">Create New Collection/List</Link> : "" }
+                  { curr_user ?  <Link to={`/categories/${this.props.match.params.id}/edit`}>Edit This Category</Link> : "" }
+
+                <p>{item.category_description || "Please fill in."}</p>
             </div>
 
             <div className="category-list">
@@ -52,9 +61,9 @@ class CategoryPage extends React.Component {
                     </Col>
                     <Col lg={8}>
                         <h4>Overview & History</h4>
-                        <p>{item.category_overview_text}</p>
+                        <p>{item.category_overview_text || "Please fill in."}</p>
                         <h4>Sources & Getting Started</h4>
-                        <p>{item.category_sources_text}</p>
+                        <p>{item.category_sources_text || "Please fill in."}</p>
                     </Col>
                 </Row>
 
@@ -62,8 +71,10 @@ class CategoryPage extends React.Component {
 
 
 
-        </div> : "Loading or not found"
-
+        </div></CSSTransition></SwitchTransition> : ( this.state.loading ?
+          <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+          : <div className="failedSearch">Sorry, there was an error. This page does not exist.</div>
+      )
     }
 }
 

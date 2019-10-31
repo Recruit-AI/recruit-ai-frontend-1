@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Pantheon from '../../../components/pantheon/page/page'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 class PantheonPage extends React.Component {
   constructor(props) {
@@ -10,8 +11,9 @@ class PantheonPage extends React.Component {
   }
 
   render() {
-    return <div  className="tpBlackBg">
+    return <div className="tpBlackBg">
         <Pantheon match={this.props.match}  />
+
       </div>
   }
 }

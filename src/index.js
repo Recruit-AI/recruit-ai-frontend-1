@@ -20,16 +20,12 @@ ReactDOM.render(
     <BrowserRouter>
       <ScrollToTop>
         {/* react-bootstrap does not include css for the components; css imported here: */}
-        <link
-          rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossOrigin="anonymous" />
-          <style>
-@import url('https://fonts.googleapis.com/css?family=Patua+One|Lexend+Giga|Martel&display=swap');
-</style>
+        
 
-        <App />
+          <App />
+
+
+          <style> @import url('https://fonts.googleapis.com/css?family=Patua+One|Lexend+Giga|Martel&display=swap'); </style>
         </ScrollToTop>
     </BrowserRouter>
 </Provider>,

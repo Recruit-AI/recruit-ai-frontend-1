@@ -7,11 +7,13 @@ function SmallKindCard(props) {
     const style = {
         width: ''
     }
-    return <div style={style}>
-            <Link to={`/collections/${item.kind_id}`}>{ item.kind_name }</Link>
-            {item.kind_description}
-                    <img src={item.thumbnail} height="50px"/>
-    </div>
+    return <Link className='blockLink' to={`/collections/${item.kind_id}`}><div style={style}>
+
+            <h3>{ item.kind_name }</h3><br />
+            {item.kind_description || "Please enter a description." }<br />
+          <img src={ item.thumbnail && item.thumbnail.image_url ? item.thumbnail.image_url : require('../../../img/logo.png') } height="100px;" />
+
+    </div></Link>
 }
 
 export default SmallKindCard

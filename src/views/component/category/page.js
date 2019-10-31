@@ -10,7 +10,7 @@ class CategoryPage extends React.Component {
   }
 
   render() {
-    return <div  className="tpBlackBg">
+    return <div className="tpBlackBg">
         <Category match={this.props.match}  />
       </div>
   }

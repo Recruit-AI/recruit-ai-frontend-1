@@ -1,6 +1,7 @@
 import React from 'react';
 import FullPantheonsList from '../lists/full';
 import axios from 'axios';
+import Pagination from '../../shared/pagination'
 
 
 
@@ -18,7 +19,10 @@ class Pantheons extends React.Component {
           sort: params.get('sort') || "pantheon_name",
           sortdir: params.get('sortdir') || "ASC",
           searchTerm: "",
-          update:true
+          update:true,
+          params: params,
+          loading: false
+
         }
     }
 
@@ -32,6 +36,7 @@ class Pantheons extends React.Component {
     }
 
     loadPage = () => {
+      this.setState({loading:true,update:false})
       const {pageNumber, sort, sortdir, searchTerm} = this.state
 
       axios
@@ -40,25 +45,37 @@ class Pantheons extends React.Component {
             this.setState({
               pantheons: res.data.pageOfItems,
               pager: res.data.pager,
-              update: false
+              loading: false
             })
           )
           .catch(err => console.log(err) );
     }
 
     goToPage = (e) => {
-      this.setState({pageNumber: e.target.attributes.page.value, update:true})
+      let params = this.state.params
+      const pageNumber =  e.target.attributes.page.value
+      params.set('page', pageNumber)
+      this.setState({pageNumber, params, update:true})
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
 
     toggleSortDir = (e) => {
-      this.setState({sortdir: this.state.sortdir === "ASC" ? "DESC" : "ASC", update:true})
+      let params = this.state.params
+      const newSortdir = this.state.sortdir === "ASC" ? "DESC" : "ASC"
+      params.set('sortdir', newSortdir)
+      this.setState({sortdir: newSortdir, update:true, params})
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
 
     changeSort = (e) => {
       const sort = e.target.attributes.sortTerm.value
       if(sort === this.state.sort) { this.toggleSortDir() }
-      this.setState({ sort: sort, update:true })
+      let params = this.state.params
+      params.set('sort', sort)
+      this.setState({ sort, update:true, params })
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
+
 
     handleChange = (e) => {
       this.setState({searchTerm: e.target.value, update:true})
@@ -71,7 +88,7 @@ class Pantheons extends React.Component {
 
     render() {
 
-        return <div className="container">
+        return <div className="container" id="pantheonSearch">
 
             <div className="componentSearchBar">
               <button className={`page-button ${this.state.sort === 'pantheon_name' ? 'page-button-active' : "" }`}  onClick={this.changeSort} sortTerm={"pantheon_name"}>
@@ -86,31 +103,24 @@ class Pantheons extends React.Component {
                 value={this.state.searchTerm} />
             </div>
 
+            <div style={{display: this.state.loading && this.state.pantheons.length !== 0 ? "block" : "none"}} className="loader"><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+            <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
 
-            <FullPantheonsList pantheons={this.state.pantheons} />
+            <div id="search-window">
+                {
+                  this.state.pantheons.length > 1 ?
+                    <FullPantheonsList pantheons={this.state.pantheons} />
+                    : (this.state.searchTerm === "" ?
+                      <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+                      : <div className="failedSearch">Sorry. There are no results for that term.</div>
+                    )
+                }
 
-            <div class="paginationLinks">
-            { this.state.pager.currentPage && this.state.pager.currentPage > 2 ?
-              <span onClick={this.goToPage} page={1} >First</span>
-            : "" }
-
-            { this.state.pager.currentPage && this.state.pager.currentPage > 1 ?
-                <span onClick={this.goToPage} page={this.state.pager.currentPage - 1} >Previous</span>
-              : "" }
-
-            { this.state.pager.pages ? this.state.pager.pages.map(page =>
-              <span onClick={this.goToPage} page={page} style={{textDecoration: this.state.pager.currentPage==page ? 'underline' : 'none'}}>{page}</span>
-            ) : "" }
-
-            { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
-              <span onClick={this.goToPage} page={this.state.pager.currentPage + 1} >Next</span>
-            : "" }
-
-            { this.state.pager.currentPage && this.state.pager.currentPage+1 < this.state.pager.totalPages ?
-              <span onClick={this.goToPage} page={this.state.pager.totalPages} >Last</span>
-            : "" }
             </div>
 
+            <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
+            <div style={{display: this.state.loading && this.state.pantheons.length !== 0 ? "block" : "none"}} className="loader"><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+            <span style={{cursor:'pointer'}} onClick={() => {document.querySelector('#pantheonSearch').scrollIntoView(true)}}>To Top</span>
         </div>
     }
 }

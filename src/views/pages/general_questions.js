@@ -1,6 +1,7 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 import OurMission from './our_mission'
 
 class Pages extends React.Component {
@@ -11,7 +12,8 @@ class Pages extends React.Component {
     }
 
     render() {
-        return <div style={{minHeight:"100vh"}}>
+        return <SwitchTransition><CSSTransition key={`gq`}
+          in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit><div key="gq" style={{minHeight:"100vh"}}>
 
         <h1>General Questions</h1>
         <h3>What are...</h3>
@@ -22,7 +24,7 @@ class Pages extends React.Component {
         <h5>Categories</h5> are convienent groups for sorting through the Collections<br />
         <h5>Symbols</h5> are the items in the collections.
 
-        </div>
+        </div></CSSTransition></SwitchTransition>
 
     }
 }

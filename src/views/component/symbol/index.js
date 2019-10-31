@@ -4,6 +4,7 @@ import Symbols from '../../../components/symbol/index/index'
 import FormInsert from '../../../components/forms/handler'
 import {defaultSymbol} from '../../../db/defaultObjects'
 import {Link} from 'react-router-dom'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 class Symbol extends React.Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class Symbol extends React.Component {
 
   render() {
     const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
-  return (
-    <div className="">
-      <div className="pageCTA">
+  return (<SwitchTransition><CSSTransition key={`symbols`}
+    in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit><div className="">
+    <div key='symbols' className="pageCTA">
         <div className="container">
           <h4>Search through our database of topics & objects</h4>
           <h1>Symbols</h1>
@@ -39,7 +40,7 @@ class Symbol extends React.Component {
       </div>
       <div className="reverse-divider"></div>
 
-    </div>
+    </div></CSSTransition></SwitchTransition>
   );
 
   }

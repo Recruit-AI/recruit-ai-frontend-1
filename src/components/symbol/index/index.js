@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import SimpleSymbolList from '../lists/simple';
 import {Form} from 'react-bootstrap'
+import Pagination from '../../shared/pagination'
+
 
 //This component is used to build a 'complete' list, used for calling searches and passing props to the actual list component.
 
@@ -16,7 +18,10 @@ class Symbols extends React.Component {
           sort: params.get('sort') || "symbol_name",
           sortdir: params.get('sortdir') || "ASC",
           searchTerm: "",
-          update:true
+          update:true,
+          params: params,
+          loading: false
+
 
         }
     }
@@ -31,6 +36,7 @@ class Symbols extends React.Component {
     }
 
     loadPage = () => {
+      this.setState({loading:true,update:false})
       const {pageNumber, sort, sortdir, searchTerm} = this.state
       axios
           .get(`https://grimwire.herokuapp.com/api/symbols?page=${pageNumber}&sort=${sort}&sortdir=${sortdir}&search=${searchTerm}`)
@@ -38,7 +44,7 @@ class Symbols extends React.Component {
               this.setState({
                 symbols: res.data.pageOfItems,
                 pager: res.data.pager,
-                update: false
+                loading: false
               });
               console.log(res.data)
             }
@@ -47,18 +53,30 @@ class Symbols extends React.Component {
     }
 
     goToPage = (e) => {
-      this.setState({pageNumber: e.target.attributes.page.value, update:true})
+      let params = this.state.params
+      const pageNumber =  e.target.attributes.page.value
+      params.set('page', pageNumber)
+      this.setState({pageNumber, params, update:true})
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
 
     toggleSortDir = (e) => {
-      this.setState({sortdir: this.state.sortdir === "ASC" ? "DESC" : "ASC", update:true})
+      let params = this.state.params
+      const newSortdir = this.state.sortdir === "ASC" ? "DESC" : "ASC"
+      params.set('sortdir', newSortdir)
+      this.setState({sortdir: newSortdir, update:true, params})
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
 
     changeSort = (e) => {
       const sort = e.target.attributes.sortTerm.value
       if(sort === this.state.sort) { this.toggleSortDir() }
-      this.setState({ sort: sort, update:true })
+      let params = this.state.params
+      params.set('sort', sort)
+      this.setState({ sort, update:true, params })
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
+
 
     handleChange = (e) => {
       this.setState({searchTerm: e.target.value, update:true})
@@ -70,7 +88,8 @@ class Symbols extends React.Component {
 
 
     render() {
-        return <div className="container">
+
+        return <div className="container" id="symbolSearch">
 
             <div className="componentSearchBar">
             <button className={`page-button ${this.state.sort === 'symbol_name' ? 'page-button-active' : "" }`} onClick={this.changeSort} sortTerm={"symbol_name"} >
@@ -82,30 +101,26 @@ class Symbols extends React.Component {
               value={this.state.searchTerm} />
             </div>
 
+            <div style={{display: this.state.loading && this.state.symbols.length !== 0 ? "block" : "none"}} className="loader"><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+            <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
 
-            <SimpleSymbolList symbols={this.state.symbols} />
 
-            <div class="paginationLinks">
-            { this.state.pager.currentPage && this.state.pager.currentPage > 2 ?
-              <span onClick={this.goToPage} page={1} >First</span>
-            : "" }
+              <div id="search-window">
+                  {
+                    this.state.symbols.length > 1 ?
+                      <SimpleSymbolList symbols={this.state.symbols} />
+                      : (this.state.searchTerm === "" ?
+                        <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+                        : <div className="failedSearch">Sorry. There are no results for that term.</div>
+                      )
+                  }
 
-            { this.state.pager.currentPage && this.state.pager.currentPage > 1 ?
-                <span onClick={this.goToPage} page={this.state.pager.currentPage - 1} >Previous</span>
-              : "" }
+              </div>
 
-            { this.state.pager.pages ? this.state.pager.pages.map(page =>
-              <span onClick={this.goToPage} page={page} style={{textDecoration: this.state.pager.currentPage==page ? 'underline' : 'none'}} >{page}</span>
-            ) : "" }
+            <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
+            <div style={{display: this.state.loading && this.state.symbols.length !== 0 ? "block" : "none"}} className="loader"><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+            <span style={{cursor:'pointer'}} onClick={() => {document.querySelector('#symbolSearch').scrollIntoView(true)}}>To Top</span>
 
-            { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
-              <span onClick={this.goToPage} page={this.state.pager.currentPage + 1} >Next</span>
-            : "" }
-
-            { this.state.pager.currentPage && this.state.pager.currentPage+1 < this.state.pager.totalPages ?
-              <span onClick={this.goToPage} page={this.state.pager.totalPages} >Last</span>
-            : "" }
-          </div>
 
         </div>
     }

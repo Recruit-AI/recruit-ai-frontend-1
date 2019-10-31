@@ -4,6 +4,7 @@ import Categories from '../../../components/category/index/index'
 import FormInsert from '../../../components/forms/handler'
 import {defaultCategory} from '../../../db/defaultObjects'
 import {Link} from 'react-router-dom'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 class Category extends React.Component {
   constructor(props) {
@@ -15,9 +16,9 @@ class Category extends React.Component {
 
   render() {
     const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
-  return (
-    <div className="">
-      <div className="pageCTA">
+  return (<SwitchTransition><CSSTransition key={`categories`}
+    in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit><div className="">
+    <div key='categories' className="pageCTA">
         <div className="container">
           <h4>Our Collections compiled into convenient...</h4>
           <h1>Categories</h1>
@@ -34,7 +35,7 @@ class Category extends React.Component {
       </div>
       <div className="reverse-divider"></div>
 
-    </div>
+            </div></CSSTransition></SwitchTransition>
   );
 
   }

@@ -18,11 +18,11 @@ class BasicInfo extends React.Component {
       <Row>
           <Col lg={8}>
               <h4>Basic Information</h4>
-            <p>Short Description: {item.symbol_description}</p>
+            <p>Short Description: {item.symbol_description || "Please fill in."}</p>
               <i>{ item.other_spellings ? `Also Spelled: ${ item.other_spellings }` : "" } </i>
               <p>Collection: <Link to={ `/collections/${item.kind.kind_id}` }> {item.kind.kind_name} </Link></p>
               { item.pantheons.length > 0 ?
-                <p>Used by: { item.pantheons.map(i => <Link key={i.id} to={`/pantheon/${i.pantheon_id}`}> {i.pantheon_name} </Link>) }</p>
+                <p>Used by: { item.pantheons.map(i => <Link key={i.id} to={`/pantheons/${i.pantheon_id}`}> {i.pantheon_name} </Link>) }</p>
                 : "" }
           </Col>
           <Col lg={4}>

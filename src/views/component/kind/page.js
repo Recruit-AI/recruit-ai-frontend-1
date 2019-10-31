@@ -10,7 +10,7 @@ class KindPage extends React.Component {
   }
 
   render() {
-    return <div  className="tpBlackBg">
+    return <div className="tpBlackBg">
         <Kind match={this.props.match}  />
       </div>
   }

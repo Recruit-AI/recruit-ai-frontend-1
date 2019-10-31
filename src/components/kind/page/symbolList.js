@@ -62,12 +62,12 @@ class BasicInfo extends React.Component {
     <div className="extra-info-row">
         {item.specific_order ?
           <div className={`extra-info-column ${ this.state.sort === 'order_number' ? 'eic-active' : ''}`} onClick={this.sortNumber} >
-            # {  this.state.sort === 'order_number' ? (this.state.sortdir > 0 ? "/\\" : '\\/') : "" }
+            # {  this.state.sort === 'order_number' ? (this.state.sortdir > 0 ? <i class="far fa-caret-square-up"></i> :<i class="far fa-caret-square-down"></i>) : "" }
           </div>
         : ""}
 
         <div className={`extra-info-column ${ this.state.sort === 'symbol_name' ? 'eic-active' : ''}`} onClick={this.sortName} >
-          Name {  this.state.sort === 'symbol_name' ? (this.state.sortdir > 0 ? "/\\" : '\\/') : "" }
+          Name {  this.state.sort === 'symbol_name' ? (this.state.sortdir > 0 ? <i class="far fa-caret-square-up"></i> : <i class="far fa-caret-square-down"></i>) : "" }
         </div>
 
         { item.default_extra_info ? Object.entries( item.default_extra_info ).map( (entry) =>

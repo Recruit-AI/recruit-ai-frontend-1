@@ -11,6 +11,7 @@ import BasicInfo from './basicInfo'
 import History from './history'
 import Collections from './collections'
 import ImageGallery from '../../imageGallery/gallery'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 
@@ -19,7 +20,8 @@ class PantheonPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pantheon: {}
+            pantheon: {},
+            loading: true
         }
     }
 
@@ -27,18 +29,25 @@ class PantheonPage extends React.Component {
     componentWillReceiveProps = (newProps) => {this.updateInfo(newProps);}
 
       updateInfo = (props = this.props) => {
+        this.setState({loading:true})
         const id = props.match.params.id
         axios
             .get(`https://grimwire.herokuapp.com/api/pantheons/${id}`)
             .then(res =>
-              this.setState({pantheon: res.data})
+              this.setState({pantheon: res.data, loading: false})
             )
-            .catch(err => console.log(err) );
+            .catch(err => {
+              console.log(err);
+              this.setState({pantheon: {}, loading: false})
+            } );
     }
 
     render() {
         const item = this.state.pantheon
-        return typeof item !== 'undefined' && Object.keys(item).length > 0 ? <div>
+        return <SwitchTransition><CSSTransition key={`pantheons-${this.props.match.params.id}`}
+          in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit>
+            {typeof item !== 'undefined' && Object.keys(item).length > 0 && !this.state.loading ?
+            <div>
 
           <Link to="/pantheons">Back to Pantheons</Link> { curr_user ?  <Link to="/pantheons/new">Create Pantheon</Link> : "" }
                 <BasicInfo item={item}>
@@ -47,22 +56,25 @@ class PantheonPage extends React.Component {
                     <Link to={`/collections/new?pantheon_id=${item.pantheon_id}`}>Add a New Collection</Link>
                   </span> : "" }
                   <History item={item} />
-                  <ImageGallery item={item} />
+                  <Collections item={item} />
+                  <ImageGallery item={item} key={item.pantheon_id}/>
                 </BasicInfo>
 
-                <Collections item={item} />
 
 
                   <div>
                       <h4>History & Background</h4>
-                      <p>{item.pantheon_history_text}</p>
+                      <p>{item.pantheon_history_text || "Please fill in."}</p>
                       <h4>Culture & Advancements</h4>
-                      <p>{item.pantheon_culture_text}</p>
+                      <p>{item.pantheon_culture_text || "Please fill in."}</p>
                   </div>
 
-            </div> : "Loading... Or object not found."
+            </div> : ( this.state.loading ?
+              <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+              : <div className="failedSearch">Sorry, there was an error. This page does not exist.</div>
+          )
 
-    }
+    }</CSSTransition></SwitchTransition>}
 }
 
 export default PantheonPage

@@ -2,6 +2,7 @@ import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 
 import OurMission from './our_mission'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 class Pages extends React.Component {
     constructor(props) {
@@ -11,9 +12,10 @@ class Pages extends React.Component {
     }
 
     render() {
-        return <div style={{minHeight:"100vh"}}>
+        return <SwitchTransition><CSSTransition key={`help`}
+          in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit><div key="help" style={{minHeight:"100vh"}}>
         <h1>Help Us Out</h1>
-        </div>
+        </div></CSSTransition></SwitchTransition>
 
     }
 }

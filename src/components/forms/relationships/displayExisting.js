@@ -1,0 +1,29 @@
+import React from 'react'
+import HandleForm from '../miniHandler'
+
+class Existing extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+
+    }
+  }
+
+  render() {
+    const {rConfig, info, update, formClass} = this.props
+
+    return rConfig.records ?
+            rConfig.records.map(item => <div>
+                {console.log(item.record)}
+                <HandleForm item={item.record} formClass={formClass} existing={true} info={rConfig} update={update} />
+              </div>
+            )
+            : ""
+        }
+
+
+
+
+}
+
+export default Existing

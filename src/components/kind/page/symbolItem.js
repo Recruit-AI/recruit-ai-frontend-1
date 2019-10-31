@@ -15,6 +15,7 @@ class BasicInfo extends React.Component {
     const show = this.state.showForm
     this.setState({showForm: !show})
     if(show) { this.props.updatePage() }
+    document.querySelector('.extra-info-slider').scrollLeft= 0;
   }
 
   render() {
@@ -36,11 +37,11 @@ class BasicInfo extends React.Component {
         <div className="extra-info-column"><img alt={symbol.name} src={symbol.thumbnail ? symbol.thumbnail.image_url : ""} height="64px" /></div>
 
 
-        <div className="extra-info-column"><span onClick={this.toggleForm}>{this.state.showForm ? "Done" : "Edit" }</span></div>
+        <div className="extra-info-column"><button onClick={this.toggleForm}>{this.state.showForm ? "Done" : "Edit" }</button></div>
       </div> : "" }
 
       { this.state.showForm ? <div>
-        <div key={symbol.symbol_id}>
+        <div key={symbol.symbol_id} className="inlineForm">
           <MainHandler item={{
               order_number: symbol.order_number,
               symbol_name: symbol.symbol_name,
@@ -48,7 +49,7 @@ class BasicInfo extends React.Component {
               extra_info: symbol.extra_info,
             }}
             editId={symbol.symbol_id} existing={true} formClass={"symbols"} update={this.toggleForm} />
-            <span onClick={this.toggleForm}>{this.state.showForm ? "Done" : "Edit" }</span>
+          <button className="extra-info-column" onClick={this.toggleForm}>{this.state.showForm ? "Done" : "Edit" }</button>
         </div>
       </div> : "" }
 

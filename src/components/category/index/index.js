@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import {Row, Col} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import Pagination from '../../shared/pagination'
+import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 
 //This component is used to build a 'complete' list, used for calling searches and passing props to the actual list component.
@@ -17,7 +19,10 @@ class Categories extends React.Component {
           sort: params.get('sort') || "category_name",
           sortdir: params.get('sortdir') || "ASC",
           searchTerm: "",
-          update:true
+          update:true,
+          params: params,
+          loading: false
+
 
         }
     }
@@ -32,6 +37,7 @@ class Categories extends React.Component {
     }
 
     loadPage = () => {
+      this.setState({loading:true,update:false})
       const {pageNumber, sort, sortdir, searchTerm} = this.state
       axios
           .get(`https://grimwire.herokuapp.com/api/categories?page=${pageNumber}&sort=${sort}&sortdir=${sortdir}&search=${searchTerm}`)
@@ -39,25 +45,37 @@ class Categories extends React.Component {
             this.setState({
               categories: res.data.pageOfItems,
               pager: res.data.pager,
-              update: false
+              loading: false
             })
           )
           .catch(err => console.log(err) );
     }
 
     goToPage = (e) => {
-      this.setState({pageNumber: e.target.attributes.page.value, update:true})
+      let params = this.state.params
+      const pageNumber =  e.target.attributes.page.value
+      params.set('page', pageNumber)
+      this.setState({pageNumber, params, update:true})
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
 
     toggleSortDir = (e) => {
-      this.setState({sortdir: this.state.sortdir === "ASC" ? "DESC" : "ASC", update:true})
+      let params = this.state.params
+      const newSortdir = this.state.sortdir === "ASC" ? "DESC" : "ASC"
+      params.set('sortdir', newSortdir)
+      this.setState({sortdir: newSortdir, update:true, params})
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
 
     changeSort = (e) => {
       const sort = e.target.attributes.sortTerm.value
       if(sort === this.state.sort) { this.toggleSortDir() }
-      this.setState({ sort: sort, update:true })
+      let params = this.state.params
+      params.set('sort', sort)
+      this.setState({ sort, update:true, params })
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
+
 
     handleChange = (e) => {
       this.setState({searchTerm: e.target.value, update:true})
@@ -69,7 +87,10 @@ class Categories extends React.Component {
 
 
     render() {
-        return <div className="container">
+        //a key is created by appending each id onto each other, creating at most a length-60 string, up to 100,000 entries
+        const renderKey = this.state.categories.length > 1 ? this.state.categories.reduce((sum, item) => { return `${sum}${item.category_id}`}) : "0"
+
+        return <div className="container" id="categorySearch">
 
             <div className="componentSearchBar">
               <button className={`page-button ${this.state.sort === 'category_name' ? 'page-button-active' : "" }`} onClick={this.changeSort} sortTerm={"category_name"} >
@@ -84,42 +105,45 @@ class Categories extends React.Component {
                 value={this.state.searchTerm} />
             </div>
 
-              <Row>
-                  {
-                      this.state.categories.map(category => <Col key={category.category_name} lg={3}>
-                          <br />
-                          <h5><Link to={`/categories/${category.category_id}`}>{category.category_name} {category.category_number}</Link></h5>
-                          {category.category_description}<br />
 
-                              <br />
-                      </Col>)
-                  }
-              </Row>
+          <div style={{display: this.state.loading && this.state.categories.length !== 0 ? "block" : "none"}} className="loader"><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+          <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
 
 
+            <div id="search-window">
+                {
+                  this.state.categories.length > 1 ?
 
-            <div class="paginationLinks">
-            { this.state.pager.currentPage && this.state.pager.currentPage > 2 ?
-              <span onClick={this.goToPage} page={1} >First</span>
-            : "" }
+                            <SwitchTransition><CSSTransition key={renderKey}
+                              in={true} timeout={150} classNames="search-page" unmountOnExit>
+                              <div key={renderKey}>
+                                <Row>
+                              {this.state.categories.map(category =>
+                                <Col key={category.category_name} lg={3}><Link className='blockLink' to={`/categories/${category.category_id}`}>
+                                  <br />
+                                  <h5>{category.category_name} {category.category_number}</h5>
+                                  {category.category_description}<br />
 
-            { this.state.pager.currentPage && this.state.pager.currentPage > 1 ?
-                <span onClick={this.goToPage} page={this.state.pager.currentPage - 1} >Previous</span>
-              : "" }
+                                      <br />
+                                  </Link>
+                                </Col>)}
+                              </Row>
+                          </div>
+                          </CSSTransition></SwitchTransition>
 
-            { this.state.pager.pages ? this.state.pager.pages.map(page => <span>
-              <span onClick={this.goToPage} page={page}  style={{textDecoration: this.state.pager.currentPage==page ? 'underline' : 'none'}}>{page}</span>
-            </span>) : "" }
+                    : (this.state.searchTerm === "" ?
+                      <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+                      : <div className="failedSearch">Sorry. There are no results for that term.</div>
+                    )
+                }
 
-            { this.state.pager.currentPage && this.state.pager.currentPage < this.state.pager.totalPages ?
-              <span onClick={this.goToPage} page={this.state.pager.currentPage + 1} >Next</span>
-            : "" }
-
-            { this.state.pager.currentPage && this.state.pager.currentPage+1 < this.state.pager.totalPages ?
-              <span onClick={this.goToPage} page={this.state.pager.totalPages} >Last</span>
-            : "" }
             </div>
 
+
+
+          <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
+          <div style={{display: this.state.loading && this.state.categories.length !== 0 ? "block" : "none"}} className="loader"><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>
+          <span style={{cursor:'pointer'}} onClick={() => {document.querySelector('#categorySearch').scrollIntoView(true)}}>To Top</span>
         </div>
     }
 }
