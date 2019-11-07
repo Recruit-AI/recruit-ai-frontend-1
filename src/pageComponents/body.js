@@ -4,6 +4,7 @@ import {Switch, Route} from 'react-router-dom'
 import Home from '../views/misc/home';
 import UserComponent from '../views/misc/user';
 import AdminComponent from '../views/misc/admin';
+import FeedbackComponent from '../views/misc/feedback';
 
 import SymbolController from '../views/component/symbol/controller';
 import PantheonController from '../views/component/pantheon/controller';
@@ -21,8 +22,9 @@ function Body() {
             <Route path="/pantheons" component={PantheonController} />
             <Route path="/collections" component={KindController} />
             <Route path="/categories" component={CategoryController} />
-            
+
             <Route path="/pages" component={PagesController} />
+            <Route path="/feedback" component={FeedbackComponent} />
 
             <Route path="/users" component={UserComponent} />
             <Route path="/admin" component={AdminComponent} />

@@ -41,7 +41,6 @@ class Page extends React.Component {
     }
 
     render() {
-        const user = this.state.user
         return <div>
           <h2>{this.state.filter === 'unconfirmed' ? 'Unconfirmed Logs' : 'All Logs'}</h2>
           <span onClick={this.toggleFilter}>See {this.state.filter === 'unconfirmed' ? 'All Logs' : 'Only Unconfirmed Logs'}</span><br />

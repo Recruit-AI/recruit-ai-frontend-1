@@ -278,7 +278,7 @@ class FormHandler extends React.Component {
       </div>) }
 
 
-    <button type='submit'>Okie</button>
+    <button type='submit'>Save</button>
     <button onClick={this.deleteItem}>Delete</button>
 
     </Form> </div>: ""

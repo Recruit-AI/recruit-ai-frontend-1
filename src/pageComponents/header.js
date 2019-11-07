@@ -94,9 +94,10 @@ class Menu extends React.Component {
                    <span className="hmenu-dropdown-options" style={{display: (showUser ? 'block' : 'none')}}>
                      <NavLink to="/users/profile">Dashboard</NavLink>
                      <NavLink to={`/users/${user.user_id}`}>View My Profile</NavLink>
-                     <NavLink to="/admin/users">(#) User List</NavLink>
+                     <NavLink to={`/users/${user.user_id}/edit`}>Edit Profile</NavLink>
+                     { user.user_role >= 3 ? <span><NavLink to="/admin/users">User List</NavLink>
                      <NavLink to="/admin/logs">(#) Logs</NavLink>
-                     <NavLink to="/feedback">(#) Feedback</NavLink>
+                     <NavLink to="/feedback">(#) Feedback</NavLink></span> : "" }
                      <span className="hmenu-item" onClick={this.logout} style={{cursor:'pointer'}}>Log Out <i class="fas fa-sign-out-alt"></i></span>
                    </span>
                  </CSSTransition>
