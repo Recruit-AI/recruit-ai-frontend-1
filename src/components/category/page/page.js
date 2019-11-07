@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap'
 
 import FormInsert from '../../forms/handler'
+import Sources from '../../sources/sourcesList'
 import {defaultKind} from '../../../db/defaultObjects'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
@@ -60,6 +61,26 @@ class CategoryPage extends React.Component {
                         { item.kinds ? item.kinds.map(i => <div><Link key={i.kind_id} to={`/collections/${i.kind_id}`}>{i.kind_name}</Link></div>) : ""}
                     </Col>
                     <Col lg={8}>
+                        {
+                          item.pantheons ?
+                            <div>
+                              <h4>Noted Pantheons</h4>
+                              {item.pantheons.map(i =>
+                                <Link key={i.pantheon_id} to={`/collections/${i.pantheon_id}`}>{i.pantheon_name}</Link>
+                              )}
+                            </div>
+                          : ""
+                        }
+                        {
+                          item.symbols ?
+                            <div>
+                              <h4>Relevant Symbols</h4>
+                              {item.symbols.map(i =>
+                                <Link key={i.symbol_id} to={`/collections/${i.symbol_id}`}>{i.symbol_name}</Link>
+                              )}
+                            </div>
+                          : ""
+                        }
                         <h4>Overview & History</h4>
                         <p>{item.category_overview_text || "Please fill in."}</p>
                         <h4>Sources & Getting Started</h4>
@@ -68,6 +89,8 @@ class CategoryPage extends React.Component {
                 </Row>
 
             </div>
+
+            <Sources item={item} />
 
 
 

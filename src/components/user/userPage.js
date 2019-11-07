@@ -13,9 +13,9 @@ class Page extends React.Component {
     componentDidMount = () => {
       //${this.props.match.params.id}
         axios
-            .get(`https://grimwire.herokuapp.com/api/users/admin-list/`)
+            .get(`https://grimwire.herokuapp.com/api/users/profile/${this.props.match.params.id}`)
             .then(res =>
-              this.setState({user: res.data[0]})
+              this.setState({user: res.data})
             )
             .catch(err => console.log(err) );
     }

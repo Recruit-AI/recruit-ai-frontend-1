@@ -107,7 +107,8 @@ a {
 .hmenu-dropdown-options {
   position:absolute;
   left:0;
-  width:100vw;
+  width:max-content;
+  padding:20px;
   max-width:500px;
   background-color:$dark-color;
   a {

@@ -44,7 +44,7 @@ class CategoryPage extends React.Component {
     }});
 
         const page = this.state.page
-        const pages = ["Main", "Thumbnail Image", "Image Gallery", "Kinds", "Prerequisites"]
+        const pages = ["Main", "Thumbnail Image", "Image Gallery", "Kinds", "Pantheons", "Symbols", "Prerequisites", "Sources"]
     return <div  className="tpBlackBg">
 
         <Link to={`/categories/${item.category_id}`}>Back to Page</Link>
@@ -89,7 +89,26 @@ class CategoryPage extends React.Component {
     {
       page === 4 ?
 
+
+        <RelationshipForm item={item} formClass={"category_pantheons"} update={this.updateInfo} />
+        : ""
+    }
+    {
+      page === 5 ?
+
+
+        <RelationshipForm item={item} formClass={"category_symbols"} update={this.updateInfo} />
+        : ""
+    }
+    {
+      page === 6 ?
+
         <RelationshipForm item={item} formClass={"category_prereqs"} update={this.updateInfo} />
+        : ""
+    }
+    {
+      page === 7 ?
+        <RelationshipForm item={item} formClass={"sources"} update={this.updateInfo}  info={ {id: item.category_id, class: "Category"}  } />
         : ""
     }
 

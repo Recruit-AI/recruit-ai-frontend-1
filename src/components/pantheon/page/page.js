@@ -11,6 +11,7 @@ import BasicInfo from './basicInfo'
 import History from './history'
 import Collections from './collections'
 import ImageGallery from '../../imageGallery/gallery'
+import Sources from '../../sources/sourcesList'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
@@ -68,6 +69,8 @@ class PantheonPage extends React.Component {
                       <h4>Culture & Advancements</h4>
                       <p>{item.pantheon_culture_text || "Please fill in."}</p>
                   </div>
+
+                  <Sources item={item} />
 
             </div> : ( this.state.loading ?
               <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>

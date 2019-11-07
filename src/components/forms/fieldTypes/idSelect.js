@@ -24,6 +24,7 @@ class IdList extends React.Component {
       case "creator_pantheon_id":
       case "kp_pantheon_id":
       case "sp_pantheon_id":
+      case "cpa_pantheon_id":
         axios
            .get('https://grimwire.herokuapp.com/api/pantheons/nameList')
            .then(res => {
@@ -72,24 +73,25 @@ class IdList extends React.Component {
                 .catch(err => console.log(err) );
                 break;
 
-                case "connected_symbol_id":
-                case "main_symbol_id":
-                case "sp_symbol_id":
-                     axios
-                        .get('https://grimwire.herokuapp.com/api/symbols/nameList')
-                        .then(res => {
-                          this.setState({
-                            allItems: res.data.map(
-                              item => ({
-                                ...item,
-                                name: item.symbol_name,
-                                id: item.symbol_id })),
-                            });
-                        })
-                        .catch(err => console.log(err) );
-                        break;
+        case "connected_symbol_id":
+        case "main_symbol_id":
+        case "sp_symbol_id":
+        case "cs_symbol_id":
+              axios
+                .get('https://grimwire.herokuapp.com/api/symbols/nameList')
+                .then(res => {
+                  this.setState({
+                    allItems: res.data.map(
+                      item => ({
+                        ...item,
+                          name: item.symbol_name,
+                          id: item.symbol_id })),
+                      });
+                })
+                .catch(err => console.log(err) );
+                break;
 
-                  case "foreign_id":
+          case "foreign_id":
                     let string = this.props.item.foreign_class.toLowerCase()
                     let plural_string = ""
                     if(string === 'category'){
@@ -98,7 +100,6 @@ class IdList extends React.Component {
                       plural_string = string + 's'
                     }
 
-                    console.log("FOREIGNID", string)
                     axios
                        .get(`https://grimwire.herokuapp.com/api/${plural_string}/nameList`)
                        .then(res => {
@@ -112,8 +113,6 @@ class IdList extends React.Component {
                        })
                        .catch(err => console.log(err) );
                        break;
-
-
 
     }
 
@@ -148,6 +147,8 @@ class IdList extends React.Component {
       .replace("ck_", "")
       .replace("cp_", "")
       .replace("sp_", "")
+      .replace("cpa_", "")
+      .replace("cs_", "")
       .replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
   }
 

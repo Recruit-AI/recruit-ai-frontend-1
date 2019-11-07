@@ -1,26 +1,5 @@
 import React from 'react'
 
-// ase "pantheons_history":
-//   return {
-// case "pantheons_influenced":
-//   return }
-// case "pantheons_use_kinds":
-//   return {}
-// case "kinds_used_by_pantheons":
-//   return {}
-// case "kinds_in_categories":
-//   return {}
-// case "category_prereqs":
-//   return {}
-// case "symbol_pantheons":
-//   return {}
-// case "symbol_connections":
-//   return {}
-//   return {}
-// case "images":
-// case "thumbnail":
-//   return {}
-
 export default (props) => {
   switch(props.formClass) {
     case "pantheons_history":
@@ -134,9 +113,55 @@ export default (props) => {
       }
       break;
 
+    case "category_pantheons":
+      if(props.item.pantheons){
+        const records = props.item.pantheons
+        return {
+          default_item: {
+            cpa_category_id: props.item.category_id,
+            cpa_pantheon_id: 0
+          },
+          records: records.map(item => ({
+            update_id: item.category_pantheon_id,
+            record: {
+              id: item.category_pantheon_id,
+              cpa_pantheon_id: item.cpa_pantheon_id
+            }
+          })),
+          title: "Pantheons",
+          url: "categories/pantheons"
+        }
+      } else {
+        return []
+      }
+      break;
+
+    case "category_symbols":
+      if(props.item.symbols){
+        const records = props.item.symbols
+        return {
+          default_item: {
+            cs_category_id: props.item.category_id,
+            cs_symbol_id: 0
+          },
+          records: records.map(item => ({
+            update_id: item.category_symbol_id,
+            record: {
+              id: item.category_symbol_id,
+              cs_symbol_id: item.cs_symbol_id
+            }
+          })),
+          title: "Symbols",
+          url: "categories/symbols"
+        }
+      } else {
+        return []
+      }
+      break;
+
     case "category_prereqs":
-      if(props.item.prereqs){
-        const records = props.item.prereqs
+      if(props.item.prerequisites){
+        const records = props.item.prerequisites
         return {
           default_item: {
             cp_category_id: props.item.category_id,
@@ -150,7 +175,7 @@ export default (props) => {
             }
           })),
           title: "Prerequisites",
-          url: "categories/prereqs"
+          url: "categories/prerequisites"
         }
       } else {
         return []
@@ -267,5 +292,41 @@ export default (props) => {
         return []
       }
       break;
+
+    case "sources":
+      if(props.item.sources){
+        const records = props.item.sources
+        return {
+          default_item: {
+            foreign_key: props.info.id,
+            foreign_class: props.info.class,
+            source_link: "",
+            source_title: "",
+            source_article_title: "",
+            source_description: ""
+          },
+          records: records.map(item => ({
+            update_id: item.source_id,
+            record: {
+              id: item.source_id,
+              source_link: item.source_link,
+              source_title: item.source_title,
+              source_article_title: item.source_article_title,
+              source_description: item.source_description
+            }
+          })),
+          title: "Sources",
+          url: "sources"
+        }
+      } else {
+        return []
+      }
+      break;
+
+
+
+
+
+
     }
   }

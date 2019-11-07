@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom'
 
 import Home from '../views/misc/home';
 import UserComponent from '../views/misc/user';
-import LogsComponent from '../views/misc/logs';
+import AdminComponent from '../views/misc/admin';
 
 import SymbolController from '../views/component/symbol/controller';
 import PantheonController from '../views/component/pantheon/controller';
@@ -21,10 +21,11 @@ function Body() {
             <Route path="/pantheons" component={PantheonController} />
             <Route path="/collections" component={KindController} />
             <Route path="/categories" component={CategoryController} />
+            
             <Route path="/pages" component={PagesController} />
 
             <Route path="/users" component={UserComponent} />
-            <Route path="/logs" component={LogsComponent} />
+            <Route path="/admin" component={AdminComponent} />
         </Switch>
     </div>
 }

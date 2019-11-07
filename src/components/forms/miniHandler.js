@@ -124,12 +124,7 @@ class FormHandler extends React.Component {
     const id = this.state.item.id
     const headers = { headers: {'authorization': localStorage.token} }
     delete this.state.item.id
-    if (item.default_extra_info) {
-      item = {...item, default_extra_info: JSON.stringify(item.default_extra_info)}
-    }
-    if(item.extra_info) {
-      item = {...item, extra_info: JSON.stringify(item.extra_info)}
-    }
+
     if(this.state.formClass === "images" || this.state.formClass === "thumbnail"){
       const formId = `${this.state.formClass}-${id}`
       let myForm = document.getElementById(formId);
@@ -183,9 +178,10 @@ class FormHandler extends React.Component {
 
   deleteItem = (e) => {
     e.preventDefault()
+    const headers = { headers: {'authorization': localStorage.token} }
     if(window.confirm("Are you sure you wish to completely delete the item?")){
       axios
-          .delete(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${this.state.item.id}`)
+          .delete(`https://grimwire.herokuapp.com/api/${this.props.info.url}/${this.state.item.id}`, headers)
           .then(res =>
             this.setState({item: {}})
           )
@@ -251,7 +247,7 @@ class FormHandler extends React.Component {
                  }
 
                 {
-                  Number.isInteger(itemField[1]) && itemField[0].indexOf("_id")<= 0 && itemField[0] !== 'connection_relationship'  && itemField[0] !== "id" ?
+                  Number.isInteger(itemField[1]) && itemField[0].indexOf("_id")<= 0 && itemField[0] !== 'connection_relationship'  && itemField[0] !== "id" && itemField[0] !== "foreign_key"  ?
                   <Form.Group>
                   <Form.Label>{ this.printifyName(itemField[0]) }</Form.Label>
                   <Form.Control onChange={this.handleChange} type="number"
@@ -325,17 +321,9 @@ class FormHandler extends React.Component {
                   : ""
                 }
 
-                { itemField[0] === 'foreign_id' ?
-
-                <Input type="hidden" name="foreign_id" value={this.state.item.foreign_id} />
-                  :""
-
-                }{ itemField[0] === 'foreign_class' ?
-
-                <Input type="hidden" name="foreign_class" value={this.state.item.foreign_class} />
-                  :""
-
-                }
+                { itemField[0] === 'foreign_id' ? <Input type="hidden" name="foreign_id" value={this.state.item.foreign_id} /> : "" }
+                { itemField[0] === 'foreign_key' ? <Input type="hidden" name="foreign_key" value={this.state.item.foreign_key} /> : "" }
+                { itemField[0] === 'foreign_class' ? <Input type="hidden" name="foreign_class" value={this.state.item.foreign_class} /> :""}
 
 
 

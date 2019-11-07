@@ -10,17 +10,18 @@ class Menu extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        showDropdown: false,
+        showBrowseDropdown: false,
+        showUserDropdown: false,
         showMenu: false
       }
-      document.addEventListener('click', (e) => {
-        const mobileToggleClick = e.target.className.indexOf('hmenu-mobile-toggle') >= 0
-        const dropdownToggleClick = e.target.className.indexOf('hmenu-dropdown-toggle') >= 0
-        if(!dropdownToggleClick && !mobileToggleClick) {
-          this.setState({showDropdown: false, showMenu: false})
-        }
 
-      })
+            document.addEventListener('click', (e) => {
+              const mobileToggleClick = e.target.className.indexOf('hmenu-mobile-toggle') >= 0
+              const dropdownToggleClick = e.target.className.indexOf('hmenu-dropdown-toggle') >= 0
+              if(!dropdownToggleClick && !mobileToggleClick) {
+                this.setState({showBrowseDropdown: false, showUserDropdown: false, showMenu: false})
+              }
+            })
     }
 
     logout = (e) => {
@@ -33,8 +34,12 @@ class Menu extends React.Component {
       this.setState({showMenu: !this.state.showMenu})
     }
 
-    toggleDropdown = (e) => {
-      this.setState({showDropdown: !this.state.showDropdown})
+    toggleBrowseDropdown = (e) => {
+      this.setState({showUserDropdown: false, showBrowseDropdown: !this.state.showBrowseDropdown})
+    }
+
+    toggleUserDropdown = (e) => {
+      this.setState({showBrowseDropdown: false, showUserDropdown: !this.state.showUserDropdown})
     }
 
 
@@ -42,8 +47,10 @@ class Menu extends React.Component {
 
     const user = localStorage.user ? JSON.parse(localStorage.user) : null
 
-    const show = this.state.showDropdown
-    return <div className={`${this.state.showDropdown ? 'headerFill' : ""} header `}>
+    const showBrowse = this.state.showBrowseDropdown
+    const showUser = this.state.showUserDropdown
+
+    return <div className={`${this.state.showBrowseDropdown || this.state.showUserDropdown ? 'headerFill' : ""} header `}>
 
       <Container>
         <Row>
@@ -54,14 +61,14 @@ class Menu extends React.Component {
 
             <Col xs={12} lg={9} className='menu-right' >
               <div className={`${ this.state.showMenu ? "mobile-menu-show" : "mobile-menu-hide" }`}>
+
                 <span className="hmenu-item hmenu-dropdown">
-                  {/*Content drop down*/}
-                  <span className="hmenu-dropdown-toggle" onClick={this.toggleDropdown}>
+                  <span className="hmenu-dropdown-toggle" onClick={this.toggleBrowseDropdown}>
                     Browse
                   </span>
                   <br />
-                  <CSSTransition in={show} timeout={100} classNames="menu-fade">
-                  <span className="hmenu-dropdown-options" style={{display: show ? 'block' : 'none'}}>
+                  <CSSTransition in={showBrowse} timeout={100} classNames="menu-fade">
+                  <span className="hmenu-dropdown-options" style={{display: showBrowse ? 'block' : 'none'}}>
                     <NavLink to="/pantheons">By Pantheons & Religions</NavLink>
                     <NavLink to="/categories">By Categories & Classes</NavLink>
                     <NavLink to="/collections">By Lists & Collections</NavLink>
@@ -74,10 +81,47 @@ class Menu extends React.Component {
                 <NavLink className="hmenu-item" to="/pages/mission">Our Mission</NavLink>
                 <NavLink className="hmenu-item" to="/pages/questions">FAQ</NavLink>
                 <NavLink className="hmenu-item" to="/pages/help">Help Us Out</NavLink>
+
                 {
-                   user ? <span className="hmenu-item" style={{cursor:'pointer'}}><i class="fas fa-sign-out-alt"></i></span>
-                  : <NavLink className="hmenu-item" to="/users/login">Admin</NavLink>
+                  user ?
+
+                <span className="hmenu-item hmenu-dropdown">
+                  <span className="hmenu-dropdown-toggle" onClick={this.toggleUserDropdown}>
+                    Account
+                  </span>
+                  <br />
+                  <CSSTransition in={showUser} timeout={100} classNames="menu-fade">
+                   <span className="hmenu-dropdown-options" style={{display: (showUser ? 'block' : 'none')}}>
+                     <NavLink to="/users/profile">Dashboard</NavLink>
+                     <NavLink to={`/users/${user.user_id}`}>View My Profile</NavLink>
+                     <NavLink to="/admin/users">(#) User List</NavLink>
+                     <NavLink to="/admin/logs">(#) Logs</NavLink>
+                     <NavLink to="/feedback">(#) Feedback</NavLink>
+                     <span className="hmenu-item" onClick={this.logout} style={{cursor:'pointer'}}>Log Out <i class="fas fa-sign-out-alt"></i></span>
+                   </span>
+                 </CSSTransition>
+               </span>
+
+                 :
+
+                 <span className="hmenu-item hmenu-dropdown">
+                   <span className="hmenu-dropdown-toggle" onClick={this.toggleUserDropdown}>
+                     Account
+                   </span>
+                   <br />
+                   <CSSTransition in={showUser} timeout={100} classNames="menu-fade">
+                    <span className="hmenu-dropdown-options" style={{display: (showUser ? 'block' : 'none')}}>
+                        <NavLink className="hmenu-item" to="/users/register">Sign Up</NavLink>
+                        <NavLink className="hmenu-item" to="/users/login">Sign In</NavLink>
+                        <NavLink className="hmenu-item" to="/users/forgottenPassword">Forgot My Password</NavLink>
+                    </span>
+                  </CSSTransition>
+                </span>
                 }
+
+
+                <NavLink className="hmenu-item" to="/feedback/provide">Feedback/Report</NavLink>
+
                 </div>
             </Col>
         </Row>
@@ -90,5 +134,4 @@ class Menu extends React.Component {
 }
 
 export default withRouter(Menu);
-//
 //

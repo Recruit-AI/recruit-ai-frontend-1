@@ -8,6 +8,7 @@ import {defaultSymbol} from '../../../db/defaultObjects'
 import BasicInfo from './basicInfo'
 import SymbolList from './symbolList'
 import ImageGallery from '../../imageGallery/gallery'
+import Sources from '../../sources/sourcesList'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
@@ -61,6 +62,8 @@ class KindPage extends React.Component {
             <BasicInfo item={item} createdBy={this.state.createdBy} usedBy={this.state.usedBy} />
             <ImageGallery item={item} key={item.kind_ids}/>
             <SymbolList item={item} relatedSymbols={this.state.relatedSymbols} updatePage={this.updatePage} />
+
+            <Sources item={item} />
 
       </div> : ( this.state.loading ?
         <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>

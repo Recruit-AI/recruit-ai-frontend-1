@@ -45,7 +45,7 @@ class PantheonPage extends React.Component {
     }});
 
     const page = this.state.page
-    const pages = ["Main", "Thumbnail Image", "Image Gallery", "History", "Inspired", "Collections"]
+    const pages = ["Main", "Thumbnail Image", "Image Gallery", "History", "Inspired", "Collections", "Sources"]
     return <div  className="tpBlackBg">
 
         <Link to={`/pantheons/${item.pantheon_id}`}>Back to Page</Link>
@@ -88,6 +88,11 @@ class PantheonPage extends React.Component {
         {
           page === 5 ?
             <RelationshipForm item={item} formClass={"pantheons_use_kinds"} update={this.updateInfo} />
+            : ""
+        }
+        {
+          page === 6 ?
+            <RelationshipForm item={item} formClass={"sources"} update={this.updateInfo}  info={ {id: item.pantheon_id, class: "Pantheon"}  } />
             : ""
         }
 

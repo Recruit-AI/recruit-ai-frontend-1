@@ -8,6 +8,7 @@ import FormInsert from '../../forms/handler'
 import BasicInfo from './basicInfo'
 import ImageGallery from '../../imageGallery/gallery'
 import Connections from './connections'
+import Sources from '../../sources/sourcesList'
 
 import {defaultConnection} from '../../../db/defaultObjects'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
@@ -62,6 +63,8 @@ class SymbolPage extends React.Component {
                           <h4>Meaning:</h4>
                           {item.symbol_meaning_text || "Please fill in."}
                       </div>
+
+                      <Sources item={item} />
 
 
          </div>

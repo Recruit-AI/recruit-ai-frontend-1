@@ -45,7 +45,7 @@ class KindPage extends React.Component {
     }});
 
         const page = this.state.page
-        const pages = ["Main", "Thumbnail Image", "Image Gallery", "Used By Pantheons"]
+        const pages = ["Main", "Thumbnail Image", "Image Gallery", "Used By Pantheons", "Sources"]
     return <div  className="tpBlackBg">
 
               <Link to={`/collections/${item.kind_id}`}>Back to Page</Link>
@@ -84,6 +84,11 @@ class KindPage extends React.Component {
 
 
         <RelationshipForm item={item} formClass={"kinds_used_by_pantheons"} update={this.updateInfo} />
+        : ""
+    }
+    {
+      page === 4 ?
+        <RelationshipForm item={item} formClass={"sources"} update={this.updateInfo}  info={ {id: item.kind_id, class: "Kind"}  } />
         : ""
     }
       </div>
