@@ -8,15 +8,38 @@ import SideBar from './pageComponents/sidebar'
 import Body from './pageComponents/body'
 import Footer from './pageComponents/footer'
 
-function App() {
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: {},
+      token: null
+    }
+  }
 
-  return (
-    <div className="App">
-      <Header />
-      <Body />
-      <Footer />
-    </div>
-  );
+  logout = () => {
+    localStorage.setItem('user', null)
+    localStorage.setItem('token', null)
+    this.setState({user: {}, token: null})
+    this.forceUpdate();
+  }
+  
+  login = (user, token) => {
+    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('token', token)
+    this.setState({user, token})
+    this.forceUpdate();
+  }
+
+  render () {
+    return (
+      <div className="App">
+        <Header auth={{curr_user: this.state, logout: this.logout, login: this.login}} />
+        <Body auth={{curr_user: this.state, logout: this.logout, login: this.login}}  />
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;

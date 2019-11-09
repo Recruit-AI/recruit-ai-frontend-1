@@ -13,7 +13,7 @@ import CategoryController from '../views/component/category/controller';
 
 import PagesController from '../views/pages/pages'
 
-function Body() {
+function Body(props) {
     return <div className="body">
         <Switch>
             <Route path="/" exact component={Home} />
@@ -25,8 +25,8 @@ function Body() {
 
             <Route path="/pages" component={PagesController} />
             <Route path="/feedback" component={FeedbackComponent} />
-
-            <Route path="/users" component={UserComponent} />
+            {console.log(props.auth)}
+            <Route path="/users" render={() => <UserComponent {...props} auth={props.auth} />} />
             <Route path="/admin" component={AdminComponent} />
         </Switch>
     </div>

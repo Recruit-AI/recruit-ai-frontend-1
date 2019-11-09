@@ -37,7 +37,7 @@ class UserForm extends React.Component {
 
 
   render() {
-    return <div>
+    return <div className="tpBlackBg">
         { !this.state.sent ?
         <div>
           <h2>Edit Your Profile</h2>

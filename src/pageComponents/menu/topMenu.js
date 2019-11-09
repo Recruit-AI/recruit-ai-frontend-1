@@ -17,7 +17,7 @@ class Menu extends React.Component {
   render = () => {
     return <div className={`${this.props.showMenu ? "mobile-menu-show" : "mobile-menu-hide"}`}>
       {menuStructure.map(item => 
-        <MenuItem item={item} toggleDropdown={this.props.toggleDropdown} />        
+        <MenuItem auth={this.props.auth} item={item} toggleDropdown={this.props.toggleDropdown} />        
       ) }
     </div>
   }

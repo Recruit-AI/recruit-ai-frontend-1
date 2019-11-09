@@ -31,8 +31,8 @@ class MenuItem extends React.Component {
     const item = this.props.item
    
     return this.showItem() ? (item.links ? 
-      <MenuDropdown item={item} toggleDropdown={this.props.toggleDropdown} /> 
-      : <MenuLink item={item} />) : ""
+      <MenuDropdown auth={this.props.auth} item={item} toggleDropdown={this.props.toggleDropdown} /> 
+      : <MenuLink auth={this.props.auth} item={item} />) : ""
   }
 }
 

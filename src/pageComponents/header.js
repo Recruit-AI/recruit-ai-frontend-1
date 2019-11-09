@@ -49,7 +49,7 @@ class Header extends React.Component {
           </Col>
 
           <Col xs={12} lg={9} className='menu-right' >
-            <Menu showMenu={this.state.showMenu} toggleDropdown={this.toggleDropdown} />
+            <Menu auth={this.props.auth} showMenu={this.state.showMenu} toggleDropdown={this.toggleDropdown} />
           </Col>
         </Row>
 

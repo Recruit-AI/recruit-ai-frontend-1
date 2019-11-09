@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 import axios from 'axios'
+import {withRouter} from 'react-router-dom'
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -27,17 +28,17 @@ class LogIn extends React.Component {
     handleLogin = (e) => {
       this.setState({formColor: 'rgba(255,255,255,.4)'})
       e.preventDefault();
+      console.log("LOGIN", this.props.auth)
       axios
           .post(`https://grimwire.herokuapp.com/api/users/auth/login`, this.state.user)
           .then(res => {
             this.setState({formColor: 'rgba(0,200,0,.4)'})
-            localStorage.setItem('token', res.data.token)
-            localStorage.setItem('user', JSON.stringify(res.data.user))
+            this.props.auth.login( res.data.user, res.data.token )
             setTimeout(() => {this.props.history.push('/')}, 200)
 
           })
           .catch((err, res) => {
-            console.log(err.response.data.message)
+            console.log(err, err.response.data.message)
             if(err.response.data.message === "Invalid Credentials.") {
               this.setState({formColor: 'rgba(200,0,0,.4)', error: "The information you entered does not match our records. Please try again."})
               setTimeout(() => {this.setState({formColor: 'transparent'})}, 2000)
@@ -47,7 +48,7 @@ class LogIn extends React.Component {
     }
 
     render() {
-        return <div style={{height:"100vh"}}>
+        return <div className="tpBlackBg">
           {this.state.error || ""}
             <Form onSubmit={this.handleLogin} style={{width:"800px", margin:"auto", backgroundColor: this.state.formColor}}>
                 <Form.Group>
@@ -73,4 +74,4 @@ class LogIn extends React.Component {
     }
 }
 
-export default LogIn
+export default withRouter( LogIn )

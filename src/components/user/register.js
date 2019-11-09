@@ -10,7 +10,8 @@ class LogIn extends React.Component {
             username: "",
             password: "",
             user_email: ""
-          }
+          },
+          sent: false
         }
     }
 
@@ -27,13 +28,13 @@ class LogIn extends React.Component {
       e.preventDefault();
       axios
           .post(`https://grimwire.herokuapp.com/api/users/auth/register`, this.state.user)
-          .then(res => { console.log(res)//Show a "go check your email thing"
-          })
+          .then(res => { this.setState({sent: true})})
           .catch(err => console.log(err) );
     }
 
     render() {
-        return <div style={{height:"100vh"}}>
+        return <div className="tpBlackBg">
+            {this.state.sent ? "Thank you. Please go check your email for the verification link." : 
             <Form onSubmit={this.handleLogin} style={{width:"800px", margin:"auto"}}>
                 <Form.Group>
                     <Form.Label>Username</Form.Label>
@@ -60,8 +61,9 @@ class LogIn extends React.Component {
                     <Form.Text>Please enter.</Form.Text>
                 </Form.Group>
 
-                    <button type='submit'>Register Account</button>
+                <button type='submit'>Register Account</button>
             </Form>
+            }
         </div>
     }
 }
