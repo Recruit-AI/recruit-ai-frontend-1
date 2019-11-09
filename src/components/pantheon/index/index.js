@@ -108,7 +108,7 @@ class Pantheons extends React.Component {
 
             <div id="search-window">
                 {
-                  this.state.pantheons.length > 1 ?
+                  this.state.pantheons.length > 0 ?
                     <FullPantheonsList pantheons={this.state.pantheons} />
                     : (this.state.searchTerm === "" ?
                       <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>

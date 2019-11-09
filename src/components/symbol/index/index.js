@@ -107,7 +107,7 @@ class Symbols extends React.Component {
 
               <div id="search-window">
                   {
-                    this.state.symbols.length > 1 ?
+                    this.state.symbols.length > 0 ?
                       <SimpleSymbolList symbols={this.state.symbols} />
                       : (this.state.searchTerm === "" ?
                         <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>

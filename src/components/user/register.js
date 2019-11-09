@@ -8,10 +8,9 @@ class LogIn extends React.Component {
         this.state = {
           user: {
             username: "",
-            password: ""
-          },
-          formColor: 'transparent',
-          error: null,
+            password: "",
+            user_email: ""
+          }
         }
     }
 
@@ -25,37 +24,31 @@ class LogIn extends React.Component {
     }
 
     handleLogin = (e) => {
-      this.setState({formColor: 'rgba(255,255,255,.4)'})
       e.preventDefault();
       axios
-          .post(`https://grimwire.herokuapp.com/api/users/auth/login`, this.state.user)
-          .then(res => {
-            this.setState({formColor: 'rgba(0,200,0,.4)'})
-            localStorage.setItem('token', res.data.token)
-            localStorage.setItem('user', JSON.stringify(res.data.user))
-            setTimeout(() => {this.props.history.push('/')}, 200)
-
+          .post(`https://grimwire.herokuapp.com/api/users/auth/register`, this.state.user)
+          .then(res => { console.log(res)//Show a "go check your email thing"
           })
-          .catch((err, res) => {
-            console.log(err.response.data.message)
-            if(err.response.data.message === "Invalid Credentials.") {
-              this.setState({formColor: 'rgba(200,0,0,.4)', error: "The information you entered does not match our records. Please try again."})
-              setTimeout(() => {this.setState({formColor: 'transparent'})}, 2000)
-
-            }
-          });
+          .catch(err => console.log(err) );
     }
 
     render() {
         return <div style={{height:"100vh"}}>
-          {this.state.error || ""}
-            <Form onSubmit={this.handleLogin} style={{width:"800px", margin:"auto", backgroundColor: this.state.formColor}}>
+            <Form onSubmit={this.handleLogin} style={{width:"800px", margin:"auto"}}>
                 <Form.Group>
-                    <Form.Label>Username or Email</Form.Label>
+                    <Form.Label>Username</Form.Label>
                     <Form.Control
                       onChange={this.handleChange} type="text"
                       name="username" placeholder="username"
                       value={this.state.user.username} />
+                    <Form.Text>Please enter.</Form.Text>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      onChange={this.handleChange} type="text"
+                      name="user_email" placeholder="user_email"
+                      value={this.state.user.user_email} />
                     <Form.Text>Please enter.</Form.Text>
                 </Form.Group>
                 <Form.Group>
@@ -67,7 +60,7 @@ class LogIn extends React.Component {
                     <Form.Text>Please enter.</Form.Text>
                 </Form.Group>
 
-                    <button type='submit'>Okie</button>
+                    <button type='submit'>Register Account</button>
             </Form>
         </div>
     }

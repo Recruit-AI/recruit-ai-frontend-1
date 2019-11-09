@@ -97,7 +97,7 @@ class Kinds extends React.Component {
 
               <div id="search-window">
                   {
-                    this.state.kinds.length > 1 ?
+                    this.state.kinds.length > 0 ?
                       <FullKindList kinds={this.state.kinds} />
                       : (this.state.searchTerm === "" ?
                         <div className="loader" style={{height:'60px',margin:'20px'}}><img className="loaderImg" src={require('../../../img/yyloader.gif')} /></div>

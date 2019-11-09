@@ -90,11 +90,29 @@ a {
 @media only screen and (min-width: 912px) {
   .hmenu-item {
     display:inline-block;
-    width:100px;
+    min-width:125px;
   }
 
   .hmenu-dropdown {
     position:relative;
+  }
+  .hmenu-dropdown-options {
+    position:absolute;
+    width:max-content;
+    border-radius:20px;
+  }
+
+  .hmenu-dropdown-options .hmenu-item {
+    display:flex;
+    justify-content: space-between;
+    &>span{
+      padding:5px;
+    }
+    background:linear-gradient(rgba(200,200,200,.2), transparent);
+  }
+
+  .hmenu-dropdown-toggle > span {
+    padding:6px;
   }
 }
 
@@ -103,11 +121,13 @@ a {
 .hmenu-dropdown-toggle {
   display:inline-block;
   cursor:pointer;
+  color: $ll-primary-color !important;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .hmenu-dropdown-options {
-  position:absolute;
   left:0;
-  width:max-content;
   padding:20px;
   max-width:500px;
   background-color:$dark-color;
@@ -116,13 +136,6 @@ a {
   }
 }
 
-.hmenu-dropdown-toggle {
-    color: $ll-primary-color !important;
-    font-family: $headerFont;
-    &:hover {
-      text-decoration: underline;
-    }
-}
 
 .page-container {
   padding: 80px 20px 20px;

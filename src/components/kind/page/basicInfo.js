@@ -28,7 +28,8 @@ class BasicInfo extends React.Component {
             { item.pantheons ?
               <p>Used By:
                 {item.pantheons.map(i =>
-                  <Link key={i.pantheon_id} to={`/pantheons/${i.pantheon_id}`}>{i.pantheon_name}</Link>
+
+                  <Link key={i.pantheon_id} to={`/pantheons/${i.pantheon_id}`}>{console.log(i)}{i.pantheon_name}</Link>
                 )}</p>
               :""}
         </Col>

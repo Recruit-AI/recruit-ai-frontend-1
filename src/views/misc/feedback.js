@@ -12,12 +12,12 @@ class Feedback extends React.Component {
     }
 
     render() {
-        return <div className="tpBlackBg">
+        return <div className="controller"><div className="tpBlackBg">
           <Switch>
             <Route path="/feedback/provide" exact component={FeedbackProvide} />
             <Route path="/feedback" exact component={FeedbackIndex} />
           </Switch>
-        </div>
+        </div></div>
     }
 }
 

@@ -23,7 +23,8 @@ class FormHandler extends React.Component {
       default_extra_info: {},
       formColor: 'transparent',
       bulkAdd: this.props.bulkAdd || false,
-      editId: props.editId || props.match.params.id
+      editId: props.editId || props.match.params.id,
+      error: ""
     }
   }
 
@@ -102,7 +103,7 @@ class FormHandler extends React.Component {
   }
 
   submitForm = (e) => {
-    this.setState({formColor:'white'})
+    this.setState({formColor:'white', error: ""})
     e.preventDefault();
 
     let item = this.state.item
@@ -111,11 +112,17 @@ class FormHandler extends React.Component {
       axios
           .put(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.state.editId}`, item, headers)
           .then(res =>{
-            this.setState({formColor:'green'})
-            this.props.update()
+              this.setState({formColor:'green'})
+              this.props.update()
+              setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
+          })
+          .catch(err => {
+            this.setState({formColor:'red'})
+            if(err.response.status === 400) {
+              this.setState({error: err.response.data.message})
+            } else { this.setState({error: "Unknown error."}) }
             setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
           })
-          .catch(err => console.log(err) )
     } else {
       axios
           .post(`https://grimwire.herokuapp.com/api/${this.state.formClass}`, item, headers )
@@ -142,7 +149,13 @@ class FormHandler extends React.Component {
                 this.props.history.push(`/${redirectPath}/${redirectId}/edit`)
               }
           })
-          .catch(err => console.log(err) )
+          .catch(err => {
+            this.setState({formColor:'red'})
+            if(err.response.status === 400) {
+              this.setState({error: err.response.data.message})
+            } else { this.setState({error: "Unknown error."}) }
+            setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
+          } )
     }
 
 
@@ -177,6 +190,8 @@ class FormHandler extends React.Component {
     return curr_user ? <div>
 
     { this.state.existing ? "" : <div>BULK ADD <input onChange={this.toggleBulkAdd} type="checkbox" checked={this.state.bulkAdd} /></div> }
+
+    {this.state.error !== "" ? <div style={{backgroundColor: 'rgba(200,0,0,.4)', padding:'10px'}}>{this.state.error}</div> : ""}
 
     <Form onSubmit={this.submitForm} className="handlerForm" style={{margin:'auto',backgroundColor:this.state.formColor}}>
       <h2 className="formHeader">{ this.state.existing ? `Edit` : "Add"}</h2>

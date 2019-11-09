@@ -112,7 +112,7 @@ class Categories extends React.Component {
 
             <div id="search-window">
                 {
-                  this.state.categories.length > 1 ?
+                  this.state.categories.length > 0 ?
 
                             <SwitchTransition><CSSTransition key={renderKey}
                               in={true} timeout={150} classNames="search-page" unmountOnExit>
