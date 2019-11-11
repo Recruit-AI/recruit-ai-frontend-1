@@ -46,6 +46,7 @@ class Page extends React.Component {
 
           <Row>
             <Col>Username</Col>
+            <Col>Mailing List?</Col>
             <Col>Email</Col>
             <Col>
               Status

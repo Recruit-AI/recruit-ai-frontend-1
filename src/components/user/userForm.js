@@ -36,12 +36,22 @@ class UserForm extends React.Component {
   }
 
 
+        handleCheck = (e) => {
+            this.setState({
+                user: {
+                    ...this.state.user,
+                    [e.target.name]: e.target.checked
+                }
+            })
+        }
+
+
   render() {
     return <div className="tpBlackBg">
         { !this.state.sent ?
         <div>
           <h2>Edit Your Profile</h2>
-          <Form onSubmit={this.submitForm} className="handlerForm" style={{margin:'auto',backgroundColor:this.state.formColor}}>
+          <Form onSubmit={this.submitForm} className="handlerForm" style={{width:'100%', maxWidth: '800px', margin:'auto',backgroundColor:this.state.formColor}}>
 
             <Form.Group>
               <Form.Label>Email</Form.Label>
@@ -55,12 +65,6 @@ class UserForm extends React.Component {
               <Form.Control onChange={this.handleChange} type="text"
                 name={ "username" } placeholder={ "Username" }
                 value={this.state.user[ "username" ]} />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Password</Form.Label>
-              <Form.Control onChange={this.handleChange} type="password"
-                name={ "password" } placeholder={ "Change Password" } />
             </Form.Group>
 
             <Form.Group>
@@ -82,6 +86,15 @@ class UserForm extends React.Component {
               <Form.Control onChange={this.handleChange} type="text"
                 name={ "user_link_description" } placeholder={ "Link Display Text" }
                 value={this.state.user[ "user_link_description" ]}   />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Recieve email updates?</Form.Label>
+                <Form.Control
+                  onChange={this.handleCheck} type="checkbox"
+                  name="mailing_list"
+                  checked={this.state.user.mailing_list} />
+                <Form.Text>We don't send spam, we keep your email address secure, and we make our "Unsubscribe" button easy to find.</Form.Text>
             </Form.Group>
 
 

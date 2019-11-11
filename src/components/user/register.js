@@ -2,6 +2,7 @@ import React from 'react'
 import {Form} from 'react-bootstrap'
 import axios from 'axios'
 
+
 class LogIn extends React.Component {
     constructor(props) {
         super(props)
@@ -10,7 +11,8 @@ class LogIn extends React.Component {
             username: "",
             password: "",
             confirmPassword: "",
-            user_email: ""
+            user_email: "",
+            mailing_list: true
           },
           sent: false,
           error: false,
@@ -26,6 +28,15 @@ class LogIn extends React.Component {
           }
       })
     }
+
+      handleCheck = (e) => {
+          this.setState({
+              user: {
+                  ...this.state.user,
+                  [e.target.name]: e.target.checked
+              }
+          })
+      }
 
     validateEmail = (email) => {
       const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -105,6 +116,14 @@ class LogIn extends React.Component {
                       name="confirmPassword" placeholder="Confirm Password"
                       value={this.state.user.confirmPassword} />
                     <Form.Text>Please enter.</Form.Text>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Recieve email updates?</Form.Label>
+                    <Form.Control
+                      onChange={this.handleCheck} type="checkbox"
+                      name="mailing_list"
+                      value={this.state.user.mailing_list} />
+                    <Form.Text>We don't send spam, we keep your email address secure, and we make our "Unsubscribe" button easy to find.</Form.Text>
                 </Form.Group>
 
                 <button className="nice-button" type='submit'>Register Account</button>

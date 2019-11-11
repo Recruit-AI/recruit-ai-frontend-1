@@ -58,7 +58,8 @@ class UserCard extends React.Component {
 
         return <Row>
           <Col>{user.username}</Col>
-          <Col>{user.email}</Col>
+          <Col>{user.mailing_list ? "Yes" : "No"}</Col>
+          <Col>{user.user_email}</Col>
           <Col>
             {user.user_verified === true ? ['', 'User', 'Mod', 'Admin'][user.user_role] : ""}
             {user.user_verified === false ? "Banned" : ""}
