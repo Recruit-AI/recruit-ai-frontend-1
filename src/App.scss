@@ -145,6 +145,35 @@ a {
   background-color: rgba($secondary-color, .7);
 }
 
+.symbolBanner {
+  background-color: rgba($d-highlight-color, .4);
+  padding: 10px 20px;
+  margin: 10px -20px;
+  &>h1.fas {
+    margin:0;
+  }
+}
+
+.nice-button {
+  display:inline-block;
+  width:100%;
+  color: $l-light-color;
+  max-width:400px;
+  padding:20px;
+  border: 8px solid $l-grey-color;
+  font-size: 28px;
+  font-family: $headerFont;
+  background: linear-gradient( rgba($l-primary-color, .2) , rgba($d-primary-color, .2) );
+  margin:10px 0;
+}
+
+.nice-button-primary {
+  background: linear-gradient( rgba($ll-highlight-color, .4) , rgba($highlight-color, .4) );
+  border: 8px solid $l-highlight-color;
+}
+
+
+
 .page-button{
   margin:5px;
   background-color:$secondary-color;
@@ -193,7 +222,7 @@ a {
 }
 
 @media only screen and (max-width: 911px) {
-.pageCTA h1, .fancyText { font-size: 28px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 4px; font-weight:bold;}
+.pageCTA h1, .fancyText { font-size: 38px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 2px; font-weight:bolder;}
 }
 @media only screen and (max-width: 480px) {
   h1 {font-size:8vw; }
@@ -319,11 +348,11 @@ h1, .header h3 {
   color:$highlight-color;
 
   $shadowColor: lighten($ll-highlight-color, 10%);
-  $shadowSize: 3px;
-  $shadowSizeN: -3px;
-  $shadowSizeX: 3px;
-  $shadowSizeXN: -3px;
-  $shadowBlur: 10px;
+  $shadowSize: 1px;
+  $shadowSizeN: -1px;
+  $shadowSizeX: 1px;
+  $shadowSizeXN: -1px;
+  $shadowBlur: 1px;
   text-shadow:
 		$shadowSizeXN $shadowSizeN $shadowBlur $shadowColor,
 		$shadowSizeX $shadowSizeN $shadowBlur $shadowColor,

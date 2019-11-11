@@ -22,7 +22,7 @@ class Page extends React.Component {
 
     render() {
         const user = this.state.user
-        return <div>
+        return <div className="tpBlackBg">
           <div className="modUserOptions">
             Ban | Unban
           </div>

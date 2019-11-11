@@ -50,7 +50,7 @@ class LogIn extends React.Component {
     render() {
         return <div className="tpBlackBg">
           {this.state.error || ""}
-            <Form onSubmit={this.handleLogin} style={{width:"800px", margin:"auto", backgroundColor: this.state.formColor}}>
+            <Form onSubmit={this.handleLogin} style={{maxWidth:"800px", width:"100%", margin:"auto", backgroundColor: this.state.formColor}}>
                 <Form.Group>
                     <Form.Label>Username or Email</Form.Label>
                     <Form.Control

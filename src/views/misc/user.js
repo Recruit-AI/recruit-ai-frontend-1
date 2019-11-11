@@ -29,13 +29,14 @@ class User extends React.Component {
             <Route path="/users/register" exact component={Register} />
             <Route path="/users/verify/:username/:verify_hash" exact component={Verify} />
 
-            <Route path="/users/profile" exact component={UserProfile} />
+            <Route path="/users/dashboard" exact component={UserProfile} />
             <Route path="/users/edit" exact component={EditUser} />
 
             <Route path="/users/forgottenPassword" exact component={ForgottenPassword} />
             <Route path="/users/resetPassword/:username/:verify_hash" exact component={ResetPassword} />
 
             <Route path="/users/logout" exact render={() => <Logout {...this.props} auth={this.props.auth} />} />
+
             <Route path="/users/:id" exact component={UserPage} />
           </Switch>
         </div>

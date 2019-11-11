@@ -1,5 +1,5 @@
 import React from 'react'
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Link} from 'react-router-dom'
 
 import OurMission from './our_mission'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
@@ -18,7 +18,7 @@ class Pages extends React.Component {
         <h3>Hey, I'm Jordan</h3>
         <p>There's a few people helping out with minor</p>
         <p>But I'm looking to start a group to help build & maintain this site & community</p>
-        <p>I've invested hundreds of hours of development time into this project. I am welcoming anyone who wants to 
+        <p>I've invested hundreds of hours of development time into this project. I am welcoming anyone who wants to
             invest their time to join the team.
         </p>
 
@@ -35,6 +35,9 @@ class Pages extends React.Component {
         <h5>Copywriting/Marketing</h5>
         <h5>Marketing/Product Development</h5>
         <h5>Advertising/Promotion</h5>
+
+        <Link to="/feedback/provide" className="nice-button">Get in Contact</Link>
+        <br /><i>-Via feedback form, select "Other"</i>
 
         </div></CSSTransition></SwitchTransition>
 

@@ -16,15 +16,28 @@ function Home(props) {
       <div className="pageCTA">
         <div>
         <img height="200px"  alt="logo" src={require('../../img/logo.png')} />
-        <h1>&nbsp;GRIMWIRE</h1>
-        <h2>The Cultural, Spritual, and Historical Encyclopedia,</h2>
+        <h1>GRIMWIRE</h1>
+        <h2>A Magickal, Spritual, and Historical Encyclopedia,</h2>
         <h2>From Tarot Cards to Greek Myths to Buddhist Philosophy to Astrology</h2>
         <hr />
+          {/*<div className="symbolBanner">{['om', 'ankh', 'yin-yang', 'quran', 'skull-crossbones', 'jedi', 'broom', 'dharmachakra', 'moon'].map((symbol) =>
+            <h1 style={{display:'inline-block'}}className={`fas fa-${symbol}`}></h1>
+          )}
+        </div>*/}
         <Row className="CTAList">
-          <Col lg={4} md={4} xs={6}><h2>Including</h2><h3>Philosophies</h3><h3>Religions</h3><h3>Histories</h3><h3>Cultures & Beliefs</h3></Col>
-          <Col lg={4} md={3} xs={6}><h2>For</h2><h3>Practitioners</h3><h3>Students</h3><h3>Teachers</h3><h3>Hobbyists</h3></Col>
-          <Col lg={4} md={5} xs={12}><h2>Featuring</h2><h3>Teachings & Concepts</h3><h3>Stories & Myths</h3><h3>Symbols & Dieties</h3><h3>Divination & Magic</h3></Col>
+          <Col lg={4} md={5} xs={12}><h2>Featuring</h2><h3>Symbols & Deities</h3><h3>Teachings & Concepts</h3><h3>Stories & Myths</h3><h3>Divination & Magic</h3></Col>
+          <Col lg={4} md={4} xs={12}><h2>Including</h2><h3>Philosophies</h3><h3>Religions</h3><h3>Histories</h3><h3>Cultures & Beliefs</h3></Col>
+          <Col lg={4} md={3} xs={12}><h2>For</h2><h3>Practitioners</h3><h3>Students</h3><h3>Teachers</h3><h3>Hobbyists</h3></Col>
         </Row>
+        <hr />
+        <br />
+
+        <i>See what we have to offer.</i><br />
+        <Link className="nice-button nice-button-primary" to="/pages/features">See Features <i className="fas fa-star"></i></Link>
+        <h1></h1>
+        <Link className="nice-button" to="/users/register">Sign Up for Mailing List</Link><br />
+        <i>Be the first to get updates on future & official releases!</i>
+        <hr />
         </div>
       </div>
 

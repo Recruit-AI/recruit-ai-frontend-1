@@ -4,6 +4,7 @@ import {Switch, Route} from 'react-router-dom'
 import OurMission from './our_mission'
 import GeneralQuestions from './general_questions'
 import Help from './help'
+import Features from './features'
 
 
 class Pages extends React.Component {
@@ -19,6 +20,7 @@ class Pages extends React.Component {
             <Route path="/pages/mission" exact component={OurMission} />
             <Route path="/pages/questions" exact component={GeneralQuestions} />
             <Route path="/pages/help" exact component={Help} />
+            <Route path="/pages/features" exact component={Features} />
           </Switch>
         </div>
     }
