@@ -25,7 +25,7 @@ function Home(props) {
 
         <img height="200px"  alt="logo" src={require('../../img/logo.png')} />
         <h1>GRIMWIRE</h1>
-        <h2>A Magickal, Spritual, and Historical Encyclopedia,</h2>
+        <h2>A Magickal, Spiritual, and Historical Encyclopedia,</h2>
         <h2>From Tarot Cards to Greek Myths to Buddhist Philosophy to Astrology</h2>
         <hr />
           {/*<div className="symbolBanner">{['om', 'ankh', 'yin-yang', 'quran', 'skull-crossbones', 'jedi', 'broom', 'dharmachakra', 'moon'].map((symbol) =>
