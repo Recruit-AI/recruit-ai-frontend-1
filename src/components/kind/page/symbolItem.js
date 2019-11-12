@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Row, Col} from 'react-bootstrap'
+import ImageModal from '../../imageGallery/imageModal'
 import MainHandler from '../../forms/handler'
 
 class BasicInfo extends React.Component {
@@ -34,7 +34,9 @@ class BasicInfo extends React.Component {
               <div className="extra-info-column" key={entry[0]}> {  symbol.extra_info[entry[0]] } </div>
           ) : ""}
 
-        <div className="extra-info-column"><img alt={symbol.name} src={symbol.thumbnail ? symbol.thumbnail.image_url : ""} height="64px" /></div>
+        <div className="extra-info-column">
+          <ImageModal item={symbol} size={'32px'} />
+        </div>
 
 
         <div className="extra-info-column"><button onClick={this.toggleForm}>{this.state.showForm ? "Done" : "Edit" }</button></div>

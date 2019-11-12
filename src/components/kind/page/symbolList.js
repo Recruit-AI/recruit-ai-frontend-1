@@ -74,7 +74,7 @@ class BasicInfo extends React.Component {
           <div className={`extra-info-column ${ this.state.sort === entry[0] ? 'eic-active' : ''}`} key={entry[0]} onClick={this.sortOther} sortTerm={entry[0]}>
             {/*Replaces underscores with spaces and capitalizes each word*/}
             {entry[0].replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})}
-            {  this.state.sort === entry[0] ? (this.state.sortdir > 0 ? "/\\" : '\\/') : "" }
+            {  this.state.sort === entry[0] ? (this.state.sortdir > 0 ? <i class="far fa-caret-square-up"></i> : <i class="far fa-caret-square-down"></i>) : "" }
           </div> ) : "" }
 
         <div className="extra-info-column">Thumbnail</div>

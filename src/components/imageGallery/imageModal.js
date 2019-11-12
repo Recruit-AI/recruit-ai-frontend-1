@@ -18,9 +18,14 @@ class ModalExample extends React.Component {
   }
 
   render() {
+
+    let size = this.props.size || "100px"
+
     return (
-      <div>
-        <div color="danger" onClick={this.toggle}>  <img src={this.props.item.image_url} height="100px" alt={this.props.item.image_description} /> </div>
+      <div> {this.props.item.image_url ? <div>
+        <div color="danger" onClick={this.toggle}>  
+          <img src={this.props.item.image_url} height={size} alt={this.props.item.image_description} /> 
+        </div>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className="modal-xl bg-dark">
           <ModalHeader toggle={this.toggle} className="bg-dark modal-header">{this.props.item.image_title}</ModalHeader>
           <ModalBody className="bg-dark">
@@ -31,7 +36,7 @@ class ModalExample extends React.Component {
             <Button color="secondary" onClick={this.toggle}>Close</Button>
           </ModalFooter>
         </Modal>
-      </div>
+       </div> : <img src={require('../../img/logo.png')} height={size} alt={this.props.item.image_description} />  } </div>
     );
   }
 }

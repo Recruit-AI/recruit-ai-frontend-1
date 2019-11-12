@@ -129,6 +129,19 @@ class LogIn extends React.Component {
                 <button className="nice-button" type='submit'>Register Account</button>
             </Form>
             }
+
+
+
+            
+
+
+
+
+
+
+
+
+
         </div>
     }
 }

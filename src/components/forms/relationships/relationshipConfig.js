@@ -18,7 +18,7 @@ export default (props) => {
             }
           })),
           title: "History",
-          url: "pantheons/history"
+          url: "pantheons/histories"
         }
       } else {
         return []
@@ -37,7 +37,7 @@ export default (props) => {
             }
           })),
           title: "Influenced",
-          url: "pantheons/history"
+          url: "pantheons/histories"
         }
       } else {
         return []

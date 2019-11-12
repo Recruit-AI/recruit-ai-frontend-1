@@ -163,11 +163,12 @@ class FormHandler extends React.Component {
 
   deleteItem = (e) => {
     e.preventDefault()
+    const headers = { headers: {'authorization': localStorage.token} }
     if(window.confirm("Are you sure you wish to completely delete the item?")){
       axios
-          .delete(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.props.match.params.id}`)
+          .delete(`https://grimwire.herokuapp.com/api/${this.state.formClass}/${this.props.match.params.id}`, headers)
           .then(res =>
-            this.props.history.push(`/${this.state.formClass}`)
+            this.props.history.push(`/${ this.state.formClass === 'kinds' ? "collections" : this.state.formClass}`)
           )
           .catch(err => console.log(err) )
     }

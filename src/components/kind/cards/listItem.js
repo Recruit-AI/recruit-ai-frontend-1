@@ -11,7 +11,7 @@ function SmallKindCard(props) {
 
             <h3>{ item.kind_name }</h3><br />
             {item.kind_description || "Please enter a description." }<br />
-          <img src={ item.thumbnail && item.thumbnail.image_url ? item.thumbnail.image_url : require('../../../img/logo.png') } height="100px;" />
+          <img src={ item.image_url ? item.image_url : require('../../../img/logo.png') } height="100px;" />
 
     </div></Link>
 }

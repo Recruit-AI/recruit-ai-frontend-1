@@ -35,9 +35,9 @@ class BasicInfo extends React.Component {
         </Col>
         <Col lg={8}>
             <h4>Theory & Application</h4>
-            <p>{item.theoryText || "Please fill in."}</p>
+            <p>{item.kind_application_theory_text || "Please fill in."}</p>
             <h4>History & Background</h4>
-            <p>{item.historyText || "Please fill in."}</p>
+            <p>{item.kind_background_history_text || "Please fill in."}</p>
         </Col>
     </Row>
     </div>

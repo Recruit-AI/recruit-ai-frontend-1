@@ -59,9 +59,9 @@ class KindPage extends React.Component {
             { curr_user ?  <Link to="/collections/new">Create Collection</Link> : "" }
             <Link to="/collections">Back to Collections</Link>
 
-            <BasicInfo item={item} createdBy={this.state.createdBy} usedBy={this.state.usedBy} />
+            <BasicInfo item={item} />
             <ImageGallery item={item} key={item.kind_ids}/>
-            <SymbolList item={item} relatedSymbols={this.state.relatedSymbols} updatePage={this.updatePage} />
+            <SymbolList item={item} updatePage={this.updatePage} />
 
             <Sources item={item} />
 
