@@ -17,13 +17,6 @@ export default  [
         {name: "External Resources", view: "all", link: '/resources', symbol: 'atlas'},
     ]},
     {name: "Features", view: "all", link: '/pages/features', symbol: 'star'},
-    {name: "Correspondences", view: "all", symbol: "info-circle", links: [
-        {name: "Tarot Cards", view: "all", link: '/pages/mission', symbol: "bullseye"},
-        {name: "Astrology Signs", view: "all", link: '/pages/questions', symbol: "question"},
-        {name: "Crystals", view: "all", link: '/resources', symbol: 'atlas'},
-        {name: "Chakras", view: "all", link: '/feedback/provide', symbol: "bug"},
-        {name: "Flowers, Herbs, Incense", view: "all", link: '/pages/help', symbol: "exclamation"},
-    ]},
     {name: "About", view: "all", symbol: "info-circle", links: [
         {name: "Our Mission", view: "all", link: '/pages/mission', symbol: "bullseye"},
         {name: "FAQ", view: "all", link: '/pages/questions', symbol: "question"},
@@ -45,3 +38,12 @@ export default  [
         {name: "Logout", view: 'all', link: '/users/logout', symbol: "sign-out-alt"}
     ]}
 ]
+
+
+// {name: "Correspondences", view: "all", symbol: "info-circle", links: [
+//     {name: "Tarot Cards", view: "all", link: '/pages/mission', symbol: "bullseye"},
+//     {name: "Astrology Signs", view: "all", link: '/pages/questions', symbol: "question"},
+//     {name: "Crystals", view: "all", link: '/resources', symbol: 'atlas'},
+//     {name: "Chakras", view: "all", link: '/feedback/provide', symbol: "bug"},
+//     {name: "Flowers, Herbs, Incense", view: "all", link: '/pages/help', symbol: "exclamation"},
+// ]},
