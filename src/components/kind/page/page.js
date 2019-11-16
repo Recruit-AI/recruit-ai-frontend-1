@@ -59,6 +59,17 @@ class KindPage extends React.Component {
             { curr_user ?  <Link to="/collections/new">Create Collection</Link> : "" }
             <Link to="/collections">Back to Collections</Link>
 
+
+            
+            {item.kindSymbolConnections.length > 0 ? 
+                <div>This article is a list of {item.kind_name}. </div> : ""}
+
+            { 
+              item.kindSymbolConnections.map(ksc => <div>
+                For more general information, please see <Link to={`/symbols/${ksc.symbol_id}`}>{ksc.symbol_name} ({ksc.connected_symbol_kind_name})</Link>
+              </div>) 
+            }
+
             <BasicInfo item={item} />
             <ImageGallery item={item} key={item.kind_ids}/>
             <SymbolList item={item} updatePage={this.updatePage} />

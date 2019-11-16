@@ -30,11 +30,26 @@ class BasicInfo extends React.Component {
     }else if(sort === 'symbol_name'){
       items = items.sort((a, b) => a[sort] > b[sort] ? sortdir : -1*sortdir )
     }else {
-      items = items.sort((a, b) => {
-        const firstValue = a.extra_info[sort] || ""
-        const secondValue = b.extra_info[sort] || ""
-        return firstValue > secondValue ? sortdir : -1*sortdir
-      })
+      //If the sort term is in extra info
+      if(items[0].extra_info[sort]){
+        items = items.sort((a, b) => {
+          const firstValue = a.extra_info[sort] || ""
+          const secondValue = b.extra_info[sort] || ""
+          return firstValue > secondValue ? sortdir : -1*sortdir
+        })
+      } //Or if it is a KIK object
+      else {
+        items = items.sort((a, b) => {
+          let firstValue = a.connections.filter(connect => connect.kind_name === sort)[0]
+          let secondValue = b.connections.filter(connect => connect.kind_name === sort)[0]
+          firstValue = firstValue ? firstValue.symbol_name : ""
+          secondValue = secondValue ? secondValue.symbol_name : ""
+          return firstValue > secondValue ? sortdir : -1*sortdir
+        })
+
+      }
+
+
     }
 
     this.setState({sort, sortdir, items})
@@ -55,10 +70,9 @@ class BasicInfo extends React.Component {
 
   render() {
     const item = this.props.item
+    
     return <div className="extra-info-slider">
-
-    <h3>List of Items ></h3>
-
+    <h2>Complete List of {item.kind_name} & their Correspondences</h2>
     <div className="extra-info-row">
         {item.specific_order ?
           <div className={`extra-info-column ${ this.state.sort === 'order_number' ? 'eic-active' : ''}`} onClick={this.sortNumber} >
@@ -69,6 +83,17 @@ class BasicInfo extends React.Component {
         <div className={`extra-info-column ${ this.state.sort === 'symbol_name' ? 'eic-active' : ''}`} onClick={this.sortName} >
           Name {  this.state.sort === 'symbol_name' ? (this.state.sortdir > 0 ? <i class="far fa-caret-square-up"></i> : <i class="far fa-caret-square-down"></i>) : "" }
         </div>
+
+        {
+          item.kindInfoKinds.map(infoKind => 
+            <div className={`extra-info-column ${ this.state.sort === infoKind.kind_name ? 'eic-active' : ''}`} 
+              onClick={this.sortOther} sortTerm={infoKind.kind_name} >
+              {infoKind.kind_name} {  this.state.sort === infoKind.kind_name ? 
+                (this.state.sortdir > 0 ? <i class="far fa-caret-square-up"></i> 
+                : <i class="far fa-caret-square-down"></i>) : "" }
+            </div>
+          )
+        }
 
         { item.default_extra_info ? Object.entries( item.default_extra_info ).map( (entry) =>
           <div className={`extra-info-column ${ this.state.sort === entry[0] ? 'eic-active' : ''}`} key={entry[0]} onClick={this.sortOther} sortTerm={entry[0]}>

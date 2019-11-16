@@ -9,13 +9,21 @@
 //links- sets the dropdown
 
 export default  [
-    {name: "Browse", view: "all", symbol: "search", links: [
+    {name: "Encyclopedia", view: "all", symbol: "search", links: [
         {name: "Religions & Cultures", view: "all", link: '/pantheons', symbol: "place-of-worship"},
         {name: "Classes & Categories", view: "all", link: '/categories', symbol: "book"},
         {name: "Lists & Collections", view: "all", link: '/collections', symbol: "list"},
-        {name: "Search All Items", view: "all", link: '/symbols', symbol: "search-plus"},
+        {name: "Search Symbols", view: "all", link: '/symbols', symbol: "search-plus"},
+        {name: "External Resources", view: "all", link: '/resources', symbol: 'atlas'},
     ]},
     {name: "Features", view: "all", link: '/pages/features', symbol: 'star'},
+    {name: "Correspondences", view: "all", symbol: "info-circle", links: [
+        {name: "Tarot Cards", view: "all", link: '/pages/mission', symbol: "bullseye"},
+        {name: "Astrology Signs", view: "all", link: '/pages/questions', symbol: "question"},
+        {name: "Crystals", view: "all", link: '/resources', symbol: 'atlas'},
+        {name: "Chakras", view: "all", link: '/feedback/provide', symbol: "bug"},
+        {name: "Flowers, Herbs, Incense", view: "all", link: '/pages/help', symbol: "exclamation"},
+    ]},
     {name: "About", view: "all", symbol: "info-circle", links: [
         {name: "Our Mission", view: "all", link: '/pages/mission', symbol: "bullseye"},
         {name: "FAQ", view: "all", link: '/pages/questions', symbol: "question"},

@@ -136,7 +136,6 @@ a {
   }
 }
 
-
 .page-container {
   padding: 80px 20px 20px;
 }
@@ -230,6 +229,13 @@ a {
 
 @media only screen and (min-width: 912px) {
 .pageCTA h1, .fancyText { font-size: 84px; margin-top: 8px; margin-bottom: 32px; letter-spacing: 21px; font-weight:bold;}
+}
+
+.health-warning {
+  background: rgba($l-highlight-color, .4);
+  padding:20px;
+  color:$light-color;
+  border:5px solid $l-highlight-color;
 }
 
 .tpBlackBg {

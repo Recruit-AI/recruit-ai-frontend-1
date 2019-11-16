@@ -18,9 +18,22 @@ class BasicInfo extends React.Component {
       <Row>
           <Col lg={8}>
               <h4>Basic Information</h4>
-            <p>Short Description: {item.symbol_description || "Please fill in."}</p>
+              
+              <p>List: <Link to={ `/collections/${item.kind.kind_id}` }> {item.kind.kind_name} </Link></p>
+            { item.health_warning ? <h3 className="health-warning">WARNING: {item.health_warning}</h3> : ""}
+            <p>{item.symbol_description || "Please fill in."}</p>
+            
+            {item.kindSymbolConnection.length > 0 ? 
+                <h4>Related Lists</h4> : ""}
+
+              { 
+              item.kindSymbolConnection.map(ksc => <span>
+                 <Link to={`/collections/${ksc.kind_id}`}>{ksc.kind_name}</Link>
+              </span>) 
+              }
+
+
               <i>{ item.other_spellings ? `Also Spelled: ${ item.other_spellings }` : "" } </i>
-              <p>Collection: <Link to={ `/collections/${item.kind.kind_id}` }> {item.kind.kind_name} </Link></p>
               { item.pantheons.length > 0 ?
                 <p>Used by: { item.pantheons.map(i => <Link key={i.id} to={`/pantheons/${i.pantheon_id}`}> {i.pantheon_name} </Link>) }</p>
                 : "" }

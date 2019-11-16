@@ -87,7 +87,7 @@ class SymbolPage extends React.Component {
       page === 3 ?
 
 
-        <RelationshipForm item={item} formClass={"symbol_connections"} update={this.updateInfo} />
+        <RelationshipForm item={item} formClass={"symbol_connections"} update={() => {return true}} />
         : ""
     }
     {

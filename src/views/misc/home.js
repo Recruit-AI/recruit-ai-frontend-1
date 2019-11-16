@@ -16,12 +16,9 @@ function Home(props) {
       <div className="pageCTA">
         <div>
 
-        <p>**NOTE:**<br />This is a beta test version of an application. Please remember: <br />
-        1. Information in the articles are largely a) not filled out or b) contain testing or incorrect information<br />
-        2. Some areas of the site may have poor readability.<br />
-        <i>This is a prototype to test concept, flow, UI, and gather user feedback/research.<br />
-        This is not an attempt to release a complete application.</i><br />
-        Thank you!</p>
+        <p>**NOTE:**<br />This is a pre-release version of an application. We're sorry, but not all information may be 
+        filled out, and some test information may be found lingering.
+        Thank you for understanding!</p>
 
         <img height="200px"  alt="logo" src={require('../../img/logo.png')} />
         <h1>GRIMWIRE</h1>

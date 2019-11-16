@@ -323,8 +323,51 @@ export default (props) => {
       }
       break;
 
+    case "kind_symbol_connections":
+      if(props.item.kindSymbolConnections){
+        const records = props.item.kindSymbolConnections
+        return {
+          default_item: {
+            ksc_kind_id: props.item.kind_id,
+            ksc_symbol_id: 0
+          },
+          records: records.map(item => ({
+            update_id: item.kind_symbol_connection_id,
+            record: {
+              id: item.kind_symbol_connection_id,
+              ksc_symbol_id: item.ksc_symbol_id
+            }
+          })),
+          title: "Same/Relative To",
+          url: "kinds/symbolConnections"
+        }
+      } else {
+        return []
+      }
+      break;
 
-
+    case "kind_info_kinds":
+      if(props.item.kindInfoKinds){
+        const records = props.item.kindInfoKinds
+        return {
+          default_item: {
+            kik_kind_id: props.item.kind_id,
+            kik_connected_info_id: 0
+          },
+          records: records.map(item => ({
+            update_id: item.kind_info_kind_id,
+            record: {
+              id: item.kind_info_kind_id,
+              kik_connected_info_id: item.kik_connected_info_id
+            }
+          })),
+          title: "Show Connections on Page",
+          url: "kinds/infoKinds"
+        }
+      } else {
+        return []
+      }
+      break;
 
 
 

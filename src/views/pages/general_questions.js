@@ -24,7 +24,17 @@ class Pages extends React.Component {
         <h5>Categories</h5> are convienent groups for sorting through the Collections<br />
         <h5>Symbols</h5> are the items in the collections.
 
-        <h3>2. Do you have a mobile app?</h3>
+        <h3>2. What about these?</h3>
+        <h5>[Human] Virtues</h5> Positive personality traits that you can work on & aim for, Wisdom, Love, Curiosity, etc.<br />
+        <h5>[Magic] Properties</h5> Magic benefits, such as Cleansing, Wealth, Luck, and Protection<br />
+        <h5>[Natural] Phenoms</h5> Naturally occuring "phenomena" or concepts- like the Weather, Life, Adventure, Mystery, Death, and War<br />
+        <h5>[Mystic] Concepts</h5> Concepts that occur across religion and culture, but don't quite have a set or agreed upon "natural" definition to go by- like God, Enlightenment, The Soul, and Energy
+
+        Teachings Sources People Stories
+
+        Deities Rituals Spells MagicItems
+
+        <h3>3. Do you have a mobile app?</h3>
         <p>That is definitely something I'd love to do, but not at the moment. You can always create a bookmark on your desktop to the app, to give it a more native feel.</p>
 
         </div></CSSTransition></SwitchTransition>

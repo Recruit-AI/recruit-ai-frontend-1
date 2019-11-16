@@ -16,7 +16,7 @@ class Categories extends React.Component {
           categories: [],
           pager: {},
           pageNumber: params.get('page') || 1,
-          sort: params.get('sort') || "category_name",
+          sort: params.get('sort') || "category_number",
           sortdir: params.get('sortdir') || "ASC",
           searchTerm: "",
           update:true,

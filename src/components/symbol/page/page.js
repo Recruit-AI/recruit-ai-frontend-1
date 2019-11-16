@@ -52,6 +52,9 @@ class SymbolPage extends React.Component {
               { curr_user ?  <Link to="/symbols/new">Create Symbol</Link> : "" }
               { curr_user ?  <Link to={`/symbols/${this.props.match.params.id}/edit`}>Edit This Symbol</Link> : "" }
 
+              
+
+
               <BasicInfo item={item} />
               <ImageGallery item={item} key={item.symbol_id}/>
               <Connections item={item} />

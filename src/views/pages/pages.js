@@ -6,6 +6,7 @@ import GeneralQuestions from './general_questions'
 import Help from './help'
 import Features from './features'
 import PrivacyPolicy from './privacy-policy'
+import MagickStatement from './magick_statement'
 
 
 class Pages extends React.Component {
@@ -23,6 +24,7 @@ class Pages extends React.Component {
             <Route path="/pages/help" exact component={Help} />
             <Route path="/pages/features" exact component={Features} />
             <Route path="/pages/privacy-policy" exact component={PrivacyPolicy} />
+            <Route path="/pages/magick-statement" exact component={MagickStatement} />
           </Switch>
         </div>
     }

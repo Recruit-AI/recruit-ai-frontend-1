@@ -300,7 +300,7 @@ class FormHandler extends React.Component {
                       <Form.Control as="select" value={itemField[1]} name={itemField[0]} onChange={this.handleSelectIntChange}>
                         <option value="-1">-please select-</option>
                         {
-                          ['Source', 'Mention', 'Related', 'Association', 'Property', 'Alternate Form'].map((option, i) =>
+                          ['Source', 'Mention', 'Related', 'Association', 'Property', 'Alternate Form', 'Type', 'Item'].map((option, i) =>
                             <option key={option} value={ i } >
                               {option}
                             </option>)

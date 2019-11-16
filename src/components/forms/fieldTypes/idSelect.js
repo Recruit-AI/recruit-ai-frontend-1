@@ -18,6 +18,7 @@ class IdList extends React.Component {
   }
 
   updateItems = () => {
+    
     switch(this.props.field) {
       case "influenced_id":
       case "influencer_id":
@@ -38,9 +39,13 @@ class IdList extends React.Component {
            })
            .catch(err => console.log(err) );
            break;
+
       case "symbol_kind_id":
       case "kp_kind_id":
       case "ck_kind_id":
+      case "kik_kind_id":
+      case "ksc_kind_id":
+      case "kik_connected_info_id":
         axios
            .get('https://grimwire.herokuapp.com/api/kinds/nameList')
            .then(res => {
@@ -59,6 +64,8 @@ class IdList extends React.Component {
         case "ck_category_id":
         case "cp_prereq_id":
         case "cp_category_id":
+        case "cpa_category_id":
+        case "cs_category_id":
              axios
                 .get('https://grimwire.herokuapp.com/api/categories/nameList')
                 .then(res => {
@@ -77,6 +84,7 @@ class IdList extends React.Component {
         case "main_symbol_id":
         case "sp_symbol_id":
         case "cs_symbol_id":
+        case "ksc_symbol_id":
               axios
                 .get('https://grimwire.herokuapp.com/api/symbols/nameList')
                 .then(res => {
@@ -149,6 +157,8 @@ class IdList extends React.Component {
       .replace("sp_", "")
       .replace("cpa_", "")
       .replace("cs_", "")
+      .replace("ksc_", "")
+      .replace("kik_", "")
       .replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
   }
 

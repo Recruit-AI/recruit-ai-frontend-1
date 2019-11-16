@@ -28,6 +28,13 @@ class BasicInfo extends React.Component {
 
         <div className="extra-info-column"><Link to={`/symbols/${symbol.symbol_id}`}>{symbol.symbol_name}</Link></div>
 
+        {item.kindInfoKinds.map(infoKind => <div className="extra-info-column" key={infoKind.kind_name}> 
+          {  
+            symbol.connections.map(connection => connection.kind_name === infoKind.kind_name ? 
+            <Link to={`/symbols/${connection.symbol_id}`}>{connection.symbol_name}</Link> : "" )
+          } 
+        </div>)}
+
         { symbol.extra_info ?
           Object.entries( item.default_extra_info ).map(
             (entry) =>
