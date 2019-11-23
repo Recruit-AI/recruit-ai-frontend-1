@@ -141,6 +141,19 @@ a {
   background-color: rgba($secondary-color, .7);
 }
 
+p, h3, h4, h5, *:not(button) {
+  $shadowColor: $dark-color;
+  $shadowSize: 2px;
+  $shadowSizeN: -2px;
+  $shadowSizeX: 2px;
+  $shadowSizeXN: -2px;
+  $shadowBlur: 4px;
+  text-shadow:
+    $shadowSizeXN $shadowSizeN $shadowBlur $shadowColor,
+    $shadowSizeX $shadowSizeN $shadowBlur $shadowColor,
+    $shadowSizeXN $shadowSize $shadowBlur $shadowColor,
+    $shadowSizeX $shadowSize $shadowBlur $shadowColor;
+  }
 
 
 .nice-button {
@@ -667,3 +680,11 @@ hr {
   transition: opacity  150ms ease-out;
   transition: height  150ms ease-out;
 }
+
+p, * {font-size:16px;}
+h2 {font-size:32px;}
+h3 {font-size:24px;}
+h4 {font-size:20px;}
+h5 {font-size:18px;}
+
+
