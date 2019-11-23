@@ -21,7 +21,7 @@ class App extends React.Component {
     localStorage.setItem('user', null)
     localStorage.setItem('token', null)
     this.setState({user: {}, token: null})
-    this.forceUpdate();
+    window.location.replace('/?loggedIn=false')
   }
   
   login = (user, token) => {

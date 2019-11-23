@@ -34,7 +34,7 @@ class ArrayField extends React.Component {
     return <div>
     <Form.Group>
         <Form.Label>{ this.printifyName(field) }</Form.Label>
-
+        
         { item[field].length > 0 ?
             item[ field ].map( (item, index) => <span key={index}>
               <Form.Control
@@ -43,8 +43,8 @@ class ArrayField extends React.Component {
                 value={item}
                 name={`${field}-${index}`} />
               </span> )
-            : <Form.Control onChange={this.handleArrayChange} type='text' name={`${field}-${0}`} />}
-
+            : <Form.Control onChange={this.handleArrayChange} type='text' placeholder="Start typing" name={`${field}-${0}`} />}
+          <i>Hit ";" to add a new field. Backspace completely to delete one.</i>
     </Form.Group>
     </div>
   }

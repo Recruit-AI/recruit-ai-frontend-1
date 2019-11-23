@@ -1,58 +1,43 @@
-import React from 'react'
-import axios from 'axios'
+import React from 'react';
+import {Link} from 'react-router-dom'
 
+import HandleForm from '../forms/handler'
+import axios from 'axios';
 
-const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
-const headers = { headers: {'authorization': localStorage.token} }
-
-class FeedbackIndex extends React.Component {
+class NewResource extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      feedbacks: [],
-      filter: "unlogged",
-      lastFilter: "",
-      loading: true,
+      resource: {}
     }
   }
 
-  componentDidMount = () => {
-    this.loadPage();
-  }
+  componentDidMount = () => { this.updateInfo(); }
+  componentWillReceiveProps = (newProps) => {this.updateInfo(newProps);}
 
-  componentDidUpdate = () => {
-    if(this.state.filter !== this.state.lastFilter) {
-      this.loadPage();
-    }
-  }
-
-  loadPage = () => {
-    axios
-        .get(`https://grimwire.herokuapp.com/api/feedback/${this.state.filter}`, headers)
-        .then(res =>
-          this.setState({feedbacks: res.data, loading: false, lastFilter: this.state.filter})
-        )
-        .catch(err => console.log(err) );
-  }
-
-  toggleFilter = () => {
-    this.setState({filter: this.state.filter === 'unlogged' ? 'all' : 'unlogged'})
+  updateInfo = (props = this.props) => {     
+    axios.get(`https://grimwire.herokuapp.com/api/resources/${this.props.match.params.id}`)
+    .then((res) => { this.setState({ resource: res.data })})
   }
 
   render() {
-      return <div>
-        <h2>{this.state.filter === 'unlogged' ? 'Unseen Feedback' : 'All Feedback'}</h2>
-        <span onClick={this.toggleFilter}>See {this.state.filter === 'unlogged' ? 'All Feedback' : 'Only Unseen Feedback'}</span><br />
-        {
-          this.state.feedbacks.length > 0 ?
-          this.state.feedbacks.map(feedback => <div>
-            </div>
-          )
-          : <div>{this.state.loading  ? "Loading." : "No Results."}</div>
-        }
-      </div>
+    const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
+    const r = this.state.resource
+    const resource = {
+      resource_link: r.resource_link || "", 
+      resource_type: r.resource_type || "",
+      resource_title: r.resource_title || "",
+      resource_tags: r.resource_tags || [], 
+      resource_description: r.resource_description || ""
+    }
+
+    
+    delete resource.resource_id
+    return <div  className="tpBlackBg">
+          { curr_user ?  <Link to="/resources">Back To All</Link> : ""}
+          <HandleForm item={resource} formClass={"resources"} update={this.updateInfo} />
+    </div>
   }
 }
 
-
-export default FeedbackIndex
+export default NewResource;

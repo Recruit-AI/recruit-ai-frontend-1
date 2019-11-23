@@ -14,8 +14,8 @@ class BasicInfo extends React.Component {
   toggleForm = (e) => {
     const show = this.state.showForm
     this.setState({showForm: !show})
-    if(show) { this.props.updatePage() }
-    document.querySelector('.extra-info-slider').scrollLeft= 0;
+    //if(show) { this.props.updatePage() }
+    //document.querySelector('.extra-info-slider').scrollLeft= 0;
   }
 
   render() {
@@ -31,7 +31,7 @@ class BasicInfo extends React.Component {
         {item.kindInfoKinds.map(infoKind => <div className="extra-info-column" key={infoKind.kind_name}> 
           {  
             symbol.connections.map(connection => connection.kind_name === infoKind.kind_name ? 
-            <Link to={`/symbols/${connection.symbol_id}`}>{connection.symbol_name}</Link> : "" )
+            <div><Link to={`/symbols/${connection.symbol_id}`}>{connection.symbol_name}</Link></div> : "" )
           } 
         </div>)}
 
@@ -64,7 +64,7 @@ class BasicInfo extends React.Component {
 
 
 
-
+            <hr/>
     </div>
   }
 }

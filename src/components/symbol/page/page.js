@@ -10,6 +10,8 @@ import ImageGallery from '../../imageGallery/gallery'
 import Connections from './connections'
 import Sources from '../../sources/sourcesList'
 
+import ArticleImageCreator from '../../shared/articleImageCreator/imageCreator'
+
 import {defaultConnection} from '../../../db/defaultObjects'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
@@ -24,21 +26,29 @@ class SymbolPage extends React.Component {
         }
     }
 
-    componentDidMount = () => { this.updateSymbolAndConnections() }
-    componentWillReceiveProps = (newProps) => { this.updateSymbolAndConnections(newProps) }
+    componentDidMount = () => { 
+      this.updateSymbolAndConnections() 
+    }
+
+    componentWillReceiveProps = (newProps) => { 
+      this.updateSymbolAndConnections(newProps) 
+    }
+
 
     updateSymbolAndConnections = (props = this.props) => {
       this.setState({loading:true})
       axios
           .get(`https://grimwire.herokuapp.com/api/symbols/${props.match.params.id}`)
-          .then(res =>
+          .then(res => {
             this.setState({symbol: res.data, loading: false})
-          )
+          })
           .catch(err => {
             console.log(err);
             this.setState({symbol: {}, loading: false})
           }  );
     }
+
+    
 
     render() {
         const item = this.state.symbol
@@ -68,6 +78,9 @@ class SymbolPage extends React.Component {
                       </div>
 
                       <Sources item={item} />
+
+
+              <ArticleImageCreator item={item} imageKind={"Correspondences"} />
 
 
          </div>

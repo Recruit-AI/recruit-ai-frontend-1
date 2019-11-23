@@ -26,18 +26,20 @@ class Pages extends React.Component {
                 <p>We are not particulary dismissing such ideas. We already have plenty of other information to organize and want to keep to the topic of Magick, Witchcraft, and Spirituality. </p>
                 <p>No consipracies, UFOs, or politically or religiously-biased content.</p>
                 <p>No Strict Urban Legends- such as the Loch Ness Monster, Bigfoot, etc.</p>
-                <p>We have discussed adding "Haunted Places" and "Serial Killers", but for now, these topics will be accepted.</p>
+                <p>We have discussed adding "Haunted Places" and "Serial Killers", but for now, these topics will not be accepted.</p>
                     
 
                 <h1>Axioms of Magick, Witchcraft, & Spirituality (MWS)</h1>
-                <p>These are common terms and basic definitions which govern the perspective & quality of content on this website.</p>
+                <p>This is NOT an attempt to lay out "Rules" or "Theory" of Magick, but are common terms and basic definitions 
+                    used in this sites' context which govern the perspective & quality of content on this website. </p>
+                <p>I.e. We don't want to tell you what to do, but we also don't want hack/cheap/fake content.</p>
 
                 <h2>Summary of Axioms:</h2>
                 <h4>1. You can of course try to exceed these axioms, but we recommend you first understand why they are here.</h4>
                 <h4>2. Coexist with science, you can't break the laws of nature, reality, or physics (but you should try bending them)</h4>
                 <h4>3. Labels are a personal choice, and there's no hard rules to any labels, be open-minded.</h4>
                 <h4>4. All humans possess "the divine spark". There is (should be) nothing elitest about magic, witchcraft, or spirituality. You do not *need* any person or group to find your vibe.</h4>
-                <h4>5. There may not be quanitifiable/definable proof, but there are rules & structures for those who take the time to get to know them. </h4>
+                <h4>5. There may not be quanitifiable/definable proof or repeatable/exact steps, but there are loose rules & structures for those who take the time to get to know them.</h4>
                 <h4>6. Just, like, in general; don't be a jerk.</h4>
 
                 <h2>1. Axiom of Infinite Possibility</h2>
@@ -46,7 +48,7 @@ class Pages extends React.Component {
                 <p>c) Summary: A lot of things may be possible, but for discussion & </p>
 
                 <h2>2. Axiom of Nature, Physics, & Reality (NPR)</h2>
-                <p>Magic, Science, and Witchcraft coexist.</p>
+                <p>Magick, Science, and Witchcraft coexist.</p>
                 <p>You cannot use MWS to contradict the laws of NPR</p>
 
                 <h2>3. Axiom of Personal Labeling</h2>
@@ -60,9 +62,9 @@ class Pages extends React.Component {
                 <p>aa) humanity is not dirty, sinful, or </p>
                 <p>b) Each person is able to access Divinity/MWS on their own, without *need* for a particular system or any system at all</p>
                 
-                <h2>5. Axiom of Science: Documentation & Repeatablity</h2>
-                <p>a) </p>
-                <p>b) </p>
+                <h2>5. Axiom of Fluid Science: Documentation & Repeatablity</h2>
+                <p>a) There is obviously no true, repeatable, definable proof- you cannot break the laws of reality.</p>
+                <p>b) There is no steps you *must* take- if you're finding yourself asking, "will it stll work if..." the chances, are yes. Just ask your intuition.</p>
                 <p>c) Maybe we'll have the terminiology and devices to measure one day, but for now personal/collective experience & documentation is the main argument***.</p>
                 
                 <h2>6. Axiom of Not Being A Jerk</h2>
@@ -71,9 +73,9 @@ class Pages extends React.Component {
                 <h2>Clarifications</h2>
                 <p>***Axiom 3.c.i; 3.c should be used to allow an individual freedom to choose a label 
                     without agreeing to -everything- that -everyone- has ever said about that label. It should not be
-                    used to 
+                    used to justify/excuse the historical/current actions of hate groups.
                 </p>
-                <p>***Axiom 6.c This of course, given that the bolder the claim, the more proof required. Ex. If you say, 
+                <p>***Axiom 6.a This of course, given that the bolder the claim, the more proof required. Ex. If you say, 
                     "My personal experience is that practicing x provides y and z benefits to myself, and in no way affects any others", 
                     that is suffienct 'evidence' to continue your practice. That is substantially different then, 
                     "My personal belief is that gay marriage is a sin, and I want to 'help' others", 

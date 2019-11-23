@@ -17,9 +17,9 @@ class ResourcesController extends React.Component {
         return <div className="controller"><div className="tpBlackBg">
           <Switch>
             <Route path="/resources" exact component={Resources} />
-            <Route path="/resources/:id" exact component={ResourcesShow} />
             <Route path="/resources/new" exact component={ResourcesNew} />
             <Route path="/resources/edit/:id" exact component={ResourcesEdit} />
+            <Route path="/resources/:id" exact component={ResourcesShow} />
           </Switch>
         </div></div>
     }

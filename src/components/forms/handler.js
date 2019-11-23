@@ -118,7 +118,7 @@ class FormHandler extends React.Component {
           })
           .catch(err => {
             this.setState({formColor:'red'})
-            if(err.response.status === 400) {
+            if(err.response && err.response.status === 400) {
               this.setState({error: err.response.data.message})
             } else { this.setState({error: "Unknown error."}) }
             setTimeout( () => {this.setState({formColor:'transparent'})} , 250);
@@ -143,6 +143,9 @@ class FormHandler extends React.Component {
                   break;
                 case('categories'):
                   redirectId = res.data.category_id
+                  break;
+                 case('resources'):
+                  redirectId = res.data.resource_id
                   break;
                 }
                 const redirectPath = this.state.formClass === 'kinds' ? "collections" : this.state.formClass
@@ -180,6 +183,7 @@ class FormHandler extends React.Component {
     .replace('kind_', '')
     .replace('category_', '')
     .replace('symbol_', '')
+    .replace('resource_', '')
     .replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
   }
 

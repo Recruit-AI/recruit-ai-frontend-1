@@ -1,8 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import {Link} from 'react-router-dom'
 
-import Category from '../../../components/category/page/page'
 import HandleForm from '../../../components/forms/handler'
 
 import {defaultCategory} from '../../../db/defaultObjects'

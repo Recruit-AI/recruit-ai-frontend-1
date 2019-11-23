@@ -1,6 +1,6 @@
 {
   "short_name": "GrimWire",
-  "name": "GrimWire- The Interactive Spiritual Encyclopedia",
+  "name": "GrimWire- The Online Grimiore- Magick, Witchcraft, Wicca, & Spirituality, Magic Correspondences & Magic Spells for Beginner and Expert Witches",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,5 +11,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "robots": "index, follow"
 }

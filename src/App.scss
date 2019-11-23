@@ -73,9 +73,6 @@ a {
   .header{
     background:$dark-color;
   }
-  .hmenu-dropdown-options{
-
-  }
   .hmenu-item {
     width:100%;
   }
@@ -144,14 +141,7 @@ a {
   background-color: rgba($secondary-color, .7);
 }
 
-.symbolBanner {
-  background-color: rgba($d-highlight-color, .4);
-  padding: 10px 20px;
-  margin: 10px -20px;
-  &>h1.fas {
-    margin:0;
-  }
-}
+
 
 .nice-button {
   display:inline-block;
@@ -558,6 +548,25 @@ hr {
   transition:opacity 500ms;
 }
 
+.amazon-link {
+  background:linear-gradient(rgba($d-primary-color, .9), rgba($dd-primary-color, .9), rgba($dark-color, .9), rgba($l-dark-color, .7));
+  padding:10px;
+  margin:10px;
+  img {
+    margin:10px auto;
+    width:80%;
+    border-radius:20px;
+    border: 4px inset $light-color;
+  }
+}
+
+
+.shop-category {
+  border-top:2px solid $light-color;
+  border-bottom:2px solid $light-color;
+  padding:10px 0;
+  background-color: rgba($light-color, .4);
+}
 
 .effect-name-appear {
   opacity: 0;

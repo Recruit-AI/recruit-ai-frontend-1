@@ -15,10 +15,12 @@ export default  [
         {name: "Lists & Collections", view: "all", link: '/collections', symbol: "list"},
         {name: "Search Symbols", view: "all", link: '/symbols', symbol: "search-plus"},
         {name: "External Resources", view: "all", link: '/resources', symbol: 'atlas'},
+        {name: "Shop & Supplies", view: "all", link: '/pages/shop', symbol: 'gem'},
     ]},
     {name: "Features", view: "all", link: '/pages/features', symbol: 'star'},
     {name: "About", view: "all", symbol: "info-circle", links: [
         {name: "Our Mission", view: "all", link: '/pages/mission', symbol: "bullseye"},
+        {name: "Site Rules & Guidelines", view: "all", link: '/pages/magick-statement', symbol: "asterisk"},
         {name: "FAQ", view: "all", link: '/pages/questions', symbol: "question"},
         {name: "Feedback/Bug Report", view: "all", link: '/feedback/provide', symbol: "bug"},
         {name: "Help Us Out", view: "all", link: '/pages/help', symbol: "exclamation"},
