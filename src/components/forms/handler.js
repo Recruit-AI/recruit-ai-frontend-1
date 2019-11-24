@@ -219,7 +219,7 @@ class FormHandler extends React.Component {
                   itemField[0].indexOf('_text') >= 0 ?
                   <Form.Group>
                     <Form.Label>{  this.printifyName(itemField[0]) }</Form.Label>
-                    <Form.Control as="textarea" rows={5} onChange={this.handleChange} type="text"
+                    <Form.Control as="textarea" rows={15} onChange={this.handleChange} type="text"
                       name={ itemField[0] } placeholder={ itemField[0] }
                       value={this.state.item[ itemField[0] ]} />
                   </Form.Group>

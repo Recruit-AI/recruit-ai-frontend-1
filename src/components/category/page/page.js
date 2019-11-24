@@ -57,16 +57,16 @@ class CategoryPage extends React.Component {
                 <Row>
                     <Col lg={4}>
                         <img src={item.thumbnail ? item.thumbnail.image_url : ""}  alt={item.pantheon_name} width="250px"/>
-                        <h4>Collections</h4>
+                        <h3>Collections</h3>
                         { item.kinds ? item.kinds.map(i => <div><Link key={i.kind_id} to={`/collections/${i.kind_id}`}>{i.kind_name}</Link></div>) : ""}
                     </Col>
                     <Col lg={8}>
                         {
                           item.pantheons ?
                             <div>
-                              <h4>Noted Pantheons</h4>
+                              <h3>Paths & Pantheons</h3>
                               {item.pantheons.map(i =>
-                                <Link key={i.pantheon_id} to={`/collections/${i.pantheon_id}`}>{i.pantheon_name}</Link>
+                                <Link key={i.pantheon_id} to={`/pantheons/${i.pantheon_id}`}>{i.pantheon_name}</Link>
                               )}
                             </div>
                           : ""
@@ -74,17 +74,17 @@ class CategoryPage extends React.Component {
                         {
                           item.symbols ?
                             <div>
-                              <h4>Relevant Symbols</h4>
+                              <h3>Articles & Symbols</h3>
                               {item.symbols.map(i =>
-                                <Link key={i.symbol_id} to={`/collections/${i.symbol_id}`}>{i.symbol_name}</Link>
+                                <Link key={i.symbol_id} to={`/symbols/${i.symbol_id}`}>{i.symbol_name}</Link>
                               )}
                             </div>
                           : ""
                         }
-                        <h4>Overview & History</h4>
-                        <p>{item.category_overview_text || "Please fill in."}</p>
-                        <h4>Sources & Getting Started</h4>
-                        <p>{item.category_sources_text || "Please fill in."}</p>
+                        <h3>Overview & History</h3>
+                        <p style={{padding:'20px',background:"rgba(0,0,0,.6)"}}>{item.category_overview_text.split('\n').map((i)=> i[0] === '>' ? <h4>{i.substr(1)}</h4> : <p>{i}</p>) || "Please fill in."}</p>
+                        <h3>Sources & Getting Started</h3>
+                        <p style={{padding:'20px',background:"rgba(0,0,0,.6)"}}>{item.category_sources_text.split('\n').map((i)=> i[0] === '>' ? <h4>{i.substr(1)}</h4> : <p>{i}</p>) || "Please fill in."}</p>
                     </Col>
                 </Row>
 

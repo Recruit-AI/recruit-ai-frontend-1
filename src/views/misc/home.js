@@ -36,6 +36,7 @@ function Home(props) {
       <div className="pageCTA">
         <div>
         <h2>BETA VERSION 0.9.8</h2>
+        <p>There may be missing or incomplete information.</p>
         <Link to="/users/register">Click HERE to be notified of the Official Release</Link><br />
         <img height="200px"  alt="logo" src={require('../../img/logo.png')} />
         <h1>GRIMWIRE</h1>

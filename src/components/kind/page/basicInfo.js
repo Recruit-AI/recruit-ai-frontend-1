@@ -45,9 +45,9 @@ class BasicInfo extends React.Component {
         </Col>
         <Col lg={8}>
             <h4>Theory & Application</h4>
-            <p>{item.kind_application_theory_text || "Please fill in."}</p>
+            <p style={{backgroundColor:"rbga(0,0,0,.6)"}}>{item.kind_application_theory_text.split('\n').map((i)=><div>{i}</div>) || "Please fill in."}</p>
             <h4>History & Background</h4>
-            <p>{item.kind_background_history_text || "Please fill in."}</p>
+            <p style={{backgroundColor:"rbga(0,0,0,.6)"}}>{item.kind_background_history_text.split('\n').map((i)=><div>{i}</div>) || "Please fill in."}</p>
         </Col>
     </Row>
     </div>

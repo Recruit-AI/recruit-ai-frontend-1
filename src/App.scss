@@ -42,6 +42,8 @@ $textFont: 'Martel', serif;
 $topFont: 'Lexend Giga', cursive;
 $headerFont: 'Patua One', sans-serif;
 
+
+
 .App {
   text-align: center;
   background-color: $dark-color;
@@ -56,17 +58,18 @@ $headerFont: 'Patua One', sans-serif;
   background-attachment: fixed;
 }
 
-a {
-  color: $l-secondary-color !important;
-}
 button { color: $dark-color }
 
 a {
+  color: $ll-light-color !important;
+  text-decoration:underline;
   padding:5px;
   display:inline-block;
   margin:2px;
   border-radius:10px;
-  text-decoration:none;
+  &:hover {
+    background:rgba($l-primary-color, .3)
+  }
 }
 
 @media only screen and (max-width: 911px) {
@@ -141,19 +144,6 @@ a {
   background-color: rgba($secondary-color, .7);
 }
 
-p, h3, h4, h5, *:not(button) {
-  $shadowColor: $dark-color;
-  $shadowSize: 2px;
-  $shadowSizeN: -2px;
-  $shadowSizeX: 2px;
-  $shadowSizeXN: -2px;
-  $shadowBlur: 4px;
-  text-shadow:
-    $shadowSizeXN $shadowSizeN $shadowBlur $shadowColor,
-    $shadowSizeX $shadowSizeN $shadowBlur $shadowColor,
-    $shadowSizeXN $shadowSize $shadowBlur $shadowColor,
-    $shadowSizeX $shadowSize $shadowBlur $shadowColor;
-  }
 
 
 .nice-button {
@@ -165,13 +155,13 @@ p, h3, h4, h5, *:not(button) {
   border: 8px solid $l-grey-color;
   font-size: 28px;
   font-family: $headerFont;
-  background: linear-gradient( rgba($l-primary-color, .2) , rgba($d-primary-color, .2) );
+  background: linear-gradient( rgba($l-secondary-color, .2) , rgba($d-secondary-color, .2) );
   margin:10px 0;
 }
 
 .nice-button-primary {
-  background: linear-gradient( rgba($ll-highlight-color, .4) , rgba($highlight-color, .4) );
-  border: 8px solid $l-highlight-color;
+  background: linear-gradient( rgba($ll-primary-color, .4) , rgba($primary-color, .4) );
+  border: 8px solid $l-primary-color;
 }
 
 
@@ -371,17 +361,17 @@ h1, .header h3 {
 
 p, a, * {
   font-family: $textFont;
-  color: $light-color;
+  color: $l-light-color;
 }
 
 h2, h3, h4, h5, h3 a {
   font-family: $headerFont;
-  color:$l-primary-color;
+  color:$l-secondary-color;
 }
 
 h2 {
-  color: $ll-primary-color;
-  $shadowColor: $l-dark-color;
+  color: $ll-highlight-color;
+  $shadowColor: $dd-highlight-color;
   $shadowSize: 4px;
   $shadowSizeN: -4px;
   text-shadow:
@@ -389,6 +379,22 @@ h2 {
 		$shadowSize $shadowSizeN $shadowSize $shadowColor,
 		$shadowSizeN $shadowSize $shadowSize $shadowColor,
 		$shadowSize $shadowSize $shadowSize $shadowColor;
+}
+
+h3{
+  color:$light-color;
+  $shadowColor: $dd-dark-color;
+  $shadowSize: 4px;
+  $shadowSizeN: -4px;
+  text-shadow:
+		$shadowSizeN $shadowSizeN 8px $shadowColor,
+		$shadowSize $shadowSizeN 8px $shadowColor,
+		$shadowSizeN $shadowSize 8px $shadowColor,
+		$shadowSize $shadowSize 8px $shadowColor;
+}
+
+h4{
+  color:$l-primary-color;
 }
 
 .modal-title {
@@ -441,7 +447,6 @@ hr {
     color: $light-color;
   }
 
-
   background-color:rgba($dark-color, .8);
   width:100%;
   height:100%;
@@ -473,8 +478,8 @@ hr {
   border-radius:14px;
 }
 
-.homeImageLink-bg:hover {
-  text-decoration:none;
+.homeImageLink-bg, .homeImageLink-bg:hover {
+text-decoration:none;
 }
 
 
@@ -572,6 +577,7 @@ hr {
     border: 4px inset $light-color;
   }
 }
+
 
 
 .shop-category {
