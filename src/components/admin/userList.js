@@ -45,6 +45,7 @@ class Page extends React.Component {
           Search By Username: <input value={this.state.searchTerm} onChange={this.handleChange} />
 
           <Row>
+            <Col>Count</Col>
             <Col>Username</Col>
             <Col>Mailing List?</Col>
             <Col>Email</Col>
@@ -63,8 +64,8 @@ class Page extends React.Component {
 
           </Row>
           {
-            this.state.users.length === 0 ? (this.state.searching ? "Loading" : "There are no results") : this.state.users.map(user => <div>
-                <UserCard user={user} update={this.loadPage}/>
+            this.state.users.length === 0 ? (this.state.searching ? "Loading" : "There are no results") : this.state.users.map((user, i) => <div>
+                <UserCard user={user} number={i} update={this.loadPage}/>
               </div>
             )
           }

@@ -1,6 +1,9 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {Row, Col} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { Row, Col } from 'react-bootstrap'
+
+import TextOutput from '../../shared/textOutput';
+
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 
 
@@ -14,42 +17,44 @@ class BasicInfo extends React.Component {
     const item = this.props.item
 
     return <div>
-    {item.thumbnail ? <img src={item.thumbnail.image_url} alt={item.kind_name} height="100px" /> : "" }
-    <h1>{item.kind_name}</h1>
 
-      { curr_user ?  <Link to={`/collections/${item.kind_id}/edit`}>Edit This Collection</Link> : "" }
 
-      { curr_user ?  <Link to={`/symbols/new`}>New Symbol</Link> : "" }
-    <Row>
-        <Col lg={4}>
-            { item.health_warning ? <h3 className="health-warning">WARNING: {item.health_warning}</h3> : ""}
-            <p>{item.kind_description || "Please fill in."}</p>
 
-            
-            <h4>Pantheons</h4>
-            <p>Created: <Link to={`/pantheons/${item.pantheon_id}`}>{item.pantheon_name}</Link></p>
+      <div className="divider" />
+    
+    
+      <div className="text-container">
+      {item.thumbnail ? <img src={item.thumbnail.image_url} alt={item.kind_name} height="100px" /> : ""}
+      <h1>{item.kind_name}</h1>
+      {item.health_warning ? <h3 className="health-warning">WARNING: {item.health_warning}</h3> : ""}
 
-            { item.pantheons ?
-              <p>Uses:
-                {item.pantheons.map(i =>
+      <p>{item.kind_description || "Please fill in."}</p>
+      </div>
+      <div className="reverse-divider" />
 
-                  <Link key={i.pantheon_id} to={`/pantheons/${i.pantheon_id}`}>{console.log(i)}{i.pantheon_name}</Link>
-                )}</p>
-              :""}
+      <div className="text-container">
+        <h3>Created</h3>
+        <Link to={`/pantheons/${item.pantheon_id}`}>{item.pantheon_name}</Link>
 
-            <h4>Classes & Categories</h4>
-            {item.categories.map(category => <div>
-              <Link to={`/categories/${category.category_id}`}>{category.category_name} {category.category_number}</Link>
-            </div>)}
+        {item.pantheons ? <div>
+          <h3>Uses</h3>
+          {item.pantheons.map(i =>
+            <Link key={i.pantheon_id} to={`/pantheons/${i.pantheon_id}`}>{console.log(i)}{i.pantheon_name}</Link>
+          )}
+        </div> : ""}
 
-        </Col>
-        <Col lg={8}>
-            <h4>Theory & Application</h4>
-            <p style={{backgroundColor:"rbga(0,0,0,.6)"}}>{item.kind_application_theory_text.split('\n').map((i)=><div>{i}</div>) || "Please fill in."}</p>
-            <h4>History & Background</h4>
-            <p style={{backgroundColor:"rbga(0,0,0,.6)"}}>{item.kind_background_history_text.split('\n').map((i)=><div>{i}</div>) || "Please fill in."}</p>
-        </Col>
-    </Row>
+        <h3>Classes & Categories</h3>
+        {item.categories.map(category => <div>
+          <Link to={`/categories/${category.category_id}`}>{category.category_name} {category.category_number}</Link>
+        </div>)}
+
+      </div>
+
+      {this.props.children}
+
+      <TextOutput text={item.kind_application_theory_text} title={'Theory & Application'} />
+      <TextOutput text={item.kind_background_history_text} title={'History & Overview'} />
+
     </div>
   }
 }

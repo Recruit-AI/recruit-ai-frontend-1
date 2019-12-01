@@ -48,7 +48,7 @@ class SymbolPage extends React.Component {
         const page = this.state.page
         const pages = ["Main", "Thumbnail Image", "Image Gallery", "Connections", "Pantheons", "Sources"]
 
-    return <div  className="tpBlackBg">
+    return <div>
 
         <Link to={`/symbols/${item.symbol_id}`}>Back to Page</Link>
 

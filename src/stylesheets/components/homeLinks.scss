@@ -1,0 +1,32 @@
+.homeImageLinks {
+    padding:25px 0;
+}
+
+.imageLinkImage {
+    height:200px;
+    width:100%;
+    margin:10px 0 20px;
+}
+
+.homeImageLink {
+    padding:10px;
+    background-color: $dark-color;
+    border: 4px $secondary-color solid;
+	width: 100%;
+	height: 100%;
+	padding: 40px;
+	&:hover {
+		background-color: rgba($dd-primary-color, .95);
+		transition: background-color 300ms linear;
+	}
+}
+
+.homeImageLink-bg,
+.homeImageLink {
+	border-radius: 14px;
+}
+
+.homeImageLink-bg,
+.homeImageLink-bg:hover {
+	text-decoration: none;
+}

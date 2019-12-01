@@ -1,0 +1,7 @@
+@mixin text-shadow($color: black, $pSize: 1px, $nSize: -1px, $blur: 2px) {
+    text-shadow: 
+        $pSize $pSize $blur $color, 
+        $pSize $nSize $blur $color,
+        $nSize $pSize $blur $color, 
+        $nSize $nSize $blur $color;
+}

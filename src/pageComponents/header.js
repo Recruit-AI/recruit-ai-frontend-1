@@ -44,7 +44,7 @@ class Header extends React.Component {
       <Container>
         <Row>
           <Col xs={12} lg={3} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <NavLink to="/"><img alt="logo" height="50px" src={require('../img/logo.png')} /> GrimWire</NavLink>
+            <NavLink to="/" style={{background:'none'}}><img alt="logo" height="50px" src={require('../img/logo.png')} /></NavLink>
             <span className='fas fa-bars hmenu-mobile-toggle d-inline d-lg-none' onClick={this.toggleMenu}></span>
           </Col>
 

@@ -1,0 +1,50 @@
+$textFont: 'Open Sans', serif;
+$topFont: 'Lexend Giga', cursive;
+$headerFont: 'Patua One', sans-serif;
+
+p,
+a,
+* {
+	font-size: 16px;
+	font-family: $textFont;
+	color: $textFontColor;
+}
+
+@mixin h-tag($color: $headerFontColor, $font: $headerFont) {
+	font-family: $font;
+	color: $color;
+}
+
+h1 {
+	@include h-tag($font: $topFont, $color: $topFontColor);
+	@include text-shadow($ll-highlight-color, 1px, -1px, 0px);
+	font-weight: bolder;
+
+	@media only screen and (max-width: 480px) {
+		font-size: 8vw;
+	}
+	@media only screen and (max-width: 911px) and (min-width: 481px) {
+		font-size: 38px;
+	}
+	@media only screen and (min-width: 912px) {
+		font-size: 48px;
+	}
+}
+
+h2 {
+	@include h-tag;
+	font-size: 32px;
+}
+h3 {
+	@include h-tag($color: $ll-primary-color);
+	font-size: 24px;
+}
+h4 {
+	@include h-tag($color: $l-primary-color);
+	font-size: 20px;
+}
+h5 {
+	@include h-tag;
+	font-size: 18px;
+	text-decoration: underline;
+}

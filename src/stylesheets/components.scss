@@ -1,0 +1,145 @@
+/* ------------------------*/
+/* Buttons ----------------*/
+/* ------------------------*/
+button {
+	color: $l-light-color;
+	padding: 10px;
+	font-size: 18px;
+	border: 8px solid $l-grey-color;
+	background: linear-gradient(rgba($l-secondary-color, .2), rgba($d-secondary-color, .2));
+	font-family: $headerFont;
+	margin: 2px;
+	border-radius: 10px;
+}
+
+/* Nice links that are displayed as buttons */
+.nice-button {
+	display: inline-block;
+	color: $l-light-color;
+	padding: 20px;
+	line-height:1.2;
+	border: 8px solid $l-grey-color;
+	font-size: 28px;
+	font-family: $headerFont;
+	background: linear-gradient(rgba($l-secondary-color, .2), rgba($d-secondary-color, .2));
+	@media only screen and (max-width: 911px) {
+		width: 90%;
+		margin: 10px auto;
+	}
+	@media only screen and (min-width: 912px) {
+		width: 350px;
+		margin: 10px 25px;
+	}
+}
+
+.nice-button-primary {
+	background: linear-gradient(rgba($ll-primary-color, .4), rgba($primary-color, .4));
+	border: 8px solid $l-primary-color;
+}
+
+/* Sort/toggle buttons- have an active and inactive state. Add/remove .page-button-active to toggle. Usually, actually divs.*/
+.page-button {
+	margin: 5px;
+	background-color: $secondary-color;
+	font-family: $textFont;
+	padding: 10px;
+	border-radius: 5px;
+	color: $ll-light-color;
+	border: 2px solid $l-secondary-color;
+	display: inline-block;
+	cursor: pointer;
+	&:hover {
+		background-color: $l-secondary-color;
+		border: 2px solid $d-secondary-color;
+	}
+}
+
+.page-button-active {
+	background-color: $d-secondary-color;
+}
+
+/* ------------------------*/
+/* LINKS ------------------*/
+/* ------------------------*/
+a {
+	color: $linkColor;
+	text-decoration: none;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 10px;
+	display: inline-block;
+	background: linear-gradient(rgba($light-color, .11) 3%, transparent 70%, rgba($light-color, .25));
+	&:hover {
+		background: rgba($d-primary-color, .7);
+		color: $ll-light-color;
+	}
+}
+
+.blockLink {
+	display: block;
+	padding: 15px;
+	margin: 20px 0;
+	&:hover {
+		text-decoration: none;
+		background-color: rgba($light-color, .2);
+	}
+}
+
+.paginationLinks {
+	text-align: center;
+	font-size: 18px;
+	& > span {
+		padding: 5px;
+		font-family: $topFont;
+		&:hover {
+			cursor: pointer;
+			font-weight: bolder;
+		}
+	}
+}
+
+/* ------------------------*/
+/* Dividers ------------------*/
+/* ------------------------*/
+hr {
+	background-color: grey;
+}
+
+.divider {
+	box-sizing: border-box;
+	height: 12px;
+	background-color: $dividerColor;
+	border-top: 3px solid $l-dividerColor;
+	border-bottom: 3px solid $d-dividerColor;
+}
+
+.reverse-divider {
+	box-sizing: border-box;
+	height: 12px;
+	background-color: $dividerColor;
+	border-bottom: 3px solid $l-dividerColor;
+	border-top: 3px solid $d-dividerColor;
+}
+
+/* ------------------------*/
+/* Warnings ------------------*/
+/* ------------------------*/
+.health-warning {
+	background: rgba($l-highlight-color, .4);
+	padding: 20px;
+	color: $light-color;
+	border: 5px solid $l-highlight-color;
+}
+
+/* ------------------------*/
+/* Images ------------------*/
+/* ------------------------*/
+img {
+	border-radius: 20px;
+}
+.image-gallery {
+	padding:10px 0;
+	& img {
+		padding: 10px;
+	}
+}

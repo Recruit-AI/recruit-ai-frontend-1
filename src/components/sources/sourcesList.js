@@ -3,7 +3,7 @@ import React from 'react'
 const SourcesList = (props) => {
   const sources = props.item.sources
 
-  return <div>
+  return <div><div className="divider" /><div className="text-container">
     <h3>Sources</h3>
     {
       sources.map((source, i) => <div>
@@ -11,7 +11,7 @@ const SourcesList = (props) => {
         <p>{source.source_description}</p>
       </div>)
     }
-  </div>
+  </div><div className="reverse-divider" /></div>
 
 }
 

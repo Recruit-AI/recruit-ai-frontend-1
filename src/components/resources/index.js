@@ -58,17 +58,16 @@ class ResourcesIndex extends React.Component {
             
           </Form.Group>
         </Form>
-
+        <hr />
         {
-          this.state.resources.map((resource) => <div style={{display:'flex',justifyContent:'space-between'}}>
-            <div><b>{resource.resource_type}</b> | 
-            <a href={`${resource.resource_link}`}>Link</a></div>
+          this.state.resources.map((resource) => <div>
             <h3>{resource.resource_title}</h3>
+            <a href={`${resource.resource_link}`}>{resource.resource_type} Link</a>
             <p>{resource.resource_description}</p>
             <p>Tags: { (resource.resource_tags || []).map((tag) => <span style={{padding:'5px'}}>{tag}</span> ) }</p>
 
             { curr_user.user_role > 1 ? <Link to={`/resources/edit/${resource.resource_id}`}>Edit</Link> : ""}
-
+            <hr />
           </div>)
 
         }

@@ -15,7 +15,7 @@ function SimplePantheonList(props) {
 
         <hr />
         { props.pantheons.map(item =>
-            <div><ListItemPantheonCard key={item.pantheon_name} pantheon={item} /><hr /></div>
+            <div><ListItemPantheonCard key={item.pantheon_name} pantheon={item} /></div>
         )}
     </div>
     </CSSTransition></SwitchTransition>

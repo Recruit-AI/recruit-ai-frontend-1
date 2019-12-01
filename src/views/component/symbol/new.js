@@ -16,7 +16,7 @@ class SymbolPage extends React.Component {
  
   render() {
   const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
-    return <div  className="tpBlackBg">
+    return <div>
         { curr_user ?  <Link to="/symbols">Back To All</Link> : ""}
         <HandleForm item={defaultSymbol} formClass={"symbols"} />
       </div>

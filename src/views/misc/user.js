@@ -22,7 +22,7 @@ class User extends React.Component {
     }
 
     render() {
-        return <div className="controller">
+        return <div>
           <Switch>
             {console.log(this.props)}
             <Route path="/users/login" exact render={() => <LogIn {...this.props} auth={this.props.auth} />} />

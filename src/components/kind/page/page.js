@@ -11,6 +11,8 @@ import ImageGallery from '../../imageGallery/gallery'
 import Sources from '../../sources/sourcesList'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
+
+
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 
 class KindPage extends React.Component {
@@ -56,11 +58,11 @@ class KindPage extends React.Component {
             {typeof item !== 'undefined' && Object.keys(item).length > 0 && !this.state.loading ?
             <div>
 
-            { curr_user ?  <Link to="/collections/new">Create Collection</Link> : "" }
+            { curr_user ?  <span><Link to="/collections/new">Create Collection</Link> 
+            <Link to={`/collections/${item.kind_id}/edit`}>Edit This Collection</Link> 
+            <Link to={`/symbols/new`}>New Symbol</Link></span> : "" }
             <Link to="/collections">Back to Collections</Link>
 
-
-            
             {item.kindSymbolConnections.length > 0 ? 
                 <div>This article is a list of {item.kind_name}. </div> : ""}
 
@@ -70,8 +72,10 @@ class KindPage extends React.Component {
               </div>) 
             }
 
-            <BasicInfo item={item} />
-            <ImageGallery item={item} key={item.kind_ids}/>
+            <BasicInfo item={item}>
+              <ImageGallery item={item} key={item.kind_ids}/>
+            </BasicInfo>
+
             <SymbolList item={item} updatePage={this.updatePage} />
 
             <Sources item={item} />

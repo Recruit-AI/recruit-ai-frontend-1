@@ -1,13 +1,13 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 
-import OurMission from './our_mission'
-import GeneralQuestions from './general_questions'
-import Help from './help'
-import Features from './features'
-import PrivacyPolicy from './privacy-policy'
-import MagickStatement from './magick_statement'
-import Shop from './shop'
+import OurMission from './pages/our_mission'
+import GeneralQuestions from './pages/general_questions'
+import Help from './pages/help'
+import Features from './pages/features'
+import PrivacyPolicy from './pages/privacy-policy'
+import MagickStatement from './pages/magick_statement'
+import Shop from './pages/shop'
 
 
 class Pages extends React.Component {
@@ -18,7 +18,7 @@ class Pages extends React.Component {
     }
 
     render() {
-        return <div className="page-container tpBlackBg">
+        return <div>
           <Switch>
             <Route path="/pages/mission" exact component={OurMission} />
             <Route path="/pages/questions" exact component={GeneralQuestions} />
@@ -28,6 +28,7 @@ class Pages extends React.Component {
             <Route path="/pages/magick-statement" exact component={MagickStatement} />
             <Route path="/pages/shop" exact component={Shop} />
           </Switch>
+          <br /> <br /> <br />
         </div>
     }
 }

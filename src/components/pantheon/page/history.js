@@ -8,29 +8,17 @@ class BasicInfo extends React.Component {
   }
 
 
-      yearRange = (item) => {
-          if(item.startYear && item.endYear) {
-          var startYearString = item.startYear > 0 ? item.startYear + "AD" : item.startYear * -1 + "BC"
-          var endYearString = item.endYear > 0 ?
-              item.endYear === 2100 ? "Present" : item.endYear + "AD" :
-              item.endYear * -1 + "BC"
-          return startYearString + " - " + endYearString;
-        } else {
-          return ""
-        }
-      }
 
   render() {
     const {item} = this.props
 
     return <div>
-            <p> { this.yearRange(item) } </p>
-            History:
+            <h3>History</h3>
             { item.history.length > 0 ? item.history.map(i => <span key={i.pantheon_name}>
                 <Link to={`/pantheons/${i.pantheon_id}`}>{i.pantheon_name}</Link>
             </span>) : "N/a" }<br />
 
-            Offshoots:
+            <h3>Offshoots</h3>
             { item.influenced.length > 0 ? item.influenced.map(i => <span key={i.pantheon_name}>
                 <Link to={`/pantheons/${i.pantheon_id}`}>{i.pantheon_name}</Link>
             </span>) : "N/a"}<br />

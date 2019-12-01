@@ -11,9 +11,8 @@ class Collections extends React.Component {
 
   render() {
     const {created_kinds, uses_kinds} = this.props.item
-    return <Row>
-                          <Col>
-                            <h5>Collections Created by {this.props.item.pantheon_name}</h5>
+    return <div>
+                            <h3>Created</h3>
                             {
                               created_kinds.length > 0 ?
                               created_kinds.map(item => <Link key={item.kind_name} to={`/collections/${item.kind_id}`}>
@@ -21,15 +20,12 @@ class Collections extends React.Component {
                                 </Link>
                               ) : "N/a"
                             }
-                          </Col>
-                          <Col>
-                            <h5>Collections Used by {this.props.item.pantheon_name}</h5>
+                            <h3>Uses</h3>
                             {
                               uses_kinds.length > 0 ?
                               uses_kinds.map(item => <Link  key={item.kind_name} to={`/collections/${item.kind_id}`}>{item.kind_name}</Link> ) : "N/a"
                             }
-                          </Col>
-                      </Row>
+                          </div>
   }
 }
 

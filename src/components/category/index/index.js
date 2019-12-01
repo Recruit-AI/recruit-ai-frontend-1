@@ -120,11 +120,11 @@ class Categories extends React.Component {
                                 <Row>
                               {this.state.categories.map(category =>
                                 <Col key={category.category_name} lg={3}><Link className='blockLink' to={`/categories/${category.category_id}`}>
-                                  <br />
+                                  
+                                  <img src={category.image_url} width="100%" /> {console.log(category)}
                                   <h5>{category.category_name} {category.category_number}</h5>
-                                  {category.category_description}<br />
+                                  <p>{category.category_description}</p>
 
-                                      <br />
                                   </Link>
                                 </Col>)}
                               </Row>

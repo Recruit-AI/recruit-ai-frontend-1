@@ -15,8 +15,9 @@ class Gallery extends React.Component {
     const images = item.images
     const thumbnail = item.thumbnail
     const galleryImages = [thumbnail, ...images]
-    return <div className="image-gallery">
-        <hr />
+    return <div><div class="divider" /><div className="image-gallery">
+        
+
         <h4>Image Gallery:</h4>
         <p>Click for larger & more info</p>
         <div className="image-slider" style={{display:'flex'}} >
@@ -26,7 +27,8 @@ class Gallery extends React.Component {
               </span> : ""
             )  : "" }
         </div>
-        <hr />
+        </div>
+        <div class="reverse-divider" />
     </div>
   }
 }

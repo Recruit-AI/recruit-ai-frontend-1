@@ -11,7 +11,7 @@ class User extends React.Component {
     }
 
     render() {
-        return <div className="tpBlackBg">
+        return <div>
           <Switch>
             <Route path="/admin/users" exact component={UserList} />
             <Route path="/admin/logs" exact component={LogComponent} />

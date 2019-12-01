@@ -15,7 +15,7 @@ import CategoryController from '../views/component/category/controller';
 import PagesController from '../views/pages/pages'
 
 function Body(props) {
-    return <div className="body">
+    return <div className="body"><div className="page-container">
         <Switch>
             <Route path="/" exact component={Home} />
 
@@ -40,7 +40,7 @@ function Body(props) {
             </div></div>} />
 
         </Switch>
-    </div>
+    </div></div>
 }
 
 export default Body;

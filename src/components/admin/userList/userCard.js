@@ -57,6 +57,7 @@ class UserCard extends React.Component {
         const user = this.props.user
 
         return <Row>
+          <Col>{this.props.number}</Col>
           <Col>{user.username}</Col>
           <Col>{user.mailing_list ? "Yes" : "No"}</Col>
           <Col>{user.user_email}</Col>

@@ -7,7 +7,7 @@ import Edit from './edit'
 import New from './new'
 
 function Controller() {
-  return <div class="controller">
+  return <div>
     <Switch>
         <Route path="/symbols/" exact component={Index} />
         <Route path="/symbols/new" exact component={New} />

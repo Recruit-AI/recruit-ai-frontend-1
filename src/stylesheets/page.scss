@@ -1,0 +1,40 @@
+.page-container {
+	padding: 80px 0px 0px;
+	min-height: 95vh;
+}
+
+.pageCTA {
+	min-height: 80vh;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.text-block-title {
+	background-color:$d-primary-color;
+	padding:10px;
+	margin:0;
+	text-decoration: underline;
+	border-top: 4px solid $primary-color;
+	border-bottom: 4px solid $dd-primary-color;
+}
+
+.text-block-content {
+	padding:20px;
+	background-color:$dark-color;
+	& > * {	
+		max-width:800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.text-container {
+	padding:20px;
+	& h3 {
+		text-decoration:underline;
+		margin-top:18px;
+		margin-bottom:6px;
+	}
+}
