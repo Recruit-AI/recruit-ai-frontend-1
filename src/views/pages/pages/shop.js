@@ -14,7 +14,7 @@ class Pages extends React.Component {
 
     linkCard = (item) => {
 
-        return <span style={{ display: "inline-block", width: '280px' }}>
+        return <span style={{ display: "inline-block", width: '280px', margin: '10px 25px' }}>
             <a target="_blank" className="amazon-link"
                 href={`https://www.amazon.com/gp/product/${item.amazonId}/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=${item.amazonId}&linkCode=as2&tag=grimwire-20&linkId=${item.linkId}`}>
                 <h3>{item.title}</h3>
