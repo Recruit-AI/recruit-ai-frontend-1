@@ -122,7 +122,7 @@ class Categories extends React.Component {
                                 <Col key={category.category_name} lg={3}><Link className='blockLink' to={`/categories/${category.category_id}`}>
                                   
                                   <img src={category.image_url} width="100%" /> {console.log(category)}
-                                  <h5>{category.category_name} {category.category_number}</h5>
+                                  <h3>{category.category_name} {category.category_number}</h3>
                                   <p>{category.category_description}</p>
 
                                   </Link>

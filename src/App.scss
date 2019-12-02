@@ -176,3 +176,68 @@
 	padding: 10px 0;
 	background-color: rgba($light-color, .4);
 }
+
+.connection-row {
+	background-color:$dark-color;
+	width:100vw;
+	margin:0;
+	& .col-12 {
+		padding:0;
+		border-left: 2px solid $d-grey-color;
+		border-right: 2px solid $d-grey-color;
+	}
+
+}
+
+.symbol-connection-area {
+
+	background-color:$dark-color;
+	& h3 {
+		background-color:$l-grey-color;
+		padding:10px;
+		color:$ll-light-color;
+		margin:0;
+	}
+	& h4 {
+		background:$d-grey-color;
+		border-top:4px solid $grey-color;
+		border-bottom:4px solid $dd-grey-color;
+		margin:0;
+		& a {
+			font-size:inherit;
+			background:none;
+			width:80%;
+			color: $light-color;
+		}
+	}
+	& > span > a {
+		margin: 20px 10px;
+	}
+}
+
+.displayImage {
+	padding:20px;
+	background-color:$ll-primary-color;
+	h2 { color: $dd-primary-color;}
+	h3 { color: $d-primary-color;}
+	& .displayImageHolder {
+		border:8px inset $l-grey-color;
+		width: min-content;
+		height: min-content;
+		margin:auto;
+	}
+	@media only screen and (max-width: 911px) {
+		& .displayImageHolder {
+			overflow:scroll;
+			max-width: 80vw;
+			max-height:200px;
+			margin:auto;
+			scrollbar-width: none; /* Firefox */
+			-ms-overflow-style: none;  /* Internet Explorer 10+ */
+			&::-webkit-scrollbar { /* WebKit */
+				width: 0;
+				height: 0;
+			}
+		}
+	}
+}

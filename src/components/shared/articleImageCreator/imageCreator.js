@@ -27,17 +27,20 @@ class ImageCreator extends React.Component {
 
 
       render () {
-        return <div style={{overflowX:'scroll'}}>
-            <h3>Save/Download this article as a sharable image:</h3>
-            <canvas ref={this.canvas} width={800} height={800} />
-            <img ref={this.logo_image} src={require('../../../img/logo.png')} style={{display:'none'}}/>
-            {}
-            <img ref={this.article_image} src={
-                this.props.item.thumbnail ? 
-                this.props.item.thumbnail.image_url : 
-                require('../../../img/logo.png')
-                } style={{display:'none'}}/>
-            
+        return <div className="displayImage">
+            <h2>NEW!</h2>
+            <div className="displayImageHolder">
+                <canvas className="displayImageCanvas" ref={this.canvas} width={800} height={800} />
+                <img ref={this.logo_image} src={require('../../../img/logo.png')} style={{display:'none'}}/>
+                
+                <img ref={this.article_image} src={
+                    this.props.item.thumbnail ? 
+                    this.props.item.thumbnail.image_url : 
+                    require('../../../img/logo.png')
+                    } style={{display:'none'}}/>
+            </div>
+            <p>Long click on mobile, right click on desktop</p>
+            <h3>Save/Download this article as a Sharable Image</h3>
         </div>
       }
 

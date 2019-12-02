@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {Row, Col} from 'react-bootstrap'
-import FormInsert from '../../forms/handler'
 
 
 function Display(props) {
@@ -19,14 +18,15 @@ function Display(props) {
 
   if(conn.length > 0) {
       let lastKind = "" 
-      return <div>
-        <h5>{title}</h5>
+      return <div className="symbol-connection-area"><div className="reverse-divider" />
+        <h3>{title}</h3>
+        <div className="divider" />
         {
           conn.map(i => {
             const showKind = i.kind_name !== lastKind
             lastKind = i.kind_name
             return <span>
-              { showKind ? <b><br /><Link to={`/collections/${i.kind_id}`}>{lastKind}</Link><br /></b> : ""}
+              { showKind ? <h4><Link to={`/collections/${i.kind_id}`}>{lastKind}</Link></h4> : ""}
 
               <Link to={`/symbols/${i.symbol_id}`}><i>{i.symbol_name}</i></Link>
 
@@ -40,20 +40,20 @@ function Display(props) {
 }
 
 export default function Connections(props){
-  return <Row>
+  return <div><Row className="connection-row">
       <Col xs={12} lg={6} >
         <Display item={props.item} number={"5"} title={"Alternate Names & Titles"} />
-        <Display item={props.item} number={"4"} title={"Properties"} />
+        <Display item={props.item} number={"4"} title={"Properties & Values"} />
         <Display item={props.item} number={"3"} title={"Attributes & Associations"} />
         <Display item={props.item} number={"1"} title={"Mentions, Stories, Teachings"} />
         <Display item={props.item} number={"0"} title={"Sources"} />
       </Col>
       <Col xs={12} lg={6} >
         <Display item={props.item} number={"6"} title={"Types"} />
-        <Display item={props.item} number={"2"} title={"Related"} />
+        <Display item={props.item} number={"2"} title={"Related Items"} />
       </Col>
       <Col xs={12} lg={12} >
         <Display item={props.item} number={"7"} title={"Items"} />
-      </Col>
-  </Row>
+      </Col> 
+  </Row></div>
 }
