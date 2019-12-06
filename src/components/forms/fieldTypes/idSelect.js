@@ -16,10 +16,16 @@ class IdList extends React.Component {
   componentDidMount = () => {
     this.updateItems()
   }
+  componentWillReceiveProps = (newProps) => {this.updateItems(newProps);}
 
-  updateItems = () => {
-    
-    switch(this.props.field) {
+  updateItems = async (props = this.props) => {
+    await this.gatherItemsAPI(props)
+    this.setState({selectionName: ""})
+  }
+
+  gatherItemsAPI = (props) => {
+  
+    switch(props.field) {
       case "influenced_id":
       case "influencer_id":
       case "creator_pantheon_id":
@@ -100,7 +106,7 @@ class IdList extends React.Component {
                 break;
 
           case "foreign_id":
-                    let string = this.props.item.foreign_class.toLowerCase()
+                    let string = props.item.foreign_class.toLowerCase()
                     let plural_string = ""
                     if(string === 'category'){
                       plural_string='categories'
@@ -140,7 +146,7 @@ class IdList extends React.Component {
     this.setState({backgroundColor: 'rgba(155,255,155, .6)'})
     const pair = e.target.value.split('-')
     const field = pair[0]
-    const id = pair[1]
+    const id = Number.parseInt(pair[1])
     const name = pair[2]
     const item = this.props.item
     const array = item[field]
@@ -168,7 +174,7 @@ class IdList extends React.Component {
     const selected = allItems.filter(obj => obj.id === value)[0]
 
 
-    return <div>
+    return <div key={item.id}>
     <Form.Group>
         <Form.Label>
           { this.printifyName(field) }:
