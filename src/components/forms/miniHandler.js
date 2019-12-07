@@ -29,6 +29,7 @@ class FormHandler extends React.Component {
   updateAPI = async (method, url, payload, bulkAdd) => {
     const headers = { headers: {'authorization': localStorage.token} }
     var apiCall;
+    console.log(bulkAdd)
 
     if(method === 'put') {
       apiCall = await axios.put(url, payload, headers)
@@ -48,6 +49,8 @@ class FormHandler extends React.Component {
     const postURL = `https://grimwire.herokuapp.com/api/${this.props.info.url}`
     const putURL = `${postURL}/${id}`
     var apiCall;
+
+    console.log(id)
 
     if(this.state.formClass === "images" || this.state.formClass === "thumbnail"){
       if(this.state.existing) {
