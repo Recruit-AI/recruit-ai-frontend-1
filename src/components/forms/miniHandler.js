@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { withRouter } from "react-router-dom";
 import BuildForm from './buildForm'
-
+import DisplayPreview from './relationships/displayPreview'
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 
@@ -44,6 +44,7 @@ class FormHandler extends React.Component {
     let item = this.state.item
     const id = this.state.item.id
     delete this.state.item.id
+    delete this.state.item.original_record
     const postURL = `https://grimwire.herokuapp.com/api/${this.props.info.url}`
     const putURL = `${postURL}/${id}`
     var apiCall;
@@ -81,10 +82,20 @@ class FormHandler extends React.Component {
     }
   }
 
+  toggleFormShow = (e) => {
+    this.setState({showForm: !this.state.showForm})
+  }
 
   render() {
-    const show = curr_user && Object.entries(this.state.item).length > 0
-    return show ?
+    const authShow = curr_user && Object.entries(this.state.item).length > 0
+    return authShow ? <div className="mini-form-handler">
+      <h5 onClick={this.toggleFormShow}>
+        {this.state.existing ? "EDIT" : "ADD NEW"} 
+        {this.state.showForm ? "-" : "+" }
+      </h5>
+  
+
+      {this.state.showForm ?
       <div className='mini-form'>
         <BuildForm 
           item={this.state.item} 
@@ -94,7 +105,9 @@ class FormHandler extends React.Component {
           existing={this.state.existing} 
           formClass={this.state.formClass} /> 
       </div>
-    : ""
+    : (this.state.existing ? <DisplayPreview {...this.props}  /> : "")
+    }
+    </div> : ""
   }
 
   formData = (id) => {

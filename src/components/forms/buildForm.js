@@ -64,7 +64,6 @@ class FormHandler extends React.Component {
         e.preventDefault();
         this.formStatus('loading');
         const results = await this.props.submitForm(this.state.bulkAdd);
-        console.log(results)
         const res = results.apiCall
         const redirectPath = results.redirect
         
@@ -92,9 +91,6 @@ class FormHandler extends React.Component {
             {this.state.error ?  
             <div style={{backgroundColor: 'rgba(200,0,0,.4)', padding:'10px'}}>{this.state.error}</div>
             : ""}
-
-            <h5>{this.props.existing ? `` : "Add New"}</h5>
-
             
             {Object.entries(this.props.item).map(itemField => <div key={itemField[0]}>
 

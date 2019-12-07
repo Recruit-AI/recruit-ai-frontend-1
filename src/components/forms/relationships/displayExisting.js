@@ -14,7 +14,6 @@ class Existing extends React.Component {
 
     return rConfig.records ?
             rConfig.records.map(item => <div>
-                {console.log(item.record)}
                 <HandleForm item={item.record} formClass={formClass} existing={true} info={rConfig} update={update} />
               </div>
             )

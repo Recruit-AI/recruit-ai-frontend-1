@@ -143,3 +143,21 @@ img {
 		padding: 10px;
 	}
 }
+
+.mini-form-handler {
+	padding-bottom:20px;
+	background-color:$l-dark-color;
+	border-bottom:4px solid $light-color;
+	h5 {
+		background-color:$grey-color;
+		color:$dark-color;
+		padding:10px;
+		border-bottom:2px solid $dark-color;
+	}
+}
+
+.full-form, .mini-form {
+	max-width:800px;
+	margin:auto;
+	padding:20px;
+}

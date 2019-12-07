@@ -15,6 +15,7 @@ export default (props) => {
             record: {
               id: item.pantheon_history_id,
               influencer_id: item.influencer_id,
+              original_record: item
             }
           })),
           title: "History",
@@ -33,7 +34,8 @@ export default (props) => {
             update_id: item.pantheon_history_id,
             record: {
               id: item.pantheon_history_id,
-              influenced_id: item.influenced_id
+              influenced_id: item.influenced_id,
+              original_record: item
             }
           })),
           title: "Influenced",
@@ -56,7 +58,8 @@ export default (props) => {
             update_id: item.kinds_to_pantheons_id,
             record: {
               id: item.kinds_to_pantheons_id,
-              kp_kind_id: item.kp_kind_id
+              kp_kind_id: item.kp_kind_id,
+              original_record: item
             }
           })),
           title: "Kinds Used",
@@ -79,7 +82,8 @@ export default (props) => {
             update_id: item.kinds_to_pantheons_id,
             record: {
               id: item.kinds_to_pantheons_id,
-              kp_pantheon_id: item.kp_pantheon_id
+              kp_pantheon_id: item.kp_pantheon_id,
+              original_record: item
             }
           })),
           title: "Pantheons Using",
@@ -102,7 +106,8 @@ export default (props) => {
             update_id: item.category_kind_id,
             record: {
               id: item.category_kind_id,
-              ck_kind_id: item.ck_kind_id
+              ck_kind_id: item.ck_kind_id,
+              original_record: item
             }
           })),
           title: "Contains",
@@ -125,7 +130,8 @@ export default (props) => {
             update_id: item.category_pantheon_id,
             record: {
               id: item.category_pantheon_id,
-              cpa_pantheon_id: item.cpa_pantheon_id
+              cpa_pantheon_id: item.cpa_pantheon_id,
+              original_record: item
             }
           })),
           title: "Pantheons",
@@ -148,7 +154,8 @@ export default (props) => {
             update_id: item.category_symbol_id,
             record: {
               id: item.category_symbol_id,
-              cs_symbol_id: item.cs_symbol_id
+              cs_symbol_id: item.cs_symbol_id,
+              original_record: item
             }
           })),
           title: "Symbols",
@@ -171,7 +178,8 @@ export default (props) => {
             update_id: item.category_prereq_id,
             record: {
               id: item.category_prereq_id,
-              cp_prereq_id: item.cp_prereq_id
+              cp_prereq_id: item.cp_prereq_id,
+              original_record: item
             }
           })),
           title: "Prerequisites",
@@ -200,7 +208,8 @@ export default (props) => {
               connected_symbol_id: item.connected_symbol_id,
               connection_description: item.connection_description || "",
               connection_strength: item.connection_strength || 0,
-              connection_relationship: item.connection_relationship || 0
+              connection_relationship: item.connection_relationship || 0,
+              original_record: item
             }
           })),
           title: "Connections",
@@ -223,7 +232,8 @@ export default (props) => {
             update_id: item.symbol_pantheon_id,
             record: {
               id: item.symbol_pantheon_id,
-              sp_pantheon_id: item.sp_pantheon_id
+              sp_pantheon_id: item.sp_pantheon_id,
+              original_record: item
             }
           })),
           title: "Uses This Symbol",
@@ -312,7 +322,7 @@ export default (props) => {
               source_link: item.source_link,
               source_title: item.source_title,
               source_article_title: item.source_article_title,
-              source_description: item.source_description
+              source_description: item.source_description,
             }
           })),
           title: "Sources",
@@ -335,7 +345,8 @@ export default (props) => {
             update_id: item.kind_symbol_connection_id,
             record: {
               id: item.kind_symbol_connection_id,
-              ksc_symbol_id: item.ksc_symbol_id
+              ksc_symbol_id: item.ksc_symbol_id,
+              original_record: item
             }
           })),
           title: "Same/Relative To",
@@ -358,7 +369,8 @@ export default (props) => {
             update_id: item.kind_info_kind_id,
             record: {
               id: item.kind_info_kind_id,
-              kik_connected_info_id: item.kik_connected_info_id
+              kik_connected_info_id: item.kik_connected_info_id,
+              original_record: item
             }
           })),
           title: "Show Connections on Page",
