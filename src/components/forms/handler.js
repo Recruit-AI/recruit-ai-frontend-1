@@ -50,7 +50,7 @@ class FormHandler extends React.Component {
       } else {
         apiCall = await axios.post(url, payload, headers)
       }
-      if(!bulkAdd) { await this.updateInfo() }
+      if(!bulkAdd) { await this.props.update() }
       return apiCall
     }
   
