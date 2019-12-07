@@ -61,7 +61,8 @@ button {
 /* ------------------------*/
 /* LINKS ------------------*/
 /* ------------------------*/
-a {
+a, .format-link {
+	cursor: pointer;
 	color: $linkColor;
 	text-decoration: none;
 	padding: 10px;

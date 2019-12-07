@@ -18,7 +18,7 @@ class ResourcesController extends React.Component {
           <Switch>
             <Route path="/resources" exact component={Resources} />
             <Route path="/resources/new" exact component={ResourcesNew} />
-            <Route path="/resources/edit/:id" exact component={ResourcesEdit} />
+            <Route path="/resources/:id/edit" exact component={ResourcesEdit} />
             <Route path="/resources/:id" exact component={ResourcesShow} />
           </Switch>
         </div>

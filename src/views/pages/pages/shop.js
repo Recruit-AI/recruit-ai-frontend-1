@@ -265,6 +265,41 @@ class Pages extends React.Component {
                 title: "Magickal Self Care",
                 description: "Something along the lines of something else and the store goes here up in the blank spot"
             },
+            {
+                amazonId: 'B074XFP27L',
+                linkId: 'a5d2dd893afc5c97d8713b9730bcbb9e',
+                category: "A",
+                title: "Copper Bowl",
+                description: ""
+            },
+            {
+                amazonId: 'B076ZZG94L',
+                linkId: '44803fe62b614c16967abe033854cc11',
+                category: "A",
+                title: "Smudge & Cleansing Kit",
+                description: ""
+            },
+            {
+                amazonId: 'B07Q4Y813W',
+                linkId: '2e6f80c7830920c727e3fa9c3e5d731d',
+                category: "A",
+                title: "Deluxe Smudging Set",
+                description: ""
+            },
+            {
+                amazonId: '',
+                linkId: '',
+                category: "A",
+                title: "",
+                description: ""
+            },
+            {
+                amazonId: '',
+                linkId: '',
+                category: "A",
+                title: "",
+                description: ""
+            }
         ].sort((a, b) => { return a.category > b.category ? 1 : -1 })
     }
 }
@@ -272,9 +307,42 @@ class Pages extends React.Component {
 export default Pages
 
 
-/* <a target="_blank" href="https://www.amazon.com/stores/node/20690677011?_encoding=UTF8&amp;field-lbr_brands_browse-bin=Moon%20Magick&amp;ref_=bl_dp_s_web_20690677011&_encoding=UTF8&tag=grimwire-20&linkCode=ur2&linkId=c68de05a9808cf5cee8fb17469166846&camp=1789&creative=9325">Moon</a><img src="//ir-na.amazon-adsystem.com/e/ir?t=grimwire-20&l=ur2&o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
- */
 
+// https://www.amazon.com/dp/B07DVDZ6WR/ref=cm_sw_r_cp_awdb_t1_DDj2DbCPDE4RJ
+// Natural Abalone shell and stand
 
+// https://www.amazon.com/dp/1578636426/ref=cm_sw_r_cp_awdb_t1_SQj2DbHMMARDN
+// Crystal gridwork
 
+// https://www.amazon.com/dp/B07H3KRBLN/ref=cm_sw_r_cp_awdb_t1_qAQ2Db33AW5VA
+// Gold Bell
 
+// https://www.amazon.com/dp/B07NJ2GGZV/ref=cm_sw_r_cp_awdb_t1_LIQ2DbVZXB4FP
+// Tabetan Singing Bowl
+
+// https://www.amazon.com/dp/B000WS73QO/ref=cm_sw_r_cp_awdb_t1_pph3Db4KQGJ49
+// Triple Goddess Altar Cloth
+
+// https://www.amazon.com/dp/B01M0A3478/ref=cm_sw_r_cp_awdb_t1_2sh3DbG93EVAJ
+// Velvet altar cloth
+
+// https://www.amazon.com/dp/B07N99GT3V/ref=cm_sw_r_cp_awdb_t1_Tzh3DbHGQM3TV
+// Goddess altar cloth and statue
+
+// https://www.amazon.com/Handmade-Pentagram-Embossed-Appointment-Organizer/dp/B072JX3L8K/ref=mp_s_a_1_3?keywords=book+of+shadows&qid=1574729878&sprefix=book+of+sha&sr=8-3#
+// Pentagram Leather book of shadows
+
+// https://www.amazon.com/Embossed-Notebook-Hardcover-Sketchbook-Scrapbook/dp/B01FNMQ8U0/ref=mp_s_a_1_18?keywords=book+of+shadows+hardcover+journal&qid=1574730485&sprefix=book+of+shadows+ha&sr=8-18#
+// Embossed leather journal 
+
+// https://www.amazon.com/Assorted-Dripless-Congregation-Candlelight-Decorations/dp/B07V1X1J4V/ref=mp_s_a_1_5?keywords=altar%2Bcandles&qid=1574734261&sprefix=altar%2Bcan&sr=8-5&th=1&psc=1#
+// Altar assorted color candles 
+
+// https://www.amazon.com/Ceramic-Chime-Ritual-Candle-Holders/dp/B07RT4D8HS/ref=mp_s_a_1_6?keywords=altar%2Bcandles%2Bholders&qid=1574735001&sr=8-6&th=1&psc=1#
+// Ceramic altar candle holders 
+
+// https://www.amazon.com/dp/B074R8GLND/ref=cm_sw_r_cp_awdb_t1_h1i3DbXFPTJSB
+// Ceramic candle holders
+
+// https://www.amazon.com/dp/B078JWRC31/ref=cm_sw_r_cp_awdb_t1_c-i3DbAQ6FES3
+// Beginner essentials oils set

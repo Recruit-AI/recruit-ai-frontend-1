@@ -41,31 +41,13 @@ class Page extends React.Component {
         return <div>
 
           <h2>Manage Users</h2>
+          <h5>Total Users: {this.state.users.length}</h5>
 
           Search By Username: <input value={this.state.searchTerm} onChange={this.handleChange} />
 
-          <Row>
-            <Col>Count</Col>
-            <Col>Username</Col>
-            <Col>Mailing List?</Col>
-            <Col>Email</Col>
-            <Col>
-              Status
-            </Col>
-            <Col>
-              Notes on User
-            </Col>
-            <Col>
-              Un/Ban
-            </Col>
-            <Col>
-              De/Promote
-            </Col>
-
-          </Row>
           {
             this.state.users.length === 0 ? (this.state.searching ? "Loading" : "There are no results") : this.state.users.map((user, i) => <div>
-                <UserCard user={user} number={i} update={this.loadPage}/>
+                <UserCard key={user.user_id} user={user} number={i} update={this.loadPage}/>
               </div>
             )
           }

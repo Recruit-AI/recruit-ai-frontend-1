@@ -66,7 +66,7 @@ class ResourcesIndex extends React.Component {
             <p>{resource.resource_description}</p>
             <p>Tags: { (resource.resource_tags || []).map((tag) => <span style={{padding:'5px'}}>{tag}</span> ) }</p>
 
-            { curr_user.user_role > 1 ? <Link to={`/resources/edit/${resource.resource_id}`}>Edit</Link> : ""}
+            { curr_user.user_role > 1 ? <Link to={`/resources/${resource.resource_id}/edit`}>Edit</Link> : ""}
             <hr />
           </div>)
 

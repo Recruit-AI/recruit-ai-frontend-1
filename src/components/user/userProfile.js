@@ -12,14 +12,9 @@ class Profile extends React.Component {
 
     render() {
         return <div className='tpBlackBg'>
-            <h2>{curr_user.username}</h2>
-            <p>{curr_user.user_email}</p>
-            <p>{['', 'User', 'Mod', 'Admin'][curr_user.user_role]}</p>
-
-            <h4>Links</h4>
-            Edit Profile<br />
-            Logs (if >mod)<br />
-            Users (for banning if >mod, promoting if >admin)<br />
+            <h2>Welcome, {curr_user.username}</h2>
+            <p>{curr_user.user_email}, {['', 'User', 'Mod', 'Admin'][curr_user.user_role]}</p>
+            <h3><i>Dashboard coming soon</i></h3>
         </div>
     }
 }

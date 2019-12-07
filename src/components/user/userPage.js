@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import TextOutput from '../shared/textOutput'
 import axios from 'axios'
 
 class Page extends React.Component {
@@ -33,8 +33,7 @@ class Page extends React.Component {
           <p>{['', 'User', 'Mod', 'Admin'][user.user_role]}</p>
           <a href={user.user_link} target="_blank">{user.user_link_description}</a>
 
-          <h4>About</h4>
-          <p>{user.bio}</p>
+          <TextOutput text={user.user_bio} title={"About"} />
         </div>
     }
 }
