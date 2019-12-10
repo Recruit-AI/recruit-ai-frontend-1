@@ -33,6 +33,16 @@ function Home(props) {
 		<div>
 			<div className="pageCTA">
 				<div>
+					<h4>Expected Full Release:</h4>
+					<h3>February 2020</h3>
+					<p>Welcome to GrimWire, beta version 0.9.1.</p>
+					<p>All features are almost completely developed, just a few finished touches & entering in all the information</p>
+					<p><Link to="/pages/help">We could use a TON of help</Link></p>
+					<p><Link to="/users/register">Or sign up for the official release!</Link></p>
+					<h4>Thank You.</h4>
+
+					<hr />
+
 					<img height="100px" alt="logo" src={require('../../img/logo.png')} />
 					<h1>GRIMWIRE</h1>
 

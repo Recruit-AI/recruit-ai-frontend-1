@@ -67,7 +67,7 @@ class KindPage extends React.Component {
 
             { curr_user ?  <span><Link to="/collections/new">Create Collection</Link> 
             <Link to={`/collections/${item.kind_id}/edit`}>Edit This Collection</Link> 
-            <Link to={`/symbols/new`}>New Symbol</Link></span> : "" }
+            <Link to={`/symbols/new?symbol_kind_id=${item.kind_id}`}>New Symbol</Link></span> : "" }
             <Link to="/collections">Back to Collections</Link>
 
             {item.kindSymbolConnections.length > 0 ? 

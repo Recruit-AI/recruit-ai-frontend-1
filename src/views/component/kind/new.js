@@ -16,6 +16,10 @@ class KindPage extends React.Component {
 
   render() {
   const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
+
+  const params = new URLSearchParams(window.location.search)
+  if(params.get('creator_pantheon_id')) { defaultKind.creator_pantheon_id = Number.parseInt(params.get('creator_pantheon_id')) }
+
     return <div  className="tpBlackBg">
         { curr_user ?  <Link to="/collections">Back To All</Link>: "" }
         <HandleForm item={defaultKind} formClass={"kinds"} update={() => {}} />

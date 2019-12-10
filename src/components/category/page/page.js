@@ -130,7 +130,8 @@ class CategoryPage extends React.Component {
 											<h3>Related Concepts</h3>
 											{item.symbols.map((i) => (
 												<Link key={i.symbol_id} to={`/symbols/${i.symbol_id}`}>
-													{i.symbol_name}
+													{console.log(i)}
+													{i.symbol_name} {i.kind_name}
 												</Link>
 											))}
 										</div>

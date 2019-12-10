@@ -249,3 +249,15 @@
 	border-top:4px solid $l-dark-color;
 	border-bottom: 4px solid $primary-color;
 }
+
+.faq-questions {
+	background:$dark-color;
+	h3 {
+		background-color:$primary-color;
+		padding:20px;
+	}
+	.faq-answer{
+		padding:20px;
+		padding-top:0;
+	}
+}

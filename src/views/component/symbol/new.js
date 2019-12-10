@@ -16,6 +16,10 @@ class SymbolPage extends React.Component {
  
   render() {
   const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
+
+  const params = new URLSearchParams(window.location.search)
+  if(params.get('symbol_kind_id')) { defaultSymbol.symbol_kind_id = Number.parseInt(params.get('symbol_kind_id')) }
+
     return <div>
         { curr_user ?  <Link to="/symbols">Back To All</Link> : ""}
         <HandleForm item={defaultSymbol} formClass={"symbols"} update={() => {}} />

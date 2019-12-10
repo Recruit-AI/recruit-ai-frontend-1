@@ -77,7 +77,7 @@ class PantheonPage extends React.Component {
 									<span>
 										<Link to="/pantheons/new">Create Pantheon</Link>
 										<Link to={`/pantheons/${item.pantheon_id}/edit`}>Edit This Pantheon</Link>
-										<Link to={`/collections/new?pantheon_id=${item.pantheon_id}`}>
+										<Link to={`/collections/new?creator_pantheon_id=${item.pantheon_id}`}>
 											Add a New Collection
 										</Link>
 									</span>

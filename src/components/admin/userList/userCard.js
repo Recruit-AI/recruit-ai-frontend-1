@@ -74,7 +74,7 @@ class UserCard extends React.Component {
         {user.ban_notes || '+/-'}
       </Col>
       <Col xs={12} lg={4}>
-          <Link to={`/users/${user.user_id}`}>Profile</Link>
+          <Link to={`/users/${user.user_id}`}>View</Link>
 
           {user.user_verified === false ? <span className="format-link" onClick={this.unbanUser}>Unban</span> : ""}
           {user.user_verified === true ? <span className="format-link" onClick={this.banUser}>Ban</span> : ""}
