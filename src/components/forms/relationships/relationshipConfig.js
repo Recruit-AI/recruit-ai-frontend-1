@@ -8,13 +8,15 @@ export default (props) => {
         return {
           default_item: {
             influenced_id: props.item.pantheon_id,
-            influencer_id: 0
+            influencer_id: 0, 
+            history_type: "Direct",
           },
           records: records.map(item => ({
             update_id: item.pantheon_history_id,
             record: {
               id: item.pantheon_history_id,
               influencer_id: item.influencer_id,
+              history_type: item.history_type || "",
               original_record: item
             }
           })),
@@ -26,19 +28,20 @@ export default (props) => {
       }
       break;
     case "pantheons_influenced":
-      if(props.item.history){
+      if(props.item.influenced){
         const records = props.item.influenced
         return {
-          default_item: { influencer_id: props.item.pantheon_id, influenced_id: 0 },
+          default_item: { influencer_id: props.item.pantheon_id, influenced_id: 0, history_type: "Direct", },
           records: records.map(item => ({
             update_id: item.pantheon_history_id,
             record: {
               id: item.pantheon_history_id,
               influenced_id: item.influenced_id,
+              history_type: item.history_type || "",
               original_record: item
             }
           })),
-          title: "Influenced",
+          title: "Influenced", 
           url: "pantheons/histories"
         }
       } else {
@@ -381,6 +384,33 @@ export default (props) => {
       }
       break;
 
+      case "symbol_resources":
+          if(props.item.resources){
+            const records = props.item.resources
+            return {
+              default_item: {
+                sr_symbol_id: props.item.symbol_id,
+                sr_resource_id: 0,
+                sr_description: ""
+              },
+              records: records.map(item => ({
+                update_id: item.symbol_resource_id,
+                record: {
+                  id: item.symbol_resource_id,
+                  sr_resource_id: item.sr_resource_id,
+                  sr_description: item.sr_description,
+                  original_record: item
+                }
+              })),
+              title: "External Resources for More Information",
+              url: "symbols/resources"
+            }
+          } else {
+            return []
+          }
+          break;
+    
+    
 
 
     }

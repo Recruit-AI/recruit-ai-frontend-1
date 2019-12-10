@@ -19,7 +19,7 @@ class PantheonPage extends React.Component {
     const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
     return <div  className="tpBlackBg">
           { curr_user ?  <Link to="/pantheons">Back To All</Link> : ""}
-        <HandleForm item={defaultPantheon} formClass={"pantheons"} />
+        <HandleForm item={defaultPantheon} formClass={"pantheons"} update={() => {}} />
       </div>
   }
 }

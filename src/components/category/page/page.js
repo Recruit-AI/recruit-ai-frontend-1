@@ -9,6 +9,8 @@ import TextOutput from '../../shared/textOutput';
 
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
+import Helmet from 'react-helmet'
+
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false;
 
 class CategoryPage extends React.Component {
@@ -32,7 +34,14 @@ class CategoryPage extends React.Component {
 		const id = props.match.params.id;
 		axios
 			.get(`https://grimwire.herokuapp.com/api/categories/${id}`)
-			.then((res) => this.setState({ category: res.data, loading: false }))
+			.then((res) => {
+				this.setState({ category: res.data, loading: false })
+				const params = new URLSearchParams(window.location.search)
+				params.set('article', encodeURI(this.state.category.category_name.replace(/ /g, "-")) + "-" 
+				+ encodeURI(this.state.category.category_number))
+				window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
+				
+			})
 			.catch((err) => {
 				console.log(err);
 				this.setState({ category: {}, loading: false });
@@ -51,6 +60,13 @@ class CategoryPage extends React.Component {
 					unmountOnExit
 				>
 					<div>
+
+					
+			<Helmet>
+                <title>{`GrimWire.Online- ${item.category_name} ${item.category_number}`}</title>
+        </Helmet>
+
+						
 						{curr_user ? (
 							<span>
 								<Link to="/collections/new">Create New Collection/List</Link>

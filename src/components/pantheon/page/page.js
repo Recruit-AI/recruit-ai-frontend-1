@@ -12,6 +12,8 @@ import TextOutput from '../../shared/textOutput';
 import Sources from '../../sources/sourcesList';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
+import Helmet from 'react-helmet'
+
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false;
 
 class PantheonPage extends React.Component {
@@ -35,7 +37,12 @@ class PantheonPage extends React.Component {
 		const id = props.match.params.id;
 		axios
 			.get(`https://grimwire.herokuapp.com/api/pantheons/${id}`)
-			.then((res) => this.setState({ pantheon: res.data, loading: false }))
+			.then((res) => {
+				this.setState({ pantheon: res.data, loading: false })
+				const params = new URLSearchParams(window.location.search)
+				params.set('article', encodeURI(this.state.pantheon.pantheon_name.replace(/ /g, "-")))
+				window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
+			})
 			.catch((err) => {
 				console.log(err);
 				this.setState({ pantheon: {}, loading: false });
@@ -58,6 +65,14 @@ class PantheonPage extends React.Component {
 				>
 					{typeof item !== 'undefined' && Object.keys(item).length > 0 && !this.state.loading ? (
 						<div>
+
+
+			<Helmet>
+                <title>{`GrimWire.Online- ${item.pantheon_name}- The History of ${item.pantheon_name}`}</title>
+        </Helmet>
+
+
+
 							<Link to="/pantheons">Back to Pantheons</Link>{' '}{curr_user ? (
 									<span>
 										<Link to="/pantheons/new">Create Pantheon</Link>

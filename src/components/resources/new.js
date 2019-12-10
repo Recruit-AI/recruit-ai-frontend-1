@@ -21,7 +21,7 @@ class NewResource extends React.Component {
   }
     return <div  className="tpBlackBg">
         { curr_user ?  <Link to="/resources">Back To All</Link> : ""}
-        <HandleForm item={defaultResource} formClass={"resources"} />
+        <HandleForm item={defaultResource} formClass={"resources"} update={() => {}}/>
       </div>
   }
 }

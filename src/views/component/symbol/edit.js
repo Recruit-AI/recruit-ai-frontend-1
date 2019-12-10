@@ -46,7 +46,7 @@ class SymbolPage extends React.Component {
 
 
         const page = this.state.page
-        const pages = ["Main", "Thumbnail Image", "Image Gallery", "Connections", "Pantheons", "Sources"]
+        const pages = ["Main Information", "Thumbnail", "Image Gallery", "Correspondences", "Pantheons", "External Resources", "Research Sources"]
 
     return <div>
 
@@ -98,6 +98,12 @@ class SymbolPage extends React.Component {
     }
     {
       page === 5 ?
+
+        <RelationshipForm item={item} formClass={"symbol_resources"} update={this.updateInfo} />
+        : ""
+    }
+    {
+      page === 6 ?
         <RelationshipForm item={item} formClass={"sources"} update={this.updateInfo}  info={ {id: item.symbol_id, class: "Symbol"}  } />
         : ""
     }

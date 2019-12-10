@@ -16,7 +16,7 @@ class CategoryPage extends React.Component {
   const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
     return <div  className="tpBlackBg">
         { curr_user ?  <Link to="/categories">Back To All</Link> : ""}
-        <HandleForm item={defaultCategory} formClass={"categories"} />
+        <HandleForm item={defaultCategory} formClass={"categories"}  update={() => {}}/>
       </div>
   }
 }

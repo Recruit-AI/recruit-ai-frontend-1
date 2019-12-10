@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap'
-
-import FormInsert from '../../forms/handler'
+import Helmet from 'react-helmet'
 import {defaultSymbol} from '../../../db/defaultObjects'
 import BasicInfo from './basicInfo'
 import SymbolList from './symbolList'
@@ -32,8 +30,12 @@ class KindPage extends React.Component {
         const id = props.match.params.id
         axios
             .get(`https://grimwire.herokuapp.com/api/kinds/${id}`)
-            .then(res =>
+            .then(res => {
               this.setState({kind: res.data, loading: false})
+              const params = new URLSearchParams(window.location.search)
+              params.set('article', encodeURI(this.state.kind.kind_name.replace(/ /g, "-")))
+              window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
+            }
             )
             .catch(err => {
               console.log(err);
@@ -57,6 +59,11 @@ class KindPage extends React.Component {
           in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit>
             {typeof item !== 'undefined' && Object.keys(item).length > 0 && !this.state.loading ?
             <div>
+              
+    
+        <Helmet>
+                <title>{`GrimWire.Online- ${item.kind_name}- Information on All ${item.kind_name}`}</title>
+        </Helmet>
 
             { curr_user ?  <span><Link to="/collections/new">Create Collection</Link> 
             <Link to={`/collections/${item.kind_id}/edit`}>Edit This Collection</Link> 

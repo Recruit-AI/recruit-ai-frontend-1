@@ -11,8 +11,10 @@ class SymbolPage extends React.Component {
   }
 
   render() {
+
     return <SwitchTransition><CSSTransition key={`symbols-show`}
       in={true} timeout={350} classNames="whole-page" unmountOnExit appear enter exit><div  key={`symbols-show`}>
+        
         <Symbol match={this.props.match}  />
       </div></CSSTransition></SwitchTransition>
   }

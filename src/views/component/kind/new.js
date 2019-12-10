@@ -18,7 +18,7 @@ class KindPage extends React.Component {
   const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
     return <div  className="tpBlackBg">
         { curr_user ?  <Link to="/collections">Back To All</Link>: "" }
-        <HandleForm item={defaultKind} formClass={"kinds"} />
+        <HandleForm item={defaultKind} formClass={"kinds"} update={() => {}} />
       </div>
   }
 }

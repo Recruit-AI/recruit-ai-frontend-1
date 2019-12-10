@@ -18,7 +18,7 @@ class Categories extends React.Component {
           pageNumber: params.get('page') || 1,
           sort: params.get('sort') || "category_number",
           sortdir: params.get('sortdir') || "ASC",
-          searchTerm: "",
+          searchTerm: params.get('searchTerm') || "",
           update:true,
           params: params,
           loading: false
@@ -78,7 +78,15 @@ class Categories extends React.Component {
 
 
     handleChange = (e) => {
-      this.setState({searchTerm: e.target.value, update:true})
+      let params = this.state.params
+      const search = e.target.value
+      if(search !== "") {
+        params.set('searchTerm', search)
+      } else {
+        params.delete('searchTerm')
+      }
+      this.setState({searchTerm: search, params, update:true})
+      window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
     }
 
     sendSearch = (e) => {

@@ -47,51 +47,68 @@ class LogIn extends React.Component {
       }
     }
 
-    handleLogin = (e) => {
+    handleLogin = async (e) => {
       e.preventDefault();
       this.setState({formColor:"rgba(200,200,200,.3)"})
+      let errors = []
 
       if(this.state.user.password !== this.state.user.confirmPassword) {
-        this.setState({error: "Your passwords do not match.", formColor:"rgba(200,0,0,.3)"})
-        setTimeout(() => {this.setState({formColor: 'transparent'})}, 250)
-      } else if(!this.validateEmail(this.state.user.user_email)) {
-        this.setState({error: "Invalid email address.", formColor:"rgba(200,0,0,.3)"})
-        setTimeout(() => {this.setState({formColor: 'transparent'})}, 250)
-      } else if(this.state.user.password.length < 6) {
-        this.setState({error: "Password is too short.", formColor:"rgba(200,0,0,.3)"})
-        setTimeout(() => {this.setState({formColor: 'transparent'})}, 250)
-      } else {
+        errors.push("Your passwords do not match.")
+      } 
+      if(!this.validateEmail(this.state.user.user_email)) {
+        errors.push("The email you entered is invalid.")
+      }
+      
+      //If 0 errors so far...
+      if(errors.length === 0)  {
         const userInfo = {...this.state.user}
         delete userInfo.confirmPassword
-        axios
-            .post(`https://grimwire.herokuapp.com/api/users/auth/register`, userInfo)
-            .then(res => {
-              this.setState({sent: true, error: false, formColor:"rgba(200,0,0,.3)"})
-              setTimeout(() => {this.setState({formColor: 'transparent'})}, 250)
-            })
-            .catch(err => {
-              this.setState({error: "Username/email is taken.", formColor:"rgba(200,0,0,.3)"})
-              setTimeout(() => {this.setState({formColor: 'transparent'})}, 250)
-            });
+        
+        await axios.post(`https://grimwire.herokuapp.com/api/users/auth/register`, userInfo)
+        .then(res => true)
+        .catch(err => errors = [...errors, ...err.response.data.error])
+        
+      }
+
+      if(errors.length === 0) {
+        this.setState({sent: true, error: false, formColor:"rgba(0,200,0,.3)"})
+        setTimeout(() => {this.setState({formColor: 'transparent'})}, 250)
+      } else {
+        this.setState({error: errors, formColor:"rgba(200,0,0,.3)"})
+        setTimeout(() => {this.setState({formColor: 'transparent'})}, 250)
       }
     }
 
+
     render() {
         return <div className="tpBlackBg">
-            <h2>Create an Account</h2>
-            <p>Creating an account allows you to:</p>
-            <p>>Sign up for notifications on the official release</p>
-            <p>>Test out editing articles/information</p>
             {this.state.sent ? "Thank you. Please go check your email for the verification link. If you do not see it within a few minutes, please check your spam folder." :
             <Form onSubmit={this.handleLogin} style={{maxWidth:"800px", width:"100%", margin:"auto", backgroundColor:this.state.formColor}}>
-            { this.state.error }
+            
+            <h2>Create an Account</h2>
+            <hr />
+            <h4>Creating an account allows you to:</h4>
+            <p>Sign up for notifications on the official & new releases</p>
+            <p>Edit & create articles & information</p>
+            <h4>Coming Soon</h4>
+            <p>Take private notes on each article</p>
+            <p>Create spells & decide public or private individually</p>
+            
+            <hr />
+
+            { this.state.error ? 
+            <div className="health-warning">
+              {this.state.error.map(err => <div>{err}</div>)}
+            </div>
+            : ""}
+            
                 <Form.Group>
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                       onChange={this.handleChange} type="text"
                       name="username" placeholder="username"
                       value={this.state.user.username} />
-                    <Form.Text>Please enter.</Form.Text>
+                    <Form.Text>Required</Form.Text>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
@@ -99,7 +116,7 @@ class LogIn extends React.Component {
                       onChange={this.handleChange} type="text"
                       name="user_email" placeholder="user_email"
                       value={this.state.user.user_email} />
-                    <Form.Text>Please enter.</Form.Text>
+                    <Form.Text>Required</Form.Text>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Password</Form.Label>
@@ -107,7 +124,7 @@ class LogIn extends React.Component {
                       onChange={this.handleChange} type="password"
                       name="password" placeholder="Password"
                       value={this.state.user.password} />
-                    <Form.Text>Please enter.</Form.Text>
+                    <Form.Text>Required</Form.Text>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Confirm Password</Form.Label>
@@ -115,7 +132,7 @@ class LogIn extends React.Component {
                       onChange={this.handleChange} type="password"
                       name="confirmPassword" placeholder="Confirm Password"
                       value={this.state.user.confirmPassword} />
-                    <Form.Text>Please enter.</Form.Text>
+                    <Form.Text>Required</Form.Text>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Recieve email updates?</Form.Label>

@@ -36,14 +36,20 @@ class Page extends React.Component {
           .catch(err => console.log(err) );
     }
 
+    clearAll = async () => {
+      await axios.put(`https://grimwire.herokuapp.com/api/logs/confirm_all`, {}, headers)
+      this.loadPage();
+    }
+
     toggleFilter = () => {
       this.setState({filter: this.state.filter === 'unconfirmed' ? 'all' : 'unconfirmed'})
     }
 
     render() {
         return <div>
+          <p className="format-link" onClick={this.clearAll}>Clear All</p>
           <h2>{this.state.filter === 'unconfirmed' ? 'Unconfirmed Logs' : 'All Logs'}</h2>
-          <span onClick={this.toggleFilter}>See {this.state.filter === 'unconfirmed' ? 'All Logs' : 'Only Unconfirmed Logs'}</span><br />
+          <span className="format-link" onClick={this.toggleFilter}>See {this.state.filter === 'unconfirmed' ? 'All Logs' : 'Only Unconfirmed Logs'}</span><br />
           {
             this.state.logs.length > 0 ?
             this.state.logs.map(log => <div>

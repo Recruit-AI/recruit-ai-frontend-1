@@ -11,7 +11,7 @@ function Controller() {
     <Switch>
         <Route path="/categories/" exact component={Index} />
         <Route path="/categories/new" exact component={New} />
-        <Route path="/categories/:id" exact component={Page} />
+        <Route path="/categories/:id"  component={Page} />
         <Route path="/categories/:id/edit" exact component={Edit} />
     </Switch>
   </div>

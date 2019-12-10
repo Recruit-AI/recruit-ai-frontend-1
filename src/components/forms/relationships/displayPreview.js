@@ -37,6 +37,8 @@ class IdList extends React.Component {
         return <h2>{original.kind_name}</h2>
       case "category_prereqs":
           return <h2>{original.category_name}</h2>
+      case "symbol_resources":
+          return <h2>{original.resource_title}</h2>
 
       default:
         return <p>{JSON.stringify(this.props)}</p>
