@@ -268,38 +268,38 @@ class Pages extends React.Component {
             {
                 amazonId: 'B074XFP27L',
                 linkId: 'a5d2dd893afc5c97d8713b9730bcbb9e',
-                category: "A",
+                category: "Magickal Tools",
                 title: "Copper Bowl",
                 description: ""
             },
             {
                 amazonId: 'B076ZZG94L',
                 linkId: '44803fe62b614c16967abe033854cc11',
-                category: "A",
+                category: "Herbs",
                 title: "Smudge & Cleansing Kit",
                 description: ""
             },
             {
                 amazonId: 'B07Q4Y813W',
                 linkId: '2e6f80c7830920c727e3fa9c3e5d731d',
-                category: "A",
+                category: "Herbs",
                 title: "Deluxe Smudging Set",
                 description: ""
             },
-            {
-                amazonId: '',
-                linkId: '',
-                category: "A",
-                title: "",
-                description: ""
-            },
-            {
-                amazonId: '',
-                linkId: '',
-                category: "A",
-                title: "",
-                description: ""
-            }
+            // {
+            //     amazonId: '',
+            //     linkId: '',
+            //     category: "A",
+            //     title: "",
+            //     description: ""
+            // },
+            // {
+            //     amazonId: '',
+            //     linkId: '',
+            //     category: "A",
+            //     title: "",
+            //     description: ""
+            // }
         ].sort((a, b) => { return a.category > b.category ? 1 : -1 })
     }
 }

@@ -42,12 +42,13 @@ class FeedbackIndex extends React.Component {
 
   render() {
       return <div>
+        <span className="format-link" onClick={this.toggleFilter}>See {this.state.filter === 'unlogged' ? 'All Feedback' : 'Only Unseen Feedback'}</span><br />
         <h2>{this.state.filter === 'unlogged' ? 'Unseen Feedback' : 'All Feedback'}</h2>
-        <span onClick={this.toggleFilter}>See {this.state.filter === 'unlogged' ? 'All Feedback' : 'Only Unseen Feedback'}</span><br />
+        <div className="divider" />
         {
           this.state.feedbacks.length > 0 ?
-          this.state.feedbacks.map(feedback => <div>
-              <FeedbackCard feedback={feedback} update={this.loadPage}/><hr />
+          this.state.feedbacks.map(feedback => <div className="faq-questions">
+              <FeedbackCard feedback={feedback} update={this.loadPage}/>
             </div>
           )
           : <div>{this.state.loading  ? "Loading." : "No Results."}</div>

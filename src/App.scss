@@ -255,9 +255,10 @@
 	h3 {
 		background-color:$primary-color;
 		padding:20px;
+		margin:0;
 	}
+	h5 { text-decoration: none; }
 	.faq-answer{
 		padding:20px;
-		padding-top:0;
 	}
 }
