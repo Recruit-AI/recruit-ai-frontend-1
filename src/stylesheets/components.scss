@@ -15,20 +15,21 @@ button {
 /* Nice links that are displayed as buttons */
 .nice-button {
 	display: inline-block;
-	color: $l-light-color;
-	padding: 20px;
+	color: $defaultNiceButtonTextColor;
+	padding: 10px;
 	line-height:1.2;
-	border: 8px solid $l-grey-color;
+	border: $defaultNiceButtonBorder;
 	font-size: 28px;
 	font-family: $headerFont;
-	background: linear-gradient(rgba($l-secondary-color, .2), rgba($d-secondary-color, .2));
+	background: linear-gradient(rgba($defaultNiceButtonColor, .4), rgba($defaultNiceButtonColor, .4));
 	@media only screen and (max-width: 911px) {
 		width: 90%;
 		margin: 10px auto;
 	}
 	@media only screen and (min-width: 912px) {
 		width: 350px;
-		margin: 10px 25px;
+		max-width:90%;
+		margin: 10px auto;
 	}
 }
 
@@ -67,12 +68,12 @@ a, .format-link {
 	text-decoration: none;
 	padding: 10px;
 	margin: 5px;
-	border-radius: 10px;
+	border-radius: $borderRadius;
 	display: inline-block;
-	background: linear-gradient(rgba($light-color, .11) 3%, transparent 70%, rgba($light-color, .25));
+	background: linear-gradient(rgba($linkBackground, .11) 3%, transparent 70%, rgba($linkBackground, .25));
 	&:hover {
-		background: rgba($d-primary-color, .7);
-		color: $ll-light-color;
+		background: rgba($linkHoverBackground, .7);
+		color: $linkHoverColor;
 	}
 }
 
@@ -136,7 +137,7 @@ hr {
 /* Images ------------------*/
 /* ------------------------*/
 img {
-	border-radius: 20px;
+	border-radius: 4px;
 }
 .image-gallery {
 	padding:10px 0;

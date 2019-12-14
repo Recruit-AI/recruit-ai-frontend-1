@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom'
 import { Container, Row, Col, NavItem, Dropdown } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
+import {siteTitle, logoURL} from '../helpers/site'
 
-import { CSSTransition } from 'react-transition-group'
 
 class Header extends React.Component {
   constructor(props) {
@@ -44,7 +44,9 @@ class Header extends React.Component {
       <Container>
         <Row>
           <Col xs={12} lg={3} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <NavLink to="/" style={{background:'none'}}><img alt="logo" height="50px" src={require('../img/logo.png')} />Beta 0.9.1</NavLink>
+            <NavLink to="/" style={{background:'none'}}><img alt="logo" height="50px" src={logoURL} />
+            {siteTitle}
+            </NavLink>
             <span className='fas fa-bars hmenu-mobile-toggle d-inline d-lg-none' onClick={this.toggleMenu}></span>
           </Col>
 

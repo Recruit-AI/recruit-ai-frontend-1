@@ -35,7 +35,7 @@ class App extends React.Component {
 			<div className="App main-bg">
 				<div className="main-screen">
 					<Helmet>
-                		<title>{`GrimWire- The Online Grimoire & Encyclodpedia`}</title>
+                		<title>{`RecruitAI- For Coaches & Recruiters- Track & Message Athletes`}</title>
         			</Helmet>
 					<Header auth={{ curr_user: this.state, logout: this.logout, login: this.login }} />
 					<Body auth={{ curr_user: this.state, logout: this.logout, login: this.login }} />

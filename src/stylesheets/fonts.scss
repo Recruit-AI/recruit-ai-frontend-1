@@ -1,6 +1,6 @@
-$textFont: 'Open Sans', serif;
-$topFont: 'Lexend Giga', cursive;
-$headerFont: 'Patua One', sans-serif;
+$textFont: 'Titillium Web', serif;
+$topFont: 'Wallpoet', cursive;
+$headerFont: 'Bebas Neue', sans-serif;
 
 p,
 a,
@@ -36,11 +36,11 @@ h2 {
 	font-size: 32px;
 }
 h3 {
-	@include h-tag($color: $ll-primary-color);
+	@include h-tag;
 	font-size: 24px;
 }
 h4 {
-	@include h-tag($color: $l-primary-color);
+	@include h-tag;
 	font-size: 20px;
 }
 h5 {

@@ -2,6 +2,8 @@
 @import '/stylesheets/mixins';
 
 /*---Theme Settings---*/
+/* The general settings that aren't fonts & colors. */
+@import '/stylesheets/settings';
 /* The color palette and what goes on each page */
 @import '/stylesheets/colors';
 /* Font-families & sizes for all fonts */
@@ -36,23 +38,19 @@
 
 .main-bg {
 	background-color: $dark-color;
-	$nightWoods: "https://images.pexels.com/photos/289367/pexels-photo-289367.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
-	$nightButterflies: "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-	$dayWoods: "https://images.pexels.com/photos/38136/pexels-photo-38136.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-	$jellyfish: "https://images.pexels.com/photos/2399543/pexels-photo-2399543.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-	$woodAltar: "https://images.pexels.com/photos/2101704/pexels-photo-2101704.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1200";
-	background-image: url($nightWoods);
+	$weights: "https://images.pexels.com/photos/703016/pexels-photo-703016.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+	background-image: url($weights);
 	background-size: cover;
 	background-attachment: fixed;
 	background-position:center;
 }
 .main-screen {
 	background: linear-gradient(
-		rgba($dark-color, .9) 10%,
-		rgba($dark-color, .85) 20%,
-		rgba($dark-color, .75) 40%,
-		rgba($dark-color, .65) 70%,
-		rgba($dark-color, .9) 100%
+		rgba($backgroundOpacityColor, .9) 10%,
+		rgba($backgroundOpacityColor, .85) 20%,
+		rgba($backgroundOpacityColor, .75) 40%,
+		rgba($backgroundOpacityColor, .65) 70%,
+		rgba($backgroundOpacityColor, .9) 100%
 	);
 }
 
@@ -77,10 +75,10 @@
 }
 
 .footer {
-	background-color: $d-primary-color;
+	background-color: $footerBackgroundColor;
 	padding: 40px;
-	border-top:12px solid $l-primary-color;
-	border-bottom:12px solid $l-primary-color;
+	border-top:12px solid $footerAccentColor;
+	border-bottom:12px solid $footerAccentColor;
 }
 
 .modal-title {

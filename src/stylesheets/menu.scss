@@ -11,7 +11,7 @@
 	background-color: transparent;
 	transition: background-color 100ms linear;
 	&:hover {
-		background-color: $dark-color;
+		background-color: $headerMenuColor;
 		transition: background-color 100ms linear;
 	}
 
@@ -27,22 +27,22 @@
 		font-family: $topFont;
 	}
 	a {
-		color: $ll-primary-color !important;
+		color: $menuLinkColor !important;
 		font-family: $headerFont;
 	}
 }
 
 .hmenu-item {
 	background:none;
-	border-bottom: 2px solid $l-primary-color;
+	border-bottom: 2px solid $menuAccentColor;
 	padding: 10px;
 	border-radius: 10px;
 	display:inline-block;
 	&:hover {
-		background-color: rgba($d-primary-color, .7);
+		background-color: rgba($menuHoverColor, .7);
 	}
 	& a, & * {
-		color:$light-color;
+		color:$menuLinkColor;
 	}
 }
 
@@ -55,7 +55,7 @@
 	padding: 20px;
 	max-width: 500px;
 	border-radius:20px;
-	background-color: $dark-color;
+	background-color: $headerMenuColor;
 	a {
 		display: block;
 	}
@@ -63,13 +63,13 @@
 
 
 .headerFill {
-	background-color: $dark-color;
+	background-color: $headerMenuColor;
 }
 
 
 @media only screen and (max-width: 911px) {
 	.header {
-		background: $dark-color;
+		background: $headerMenuColor;
 	}
 	.hmenu-item {
 		width: 100%;

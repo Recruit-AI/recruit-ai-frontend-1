@@ -1,5 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import {siteTitle, logoURL} from '../helpers/site'
 
 function Footer() {
     return <div className="footer">
@@ -15,8 +16,8 @@ function Footer() {
 
 
         <h1>
-          <img alt="logo" height="50px" src="https://www.freelogodesign.org/file/app/client/thumb/d61a2eaf-ba59-4c5c-b40b-5d866a55672e_200x200.png?1563814596359" />
-          <br />GRIMWIRE  
+          <img alt="logo" height="50px" src={logoURL} />
+          <br />{siteTitle}  
         </h1>
 
 

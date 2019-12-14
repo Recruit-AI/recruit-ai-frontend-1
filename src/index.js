@@ -13,7 +13,9 @@ ReactDOM.render(
     <BrowserRouter>
       <ScrollToTop>
           <App />
-          <style>@import url('https://fonts.googleapis.com/css?family=Lexend+Giga|Open+Sans|Patua+One&display=swap');</style>
+          <style>
+            @import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Titillium+Web|Wallpoet&display=swap');
+          </style>
         </ScrollToTop>
     </BrowserRouter>,
 

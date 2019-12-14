@@ -1,36 +1,36 @@
-$ll-primary-color: #6e72d1;
-$l-primary-color: #4248c3;
-$primary-color: #31369b;
-$d-primary-color: #23276f;
-$dd-primary-color: #151844;
+$ll-primary-color: #f9d6d1;
+$l-primary-color: #ed897b;
+$primary-color: #e13c25;
+$d-primary-color: #902314;
+$dd-primary-color: #3a0e08;
 
-$ll-secondary-color: #98a7ac;
-$l-secondary-color: #788c93;
-$secondary-color: #5d6e74;
-$d-secondary-color: #435054;
-$dd-secondary-color: #2a3234;
+$ll-secondary-color: #b9d2f3;
+$l-secondary-color: #659ce5;
+$secondary-color: #2168c7;
+$d-secondary-color: #133c73;
+$dd-secondary-color: #05101f;
 
-$ll-highlight-color: #cc6467;
-$l-highlight-color: #b93d41;
-$highlight-color: #8e2f32;
-$d-highlight-color: #632123;
-$dd-highlight-color: #381214;
+$ll-highlight-color: #ffffff;
+$l-highlight-color: #fccbc4;
+$highlight-color: #f67968;
+$d-highlight-color: #ee290e;
+$dd-highlight-color: #911909;
 
-$ll-light-color: #ebecf9;
-$l-light-color: #c0c1eb;
-$light-color: #9497dd;
-$d-light-color: #686dcf;
-$dd-light-color: #3d43c1;
+$ll-light-color: #ffffff;
+$l-light-color: #ffffff;
+$light-color: #fdf0ee;
+$d-light-color: #f3a396;
+$dd-light-color: #e8553f;
 
-$ll-grey-color: #9f9f9f;
-$l-grey-color: #838383;
-$grey-color: #666666;
-$d-grey-color: #494949;
-$dd-grey-color: #2d2d2d;
+$ll-grey-color: #eae1e0;
+$l-grey-color: #c2a9a6;
+$grey-color: #9a716c;
+$d-grey-color: #614643;
+$dd-grey-color: #271c1b;
 
-$ll-dark-color: #003a75;
-$l-dark-color: #001e3b;
-$dark-color: #000102;
+$ll-dark-color: #df3824;
+$l-dark-color: #8c2114;
+$dark-color: #370d08;
 $d-dark-color: #000000;
 $dd-dark-color: #000000;
 
@@ -38,16 +38,50 @@ $dd-dark-color: #000000;
 
 
 
+
 /* THEME COLORS */
 
-$linkColor: $l-light-color;
-$textFontColor: $l-light-color;
-$headerFontColor: $ll-secondary-color;
-$topFontColor: $highlight-color;
+//PAGE
+//MAIN BACKGROUND OPACITY
+$backgroundOpacityColor: $l-light-color;
 
-$headerMenuColor: $dark-color;
+//HEADER & MENUS
+$headerMenuColor: $ll-light-color;
+$menuLinkColor: $dark-color;
+$menuHoverColor: $ll-primary-color;
+$menuAccentColor: $menuLinkColor;
 
+//FOOTER
+$footerBackgroundColor: $ll-secondary-color;
+$footerAccentColor: $dark-color;
+
+//DIVIDERS
 $dividerColor: $secondary-color;
 $d-dividerColor: $dd-secondary-color;
 $l-dividerColor: $ll-secondary-color;
+
+//DEFAULT TEXT
+$textFontColor: $dark-color;
+$headerFontColor: $d-secondary-color;
+$topFontColor: $d-highlight-color;
+
+//LINKS
+$linkColor: $d-primary-color;
+$linkBackground: $light-color;
+$linkHoverColor: $ll-light-color;
+$linkHoverBackground: $d-primary-color;
+
+//BUTTONS
+$defaultNiceButtonTextColor: $light-color;
+$defaultNiceButtonColor: $d-secondary-color;
+$defaultNiceButtonBorder: 2px solid $d-grey-color;
+$defaultNiceButtonHighlightColor: $l-light-color;
+$defaultNiceButtonHighlightTextColor: $l-light-color;
+
+$primaryNiceButtonTextColor: $l-light-color;
+$primaryNiceButtonBorderColor: $grey-color;
+$primaryNiceButtonColor: $l-light-color;
+$primaryNiceButtonHighlightColor: $l-light-color;
+$primaryNiceButtonHighlightTextColor: $l-light-color;
+
 
