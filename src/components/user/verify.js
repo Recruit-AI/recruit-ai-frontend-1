@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 import axios from 'axios'
+import api from '../../helpers/api'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 
@@ -18,7 +19,7 @@ class Profile extends React.Component {
    componentDidMount = () => {
         const {username, verify_hash} = this.props.match.params
         axios
-            .get(`https://grimwire.herokuapp.com/api/users/auth/verify/${username}/${verify_hash}`)
+            .get(api.verifyUserPath(username, verify_hash))
                 .then(res => {})
                 .catch(err => {});
     }

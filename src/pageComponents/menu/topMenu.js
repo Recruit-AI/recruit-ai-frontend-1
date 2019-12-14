@@ -22,6 +22,7 @@ class Menu extends React.Component {
   }
 
   sitePagesCategories = ['Features', 'About']
+  siteBlogTypes = ["News", "Blog"]
 
   sitePagesStructure = () => {
     let returnStructure = []

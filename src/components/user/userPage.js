@@ -1,6 +1,7 @@
 import React from 'react'
 import TextOutput from '../shared/textOutput'
 import axios from 'axios'
+import api from '../../helpers/api'
 
 class Page extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class Page extends React.Component {
     componentDidMount = () => {
       //${this.props.match.params.id}
         axios
-            .get(`https://grimwire.herokuapp.com/api/users/profile/${this.props.match.params.id}`)
+            .get(api.userPath(`/profile/${this.props.match.params.id}`))
             .then(res =>
               this.setState({user: res.data})
             )

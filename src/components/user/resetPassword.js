@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 import axios from 'axios'
+import api from '../../helpers/api'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 
@@ -24,7 +25,7 @@ class Profile extends React.Component {
         if(this.state.password === this.state.passwordConfirm) {
             const {username, verify_hash} = this.props.match.params
             axios
-                .put(`https://grimwire.herokuapp.com/api/users/auth/resetPassword/${username}/${verify_hash}`, 
+                .put(api.resetPasswordPath(username, verify_hash), 
                 {password:this.state.password})
                 .then(res => this.setState({confirm: true} ))
                 .catch(err => console.log(err) );

@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import {Form} from 'react-bootstrap'
+import api from '../../helpers/api'
 
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
@@ -18,7 +19,7 @@ class UserForm extends React.Component {
   submitForm = (e) => {
     e.preventDefault();
     axios
-        .put(`https://grimwire.herokuapp.com/api/users/edit`, this.state.user, headers)
+        .put(api.userPath(`/edit`), this.state.user, headers)
         .then(res => {
           if(res.status === 200) {
             localStorage.setItem('user', JSON.stringify(res.data))

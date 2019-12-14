@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 import axios from 'axios'
+import api from '../../helpers/api'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 
@@ -20,7 +21,7 @@ class Profile extends React.Component {
     submitForm = (e) => {
         e.preventDefault();
         axios
-            .get(`https://grimwire.herokuapp.com/api/users/auth/forgottenPassword/${this.state.username}`)
+            .get(api.forgotPasswordPath(this.state.username))
             .then(res => this.setState({sent:true}))
             .catch(err => console.log(err) );
     }

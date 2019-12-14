@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 import axios from 'axios'
+import api from '../../helpers/api'
 
 
 class LogIn extends React.Component {
@@ -64,7 +65,7 @@ class LogIn extends React.Component {
         const userInfo = {...this.state.user}
         delete userInfo.confirmPassword
         
-        await axios.post(`https://grimwire.herokuapp.com/api/users/auth/register`, userInfo)
+        await axios.post(api.registerPath(), userInfo)
         .then(res => true)
         .catch(err => errors = [...errors, ...err.response.data.error])
         
