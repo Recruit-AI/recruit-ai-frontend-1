@@ -22,16 +22,12 @@ const FeedbackCard = (props) => {
 
 
   return <div>
-    <h3>{ ['Bug Report', 'Question/Concern', 'Comment/Feedback', "I'd Like to Help Out", 'Other'][feedback.feedback_kind] }</h3>
-    
-    <div className="faq-answer">
-    { feedback.feedback_name || feedback.feedback_email ? <span>
-       { feedback.feedback_name } / {feedback.feedback_email}
-    </span> : <p>Anonymous</p> } says:<br />
-    <i>"{ feedback.feedback_message }"</i><br />
-    { feedback.logged ? "" : <span className="format-link" onClick={logFeedback}>Click To Log Feedback</span> }
-    </div>
-    
+    { ['Bug Report', 'Question/Concern', 'Comment/Feedback', "I'd Like to Help Out", 'Other'][feedback.feedback_kind] }<br />
+    Message: { feedback.feedback_message }<br />
+    { feedback.feedback_name && feedback.feedback_email ? <div>
+      Contact: "<i>{ feedback.feedback_name }</i>" at: <u>{feedback.feedback_email}</u>
+    </div> : <p>By Anonymous</p> }
+    { feedback.logged ? "Logged" : <span onClick={logFeedback}>Click To Log Feedback</span> }
   </div>
 
 }
