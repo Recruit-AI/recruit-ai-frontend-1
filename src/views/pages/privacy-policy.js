@@ -1,7 +1,4 @@
 import React from 'react'
-import {Switch, Route, Link} from 'react-router-dom'
-
-import OurMission from './our_mission'
 import {CSSTransition, SwitchTransition} from 'react-transition-group'
 
 class Pages extends React.Component {

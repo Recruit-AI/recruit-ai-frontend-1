@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import {apiPath} from '../../helpers/api'
 
 const FeedbackCard = (props) => {
   const {feedback} = props
@@ -12,7 +13,7 @@ const FeedbackCard = (props) => {
   const logFeedback = (e) => {
     console.log(headers)
       axios
-          .put(`https://grimwire.herokuapp.com/api/feedback/confirm/${props.feedback.feedback_id}`, {}, headers)
+          .put(apiPath(`/feedback/confirm/${props.feedback.feedback_id}`), {}, headers)
           .then(res => {
             props.update();
           })

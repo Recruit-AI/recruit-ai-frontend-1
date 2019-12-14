@@ -52,13 +52,17 @@ $menuHoverColor: $ll-primary-color;
 $menuAccentColor: $menuLinkColor;
 
 //FOOTER
-$footerBackgroundColor: $ll-secondary-color;
+$footerBackgroundColor: $d-secondary-color;
 $footerAccentColor: $dark-color;
 
 //DIVIDERS
 $dividerColor: $secondary-color;
 $d-dividerColor: $dd-secondary-color;
 $l-dividerColor: $ll-secondary-color;
+
+//COLOR SECTION COMPONENT
+$colorSectionBackground: $ll-light-color;
+$colorSectionHeaderBackground: $l-primary-color;
 
 //DEFAULT TEXT
 $textFontColor: $dark-color;

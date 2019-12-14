@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Form} from 'react-bootstrap'
 
 import FeedbackCard from './card.js'
+import {apiPath} from '../../helpers/api'
 
 class FeedbackIndex extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class FeedbackIndex extends React.Component {
   submitForm = (e) => {
     e.preventDefault();
     axios
-        .post(`https://grimwire.herokuapp.com/api/feedback/`, this.state.feedback)
+        .post(apiPath(`/feedback/`), this.state.feedback)
         .then(res => {
           if(res.status === 201) {
             this.setState({sent: true})

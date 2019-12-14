@@ -1,19 +1,17 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 
-import Home from '../views/misc/home';
+import Home from '../views/home';
 import UserComponent from '../views/misc/user';
 import AdminComponent from '../views/misc/admin';
 import FeedbackComponent from '../views/misc/feedback';
 
-import PagesController from '../views/pages/pages'
 
 function Body(props) {
     return <div className="body"><div className="page-container">
         <Switch>
             <Route path="/" exact component={Home} />
 
-            <Route path="/pages" component={PagesController} />
             <Route path="/feedback" component={FeedbackComponent} />
 
             <Route path="/users" render={() => <UserComponent {...props} auth={props.auth} />} />

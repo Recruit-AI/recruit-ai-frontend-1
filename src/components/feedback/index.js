@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import FeedbackCard from './card.js'
+import {apiPath} from '../../helpers/api'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 const headers = { headers: {'authorization': localStorage.token} }
@@ -29,9 +30,9 @@ class FeedbackIndex extends React.Component {
 
   loadPage = () => {
     axios
-        .get(`https://grimwire.herokuapp.com/api/feedback/${this.state.filter}`, headers)
+        .get(apiPath(`/feedback`), headers)
         .then(res =>
-          this.setState({feedbacks: res.data, loading: false, lastFilter: this.state.filter})
+          this.setState({feedbacks: res.data.pageOfItems, loading: false, lastFilter: this.state.filter})
         )
         .catch(err => console.log(err) );
   }
