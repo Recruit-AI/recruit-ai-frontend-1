@@ -55,15 +55,6 @@ $menuAccentColor: $menuLinkColor;
 $footerBackgroundColor: $d-secondary-color;
 $footerAccentColor: $dark-color;
 
-//DIVIDERS
-$dividerColor: $secondary-color;
-$d-dividerColor: $dd-secondary-color;
-$l-dividerColor: $ll-secondary-color;
-
-//COLOR SECTION COMPONENT
-$colorSectionBackground: $ll-light-color;
-$colorSectionHeaderBackground: $l-primary-color;
-
 //DEFAULT TEXT
 $textFontColor: $dark-color;
 $headerFontColor: $d-secondary-color;
@@ -74,6 +65,17 @@ $linkColor: $d-primary-color;
 $linkBackground: $light-color;
 $linkHoverColor: $ll-light-color;
 $linkHoverBackground: $d-primary-color;
+
+
+
+//DIVIDERS
+$dividerColor: $secondary-color;
+$d-dividerColor: $dd-secondary-color;
+$l-dividerColor: $ll-secondary-color;
+
+//COLOR SECTION COMPONENT
+$colorSectionBackground: $ll-light-color;
+$colorSectionHeaderBackground: $l-primary-color;
 
 //BUTTONS
 $defaultNiceButtonTextColor: $light-color;
