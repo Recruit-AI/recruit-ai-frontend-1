@@ -6,6 +6,9 @@ import UserComponent from '../views/misc/user';
 import AdminComponent from '../views/misc/admin';
 import FeedbackComponent from '../views/misc/feedback';
 
+import PageController from '../components/pages/page-controller'
+import PostController from '../components/posts/controller'
+
 
 function Body(props) {
     return <div className="body"><div className="page-container">
@@ -14,12 +17,16 @@ function Body(props) {
 
             <Route path="/feedback" component={FeedbackComponent} />
 
+            <Route path="/pages" component={PageController} />
+            <Route path="/posts" component={PostController} />
+
             <Route path="/users" render={() => <UserComponent {...props} auth={props.auth} />} />
             <Route path="/admin" component={AdminComponent} />
 
             <Route path="/" render={() => <div className="controller"><div className="tpBlackBg">
                 <h2>We're Sorry</h2>
                 <h1>ERROR: 404 Page Not Found</h1> 
+                <p>Error Code AWFCIM</p>
             </div></div>} />
 
         </Switch>

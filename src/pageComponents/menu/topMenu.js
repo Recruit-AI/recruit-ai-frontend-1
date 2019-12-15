@@ -29,7 +29,7 @@ class Menu extends React.Component {
       let dropdownOptions = []
       this.state.site_pages.map(page => {
         if(page.page_category === category) {
-          dropdownOptions.push({name: page.page_title, view: "all", link: `pages/${page.page_title}`, symbol: page.page_symbol})
+          dropdownOptions.push({name: page.page_title, view: "all", link: `/pages/${page.site_page_id}?article=${page.page_title}`, symbol: page.page_symbol})
         }
       })
       categoryDropdown.links = dropdownOptions
