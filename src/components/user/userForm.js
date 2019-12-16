@@ -77,7 +77,6 @@ class UserForm extends React.Component {
                 <Form.Text>We don't send spam, we keep your email address secure, and we make our "Unsubscribe" button easy to find.</Form.Text>
             </Form.Group>
 
-            {JSON.stringify(this.state.user)}
 
             <button type='submit'>Submit</button>
 
