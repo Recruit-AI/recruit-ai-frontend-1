@@ -48,7 +48,7 @@ class FormHandler extends React.Component {
   submitForm = async (bulkAdd = false) => {
     let item = this.state.item
     
-    const postURL = api.apiPath(`/${this.state.formClass}`)
+    const postURL = api.apiPath(`/${this.state.formClass ==="support_tickets" ? 'support-tickets' : this.state.formClass}`)
     const putURL = `${postURL}/${this.state.editId}`
 
     var apiCall, redirect;
@@ -94,9 +94,12 @@ class FormHandler extends React.Component {
   }
 
   redirectEditPath = (res) => {
-    let redirectId = res.data[this.props.redirectIdField]
-
-    return `/${this.state.formClass}/${redirectId}/edit`
+    if(this.props.redirect) {
+      return this.props.redirect
+    } else {
+      let redirectId = res.data[this.props.redirectIdField]
+      return `/${this.state.formClass}/${redirectId}/edit`
+    }
 
   }
 

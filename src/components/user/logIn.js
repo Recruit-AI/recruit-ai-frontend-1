@@ -34,7 +34,7 @@ class LogIn extends React.Component {
           .then(res => {
             this.setState({formColor: 'rgba(0,200,0,.4)'})
             this.props.auth.login( res.data.user, res.data.token )
-            setTimeout(() => {window.location.replace('/?loggedIn=true')}, 200)
+            setTimeout(() => {window.location.replace('/users/edit/?loggedIn=true')}, 200)
 
           })
           .catch((err, res) => {

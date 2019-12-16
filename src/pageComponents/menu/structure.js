@@ -14,7 +14,7 @@
 //links- sets the dropdown
 
 export default  [
-    {name: "SIGN UP", view: "no_user", symbol: "user", links: [
+    {name: "Sign Up", view: "no_user", symbol: "user", links: [
         {name: "Register", view: "all", link: '/users/register', symbol: ""},
         {name: "Login", view: "all", link: '/users/login', symbol: ""},
         {name: "Forgot My Password", view: "all", link: '/users/forgottenPassword', symbol: ""},
@@ -26,11 +26,12 @@ export default  [
         {name: "User List", view: 'admin', link: '/admin/users', symbol: "users"},
         {name: "Logs", view: 'admin', link: '/admin/logs', symbol: "cogs"},
         {name: "Feedback", view: 'admin', link: '/feedback', symbol: "comments"},
+        {name: "Support Tickets", view: 'admin', link: '/support_tickets', symbol: "comments"},
         {name: "Logout", view: 'all', link: '/users/logout', symbol: "sign-out-alt"}
     ]},
     {name: "Help", view: "all", symbol: "info-circle", links: [
-        {name: "Feedback/Contact", view: "all", link: '/feedback/provide', symbol: "bug"},
-        {name: "Support/Bug Report", view: "all", link: '/feedback/provide', symbol: "bug"},
+        {name: "Feedback/Contact", view: "all", link: '/feedback/provide', symbol: "comments"},
+        {name: "Support/Bug Report", view: "all", link: '/support_tickets/new', symbol: "bug"},
     ]},
 ]
 

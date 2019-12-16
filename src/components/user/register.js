@@ -13,6 +13,8 @@ class LogIn extends React.Component {
             password: "",
             confirmPassword: "",
             user_email: "",
+            user_role: 1,
+            user_kind: "end_user",
             mailing_list: true
           },
           sent: false,
@@ -135,6 +137,8 @@ class LogIn extends React.Component {
                       value={this.state.user.confirmPassword} />
                     <Form.Text>Required</Form.Text>
                 </Form.Group>
+
+              
                 <Form.Group>
                     <Form.Label>Recieve email updates?</Form.Label>
                     <Form.Control

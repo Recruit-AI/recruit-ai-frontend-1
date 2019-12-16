@@ -170,14 +170,14 @@ class FormHandler extends React.Component {
                 //This is a custom field for a symbol connections, which, if set, tells the backend to create an inverse "duplicate"
                 <DualConnectionField stateSettings={this.state} callback={this.toggleDuplicate} />
             }
-            { 
+            { /*
                 //BULK ADD is an admin feature that does not refresh the page/form on submit, allowing for much faster entry, reusing of form data
                 this.props.existing ? "" : 
                     <div>BULK ADD 
                         <input onChange={this.toggleBulkAdd} type="checkbox" checked={this.state.bulkAdd} />  
                         <p>BULK ADD is an admin feature that does not refresh the page/form on submit, allowing for much faster entry when entering in multiple articles, but YOU MUST MANUALLY REFRESH PAGE TO SEE CHANGES</p>  
                     </div> 
-            }
+            */ }
 
             <button type='submit'>{this.props.existing ? `Edit` : "Add"}</button>
             <button onClick={this.props.deleteItem}>Delete</button>

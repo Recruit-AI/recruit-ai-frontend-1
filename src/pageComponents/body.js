@@ -4,7 +4,9 @@ import {Switch, Route} from 'react-router-dom'
 import Home from '../views/home';
 import UserComponent from '../views/misc/user';
 import AdminComponent from '../views/misc/admin';
+
 import FeedbackComponent from '../views/misc/feedback';
+import SupportComponent from '../components/support_tickets/controller';
 
 import PageController from '../components/pages/page-controller'
 import PostController from '../components/posts/controller'
@@ -16,6 +18,8 @@ function Body(props) {
             <Route path="/" exact component={Home} />
 
             <Route path="/feedback" component={FeedbackComponent} />
+            <Route path="/support_tickets" component={SupportComponent} />
+
 
             <Route path="/pages" component={PageController} />
             <Route path="/posts" component={PostController} />

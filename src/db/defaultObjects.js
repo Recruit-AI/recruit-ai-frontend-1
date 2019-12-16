@@ -12,6 +12,16 @@ const defaultObjects = {
         blog_text: "Please enter the body text here.",
         blog_category: "Blog",
         blog_tags: []
+    },
+    support_ticket: {
+        support_ticket_kind: 1,
+        support_ticket_message: "",
+        support_ticket_name: "",
+        support_ticket_email: "",
+        require_update: true,
+        support_ticket_state: "pending",
+        public_notes_text: "The ticket has been created and is awaiting an open staff member.",
+        private_notes_text: "Please make your notes here."
     }
 }
 

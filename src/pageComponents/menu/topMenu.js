@@ -19,16 +19,16 @@ class Menu extends React.Component {
     this.setState({site_pages: pages.data})
   }
 
-  sitePagesCategories = ['Features', 'About']
-  siteBlogTypes = ["News", "Blog"]
+  sitePagesCategories = [['Features', 'exclamation'], ['About', 'question']]
+  siteBlogTypes = [["News", 'newspaper'], ["Blog", 'pencil-alt']]
 
   sitePagesStructure = () => {
     let returnStructure = []
     this.sitePagesCategories.map(category => {
-      let categoryDropdown = {name: category, view: 'all', symbol: ''}
+      let categoryDropdown = { name: category[0], view: 'all', symbol: category[1] }
       let dropdownOptions = []
       this.state.site_pages.map(page => {
-        if(page.page_category === category) {
+        if(page.page_category === category[0]) {
           dropdownOptions.push({name: page.page_title, view: "all", link: `/pages/${page.site_page_id}?article=${page.page_title}`, symbol: page.page_symbol})
         }
       })
@@ -41,7 +41,7 @@ class Menu extends React.Component {
   siteContentStructure = () => {
     let returnStructure = { name: "Content", view: "all", symbol: "star" }
     let dropdownOptions = []
-    this.siteBlogTypes.map(name => dropdownOptions.push({name, view: 'all', link: `/posts?category=${name}`, symbol: 'star' }))
+    this.siteBlogTypes.map(name => dropdownOptions.push({name: name[0], view: 'all', link: `/posts?category=${name[0]}`, symbol: name[1] }))
     returnStructure.links = dropdownOptions
     return returnStructure
   }

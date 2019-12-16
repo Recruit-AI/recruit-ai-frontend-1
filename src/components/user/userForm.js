@@ -51,7 +51,7 @@ class UserForm extends React.Component {
     return <div className="tpBlackBg">
         { !this.state.sent ?
         <div>
-          <h2>Edit Your Profile</h2>
+          <h2>Account Settings</h2>
           <Form onSubmit={this.submitForm} className="handlerForm" style={{width:'100%', maxWidth: '800px', margin:'auto',backgroundColor:this.state.formColor}}>
 
             <Form.Group>
@@ -69,27 +69,6 @@ class UserForm extends React.Component {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>User Bio</Form.Label>
-              <Form.Control as="textarea" rows={5} onChange={this.handleChange} type="text"
-                name={ "user_bio" } placeholder={ "User Bio" }
-                value={this.state.user[ "user_bio" ]} />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>User Link</Form.Label>
-              <Form.Control onChange={this.handleChange} type="text"
-                name={ "user_link" } placeholder={ "Your External Link" }
-                value={this.state.user[ "user_link" ]}  />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>User Link Display Text</Form.Label>
-              <Form.Control onChange={this.handleChange} type="text"
-                name={ "user_link_description" } placeholder={ "Link Display Text" }
-                value={this.state.user[ "user_link_description" ]}   />
-            </Form.Group>
-
-            <Form.Group>
                 <Form.Label>Recieve email updates?</Form.Label>
                 <Form.Control
                   onChange={this.handleCheck} type="checkbox"
@@ -98,10 +77,7 @@ class UserForm extends React.Component {
                 <Form.Text>We don't send spam, we keep your email address secure, and we make our "Unsubscribe" button easy to find.</Form.Text>
             </Form.Group>
 
-
-
-
-
+            {JSON.stringify(this.state.user)}
 
             <button type='submit'>Submit</button>
 
