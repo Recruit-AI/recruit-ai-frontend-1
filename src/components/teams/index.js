@@ -13,7 +13,8 @@ class Page extends React.Component {
         this.state = {
             teams: [],
             params: params,
-            update: true
+            update: true,
+            formColor: 'transparent'
         }
     }
 
@@ -49,6 +50,8 @@ class Page extends React.Component {
         axios
             .get(api.apiPath(`/teams/join/${e.target.getAttribute('data-id')}`), headers)
             .then(res => { 
+                this.setState({ formColor: "rgba(0,200,0,.4)", user: res.data })
+                setTimeout(() => { this.setState({ formColor: "transparent" }) }, 500)
                 
             })
             .catch(err => console.log(err));
@@ -56,7 +59,7 @@ class Page extends React.Component {
 
     render() {
         const teams = this.state.teams
-        return <div className="tpBlackBg">
+        return <div className="tpBlackBg" style={{backgroundColor:this.state.formColor}}>
             <h1>Team Search</h1>
             <hr />
             {teams.map(
