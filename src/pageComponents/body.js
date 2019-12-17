@@ -11,6 +11,8 @@ import SupportComponent from '../components/support_tickets/controller';
 import PageController from '../components/pages/page-controller'
 import PostController from '../components/posts/controller'
 
+import AthleteController from '../components/athletes/controller'
+import TeamController from '../components/teams/controller'
 
 function Body(props) {
     return <div className="body"><div className="page-container">
@@ -26,6 +28,9 @@ function Body(props) {
 
             <Route path="/users" render={() => <UserComponent {...props} auth={props.auth} />} />
             <Route path="/admin" component={AdminComponent} />
+
+            <Route path="/athletes" component={AthleteController} />
+            <Route path="/teams" component={TeamController} />
 
             <Route path="/" render={() => <div className="controller"><div className="tpBlackBg">
                 <h2>We're Sorry</h2>

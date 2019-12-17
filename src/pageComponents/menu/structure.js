@@ -20,6 +20,7 @@ export default  [
         {name: "Forgot My Password", view: "all", link: '/users/forgottenPassword', symbol: ""},
     ]},
     {name: "Account", view: "logged_in", symbol: "user", links: [
+        {name: "Athletes", view: "all", link: '/athletes', symbol: "user-circle"},
         {name: "Dashboard", view: "all", link: '/users/dashboard', symbol: "user-circle"},
         {name: "View Profile", view: "all", linkTo: 'user_profile', symbol: "address-card"},
         {name: "Edit Profile", view: "all", link: '/users/edit', symbol: "user-cog"},

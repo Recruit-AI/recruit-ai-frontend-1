@@ -15,7 +15,8 @@ const checkTextField = (pair) => {
 
 const checkIdSelectField = (pair) => {
     return fieldContains(pair, '_id') && 
-    fieldDoesNotContain(pair, ['foreign'])
+    fieldDoesNotContain(pair, ['foreign']) &&
+    fieldIsNot(pair, ['recruiting_personnel_id'])
 }
 
 const checkArrayOptionsField = (pair) => {

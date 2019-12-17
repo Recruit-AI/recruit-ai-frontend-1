@@ -89,13 +89,6 @@ class LogIn extends React.Component {
             <Form onSubmit={this.handleLogin} style={{maxWidth:"800px", width:"100%", margin:"auto", backgroundColor:this.state.formColor}}>
             
             <h2>Create an Account</h2>
-            <hr />
-            <h4>Creating an account allows you to:</h4>
-            <p>Sign up for notifications on the official & new releases</p>
-            <p>Edit & create articles & information</p>
-            <h4>Coming Soon</h4>
-            <p>Take private notes on each article</p>
-            <p>Create spells & decide public or private individually</p>
             
             <hr />
 

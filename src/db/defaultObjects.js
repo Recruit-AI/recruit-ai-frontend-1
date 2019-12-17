@@ -2,14 +2,14 @@
 const defaultObjects = {
     page: {
         page_title: "",
-        page_body_text: "Please enter the body text here.",
+        page_body_text: "",
         page_category: "About",
         page_symbol: "star",
         page_order: 0
-    },  
+    },
     post: {
         blog_title: "",
-        blog_text: "Please enter the body text here.",
+        blog_text: "",
         blog_category: "Blog",
         blog_tags: []
     },
@@ -21,8 +21,42 @@ const defaultObjects = {
         require_update: true,
         support_ticket_state: "pending",
         public_notes_text: "The ticket has been created and is awaiting an open staff member.",
-        private_notes_text: "Please make your notes here."
+        private_notes_text: ""
+    },
+    athlete: {
+        preferred_name: "",
+        recruiting_personnel_id: 0,
+        notes: "",
+        application_process: {
+            school_application: false,
+            test_scores: false,
+            transcripts: false,
+            fafsa: false,
+            scholarship_offer: false,
+            visited_school: false,
+            accepted_offer: false,
+            classes_scheduled: false,
+            housing_selected: false,
+            financial_aid_accepted: false,
+        },
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        city: "",
+        state: "",
+        high_school_name: "",
+        school_year: "",
+        height: 60,
+        weight: 100
+    },
+    team: {
+        team_name: "",
+        admissions_email_address: "",
+        visit_reporting_address: "",
+        visit_reporting_instructions: ""
     }
+
 }
 
 
@@ -41,11 +75,11 @@ const defaultNewObj = (classKind) => {
 //Takes in an item, and returns the default object with the item's values imposed on top.
 const defaultFullFields = (classKind, item) => {
     const defaultObj = defaultNewObj(classKind);
-    
+
     const formFields = {}
 
     defaultObj.fields.forEach((key) => {
-      formFields[key] = item[key] ? item[key] : defaultObj.values[key]
+        formFields[key] = item[key] ? item[key] : defaultObj.values[key]
     });
 
     console.log(formFields)
@@ -53,4 +87,4 @@ const defaultFullFields = (classKind, item) => {
     return formFields
 }
 
-export default {defaultNewFields, defaultNewObj, defaultFullFields}
+export default { defaultNewFields, defaultNewObj, defaultFullFields }

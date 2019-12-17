@@ -17,11 +17,11 @@ export default (props) => {
             onChange={callback} 
             name={field[0]} 
             placeholder={field[0]}
-            value={item[field[0]]}
+            value={props.value || item[field[0]]}
             
             as={as_setting}
             rows={5}
-            checked={item[field[0]]} />
+            checked={props.value || item[field[0]]} />
 
     </Form.Group>
 }
