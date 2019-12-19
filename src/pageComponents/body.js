@@ -13,6 +13,7 @@ import PostController from '../components/posts/controller'
 
 import AthleteController from '../components/athletes/controller'
 import TeamController from '../components/teams/controller'
+import VisitController from '../components/visits/controller'
 
 function Body(props) {
     return <div className="body"><div className="page-container">
@@ -31,6 +32,7 @@ function Body(props) {
 
             <Route path="/athletes" component={AthleteController} />
             <Route path="/teams" component={TeamController} />
+            <Route path="/visits" component={VisitController} />
 
             <Route path="/" render={() => <div className="controller"><div className="tpBlackBg">
                 <h2>We're Sorry</h2>

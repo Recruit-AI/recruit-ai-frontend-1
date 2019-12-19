@@ -66,15 +66,15 @@ class FormHandler extends React.Component {
         const results = await this.props.submitForm(this.state.bulkAdd);
         const res = results.apiCall
         const redirectPath = results.redirect
-        
+
         if (res.status === 200 || res.status === 201) {
             this.formStatus('success');
-            if(redirectPath && !this.state.bulkAdd) { this.props.history.push(redirectPath) }
+            if (redirectPath && !this.state.bulkAdd) { this.props.history.push(redirectPath) }
         } else {
             this.formStatus('error');
-            if(res.response && res.response.status === 400) {
-              this.setState({error: res.response.data.message})
-            } else { this.setState({error: "Unknown error."}) }
+            if (res.response && res.response.status === 400) {
+                this.setState({ error: res.response.data.message })
+            } else { this.setState({ error: "Unknown error." }) }
         }
 
         setTimeout(() => { this.formStatus('complete') }, 250);
@@ -88,10 +88,10 @@ class FormHandler extends React.Component {
             onSubmit={this.submitForm}
             id={`${this.props.formClass}-${this.props.item.id}`} >
 
-            {this.state.error ?  
-            <div style={{backgroundColor: 'rgba(200,0,0,.4)', padding:'10px'}}>{this.state.error}</div>
-            : ""}
-            
+            {this.state.error ?
+                <div style={{ backgroundColor: 'rgba(200,0,0,.4)', padding: '10px' }}>{this.state.error}</div>
+                : ""}
+
             {Object.entries(this.props.item).map(itemField => <div key={itemField[0]}>
 
                 {
@@ -154,35 +154,69 @@ class FormHandler extends React.Component {
                         <ExtraInfoDefaultField item={this.props.item} fieldsObject={itemField[1]} handleExtraInfoChange={this.handleExtraInfoChange} /> : ""
                 }
 
+
                 {
-                    itemField[0] === 'application_process' ?
-                    <div><h4>Application Process:</h4> <br />
-                    {
-                    Object.entries(itemField[1])
-                        .map(step => <div>
-                            <BasicBooleanField value={step[1]} field={step} callback={this.handleAppProcessCheck} item={this.props.item} />
-                            
-                            </div>
-                        )
-                        
-                    }
-                    
-                    </div>
-                    :""
+                    itemField[0] === 'school_year' ?
+                        <div>
+                            <Form.Group>
+                                <Form.Label>
+                                    School Year
+                                </Form.Label>
+
+                                <div>
+                                    <Form.Control style={{ backgroundColor: this.state.backgroundColor }} as="select" value={itemField[1]} onChange={this.handleYearChange}>
+                                        {
+                                            ['09 Freshman', '10 Sophomore', '11 Junior', '12 Senior'].map(option =>
+                                                <option key={option} value={`${option}`} >
+                                                    {option}
+                                                </option>)
+                                        }
+                                    </Form.Control>
+                                </div>
+
+
+
+                            </Form.Group>
+                        </div> : ""
                 }
 
-                { /* ADD hidden fields here */ }
+                {
+                    itemField[0] === 'time_options' && this.props.item.visit_status === 'pending' ?
+                        <div>
+                            <ArrayField type='datetime-local' datearray={true} item={this.props.item} field={itemField[0]} array={itemField[1]} handleArrayChange={this.handleDateArrayChange} />
+                        </div> : ""
+                }
+
+                {
+                    itemField[0] === 'application_process' ?
+                        <div><h4>Application Process:</h4> <br />
+                            {
+                                Object.entries(itemField[1])
+                                    .map(step => <div>
+                                        <BasicBooleanField value={step[1]} field={step} callback={this.handleAppProcessCheck} item={this.props.item} />
+
+                                    </div>
+                                    )
+
+                            }
+
+                        </div>
+                        : ""
+                }
+
+                { /* ADD hidden fields here */}
                 {itemField[0] === 'foreign_id' ? <Input type="hidden" name="foreign_id" value={this.props.item.foreign_id} /> : ""}
                 {itemField[0] === 'foreign_key' ? <Input type="hidden" name="foreign_key" value={this.props.item.foreign_key} /> : ""}
                 {itemField[0] === 'foreign_class' ? <Input type="hidden" name="foreign_class" value={this.props.item.foreign_class} /> : ""}
-                
-                { /* Add any notes for any fields here */ }
-                {itemField[0] === 'start_year' ? "Values greater than 0 are treated as AD, and negative values are treated as BCE." : ""}
-                {itemField[0] === 'end_year' ? "Values greater than 0 are treated as AD, and negative values are treated as BCE. Enter '2100' exactly if the pantheon is still living." : ""}
+
+                { /* Add any notes for any fields here */}
+                {itemField[0] === 'height' ? "In inches." : ""}
+                {itemField[0] === 'weight' ? "In pounds." : ""}
+                {itemField[0] === 'phone' ? "Only use numbers, DO NOT use any formatting." : ""}
 
             </div>)}
 
-            { /* These are fields that are targeted by classForm */ }
+            { /* These are fields that are targeted by classForm */}
             {
                 //This is a custom field for a symbol connections, which, if set, tells the backend to create an inverse "duplicate"
                 <DualConnectionField stateSettings={this.state} callback={this.toggleDuplicate} />
@@ -239,6 +273,14 @@ class FormHandler extends React.Component {
         })
     }
 
+    handleDateArrayChange = (field, array) => {
+        array = array.map(a => { return new Date(a).toUTCString() })
+        this.props.updateItem({
+            ...this.props.item,
+            [field]: array
+        })
+    }
+
     handleInfoChange = (e) => {
         this.props.updateItem({
             ...this.props.item,
@@ -283,12 +325,16 @@ class FormHandler extends React.Component {
         })
     }
 
+    handleYearChange = (e) => {
+        this.props.updateItem({...this.props.item, school_year: e.target.value})
+    }
+
     toggleDuplicate = (e) => {
         this.setState({ duplicateConnection: !this.state.duplicateConnection })
     }
-    
+
     toggleBulkAdd = (e) => {
-        this.setState({bulkAdd: !this.state.bulkAdd})
+        this.setState({ bulkAdd: !this.state.bulkAdd })
     }
 
 

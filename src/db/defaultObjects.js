@@ -55,6 +55,15 @@ const defaultObjects = {
         admissions_email_address: "",
         visit_reporting_address: "",
         visit_reporting_instructions: ""
+    },
+    visit: {
+        visit_team_id: 0,
+        visit_athlete_id: 0,
+        visit_personnel_id: 0,
+        visit_status: "pending",
+        reporting_address: "",
+        reporting_instructions: "",
+        time_options: [Date.now(), Date.now(), Date.now()]
     }
 
 }
@@ -81,8 +90,6 @@ const defaultFullFields = (classKind, item) => {
     defaultObj.fields.forEach((key) => {
         formFields[key] = item[key] ? item[key] : defaultObj.values[key]
     });
-
-    console.log(formFields)
 
     return formFields
 }

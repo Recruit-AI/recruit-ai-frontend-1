@@ -80,7 +80,9 @@ class UserForm extends React.Component {
   render() {
     const user = this.state.user
     const info = user.userInfo
+  
     let error = []
+
     const basicInfo = info.user_first_name === "" || 
     info.user_last_name === "" || 
     info.user_professional_title === "" ||

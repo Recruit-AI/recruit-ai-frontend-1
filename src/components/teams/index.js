@@ -50,7 +50,9 @@ class Page extends React.Component {
         axios
             .get(api.apiPath(`/teams/join/${e.target.getAttribute('data-id')}`), headers)
             .then(res => { 
-                this.setState({ formColor: "rgba(0,200,0,.4)", user: res.data })
+                this.setState({ formColor: "rgba(0,200,0,.4)" })
+                console.log(res.data)
+                localStorage.setItem('user', JSON.stringify(res.data.user))
                 setTimeout(() => { this.setState({ formColor: "transparent" }) }, 500)
                 
             })

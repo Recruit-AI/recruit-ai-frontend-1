@@ -21,10 +21,9 @@ class Requests extends React.Component {
     loadPage = () => {
         axios
             .get(api.apiPath(`/teams/join-requests`), headers)
-            .then(res => {
+            .then(res =>
               this.setState({requests: res.data})
-              this.props.loadPage();
-            })
+            )
             .catch(err => console.log(err) );
     }
 
@@ -56,7 +55,7 @@ class Requests extends React.Component {
                 <span className="format-link" onClick={this.declineJoin} data-id={req.user_id}>Decline Join</span>
 
                 <br /><hr />
-            </div>)} {this.state.requests.length === 0 ? "N/a" : ""}
+            </div>)}
         </div>
     }
 

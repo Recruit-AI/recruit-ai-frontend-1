@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import JoinRequests from './requests'
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
+const headers = { headers: {'authorization': localStorage.token} }
 
 class Page extends React.Component {
     constructor(props) {
@@ -32,6 +33,16 @@ class Page extends React.Component {
             .catch(err => console.log(err) );
     }
 
+    
+    declineJoin = (e) => {
+        axios
+            .get(api.apiPath(`/teams/decline/${e.target.getAttribute('data-id')}`), headers)
+            .then(res => { 
+                this.loadPage();
+            })
+            .catch(err => console.log(err));
+    }
+
     render() {
         const team = this.state.team
         const owned = team.account_moderator_id === curr_user.user_id 
@@ -40,7 +51,12 @@ class Page extends React.Component {
             <h3>Team</h3>
             <h1>{team.team_name}</h1>
             <h2>Staff</h2>
-            {team.teamMembers ? team.teamMembers.map(s => <div>{s.user_display_name}</div>) : ""}
+            {team.teamMembers ? team.teamMembers.map(s => <div>
+                {s.user_display_name}
+                {s.foreign_user_id !== curr_user.user_id ? 
+                <span className="format-link" onClick={this.declineJoin} data-id={s.foreign_user_id}>Remove From Team</span>
+                : ""}
+                </div>) : ""}
             <h3>Admissions Email</h3>
             {team.admissions_email_address}
             <h3>Visit Address</h3>
@@ -51,7 +67,7 @@ class Page extends React.Component {
 
             { owned ? <Link to={`/teams/${team.team_id}/edit`}>Edit Team Details</Link> : "" }
 
-            { owned ? <JoinRequests /> : "" } 
+            { owned ? <JoinRequests loadPage={this.loadPage} /> : "" } 
         </div>
     }
 }

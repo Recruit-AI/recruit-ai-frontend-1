@@ -8,6 +8,7 @@ import HandleForm from '../forms/handler'
 import defaults from  '../../db/defaultObjects'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
+const headers = { headers: {'authorization': localStorage.token} }
 
 class NewPage extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class NewPage extends React.Component {
   updateInfo = (props = this.props) => {
       const id = props.match.params.id
       axios
-          .get(api.apiPath(`/athletes/${id}`))
+          .get(api.apiPath(`/athletes/${id}`), headers)
           .then(res =>
             this.setState({post: res.data})
           )
@@ -36,6 +37,8 @@ class NewPage extends React.Component {
     const formFields = defaults.defaultFullFields('athlete', item)
     formFields.recruiting_personnel_id = curr_user.user_id
     formFields.team_id = curr_user.userInfo.team_id
+    delete formFields.notes 
+    delete formFields.application_process
 
     return <div  className="tpBlackBg">
 

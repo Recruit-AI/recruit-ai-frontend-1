@@ -13,6 +13,10 @@
 //linkTo- dynamic linking set in topMenu.js
 //links- sets the dropdown
 
+
+const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
+
+
 export default  [
     {name: "Sign Up", view: "no_user", symbol: "user", links: [
         {name: "Register", view: "all", link: '/users/register', symbol: ""},
@@ -20,10 +24,11 @@ export default  [
         {name: "Forgot My Password", view: "all", link: '/users/forgottenPassword', symbol: ""},
     ]},
     {name: "Account", view: "logged_in", symbol: "user", links: [
-        {name: "Athletes", view: "all", link: '/athletes', symbol: "user-circle"},
+        {name: "Alerts", view: "end_user", link: '/', symbol: "exclamation"},
+        {name: "Athletes", view: "end_user", link: '/athletes', symbol: "running"},
+        {name: "Visits", view: "end_user", link: '/visits', symbol: "calendar-alt"},
+        {name: "Team", view: "end_user", link: `/teams/${curr_user && curr_user.userInfo ? curr_user.userInfo.team_id : ""}`, symbol: "users"},
         {name: "Dashboard", view: "all", link: '/users/dashboard', symbol: "user-circle"},
-        {name: "View Profile", view: "all", linkTo: 'user_profile', symbol: "address-card"},
-        {name: "Edit Profile", view: "all", link: '/users/edit', symbol: "user-cog"},
         {name: "User List", view: 'admin', link: '/admin/users', symbol: "users"},
         {name: "Logs", view: 'admin', link: '/admin/logs', symbol: "cogs"},
         {name: "Feedback", view: 'admin', link: '/feedback', symbol: "comments"},
@@ -35,12 +40,3 @@ export default  [
         {name: "Support/Bug Report", view: "all", link: '/support_tickets/new', symbol: "bug"},
     ]},
 ]
-
-
-// {name: "Correspondences", view: "all", symbol: "info-circle", links: [
-//     {name: "Tarot Cards", view: "all", link: '/pages/mission', symbol: "bullseye"},
-//     {name: "Astrology Signs", view: "all", link: '/pages/questions', symbol: "question"},
-//     {name: "Crystals", view: "all", link: '/resources', symbol: 'atlas'},
-//     {name: "Chakras", view: "all", link: '/feedback/provide', symbol: "bug"},
-//     {name: "Flowers, Herbs, Incense", view: "all", link: '/pages/help', symbol: "exclamation"},
-// ]},

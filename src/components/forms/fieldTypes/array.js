@@ -29,6 +29,37 @@ class ArrayField extends React.Component {
     return name.replace(/_/g, ' ').replace(/(?: |\b)(\w)/g, function(key) { return key.toUpperCase()})
   }
 
+  dateValue = (d) => {
+    let value = new Date(d)
+    
+    const tz = value.getTimezoneOffset()
+    let hours = value.getHours()
+    hours = hours - tz/60
+    console.log(value, value.setHours(hours) )
+    value = value.toISOString()
+    return value.substring(0, value.length - 1)
+  }
+
+  stringifyDate = (d) => {
+    if(typeof d === 'string') { d = new Date(d) }
+
+    const date = d,
+    v = [
+        date.getFullYear(),
+        date.getMonth()+1,
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getDay(),
+        date.getTimezoneOffset()
+    ];
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    const hours = v[3] > 12 ? v[3] - 12 : v[3]
+    const mm = v[3] > 12 ? "pm" : "am"
+    const minutes = v[4] < 10 ? `0${v[4]}` : v[4]
+    return `${days[v[5]]} ${v[1]}/${v[2]} @ ${hours}:${minutes} ${mm}`
+}
+
   render() {
     const {field, array, item} = this.props
     return <div>
@@ -39,12 +70,13 @@ class ArrayField extends React.Component {
             item[ field ].map( (item, index) => <span key={index}>
               <Form.Control
                 onChange={this.handleArrayChange}
-                type='text'
-                value={item}
+                type={this.props.type || 'text'}
+                { ...(this.props.datearray ? null : {value: item}) } 
                 name={`${field}-${index}`} />
+                {this.props.datearray ? this.stringifyDate(new Date(item)) : ""}
               </span> )
             : <Form.Control onChange={this.handleArrayChange} type='text' placeholder="Start typing" name={`${field}-${0}`} />}
-          <i>Hit ";" to add a new field. Backspace completely to delete one.</i>
+          {!this.props.type ? <i>Hit ";" to add a new field. Backspace completely to delete one.</i> : "" }
     </Form.Group>
     </div>
   }

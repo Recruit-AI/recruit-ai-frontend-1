@@ -34,11 +34,14 @@ class LogIn extends React.Component {
           .then(res => {
             this.setState({formColor: 'rgba(0,200,0,.4)'})
             this.props.auth.login( res.data.user, res.data.token )
-            setTimeout(() => {window.location.replace('/users/edit/?loggedIn=true')}, 200)
+            if(res.data.user.user_kind === 'end_user') {
+              setTimeout(() => {window.location.replace('/users/edit/?loggedIn=true')}, 200)
+            } else {
+              setTimeout(() => {window.location.replace('/')}, 200)
+            }
 
           })
           .catch((err, res) => {
-            console.log(err, err.response.data.message)
             if(err.response.data.message === "Invalid Credentials.") {
               this.setState({formColor: 'rgba(200,0,0,.4)', error: "The information you entered does not match our records. Please try again."})
               setTimeout(() => {this.setState({formColor: 'transparent'})}, 2000)

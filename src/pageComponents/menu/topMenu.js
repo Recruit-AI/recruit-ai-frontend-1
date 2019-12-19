@@ -19,13 +19,13 @@ class Menu extends React.Component {
     this.setState({site_pages: pages.data})
   }
 
-  sitePagesCategories = [['Features', 'exclamation'], ['About', 'question']]
+  sitePagesCategories = [['Features', 'exclamation', 'no_user'], ['About', 'question', 'all']]
   siteBlogTypes = [["News", 'newspaper'], ["Blog", 'pencil-alt']]
 
   sitePagesStructure = () => {
     let returnStructure = []
     this.sitePagesCategories.map(category => {
-      let categoryDropdown = { name: category[0], view: 'all', symbol: category[1] }
+      let categoryDropdown = { name: category[0], view: category[2], symbol: category[1] }
       let dropdownOptions = []
       this.state.site_pages.map(page => {
         if(page.page_category === category[0]) {
