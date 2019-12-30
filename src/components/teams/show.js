@@ -53,7 +53,7 @@ class Page extends React.Component {
             <h2>Staff</h2>
             {team.teamMembers ? team.teamMembers.map(s => <div>
                 {s.user_display_name}
-                {s.foreign_user_id !== curr_user.user_id ? 
+                {s.foreign_user_id !== curr_user.user_id && owned ? 
                 <span className="format-link" onClick={this.declineJoin} data-id={s.foreign_user_id}>Remove From Team</span>
                 : ""}
                 </div>) : ""}

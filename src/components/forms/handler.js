@@ -40,7 +40,8 @@ class FormHandler extends React.Component {
       } else {
         apiCall = await axios.post(url, payload, headers)
       }
-      if(!bulkAdd) { await this.props.update() }
+      if(this.props.blockRedirect) { await this.props.update(apiCall) }
+      else if(!bulkAdd) { await this.props.update() }
       return apiCall
     }
   
@@ -53,11 +54,15 @@ class FormHandler extends React.Component {
 
     var apiCall, redirect;
 
+    if(this.props.apiRoute){
+      var overwritePath = api.apiPath(this.props.apiRoute)
+    }
+
     if(this.state.existing) {
-      apiCall = await this.updateAPI('put', putURL, item, bulkAdd)
+      apiCall = await this.updateAPI('put', overwritePath || putURL, item, bulkAdd)
       redirect = null
     } else {
-      apiCall = await this.updateAPI('post', postURL, item, bulkAdd)
+      apiCall = await this.updateAPI('post', overwritePath || postURL, item, bulkAdd)
       redirect = this.redirectEditPath(apiCall)
     }
 
@@ -79,10 +84,11 @@ class FormHandler extends React.Component {
 
 
   render() {
-    const show = curr_user
+    const show = curr_user || this.props.public
     return show ?
       <div className='full-form'>
         <BuildForm 
+          {...this.props}
           item={this.state.item} 
           updateItem={this.updateItem} 
           submitForm={this.submitForm} 
@@ -94,7 +100,9 @@ class FormHandler extends React.Component {
   }
 
   redirectEditPath = (res) => {
-    if(this.props.redirect) {
+    if(this.props.blockRedirect) {
+      return false
+    }if(this.props.redirect) {
       return this.props.redirect
     } else {
       let redirectId = res.data[this.props.redirectIdField]

@@ -35,6 +35,7 @@ class Profile extends React.Component {
 
             <p>{curr_user.userInfo.user_display_name}</p>
             <Link className='nice-button' to="/alerts">Your Alerts</Link><br />
+            <Link className='nice-button' to="/messages">Your Messages</Link><br />
             <Link className='nice-button' to="/athletes">Your Recruits</Link><br />
             <Link className='nice-button' to="/visits">Your Visits</Link><br />
             <Link className='nice-button' to={`/teams/${curr_user.userInfo.team_id}`}>Your Team</Link><br />

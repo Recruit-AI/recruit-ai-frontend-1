@@ -3,6 +3,8 @@ import axios from 'axios'
 import api from '../../helpers/api'
 import { Link } from 'react-router-dom'
 
+const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
+
 class Page extends React.Component {
     constructor(props) {
         super(props)
@@ -48,16 +50,14 @@ class Page extends React.Component {
             <h1>{posts[0] ? posts[0].blog_category : "LOADING"}</h1>
             <hr />
             {posts.map(
-                (post) => <div>
+                (post) => <Link to={`/posts/${post.site_blog_id}`} style={{display:"block"}}>
                     <h4>{post.blog_title}</h4>
                     {post.blog_tags.join(', ')}
-                    <Link to={`/posts/${post.site_blog_id}`}>View</Link>
-                    <Link to={`/posts/${post.site_blog_id}/edit`}>Edit</Link>
-                    <hr />
-                </div>
+                    { curr_user.user_role === 3 ? <Link to={`/posts/${post.site_blog_id}/edit`}>Edit</Link> : "" }
+                    </Link>
 
             )}
-            <Link to={`/posts/new`}>Add New +</Link>
+            { curr_user.user_role === 3 ? <Link to={`/posts/new`}>Add New +</Link> : "" }
         </div>
     }
 }

@@ -64,6 +64,13 @@ const defaultObjects = {
         reporting_address: "",
         reporting_instructions: "",
         time_options: [Date.now(), Date.now(), Date.now()]
+    },
+    message: {
+        message_team_id: 0,
+        message_athlete_id: 0,
+        message_personnel_id: 0,
+        message_type: "outgoing",
+        message_text: ""
     }
 
 }

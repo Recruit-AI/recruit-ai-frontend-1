@@ -24,7 +24,8 @@ export default  [
         {name: "Forgot My Password", view: "all", link: '/users/forgottenPassword', symbol: ""},
     ]},
     {name: "Account", view: "logged_in", symbol: "user", links: [
-        {name: "Alerts", view: "end_user", link: '/', symbol: "exclamation"},
+        {name: "Messages", view: "end_user", link: '/messages', symbol: "comments"},
+        {name: "Alerts", view: "end_user", link: '/alerts', symbol: "exclamation"},
         {name: "Athletes", view: "end_user", link: '/athletes', symbol: "running"},
         {name: "Visits", view: "end_user", link: '/visits', symbol: "calendar-alt"},
         {name: "Team", view: "end_user", link: `/teams/${curr_user && curr_user.userInfo ? curr_user.userInfo.team_id : ""}`, symbol: "users"},

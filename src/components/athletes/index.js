@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import api from '../../helpers/api'
 import { Link } from 'react-router-dom'
+import Pagination from '../shared/pagination'
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 const headers = { headers: {'authorization': localStorage.token} }
@@ -16,7 +17,9 @@ class Page extends React.Component {
             update: true,
             sort: params.get('sort') || "preferred_name",
             order: params.get('order') || "asc",
-            filter: params.get('filter') || "team"
+            filter: params.get('filter') || "team",
+            pager: {},
+            pageNumber: params.get('page') || 1,
         }
     }
 
@@ -36,10 +39,20 @@ class Page extends React.Component {
         axios
             .get(api.apiPath(`/athletes`+ '?' + params.toString() ), headers)
             .then(res => { 
-                this.setState({ athletes: res.data, params, update: false })
+                this.setState({ athletes: res.data.pageOfItems,
+                    pager: res.data.pager,
+                    params, update: false })
             })
             .catch(err => console.log(err));
     }
+
+    goToPage = (e) => {
+        let params = this.state.params
+        const pageNumber =  e.target.attributes.page.value
+        params.set('page', pageNumber)
+        this.setState({pageNumber, params, update:true})
+        window.history.replaceState({}, "", window.location.pathname + '?' + params.toString());
+      }
 
     handleSort = (e) => {
         const params = this.state.params
@@ -79,6 +92,9 @@ class Page extends React.Component {
                 <option value="personal">Personal</option>
             </select>
             <hr />
+
+            <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
+
             {athletes.map(
                 (athlete) => <div>
                     <b>{athlete.preferred_name}</b> ({athlete.first_name} {athlete.last_name}); {athlete.school_year} at {athlete.high_school_name} ({athlete.city}, {athlete.state});  

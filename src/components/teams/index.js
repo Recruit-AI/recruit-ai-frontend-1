@@ -14,6 +14,7 @@ class Page extends React.Component {
             teams: [],
             params: params,
             update: true,
+            search: params.get('search') || "",
             formColor: 'transparent'
         }
     }
@@ -23,20 +24,13 @@ class Page extends React.Component {
     }
 
     componentDidUpdate = (pProps, pState) => {
-        
-        const differentPages = this.state.params.toString() !== new URLSearchParams(window.location.search).toString()
-        const changingUpdate = pState.update !== this.state.update
-
-        if(this.state.update || (differentPages && !changingUpdate)) {
+        if(this.state.update) {
             this.loadPage()
         }
     }
 
     loadPage = (props = this.props) => {
         let params = this.state.params
-        if(params.toString() !== new URLSearchParams(window.location.search)) {
-            params = new URLSearchParams(window.location.search)
-        }
         if(this.state.update){this.setState({update: false})}
         axios
             .get(api.apiPath(`/teams`+ '?' + params.toString() ))
@@ -51,18 +45,36 @@ class Page extends React.Component {
             .get(api.apiPath(`/teams/join/${e.target.getAttribute('data-id')}`), headers)
             .then(res => { 
                 this.setState({ formColor: "rgba(0,200,0,.4)" })
-                console.log(res.data)
                 localStorage.setItem('user', JSON.stringify(res.data.user))
-                setTimeout(() => { this.setState({ formColor: "transparent" }) }, 500)
+                setTimeout(() => {
+                    this.props.history.push("/users/edit");
+                    document.location.reload(true);
+                }, 500)
                 
             })
             .catch(err => console.log(err));
+    }
+
+    searchTeamName = (e) => {
+        e.preventDefault();
+        const params = this.state.params
+        params.set('search', this.state.search)
+        this.setState({update:true, params})
+    }
+
+    handleSearch = (e) => {
+        this.setState({search: e.target.value})
     }
 
     render() {
         const teams = this.state.teams
         return <div className="tpBlackBg" style={{backgroundColor:this.state.formColor}}>
             <h1>Team Search</h1>
+            <p>Please search for your team by name.</p>
+            <form onSubmit={this.searchTeamName}>
+            <input onChange={this.handleSearch} value={this.state.search} />
+            <button type="submit">Search</button>
+            </form>
             <hr />
             {teams.map(
                 (team) => <div>
@@ -72,7 +84,8 @@ class Page extends React.Component {
                 </div>
 
             )}
-            <Link to={`/teams/new`}>Add New +</Link>
+            <h2>-OR-</h2>
+            <Link className="nice-button" to={`/teams/new`}>Add Your Team +</Link>
         </div>
     }
 }

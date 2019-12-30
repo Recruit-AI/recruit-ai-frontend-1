@@ -24,7 +24,6 @@ class User extends React.Component {
     render() {
         return <div>
           <Switch>
-            {console.log(this.props)}
             <Route path="/users/login" exact render={() => <LogIn {...this.props} auth={this.props.auth} />} />
             <Route path="/users/register" exact component={Register} />
             <Route path="/users/verify/:username/:verify_hash" exact component={Verify} />

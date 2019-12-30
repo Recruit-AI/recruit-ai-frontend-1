@@ -230,8 +230,12 @@ class FormHandler extends React.Component {
                     </div> 
             */ }
 
-            <button type='submit'>{this.props.existing ? `Edit` : "Add"}</button>
-            <button onClick={this.props.deleteItem}>Delete</button>
+            <button type='submit'>{this.props.existing ? 
+            (this.props.editButtonText ? this.props.editButtonText : `Edit`) : "Add"}
+
+            </button>
+            { this.props.hideDeleteButton ? "" : 
+            <button onClick={this.props.deleteItem}>Delete</button> }
 
         </Form>
     }

@@ -1,7 +1,4 @@
 import React from 'react';
-import axios from 'axios';
-import {Link} from 'react-router-dom'
-import api from '../../helpers/api'
 
 import HandleForm from '../forms/handler'
 
@@ -17,19 +14,11 @@ class NewPage extends React.Component {
     }
   }
 
-  componentDidMount = () => { this.updateInfo(); }
-  componentWillReceiveProps = (newProps) => {this.updateInfo(newProps);}
-
-
-  updateInfo = (props = this.props) => {
-      const id = props.match.params.id
-      axios
-          .get(api.apiPath(`/teams/${id}`))
-          .then(res => {
-            this.setState({post: res.data.team})
-            localStorage.setItem('user', JSON.stringify(res.data.user))
-          })
-          .catch(err => console.log(err) );
+  updateInfo = (apiCall) => {
+    console.log(apiCall.data.user)
+    localStorage.setItem('user', JSON.stringify(apiCall.data.user))
+    this.props.history.push("/users/edit")
+    document.location.reload(true)
   }
 
   render() {
@@ -38,7 +27,7 @@ class NewPage extends React.Component {
 
     return <div  className="tpBlackBg">
 
-        <HandleForm item={formFields} formClass={"teams"} update={this.updateInfo} redirect={"/users/edit"}/>
+        <HandleForm item={formFields} formClass={"teams"} update={this.updateInfo} blockRedirect={true}/>
         
       </div>
   }

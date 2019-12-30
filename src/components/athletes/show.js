@@ -114,6 +114,7 @@ class Page extends React.Component {
              | 
             <span className="format-link" onClick={this.deleteAthlete}>Delete Athlete Record</span> 
 
+            <Link to={`/messages/${athlete.athlete_id}`}>Messages</Link>
             <h3>School Visits</h3> 
             {athlete.visits.map((visit, i) => <div>
                 {visit.visit_status.toUpperCase()} - {visit.chosen_time ? this.stringifyDate(visit.chosen_time) : ""}
