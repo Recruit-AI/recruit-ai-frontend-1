@@ -82,30 +82,23 @@ class Page extends React.Component {
         const visit = this.state.visit
 
         return <div>
-            <Link to="/visits">Back to All</Link> | 
-            <Link to={`/visits/${visit.visit_id}/edit`}>Update</Link>
-            <h3>Visit</h3>
-            Athlete Link: <input value={`https://recruit-ai.netlify.com/visits/${visit.visit_id}/choose`} />
-            <br /><i>Copy & Paste & send to athlete</i><br />
-
+            <Link to="/visits">Back to All</Link> <br />
+            <h3>{visit.preferred_name} {visit.last_name}'s Visit</h3>
             Recruiter: {visit.user_display_name} <br />
             
-            Athlete: {visit.preferred_name} <Link to={`/athletes/${visit.athlete_id}`}>See Profile</Link><br />
-            STATUS: {visit.visit_status} <br />
-            
+            <h5>Update Status:</h5>
+            Current: {visit.visit_status} <br />
             {visit.visit_status === 'chosen' ? 
-            <span className="format-link" data-id={visit.vist_id} onClick={this.confirmVisit}>Confirm</span> 
+            <span className="format-link" data-id={visit.vist_id} onClick={this.confirmVisit}>Confirm Choice</span> 
             : "" } <br />
 
             {visit.visit_status === 'confirmed' ? 
-            <span className="format-link" data-id={visit.vist_id} onClick={this.completeVisit}>Complete</span> 
+            <span className="format-link" data-id={visit.vist_id} onClick={this.completeVisit}>Completed Visit</span> 
             : ""}<br />
 
             {visit.visit_status === 'confirmed' ? 
             <span className="format-link" data-id={visit.vist_id} onClick={this.markMissed}>No Show</span> 
              : ""}<br />
-
-            <span className="format-link" onClick={this.deleteVisit}>Delete Visit Record</span> 
 
             <h3>Time & Date</h3>
             {visit.time_options && !visit.chosen_time ? 
@@ -117,6 +110,10 @@ class Page extends React.Component {
             <h3>Instructions</h3>
             {visit.reporting_address || visit.visit_reporting_address}<br />
             {visit.reporting_instructions || visit.visit_reporting_instructions}<br />
+
+            
+
+            <span className="format-link" onClick={this.deleteVisit}>Delete Visit Record</span> 
 
         </div>
     }

@@ -43,13 +43,13 @@ $dd-dark-color: #000000;
 
 //PAGE
 //MAIN BACKGROUND OPACITY
-$backgroundOpacityColor: $l-light-color;
+$backgroundOpacityColor: lighten($ll-secondary-color, 10%);
 
 //HEADER & MENUS
-$headerMenuColor: $ll-light-color;
-$menuLinkColor: $dark-color;
-$menuHoverColor: $ll-primary-color;
-$menuAccentColor: $menuLinkColor;
+$headerMenuColor: $d-secondary-color;
+$menuLinkColor: $ll-secondary-color;
+$menuHoverColor: $secondary-color;
+$menuAccentColor: $dark-color;
 
 //FOOTER
 $footerBackgroundColor: $d-secondary-color;
@@ -61,8 +61,8 @@ $headerFontColor: $d-secondary-color;
 $topFontColor: $d-highlight-color;
 
 //LINKS
-$linkColor: $d-primary-color;
-$linkBackground: $light-color;
+$linkColor: $d-dark-color;
+$linkBackground: $l-secondary-color;
 $linkHoverColor: $ll-light-color;
 $linkHoverBackground: $d-primary-color;
 

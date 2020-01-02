@@ -36,6 +36,8 @@
 	text-align: center;
 }
 
+ul { list-style:none;padding:0;}
+
 .main-bg {
 	background-color: $dark-color;
 	$weights: "https://images.pexels.com/photos/703016/pexels-photo-703016.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
@@ -46,13 +48,14 @@
 }
 .main-screen {
 	background: linear-gradient(
-		rgba($backgroundOpacityColor, .9) 10%,
-		rgba($backgroundOpacityColor, .85) 20%,
-		rgba($backgroundOpacityColor, .75) 40%,
-		rgba($backgroundOpacityColor, .65) 70%,
-		rgba($backgroundOpacityColor, .9) 100%
+		rgba($backgroundOpacityColor, 1) 10%,
+		rgba($backgroundOpacityColor, .95) 20%,
+		rgba($backgroundOpacityColor, .85) 40%,
+		rgba($backgroundOpacityColor, .8) 70%,
+		rgba($backgroundOpacityColor, 1) 100%
 	);
 }
+
 
 
 .main-page {

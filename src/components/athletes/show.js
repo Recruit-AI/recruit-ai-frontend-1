@@ -109,27 +109,29 @@ class Page extends React.Component {
 
         return Object.keys(athlete).length > 0 ? <div className="tpBlackBg">
 
+            <Link to={`/athletes`}>Back to All Athletes</Link><br /> 
+            <h1>{athlete.preferred_name} {athlete.last_name}</h1>
+            <Link to={`/messages/${athlete.athlete_id}`}>See Messages</Link> 
+            <Link to={`/athletes/${athlete.athlete_id}/edit`}>Update Record</Link><br />
 
-            <Link to={`/athletes/${athlete.athlete_id}/edit`}>Update</Link> | <Link to={`/athletes`}>Back to All</Link><br />
-             | 
-            <span className="format-link" onClick={this.deleteAthlete}>Delete Athlete Record</span> 
-
-            <Link to={`/messages/${athlete.athlete_id}`}>Messages</Link>
-            <h3>School Visits</h3> 
-            {athlete.visits.map((visit, i) => <div>
-                {visit.visit_status.toUpperCase()} - {visit.chosen_time ? this.stringifyDate(visit.chosen_time) : ""}
-                <Link to={`/visits/${visit.visit_id}`}>View Details</Link>
-
-            </div>)}
-
-            <h1>{athlete.preferred_name}- {athlete.high_school_name}</h1>
-            {athlete.first_name} {athlete.last_name}, {athlete.city}, {athlete.state}<br />
-            {athlete.email} - {athlete.phone}<br />
-            Grade: {athlete.school_year}<br />
-            Height: {athlete.height}<br />
-            Weight: {athlete.weight}<br />
-            <hr />
+            
             Recruiter: {athlete.user_display_name}
+
+            <h3>Contact</h3>
+            <ul>
+                <li>{athlete.first_name} {athlete.last_name}</li>
+                <li>{athlete.phone}</li>
+                <li>{athlete.email}</li>
+                <li>{athlete.high_school_name}</li>    
+                <li>{athlete.city}, {athlete.state}</li>
+            </ul>
+            <h3>Stats</h3>
+            <ul>
+                <li>Grade: {athlete.school_year}</li>    
+                <li>Height: {athlete.height}</li>
+                <li>Weight: {athlete.weight}</li>
+            </ul>
+
             <hr />
             <h4>Notes</h4>
             {athlete.notes ? athlete.notes.split(/\r?\n/).map(line => <div>{line}</div>) : "There are no notes for this athlete yet."}
@@ -141,8 +143,20 @@ class Page extends React.Component {
                 </Form.Group>
             </Form>
             <hr />
+
+
+            <h3>School Visits</h3> 
+            {athlete.visits.map((visit, i) => <div>
+                {visit.visit_status.toUpperCase()} - {visit.chosen_time ? this.stringifyDate(visit.chosen_time) : ""}
+                <Link to={`/visits/${visit.visit_id}`}>View Details</Link>
+
+            </div>)} {athlete.visits.length === 0 ? "There are no scheduled visits" : "" }
+
+            <hr />
+
+
             {athlete.application_process ? <div>
-            <h4>Application Process: {application_percent}%</h4>
+            <h3>Application Process: {application_percent}%</h3>
             {
                 Object.entries(athlete.application_process)
                     .map(item => item[1] ?
@@ -153,6 +167,11 @@ class Page extends React.Component {
             <hr />
             <h4>Schedule Visit</h4>
             <HandleForm existing={false} item={formFields} formClass={"visits"} update={this.loadPage} redirect={`/athletes/${athlete.athlete_id}`}/>
+        
+            <hr />
+            <h4>DELETE THIS RECORD</h4>
+            <span className="format-link" onClick={this.deleteAthlete}>Delete Athlete Record</span> 
+            <h3>WARNING: NO UNDO</h3>
         </div> : ""
     }
 }

@@ -8,21 +8,21 @@ function Home(props) {
 	const squares = [
 		{
 			title: "Manage Your Recruits",
-			description: "",
+			description: "Web application developed to help you keep track of your recruits",
 			symbol: "users",
 			linkDescription: "See Features",
 			link: ""
 		},
 		{
 			title: "Sign Up For The Release",
-			description: "The full product is still under development, but you can be the first to know about it's release.",
+			description: "Beta version is now released! Sign up for release and take it on a test run.",
 			symbol: "certificate",
 			linkDescription: "Sign Up",
 			link: ""
 		},
 		{
 			title: "Made By People Who Care",
-			description: "Founder LeRoy Garnder started this to solve his own needs",
+			description: "As a coach, founder LeRoy Garnder started this to solve his own needs.",
 			symbol: "dumbbell",
 			linkDescription: "See The Team",
 			link: ""

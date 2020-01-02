@@ -8,7 +8,7 @@
 	width: 100%;
 	z-index: 10;
 	top: 0;
-	background-color: transparent;
+	background-color: $headerMenuColor;
 	transition: background-color 100ms linear;
 	&:hover {
 		background-color: $headerMenuColor;
@@ -52,7 +52,7 @@
 }
 .hmenu-dropdown-options {
 	left: 0;
-	padding: 20px;
+	padding: 20px 0;
 	max-width: 500px;
 	border-radius:20px;
 	background-color: $headerMenuColor;

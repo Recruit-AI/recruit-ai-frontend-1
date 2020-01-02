@@ -79,13 +79,13 @@ class Page extends React.Component {
             <hr />
             {visits.map(
                 (visit) => <div>
-                    <Link to={`/visits/${visit.visit_id}`}>View</Link>
+                    <Link to={`/visits/${visit.visit_id}`}>
 
-                    Athlete: {visit.preferred_name}<br />
+                    <h3>{visit.preferred_name} {visit.last_name}</h3>
                 
                     Recruiter: {visit.user_display_name} <br />
             
-                    STATUS: {visit.visit_status}<br />
+                    {visit.visit_status}<br />
 
                     
                     {visit.time_options && !visit.chosen_time ? visit.time_options.map(t => <div>{ this.stringifyDate(t) }</div> ) : ""}<br />
@@ -93,10 +93,8 @@ class Page extends React.Component {
                     
                     {visit.chosen_time ? <span>: {this.stringifyDate(visit.chosen_time)}</span> : " Still pending"}<br /><br />
 
-                    Athlete Link: <input value={`https://recruit-ai.netlify.com/visits/${visit.visit_id}/choose`} />
-                    <br /><i>Copy & Paste & send to athlete</i>
 
-                    <hr />
+                    </Link>
                 </div>
 
             )}

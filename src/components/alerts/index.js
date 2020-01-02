@@ -105,8 +105,8 @@ class Page extends React.Component {
             </select>
             <hr />
             {alerts.map(alert => <div>
-                {alert.preferred_name} {alert.last_name}
-                {!alert.alert_state ? "UNREAD" : ""}
+                {!alert.alert_state ? "! " : ""}
+                {alert.preferred_name} {alert.last_name} {" "}
                 <b>{alert.alert_type === 'new-message' ? "New Message" : ""}</b>
                 <b>{alert.alert_type === 'visit-choice' ? "Visit Update" : ""}</b>
                 <b>{alert.alert_type === 'visit-upcoming' ? "Upcoming Visit" : ""}</b>
