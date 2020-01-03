@@ -9,7 +9,7 @@ import SendForm from './send_form.js'
 
 
 function PageController(props) {
-    return <div className="body"><div className="page-container">
+    return <div className="page-container">
         <Switch>
             <Route path="/athletes/" exact component={Index} />
             <Route path="/athletes/new" exact component={New} />
@@ -24,7 +24,7 @@ function PageController(props) {
             </div></div>} />
 
         </Switch>
-    </div></div>
+    </div>
 }
 
 export default PageController;

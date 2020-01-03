@@ -48,7 +48,7 @@ class Requests extends React.Component {
 
     render () {
         return <div>
-            <h2>Requests to Join Team</h2>
+            <h4>Requests to Join Team</h4>
             {this.state.requests.map(req => <div> 
                 {req.user_first_name} {req.user_last_name}, {req.user_professional_title}, ({req.user_email})
                 

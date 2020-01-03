@@ -50,7 +50,7 @@ class Menu extends React.Component {
 
   render = () => {
 
-    const menuStructure = [/*this.siteContentStructure(),*/ ...this.sitePagesStructure(), ...customMenuStructure]
+    const menuStructure = [/*this.siteContentStructure(),*/ ...customMenuStructure, ...this.sitePagesStructure(), ]
 
     return <div className={`${this.props.showMenu ? "mobile-menu-show" : "mobile-menu-hide"}`}>
       {menuStructure.map(item => 

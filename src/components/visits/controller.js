@@ -9,7 +9,7 @@ import Choose from './choose.js'
 
 
 function PageController(props) {
-    return <div className="body"><div className="page-container">
+    return <div className="page-container">
         <Switch>
             <Route path="/visits/" exact component={Index} />
             <Route path="/visits/new" exact component={New} />
@@ -24,7 +24,7 @@ function PageController(props) {
             </div></div>} />
 
         </Switch>
-    </div></div>
+    </div>
 }
 
 export default PageController;

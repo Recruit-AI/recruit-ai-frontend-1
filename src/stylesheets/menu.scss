@@ -1,12 +1,15 @@
 
+	.body {
+		margin-left:280px;
+	}
+
 .header {
 	box-sizing: border-box;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	position: fixed;
-	width: 100%;
+	width: 280px;
+	height:100vh;
 	z-index: 10;
+	border-right:5px solid $menuAccentColor;
 	top: 0;
 	background-color: $headerMenuColor;
 	transition: background-color 100ms linear;
@@ -14,6 +17,8 @@
 		background-color: $headerMenuColor;
 		transition: background-color 100ms linear;
 	}
+
+
 
 	.menu-right {
 		display: flex;
@@ -33,10 +38,11 @@
 }
 
 .hmenu-item {
-	background:none;
+
 	border-bottom: 2px solid $menuAccentColor;
 	padding: 10px;
-	border-radius: 10px;
+	margin:0;
+	width:100%;
 	display:inline-block;
 	&:hover {
 		background-color: rgba($menuHoverColor, .7);
@@ -51,10 +57,8 @@
 	cursor: pointer;
 }
 .hmenu-dropdown-options {
-	left: 0;
-	padding: 20px 0;
-	max-width: 500px;
-	border-radius:20px;
+	border-radius:4px;
+	width:100%;
 	background-color: $headerMenuColor;
 	a {
 		display: block;
@@ -67,44 +71,7 @@
 }
 
 
-@media only screen and (max-width: 911px) {
-	.header {
-		background: $headerMenuColor;
-	}
-	.hmenu-item {
-		width: 100%;
-		margin:0px;
-	}
-	.mobile-menu-hide {
-		display: none;
-	}
-	.mobile-menu-show {
-		padding: 20px;
-		width: 100%;
-	}
-	.hmenu-dropdown-options {
-		margin-top:10px;
-		padding-top:0px;
-	}
-}
-@media only screen and (min-width: 912px) {
-	.hmenu-item {
-		display: inline-block;
-		min-width: 125px;
-		margin: 0 15px;
-	}
-
-	.hmenu-dropdown {
-		position: relative;
-	}
-	.hmenu-dropdown-options {
-		position: absolute;
-		width: max-content;
-		border-radius: 20px;
-		margin-top:12px;
-	}
-
-	.hmenu-dropdown-options .hmenu-item {
+	.hmenu-dropdown-options .hmenu-item, .hmenu-item:not(.hmenu-dropdown) {
 		display: flex;
 		justify-content: space-between;
 		& > span {
@@ -115,4 +82,3 @@
 	.hmenu-dropdown-toggle > span {
 		padding: 6px;
 	}
-}

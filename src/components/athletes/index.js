@@ -3,6 +3,7 @@ import axios from 'axios'
 import api from '../../helpers/api'
 import { Link } from 'react-router-dom'
 import Pagination from '../shared/pagination'
+import {Container, Row, Col} from 'reactstrap'
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 const headers = { headers: {'authorization': localStorage.token} }
@@ -95,16 +96,22 @@ class Page extends React.Component {
 
             <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
 
+            <Container>
             {athletes.map(
-                (athlete) => <div>
-                    <b>{athlete.preferred_name}</b> ({athlete.first_name} {athlete.last_name}); {athlete.school_year} at {athlete.high_school_name} ({athlete.city}, {athlete.state});  
-                    <br />  {Number.parseInt(athlete.height/12)}'{athlete.height%12}", {athlete.weight}lbs; {athlete.email} / {athlete.phone} /
-                    <Link to={`/athletes/${athlete.athlete_id}`}>View</Link> /
-                    <Link to={`/athletes/${athlete.athlete_id}/edit`}>Update</Link>
-                    <hr />
-                </div>
+                (athlete) => <Row>
+                    <Col>{athlete.preferred_name} {athlete.last_name}</Col> 
+                    
+                    <Col>{ new Date(Date.now()).getFullYear() - (Number.parseInt(athlete.school_year.substr(0,2)) - 12) }</Col>
+                    <Col>{athlete.high_school_name}<br />{athlete.city}, {athlete.state}</Col>  
+                    <Col>{Number.parseInt(athlete.height/12)}'{athlete.height%12}", {athlete.weight}lbs</Col>
+                    <Col><Link to={`/athletes/${athlete.athlete_id}`}>View</Link></Col>
+                    <Col><Link to={`/athletes/${athlete.athlete_id}/edit`}>Update</Link></Col>
+                     
+                </Row>
+                
 
             )}
+            </Container>
             <Link to={`/athletes/new`}>Add New +</Link>
         </div>
     }

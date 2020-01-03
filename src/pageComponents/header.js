@@ -41,21 +41,13 @@ class Header extends React.Component {
 
     return <div className={`header ${this.state.showDropdown ? 'headerFill' : ""}`}>
 
-      <Container>
-        <Row>
-          <Col xs={12} lg={3} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <NavLink to="/" style={{background:'none'}}><img alt="logo" height="50px" src={logoURL} />
-            {siteTitle}
+            <NavLink to="/" style={{background:'none'}}><img alt="logo" height="50px" src={logoURL} /><br />
+            <h3 style={{color:"white"}}>{siteTitle}</h3>
             </NavLink>
             <span className='fas fa-bars hmenu-mobile-toggle d-inline d-lg-none' onClick={this.toggleMenu}></span>
-          </Col>
-
-          <Col xs={12} lg={9} className='menu-right' >
+         
             <Menu auth={this.props.auth} showMenu={this.state.showMenu} toggleDropdown={this.toggleDropdown} />
-          </Col>
-        </Row>
-
-      </Container>
+       
 
     </div>
   }

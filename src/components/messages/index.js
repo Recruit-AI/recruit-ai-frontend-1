@@ -75,7 +75,13 @@ class Page extends React.Component {
             <hr />
             {messages.map(message => <div>
 
-                <Link to={`/messages/${message.athlete_id}`}>{message.preferred_name}- {message.user_display_name}</Link>
+                <Link to={`/messages/${message.athlete_id}`} style={{width:'100%'}}>
+                <div style={{display:'flex',justifyContent:'space-between'}}>
+                    <h3>{message.preferred_name} {message.last_name}</h3> 
+                    <span>{message.user_display_name}</span>
+                </div>
+                </Link>
+
                 <hr />
 
             </div>)}

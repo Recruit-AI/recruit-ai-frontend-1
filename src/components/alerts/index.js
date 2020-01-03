@@ -104,7 +104,7 @@ class Page extends React.Component {
                 <option value="all">All Alerts</option>
             </select>
             <hr />
-            {alerts.map(alert => <div>
+            {alerts.length > 0 ? alerts.map(alert => <div>
                 {!alert.alert_state ? "! " : ""}
                 {alert.preferred_name} {alert.last_name} {" "}
                 <b>{alert.alert_type === 'new-message' ? "New Message" : ""}</b>
@@ -117,7 +117,7 @@ class Page extends React.Component {
                     {alert.alert_type === 'visit-upcoming' ? 'View' : ""}
                 </span>
 
-            </div>)}
+            </div>) : "You have no alerts."}
         </div>
     }
 }

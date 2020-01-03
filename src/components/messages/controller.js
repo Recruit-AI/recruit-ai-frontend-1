@@ -6,7 +6,7 @@ import Show from './show.js'
 import Compliance from './compliance.js'
 
 function PageController(props) {
-    return <div className="body"><div className="page-container">
+    return <div className="page-container">
         <Switch>
             <Route path="/messages/" exact component={Index} />
             <Route path="/messages/compliance" exact component={Compliance} />
@@ -19,7 +19,7 @@ function PageController(props) {
             </div></div>} />
 
         </Switch>
-    </div></div>
+    </div>
 }
 
 export default PageController;

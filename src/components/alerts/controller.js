@@ -4,7 +4,7 @@ import {Switch, Route} from 'react-router-dom'
 import Index from './index.js'
 
 function PageController(props) {
-    return <div className="body"><div className="page-container">
+    return <div className="page-container">
         <Switch>
             <Route path="/alerts/" exact component={Index} />
 
@@ -15,7 +15,7 @@ function PageController(props) {
             </div></div>} />
 
         </Switch>
-    </div></div>
+    </div>
 }
 
 export default PageController;

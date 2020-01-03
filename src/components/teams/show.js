@@ -3,6 +3,7 @@ import axios from 'axios'
 import api from '../../helpers/api'
 import {Link} from 'react-router-dom'
 import JoinRequests from './requests'
+import {Container, Row, Col} from 'reactstrap'
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 const headers = { headers: {'authorization': localStorage.token} }
@@ -50,24 +51,42 @@ class Page extends React.Component {
         return <div>
             <h3>Team</h3>
             <h1>{team.team_name}</h1>
+
+            <hr />
             <h2>Staff</h2>
-            {team.teamMembers ? team.teamMembers.map(s => <div>
-                {s.user_display_name}
+            <hr />
+            <Container>            
+            <Row>
+            {team.teamMembers ? team.teamMembers.map(s => <Col><div className="staff-square">
+                <h4>{s.user_display_name}</h4>
+                <p>Email{s.user_email}</p>
+                <p>Role{s.user_role}</p>
+
                 {s.foreign_user_id !== curr_user.user_id && owned ? 
-                <span className="format-link" onClick={this.declineJoin} data-id={s.foreign_user_id}>Remove From Team</span>
-                : ""}
-                </div>) : ""}
-            <h3>Admissions Email</h3>
-            {team.admissions_email_address}
-            <h3>Visit Address</h3>
-            {team.visit_reporting_address}
-            <h3>Visit Instructions</h3>
-            {team.visit_reporting_instructions}<br />
-
-
-            { owned ? <Link to={`/teams/${team.team_id}/edit`}>Edit Team Details</Link> : "" }
+                <span className="format-link" onClick={this.declineJoin} data-id={s.foreign_user_id}>Remove</span>
+                : "\n\n-"}
+                </div></Col>) 
+                
+            
+            : ""}
+            </Row>
+            </Container>
 
             { owned ? <JoinRequests loadPage={this.loadPage} /> : "" } 
+
+            <hr />
+            <h2>Admission & Visit Settings</h2>
+            <hr />
+            <h4>Admissions Email</h4>
+            {team.admissions_email_address}
+            <h4>Visit Address</h4>
+            {team.visit_reporting_address}
+            <h4>Visit Instructions</h4>
+            {team.visit_reporting_instructions}<br />
+
+            <hr />
+            { owned ? <Link to={`/teams/${team.team_id}/edit`}>Edit Team Details</Link> : "" }
+            
         </div>
     }
 }
