@@ -49,7 +49,7 @@ class NewPage extends React.Component {
         <div>
 
           <h3>We are an app that makes your recruitment process much easier.</h3>
-          <p>You will be able to communicate through your usual texting app (SMS) to reach the
+          <p>You will be able to communicate through your usual texting app (text only- no picture messages) to reach the
           whole coaching staff through one number.</p>
           <p>Occassionally, you may recieve a link for a form similar to this one.</p>
 

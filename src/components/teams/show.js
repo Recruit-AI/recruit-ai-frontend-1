@@ -57,15 +57,16 @@ class Page extends React.Component {
             <hr />
             <Container>            
             <Row>
-            {team.teamMembers ? team.teamMembers.map(s => <Col><div className="staff-square">
+            {team.teamMembers ? team.teamMembers.map(s => <Col><Link to={`/users/profile/${s.user_id}`}><div className="staff-square">
                 <h4>{s.user_display_name}</h4>
-                <p>Email{s.user_email}</p>
-                <p>Role{s.user_role}</p>
+                <p>{s.user_first_name} {s.user_last_name}, {s.user_professional_title}</p>
+                <p>{s.user_email}</p>
+                <p></p>
 
                 {s.foreign_user_id !== curr_user.user_id && owned ? 
                 <span className="format-link" onClick={this.declineJoin} data-id={s.foreign_user_id}>Remove</span>
                 : "\n\n-"}
-                </div></Col>) 
+                </div></Link></Col>) 
                 
             
             : ""}

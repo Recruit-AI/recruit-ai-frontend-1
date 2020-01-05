@@ -67,16 +67,22 @@ class ArrayField extends React.Component {
         <Form.Label>{ this.printifyName(field) }</Form.Label>
         
         { item[field].length > 0 ?
-            item[ field ].map( (item, index) => <span key={index}>
+            item[ field ].map( (i, index) => <div key={index}>
+              
+              {this.props.datearray && i ? this.stringifyDate(i) : "Option " + (index + 1)}
               <Form.Control
                 onChange={this.handleArrayChange}
                 type={this.props.type || 'text'}
-                { ...(this.props.datearray ? null : {value: item}) } 
+                { ...(this.props.datearray ? null : {value: i}) } 
                 name={`${field}-${index}`} />
-                {this.props.datearray ? this.stringifyDate(new Date(item)) : ""}
-              </span> )
+                -<br />
+              </div> )
             : <Form.Control onChange={this.handleArrayChange} type='text' placeholder="Start typing" name={`${field}-${0}`} />}
           {!this.props.type ? <i>Hit ";" to add a new field. Backspace completely to delete one.</i> : "" }
+          {this.props.datearray ? 
+            (item[field][0] || item[field][1] || item[field][2] ? "" : 
+            <p style={{color:'red'}}>Please choose at least one option to continue.</p>) 
+          : "" }
     </Form.Group>
     </div>
   }

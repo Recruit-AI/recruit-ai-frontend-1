@@ -25,7 +25,17 @@ const defaultObjects = {
     },
     athlete: {
         preferred_name: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
         recruiting_personnel_id: 0,
+        city: "",
+        state: "",
+        high_school_name: "",
+        school_year: "12- Senior",
+        height: 60,
+        weight: 100,
         notes: "",
         application_process: {
             school_application: false,
@@ -39,16 +49,6 @@ const defaultObjects = {
             housing_selected: false,
             financial_aid_accepted: false,
         },
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        city: "",
-        state: "",
-        high_school_name: "",
-        school_year: "",
-        height: 60,
-        weight: 100
     },
     team: {
         team_name: "",
@@ -60,10 +60,10 @@ const defaultObjects = {
         visit_team_id: 0,
         visit_athlete_id: 0,
         visit_personnel_id: 0,
+        time_options: [null, null, null],
         visit_status: "pending",
         reporting_address: "",
         reporting_instructions: "",
-        time_options: [Date.now(), Date.now(), Date.now()]
     },
     message: {
         message_team_id: 0,

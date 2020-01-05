@@ -82,13 +82,20 @@ class Page extends React.Component {
         const visit = this.state.visit
 
         return <div>
-            <Link to="/visits">Back to All</Link> <br />
-            <h3>{visit.preferred_name} {visit.last_name}'s Visit</h3>
+            <Link to="/visits">All Visits</Link>
+            <Link to={`/athletes/${visit.visit_athlete_id}`}>Athlete Profile</Link> <br />
+            <h1>Visit Information</h1>
+            Athlete: {visit.preferred_name} {visit.last_name}<br />
             Recruiter: {visit.user_display_name} <br />
-            
-            <h5>Update Status:</h5>
-            Current: {visit.visit_status} <br />
-            {visit.visit_status === 'chosen' ? 
+
+
+            <h3>Time & Date</h3>
+            {visit.time_options && !visit.chosen_time ? 
+            <div>Options: { visit.time_options.map(t => <div>{t ? this.stringifyDate(t) : ""}</div>)}</div> : ""}
+            {visit.chosen_time ? <span>Scheduled {this.stringifyDate(visit.chosen_time)}</span> : ""}
+
+            <h3>Update Status:</h3>
+            <b>{visit.visit_status}</b>            {visit.visit_status === 'chosen' ? 
             <span className="format-link" data-id={visit.vist_id} onClick={this.confirmVisit}>Confirm Choice</span> 
             : "" } <br />
 
@@ -100,12 +107,6 @@ class Page extends React.Component {
             <span className="format-link" data-id={visit.vist_id} onClick={this.markMissed}>No Show</span> 
              : ""}<br />
 
-            <h3>Time & Date</h3>
-            {visit.time_options && !visit.chosen_time ? 
-            <div>Time Options: { visit.time_options.map(t => <div>{this.stringifyDate(t)}</div>)}</div> : ""}<br />
-
-            Chosen Time
-            {visit.chosen_time ? <span>: {this.stringifyDate(visit.chosen_time)}</span> : " Still pending"}<br /><br />
 
             <h3>Instructions</h3>
             {visit.reporting_address || visit.visit_reporting_address}<br />

@@ -18,7 +18,7 @@ class Page extends React.Component {
             messages: [],
             message: {},
             params: params,
-            filter: params.get('filter') || 'team'
+            page: params.get('page') || 1
         }
     }
 
@@ -37,12 +37,26 @@ class Page extends React.Component {
         axios
             .get(api.apiPath(`/messages/${props.match.params.id}`+ '?' + params.toString() ), headers)
             .then(res =>{
-                this.setState({ messages: res.data.pageOfItems })
+                this.setState({ messages: [...this.state.messages, ...res.data.pageOfItems ] })
                 var objDiv = document.getElementById("messages-scroll-box");
-                console.log(objDiv, objDiv.scrollTop, objDiv.scrollHeight)
                 objDiv.scrollTop = objDiv.scrollHeight;
             })
             .catch(err => console.log(err));
+    }
+
+    loadNextMessages = async() => {
+        
+        const params = this.state.params
+        params.set('page', this.state.page + 1)
+        this.setState({ page: this.state.page + 1, params})
+        
+        axios
+        .get(api.apiPath(`/messages/${this.props.match.params.id}`+ '?' + params.toString() ), headers)
+        .then(res =>{
+            this.setState({ messages: [...this.state.messages, ...res.data.pageOfItems ] })
+        })
+        .catch(err => console.log(err));
+    
     }
 
     
@@ -79,8 +93,15 @@ class Page extends React.Component {
             .catch(err => console.log(err) );
     }
 
+    urlify = (text) => {
+        var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        return text.replace(urlRegex, function(url) {
+            return '<url>' + url + '</url>';
+        })
+    }
+
     render() {
-        const messages = this.state.messages.reverse()
+        const messages = this.state.messages
         const item = this.state.message
         const formFields = defaults.defaultFullFields('message', item)
 
@@ -89,21 +110,31 @@ class Page extends React.Component {
                 <h1>{messages[0].preferred_name}</h1>
             </div>: ""}
             
-            <Link to={`/athletes/${this.props.match.params.id}`}>Back to Profile</Link>
+            <Link to={`/athletes/${this.props.match.params.id}`}>Athlete Profile</Link>
+            <Link to={`/messages`}>All Messages</Link>
 
-            <div id="messages-scroll-box" style={{backgroundColor:'grey',maxHeight:'50vh',overflow:'scroll'}}>
+            <div id="messages-scroll-box"><div>
 
             {messages.map(m => <div className="message" style={{backgroundColor: m.message_type === 'outgoing' ? 'lightblue' : 'white'}}>
 
-                {m.message_text}
+                {m.message_text ? this.urlify(m.message_text).split('<url>').map(line => <span>
+                    { line.split('</url>')[1] ? <a href={line.split('</url>')[0]} target="_blank">{line.split('</url>')[0]}</a> : "" }
+                    { line.split('</url>')[1] ? line.split('</url>')[1] : line.split('</url>')[0]}
+                </span>)
+                : <i>blank message sent</i>}
                 <div className="m-date">{this.stringifyDate(m.created_at)}</div>
                 {m.message_type === 'outgoing' ? m.user_display_name : ""}
                 
             </div>)}
 
-            </div>
+            <div onClick={this.loadNextMessages} className='message' >Load More</div>
 
-            <HandleForm item={formFields} existing={false} formClass={"messages"} update={this.updateInfo} redirect={`/messages/${this.props.match.params.id}`} apiRoute={`/messages/send/${this.props.match.params.id}`} />
+            </div></div>
+
+            <HandleForm item={formFields} 
+            existing={false} formClass={"messages"} 
+            update={this.updateInfo} redirect={`/messages/${this.props.match.params.id}`} 
+            apiRoute={`/messages/send/${this.props.match.params.id}`} />
 
             
 

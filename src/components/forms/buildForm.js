@@ -13,12 +13,9 @@ import BasicBooleanField from './fieldTypes/basicBoolean'
 import ArrayField from './fieldTypes/array'
 import IdSelectField from './fieldTypes/idSelect'
 
-import ExtraInfoField from './fieldTypes/extraInfo'
-import ExtraInfoDefaultField from './fieldTypes/defaultExtraInfo'
-
-import ConnectionRelationshipSelect from './fieldTypes/connectionRelationship'
-import DualConnectionField from './fieldTypes/duplicateConnection'
 import ImageField from './fieldTypes/imageFile'
+
+import VerifyPhone from './fieldTypes/verifyPhone'
 
 
 
@@ -67,12 +64,14 @@ class FormHandler extends React.Component {
         const res = results.apiCall
         const redirectPath = results.redirect
 
+        console.log(res)
+
         if (res.status === 200 || res.status === 201) {
             this.formStatus('success');
             if (redirectPath && !this.state.bulkAdd) { this.props.history.push(redirectPath) }
         } else {
             this.formStatus('error');
-            if (res.response && res.response.status === 400) {
+            if (res.response && (res.response.status === 400)) {
                 this.setState({ error: res.response.data.message })
             } else { this.setState({ error: "Unknown error." }) }
         }
@@ -131,29 +130,17 @@ class FormHandler extends React.Component {
                 }
 
                 {
-                    //Shows the appropriate selections for connection relationships
-                    itemField[0] === 'connection_relationship' ?
-                        <ConnectionRelationshipSelect field={itemField} callback={this.handleSelectIntChange} item={this.props.item} /> : ""
-                }
-
-                {
                     //Displays the fields for an image
                     itemField[0] === 'image_url' ?
                         <ImageField field={itemField} callback={this.handleFileChange} item={this.props.item} /> : ""
                 }
 
-                {
-                    //The extra info section for symbols
-                    itemField[0] === 'extra_info' ?
-                        <ExtraInfoField field={itemField} callback={this.handleInfoChange} item={this.props.item} /> : ""
-                }
 
                 {
-                    //The settings for kinds where you set the extra info fields themselves
-                    itemField[0] === 'default_extra_info' ?
-                        <ExtraInfoDefaultField item={this.props.item} fieldsObject={itemField[1]} handleExtraInfoChange={this.handleExtraInfoChange} /> : ""
+                    //Verification for a phone number
+                    itemField[0] === 'phone' ?
+                        <VerifyPhone field={itemField} callback={this.handleChange} item={this.props.item} /> : ""
                 }
-
 
                 {
                     itemField[0] === 'school_year' ?
@@ -209,33 +196,15 @@ class FormHandler extends React.Component {
                 {itemField[0] === 'foreign_key' ? <Input type="hidden" name="foreign_key" value={this.props.item.foreign_key} /> : ""}
                 {itemField[0] === 'foreign_class' ? <Input type="hidden" name="foreign_class" value={this.props.item.foreign_class} /> : ""}
 
-                { /* Add any notes for any fields here */}
-                {itemField[0] === 'height' ? "In inches." : ""}
-                {itemField[0] === 'weight' ? "In pounds." : ""}
-                {itemField[0] === 'phone' ? "Only use numbers, DO NOT use any formatting." : ""}
-
             </div>)}
 
-            { /* These are fields that are targeted by classForm */}
-            {
-                //This is a custom field for a symbol connections, which, if set, tells the backend to create an inverse "duplicate"
-                <DualConnectionField stateSettings={this.state} callback={this.toggleDuplicate} />
-            }
-            { /*
-                //BULK ADD is an admin feature that does not refresh the page/form on submit, allowing for much faster entry, reusing of form data
-                this.props.existing ? "" : 
-                    <div>BULK ADD 
-                        <input onChange={this.toggleBulkAdd} type="checkbox" checked={this.state.bulkAdd} />  
-                        <p>BULK ADD is an admin feature that does not refresh the page/form on submit, allowing for much faster entry when entering in multiple articles, but YOU MUST MANUALLY REFRESH PAGE TO SEE CHANGES</p>  
-                    </div> 
-            */ }
 
             <button type='submit'>{this.props.existing ? 
             (this.props.editButtonText ? this.props.editButtonText : `Edit`) : "Add"}
 
             </button>
-            { this.props.hideDeleteButton ? "" : 
-            <button onClick={this.props.deleteItem}>Delete</button> }
+            { this.props.existing && !this.props.hideDeleteButton ? 
+            <button onClick={this.props.deleteItem}>Delete</button> : "" }
 
         </Form>
     }
@@ -278,7 +247,7 @@ class FormHandler extends React.Component {
     }
 
     handleDateArrayChange = (field, array) => {
-        array = array.map(a => { return new Date(a).toUTCString() })
+        array = array.map(a => a ? new Date(a).toUTCString() : null )
         this.props.updateItem({
             ...this.props.item,
             [field]: array

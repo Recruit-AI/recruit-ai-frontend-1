@@ -36,13 +36,18 @@ class FormHandler extends React.Component {
       var apiCall;
   
       if(method === 'put') {
-        apiCall = await axios.put(url, payload, headers)
+        await axios.put(url, payload, headers)
+        .then((res) => apiCall = res)
+        .catch((err) => apiCall = err)
       } else {
-        apiCall = await axios.post(url, payload, headers)
+        await axios.post(url, payload, headers)
+        .then((res) => apiCall = res)
+        .catch((err) => apiCall = err)
       }
       if(this.props.blockRedirect) { await this.props.update(apiCall) }
       else if(!bulkAdd) { await this.props.update() }
       return apiCall
+
     }
   
 
@@ -58,11 +63,13 @@ class FormHandler extends React.Component {
       var overwritePath = api.apiPath(this.props.apiRoute)
     }
 
+
     if(this.state.existing) {
       apiCall = await this.updateAPI('put', overwritePath || putURL, item, bulkAdd)
       redirect = null
     } else {
       apiCall = await this.updateAPI('post', overwritePath || postURL, item, bulkAdd)
+      
       redirect = this.redirectEditPath(apiCall)
     }
 

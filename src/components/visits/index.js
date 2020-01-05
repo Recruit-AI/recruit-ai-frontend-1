@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import api from '../../helpers/api'
 import { Link } from 'react-router-dom'
+import {Row, Col} from 'reactstrap'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 const headers = { headers: {'authorization': localStorage.token} }
@@ -71,34 +72,37 @@ class Page extends React.Component {
     render() {
         const visits = this.state.visits
         return <div className="tpBlackBg" style={{backgroundColor:this.state.formColor}}>
-            <h1>Your Visits</h1>
+            <h1>Scheduled Visits</h1>
             <select onChange={this.handleFilter}>
                 <option value="team">Team</option>
                 <option value="personal">Personal</option>
             </select>
             <hr />
+            <Row>
             {visits.map(
-                (visit) => <div>
+                (visit) => <Col><div>
                     <Link to={`/visits/${visit.visit_id}`}>
 
                     <h3>{visit.preferred_name} {visit.last_name}</h3>
                 
-                    Recruiter: {visit.user_display_name} <br />
+                    <p><b>Recruiter:</b> {visit.user_display_name}</p>
             
-                    {visit.visit_status}<br />
-
+                    <p style={{textTransform:"capitalize"}}><b>Status:</b> {visit.visit_status}</p>
                     
-                    {visit.time_options && !visit.chosen_time ? visit.time_options.map(t => <div>{ this.stringifyDate(t) }</div> ) : ""}<br />
-
-                    
-                    {visit.chosen_time ? <span>: {this.stringifyDate(visit.chosen_time)}</span> : " Still pending"}<br /><br />
+                    <p>
+                        {visit.chosen_time ? <span>{this.stringifyDate(visit.chosen_time)}</span> : "Still pending"}
+                    </p>
 
 
                     </Link>
-                </div>
+                </div></Col>
 
             )}
+            </Row>
+            <hr />
             <i>To schedule a new visit, go through the athlete's page you wish to schedule.</i>
+            <br />
+            <Link to={`/athletes`}>All Athletes</Link>
         </div>
     }
 }

@@ -39,7 +39,8 @@ class Profile extends React.Component {
             <Link className='nice-button' to="/athletes">Your Recruits</Link><br />
             <Link className='nice-button' to="/visits">Your Visits</Link><br />
             <Link className='nice-button' to={`/teams/${curr_user.userInfo.team_id}`}>Your Team</Link><br />
-            <Link className='nice-button' to="/athletes">Edit Profile</Link><br />
+            <Link className='nice-button' to={`/users/profile/${curr_user.user_id}`}>View Profile</Link><br />
+            <Link className='nice-button' to="/users/edit">Edit Profile</Link><br />
         </div>
     }
 }

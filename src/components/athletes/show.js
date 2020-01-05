@@ -149,8 +149,8 @@ class Page extends React.Component {
                         {
                             Object.entries(athlete.application_process)
                                 .map(item => item[1] ?
-                                    <div><b style={{color:"green"}}>{item[0]}</b></div> :
-                                    <div>{item[0]}</div>
+                                    <div style={{textTransform:"capitalize"}}><b style={{color:"green"}}>{item[0].replace(/_/g, ' ')} <span style={{color:"green"}} className='fas fa-check'></span></b></div> :
+                                    <div style={{textTransform:"capitalize"}}>{item[0].replace(/_/g, ' ')} &nbsp;&nbsp;&nbsp;</div>
                                 )
                         } </div> : <div>Please <Link to={`/athletes/${athlete.athlete_id}/edit`}>Edit this Record</Link> to add the application process.</div>}
                     </Col>

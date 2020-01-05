@@ -82,8 +82,6 @@ class Page extends React.Component {
                 </div>
                 </Link>
 
-                <hr />
-
             </div>)}
         </div>
     }

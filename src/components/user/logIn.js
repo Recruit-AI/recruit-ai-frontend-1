@@ -33,9 +33,26 @@ class LogIn extends React.Component {
           .post(api.loginPath(), this.state.user)
           .then(res => {
             this.setState({formColor: 'rgba(0,200,0,.4)'})
-            this.props.auth.login( res.data.user, res.data.token )
-            if(res.data.user.user_kind === 'end_user') {
-              setTimeout(() => {window.location.replace('/users/edit/?loggedIn=true')}, 200)
+            const user = res.data.user
+            this.props.auth.login( user, res.data.token )
+            if(user.user_kind === 'end_user') {
+
+              setTimeout(() => {
+                if(user.userInfo.user_first_name && 
+                  user.userInfo.user_last_name && 
+                  user.userInfo.user_professional_title && 
+                  user.userInfo.user_display_name) {
+                  
+                  window.location.replace('/?loggedIn=true')
+                } else {
+                  window.location.replace('/users/edit/?loggedIn=true')
+                }
+                
+              
+              
+              }, 200)
+
+
             } else {
               setTimeout(() => {window.location.replace('/')}, 200)
             }
