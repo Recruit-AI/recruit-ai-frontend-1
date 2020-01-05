@@ -147,19 +147,17 @@ class Page extends React.Component {
             <hr />
 
             <Pagination pages={this.state.pager.pages} callback={this.goToPage} currentPage={this.state.pager.currentPage} totalPages={this.state.pager.totalPages} />
-
+            <hr />
             <Container>
                 {athletes.map(
-                    (athlete) => <Row>
-                        <Col>{athlete.preferred_name} {athlete.last_name}</Col>
+                    (athlete) => <div><Link style={{width:"100%"}} to={`/athletes/${athlete.athlete_id}`}><Row>
+                        <Col><h4>{athlete.preferred_name} {athlete.last_name}</h4></Col>
 
                         <Col>{new Date(Date.now()).getFullYear() - (Number.parseInt(athlete.school_year.substr(0, 2)) - 12)}</Col>
-                        <Col>{athlete.high_school_name}<br />{athlete.city}, {athlete.state}</Col>
+                        <Col>{athlete.high_school_name}</Col><Col>{athlete.city}, {athlete.state}</Col>
                         <Col>{Number.parseInt(athlete.height / 12)}'{athlete.height % 12}", {athlete.weight}lbs</Col>
-                        <Col><Link to={`/athletes/${athlete.athlete_id}`}>View</Link></Col>
-                        <Col><Link to={`/athletes/${athlete.athlete_id}/edit`}>Update</Link></Col>
 
-                    </Row>
+                        </Row></Link></div>
 
 
                 )}
