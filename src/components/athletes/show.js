@@ -4,8 +4,10 @@ import api from '../../helpers/api'
 import { Link } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
 import defaults from '../../db/defaultObjects'
-import HandleForm from '../forms/handler'
 import { Container, Row, Col } from 'reactstrap'
+
+
+import VisitPanel from './visitpanel'
 
 const curr_user = localStorage.user ? JSON.parse(localStorage.user) : false
 const headers = { headers: { 'authorization': localStorage.token } }
@@ -117,7 +119,6 @@ class Page extends React.Component {
 
             <hr />
             <Container>
-
                 <Row><Col>
                     <h1>{athlete.preferred_name} {athlete.last_name}</h1>
                 </Col>
@@ -126,33 +127,40 @@ class Page extends React.Component {
 
                 <Row>
                     <Col>
-                        <h3>Contact</h3>
-                        <ul>
+                        <ul className="itemList itemPanel">
+                            <h3>Contact</h3><hr style={{width:'100%',height:'1px',margin:'5px 0'}} />
+                            <div className="alternateRows itemFlex">
                             <li><b>Legal: </b>{athlete.first_name} {athlete.last_name}</li>
                             <li><b>Phone: </b>{athlete.phone}</li>
                             <li><b>Email: </b>{athlete.email}</li>
                             <li><b>City: </b>{athlete.city}, {athlete.state}</li>
+                            </div>
                         </ul>
-                        <h3>Stats</h3>
-                        <ul>
+                        <ul className="itemList itemPanel">
+                            <h3>Stats</h3><hr style={{width:'100%',height:'1px',margin:'5px 0'}} />
+                            <div className="alternateRows itemFlex">
                             <li><b>Grade:</b> {athlete.school_year}, {new Date(Date.now()).getFullYear() - (Number.parseInt(athlete.school_year.substr(0, 2)) - 12)} </li>
                             <li><b>High School: </b>{athlete.high_school_name}</li>
                             <li><b>Height:</b> {Number.parseInt(athlete.height / 12)}'{athlete.height % 12}"</li>
                             <li><b>Weight:</b> {athlete.weight}lbs</li>
+                            </div>
                         </ul>
                     </Col>
 
 
                     <Col>
-                    {athlete.application_process ? <div>
-                        <h3>Application Process: {application_percent}%</h3>
+                        <div className="itemList itemPanel">
+                        <h3>Application Process: {application_percent}%</h3><hr style={{width:'100%',height:'1px',margin:'5px 0'}} />
+                    {athlete.application_process ? <div  className="itemFlex alternateRows">
                         {
                             Object.entries(athlete.application_process)
                                 .map(item => item[1] ?
-                                    <div style={{textTransform:"capitalize"}}><b style={{color:"green"}}>{item[0].replace(/_/g, ' ')} <span style={{color:"green"}} className='fas fa-check'></span></b></div> :
+                                    <div style={{textTransform:"capitalize"}}><b style={{color:"green"}}>{item[0].replace(/_/g, ' ')}</b> <span style={{color:"green"}} className='fas fa-check'></span></div> :
                                     <div style={{textTransform:"capitalize"}}>{item[0].replace(/_/g, ' ')} &nbsp;&nbsp;&nbsp;</div>
                                 )
                         } </div> : <div>Please <Link to={`/athletes/${athlete.athlete_id}/edit`}>Edit this Record</Link> to add the application process.</div>}
+                    
+                    </div>
                     </Col>
 
                     <Col xs={12}>
@@ -179,13 +187,12 @@ class Page extends React.Component {
                     </Col>
 
                     <Col>
-                    <h3>New Visit</h3>
-                    <HandleForm existing={false} item={formFields} formClass={"visits"} update={this.loadPage} redirect={`/athletes/${athlete.athlete_id}`} />
+                        <VisitPanel component={this} athlete={athlete} formFields={formFields} />
                     </Col>
                     </Row>
                     <hr />
                     <h4>DELETE THIS RECORD</h4>
-                    <span className="format-link" onClick={this.deleteAthlete}>Delete Athlete Record</span>
+                    <span className="format-link nice-button red-button" onClick={this.deleteAthlete}>Delete Athlete Record</span>
                     <h3>WARNING: NO UNDO</h3>
 
 

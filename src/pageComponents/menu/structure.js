@@ -29,15 +29,16 @@ export default  [
     {name: "Visits", view: "end_user", link: '/visits', symbol: "calendar-alt"},
     {name: "Team and Staff", view: "end_user", link: `/teams/${curr_user && curr_user.userInfo ? curr_user.userInfo.team_id : ""}`, symbol: "users"},
     {name: "Dashboard", view: "end_user", link: '/users/dashboard', symbol: "user-circle"},
-    {name: "Account", view: "logged_in", symbol: "user", links: [   
+    {name: "Admin", view: "admin_user", symbol: "user", links: [   
         {name: "User List", view: 'admin', link: '/admin/users', symbol: "users"},
         {name: "Logs", view: 'admin', link: '/admin/logs', symbol: "cogs"},
         {name: "Feedback", view: 'admin', link: '/feedback', symbol: "comments"},
         {name: "Support Tickets", view: 'admin', link: '/support_tickets', symbol: "comments"},
-        {name: "Logout", view: 'all', link: '/users/logout', symbol: "sign-out-alt"}
     ]},
     {name: "Help", view: "all", symbol: "info-circle", links: [
         {name: "Feedback/Contact", view: "all", link: '/feedback/provide', symbol: "comments"},
         {name: "Support/Bug Report", view: "all", link: '/support_tickets/new', symbol: "bug"},
     ]},
+    
+    {name: "Logout", view: 'logged_in', link: '/users/logout', symbol: "sign-out-alt"}
 ]

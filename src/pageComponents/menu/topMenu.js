@@ -43,7 +43,7 @@ class Menu extends React.Component {
     let dropdownOptions = []
     this.siteBlogTypes.map(name => dropdownOptions.push({name: name[0], view: 'all', link: `/posts?category=${name[0]}`, symbol: name[1] }))
     returnStructure.links = dropdownOptions
-    return returnStructure
+    return dropdownOptions
   }
 
 

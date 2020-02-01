@@ -5,13 +5,13 @@
 .header {
 	box-sizing: border-box;
 	position: fixed;
-	width: 280px;
+	width: 230px;
 	height:100vh;
 	z-index: 10;
-	border-right:5px solid $menuAccentColor;
 	top: 0;
 	background-color: $headerMenuColor;
 	transition: background-color 100ms linear;
+	overflow-y:scroll;
 	&:hover {
 		background-color: $headerMenuColor;
 		transition: background-color 100ms linear;
@@ -38,7 +38,6 @@
 
 .hmenu-item {
 
-	border-bottom: 2px solid $menuAccentColor;
 	padding: 10px;
 	margin:0;
 	width:100%;
@@ -51,12 +50,17 @@
 	}
 }
 
+.hmenu-item .hmenu-dropdown{
+	margin: 10px !important;
+}
+
 .hmenu-dropdown-toggle {
 	display: inline-block;
 	cursor: pointer;
+	padding: 10px;
 }
 .hmenu-dropdown-options {
-	border-radius:4px;
+	border-radius:20px;
 	width:100%;
 	background-color: $headerMenuColor;
 	a {
@@ -72,7 +76,7 @@
 
 	.hmenu-dropdown-options .hmenu-item, .hmenu-item:not(.hmenu-dropdown) {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		& > span {
 			padding: 5px;
 		}

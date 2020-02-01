@@ -43,28 +43,28 @@ $dd-dark-color: #000000;
 
 //PAGE
 //MAIN BACKGROUND OPACITY
-$backgroundOpacityColor: lighten($ll-secondary-color, 10%);
+$backgroundOpacityColor: #F0F3F5;
 
 //HEADER & MENUS
-$headerMenuColor: $d-secondary-color;
-$menuLinkColor: $ll-secondary-color;
-$menuHoverColor: $secondary-color;
-$menuAccentColor: $dark-color;
+$headerMenuColor: #38405A;
+$menuLinkColor: #ffffff;
+$menuHoverColor: #C10F22;
+$menuAccentColor: #C10F22;
 
 //FOOTER
 $footerBackgroundColor: $d-secondary-color;
 $footerAccentColor: $dark-color;
 
 //DEFAULT TEXT
-$textFontColor: $dark-color;
+$textFontColor: #464545;
 $headerFontColor: $d-secondary-color;
 $topFontColor: $d-highlight-color;
 
 //LINKS
 $linkColor: $d-dark-color;
-$linkBackground: $l-secondary-color;
+$linkBackground: $l-primary-color;
 $linkHoverColor: $ll-light-color;
-$linkHoverBackground: $d-primary-color;
+$linkHoverBackground: $ll-secondary-color;
 
 
 
@@ -80,7 +80,7 @@ $colorSectionHeaderBackground: $l-primary-color;
 //BUTTONS
 $defaultNiceButtonTextColor: $light-color;
 $defaultNiceButtonColor: $d-secondary-color;
-$defaultNiceButtonBorder: 2px solid $d-grey-color;
+$defaultNiceButtonBorder: 1px solid $d-grey-color;
 $defaultNiceButtonHighlightColor: $l-light-color;
 $defaultNiceButtonHighlightTextColor: $l-light-color;
 

@@ -20,8 +20,7 @@ function Home(props) {
 		<h1>{siteTitle}</h1>
 		<hr />
 		<img alt="logo" height="100px" style={{margin:"75px 0 25px"}} src={logoURL} />
-		<h4>Manage recruits, keep in contact, schedule visits, and track application progress.</h4>
-		<h3>Sign up to be among the first users.</h3>
+		
 			{squares.map(({title, link}) => 
 			<div>
 					<Link className="nice-button" to={link}><h3>{title}</h3></Link>

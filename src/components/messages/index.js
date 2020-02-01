@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import api from '../../helpers/api'
 import { Link } from 'react-router-dom'
+import { Container, Row, Col } from 'reactstrap'
 
 const curr_user = localStorage.user ?  JSON.parse(localStorage.user) : false
 const headers = { headers: {'authorization': localStorage.token} }
@@ -71,18 +72,31 @@ class Page extends React.Component {
     render() {
         const messages = this.state.messages
         return <div className="tpBlackBg">
-            <h1>Messages</h1>
-            <hr />
-            {messages.map(message => <div>
+        <h3>Messages</h3>
+        
+        <Row>
+                <Col lg={6}>
+                    <input className='neatform' type="text" onChange={this.handleSearch} />
+                    <p>Search Messages- Coming Soon</p>
+                </Col>
+                <Col lg={4}>
+                </Col>
 
-                <Link to={`/messages/${message.athlete_id}`} style={{width:'100%'}}>
-                <div style={{display:'flex',justifyContent:'space-between'}}>
-                    <h3>{message.preferred_name} {message.last_name}</h3> 
+                <Col lg={2}>
+                    <Link className='nice-button blue-button' to={`/athletes/new`}>Compose</Link>
+                </Col>
+            </Row>
+        <div className="itemList">
+            
+            <div className="alternateRows">
+            {messages.map(message => <div className="itemFlex">
+                <Link to={`/messages/${message.athlete_id}`} >
+                    <span style={{color:"#2298E7"}}>{message.preferred_name} {message.last_name}</span> 
                     <span>{message.user_display_name}</span>
-                </div>
                 </Link>
-
             </div>)}
+            </div>
+            </div>
         </div>
     }
 }
