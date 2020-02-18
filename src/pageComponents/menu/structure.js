@@ -23,22 +23,16 @@ export default  [
         {name: "Login", view: "all", link: '/users/login', symbol: ""},
         {name: "Forgot My Password", view: "all", link: '/users/forgottenPassword', symbol: ""},
     ]}, 
+    {name: "Recruits", view: "end_user", link: '/athletes', symbol: "running"},
     {name: "Messages", view: "end_user", link: '/messages', symbol: "comments"},
-    {name: "Alerts", view: "end_user", link: '/alerts', symbol: "exclamation"},
-    {name: "Athletes", view: "end_user", link: '/athletes', symbol: "running"},
-    {name: "Visits", view: "end_user", link: '/visits', symbol: "calendar-alt"},
     {name: "Team and Staff", view: "end_user", link: `/teams/${curr_user && curr_user.userInfo ? curr_user.userInfo.team_id : ""}`, symbol: "users"},
     {name: "Dashboard", view: "end_user", link: '/users/dashboard', symbol: "user-circle"},
     {name: "Admin", view: "admin_user", symbol: "user", links: [   
         {name: "User List", view: 'admin', link: '/admin/users', symbol: "users"},
         {name: "Logs", view: 'admin', link: '/admin/logs', symbol: "cogs"},
         {name: "Feedback", view: 'admin', link: '/feedback', symbol: "comments"},
-        {name: "Support Tickets", view: 'admin', link: '/support_tickets', symbol: "comments"},
     ]},
-    {name: "Help", view: "all", symbol: "info-circle", links: [
-        {name: "Feedback/Contact", view: "all", link: '/feedback/provide', symbol: "comments"},
-        {name: "Support/Bug Report", view: "all", link: '/support_tickets/new', symbol: "bug"},
-    ]},
+    {name: "Contact RecruitAI", view: "all", link: '/feedback/provide', symbol: "comments"},
     
     {name: "Logout", view: 'logged_in', link: '/users/logout', symbol: "sign-out-alt"}
 ]

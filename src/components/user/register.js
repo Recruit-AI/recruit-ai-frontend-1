@@ -1,6 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 import api from '../../helpers/api'
 
 
@@ -84,7 +85,7 @@ class LogIn extends React.Component {
 
 
     render() {
-        return <div className="tpBlackBg">
+        return <div className="tpBlackBg" style={{border: "1px outset grey", borderRadius: '2px', maxWidth:'800px',margin:'40px auto', backgroundColor: '#fff', padding: '40px'}}>
             {this.state.sent ? <div>
               <h1>Thank you.</h1> 
               <h3>Please go check your email for the verification link.</h3>
@@ -93,7 +94,7 @@ class LogIn extends React.Component {
             <Form onSubmit={this.handleLogin} style={{maxWidth:"800px", width:"100%", margin:"auto", backgroundColor:this.state.formColor}}>
             
             <h2>Create an Account</h2>
-            
+            Already have an account? Click <Link to='/users/login'>here</Link> to login.
             <hr />
 
             { this.state.error ? 

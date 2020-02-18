@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import api from '../../helpers/api'
 
 class LogIn extends React.Component {
@@ -68,8 +68,11 @@ class LogIn extends React.Component {
     }
 
     render() {
-        return <div className="tpBlackBg">
+        return <div className="tpBlackBg" style={{border: "1px outset grey", borderRadius: '2px', maxWidth:'800px',margin:'40px auto', backgroundColor: '#fff', padding: '40px'}}>
           {this.state.error || ""}
+          
+          <h2>Login</h2>
+            Need an account? Click <Link to='/users/register'>here</Link> to register.
             <Form onSubmit={this.handleLogin} style={{maxWidth:"800px", width:"100%", margin:"auto", backgroundColor: this.state.formColor}}>
                 <Form.Group>
                     <Form.Label>Username or Email</Form.Label>

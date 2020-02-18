@@ -1,6 +1,5 @@
 import React from 'react';
-import {siteTitle, logoURL} from '../helpers/site'
-import {Row, Col} from 'reactstrap'
+import {logoURL} from '../helpers/site'
 import {Link} from 'react-router-dom'
 
 function Home(props) {
@@ -15,16 +14,16 @@ function Home(props) {
 		},
 	]
 
-	return <div style={{maxWidth:'800px',margin:'40px auto',textAlign:'center'}}>
+	return <div style={{border: "1px outset grey", textAlign: 'center', borderRadius: '2px', maxWidth:'800px',margin:'40px auto', backgroundColor: '#fff', padding: '40px'}}>
 		
-		<h1>{siteTitle}</h1>
+		<div style={{}}><img alt="logo" height="100px" style={{margin:"75px 0 25px"}} src={logoURL} /></div>
+		<h2>RecruitAI</h2>
 		<hr />
-		<img alt="logo" height="100px" style={{margin:"75px 0 25px"}} src={logoURL} />
 		
 			{squares.map(({title, link}) => 
-			<div>
+			<span style={{ padding: '0px 20px'}}>
 					<Link className="nice-button" to={link}><h3>{title}</h3></Link>
-			</div>)}
+			</span>)}
 		<hr />
 
 	</div>
