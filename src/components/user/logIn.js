@@ -72,7 +72,7 @@ class LogIn extends React.Component {
           {this.state.error || ""}
           
           <h2>Login</h2>
-            Need an account? Click <Link to='/users/register'>here</Link> to register.
+            Need an account? Click <Link style={{margin:'0',padding:'0',textDecoration:'underline'}} to='/users/register'>here</Link> to register.
             <Form onSubmit={this.handleLogin} style={{maxWidth:"800px", width:"100%", margin:"auto", backgroundColor: this.state.formColor}}>
                 <Form.Group>
                     <Form.Label>Username or Email</Form.Label>
@@ -91,7 +91,7 @@ class LogIn extends React.Component {
                     <Form.Text>Please enter.</Form.Text>
                 </Form.Group>
 
-                    <button type='submit'>Okie</button>
+                    <button type='submit'>Submit</button>
             </Form>
         </div>
     }

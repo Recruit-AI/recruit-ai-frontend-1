@@ -169,7 +169,6 @@ class Page extends React.Component {
                         {athlete.notes ? athlete.notes.split(/\r?\n/).map(line => <div>{line}</div>) : "There are no notes for this athlete yet."}
                         <Form onSubmit={this.updateNotes} style={{ maxWidth: '800px', margin: 'auto' }}>
                             <Form.Group>
-                                <Form.Label>Add Notes</Form.Label>
                                 <Form.Control type="text" as="textarea" rows={5} value={this.state.notes} onChange={this.handleNotes} />
                                 <button type="submit">Add +</button>
                             </Form.Group>
@@ -191,7 +190,6 @@ class Page extends React.Component {
                     </Col>
                     </Row>
                     <hr />
-                    <h4>DELETE THIS RECORD</h4>
                     <span className="format-link nice-button red-button" onClick={this.deleteAthlete}>Delete Athlete Record</span>
                     <h3>WARNING: NO UNDO</h3>
 

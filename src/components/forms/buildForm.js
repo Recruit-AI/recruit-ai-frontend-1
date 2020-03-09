@@ -200,7 +200,7 @@ class FormHandler extends React.Component {
 
 
             <button type='submit'>{this.props.existing ? 
-            (this.props.editButtonText ? this.props.editButtonText : `Edit`) : "Add"}
+            (this.props.editButtonText ? this.props.editButtonText : `Confirm`) : "Add"}
 
             </button>
             { this.props.existing && !this.props.hideDeleteButton ? 

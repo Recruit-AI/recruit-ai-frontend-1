@@ -22,7 +22,6 @@ export default (props) => {
             type={type}
             onChange={callback} 
             name={field[0]} 
-            placeholder={field[0]}
             value={value}
             
             />

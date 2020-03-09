@@ -34,8 +34,8 @@ const defaultObjects = {
         state: "",
         high_school_name: "",
         school_year: "12- Senior",
-        height: 60,
-        weight: 100,
+        height: 0,
+        weight: 0,
         notes: "",
         application_process: {
             school_application: false,
