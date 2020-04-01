@@ -94,7 +94,7 @@ class LogIn extends React.Component {
             <Form onSubmit={this.handleLogin} style={{maxWidth:"800px", width:"100%", margin:"auto", backgroundColor:this.state.formColor}}>
             
             <h2>Create an Account</h2>
-            Already have an account? Click <Link to='/users/login'>here</Link> to login.
+            Already have an account? Click<Link to='/users/login'>here</Link>to login.
             <hr />
 
             { this.state.error ? 
